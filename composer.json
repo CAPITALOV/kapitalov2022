@@ -1,0 +1,104 @@
+{
+    "name": "suffra-com/admin",
+    "description": "Административная панель для управления сайтом suffra.com",
+    "keywords": ["suffra"],
+    "homepage": "https://www.suffra.com/",
+    "type": "project",
+    "license": "BSD-3-Clause",
+    "support": {
+        "source": "https://github.com/yiisoft/yii2"
+    },
+    "authors": [
+        {
+            "name": "Dmitriy Mukhortov",
+            "email": "dram1008@yandex.ru",
+            "role": "developer"
+        },
+        {
+            "name": "Andrew Lykov",
+            "email": "andrew.lykov@yandex.ru",
+            "role": "developer"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Suffra\\": "suffra",
+            "cs\\": "app"
+        },
+        "classmap": [
+            "vendor/mustangostang/spyc/"
+        ]
+    },
+    "repositories": [
+        {
+            "type": "package",
+            "package": {
+                "name": "nnnick/Chart.js",
+                "version": "1.0.1",
+                "source": {
+                    "url": "https://github.com/nnnick/Chart.js",
+                    "type": "git",
+                    "reference": "02f858b264de6c6c1af0579b05b7b5913d0d61ef"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "isocra/TableDnD",
+                "version": "1.0.1",
+                "source": {
+                    "url": "https://github.com/isocra/TableDnD",
+                    "type": "git",
+                    "reference": "master"
+                }
+            }
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "php": ">=5.4.0",
+        "yiisoft/yii2": "*",
+        "yiisoft/yii2-bootstrap": "*",
+        "yiisoft/yii2-swiftmailer": "*",
+        "mustangostang/spyc": "*",
+        "nnnick/Chart.js": "1.0.1",
+        "guzzle/http": "3.9.2",
+        "isocra/TableDnD": "*"
+    },
+    "require-dev": {
+        "yiisoft/yii2-codeception": "*",
+        "yiisoft/yii2-debug": "*",
+        "yiisoft/yii2-gii": "*",
+        "yiisoft/yii2-faker": "*",
+        "fxp/composer-asset-plugin": "~1.0",
+        "ccampbell/chromephp": "dev-master",
+        "yiisoft/yii2-apidoc": "~2.0.0"
+    },
+    "config": {
+        "process-timeout": 1800
+    },
+    "scripts": {
+        "post-create-project-cmd": [
+            "yii\\composer\\Installer::postCreateProject"
+        ]
+    },
+    "extra": {
+        "yii\\composer\\Installer::postCreateProject": {
+            "setPermission": [
+                {
+                    "runtime": "0777",
+                    "web/assets": "0777",
+                    "yii": "0755"
+                }
+            ],
+            "generateCookieValidationKey": [
+                "config/web.php"
+            ]
+        },
+        "asset-installer-paths": {
+            "npm-asset-library": "vendor/npm",
+            "bower-asset-library": "vendor/bower"
+        }
+    }
+}
