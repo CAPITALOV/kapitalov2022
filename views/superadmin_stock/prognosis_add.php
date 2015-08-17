@@ -9,7 +9,7 @@ use yii\db\Query;
 /* @var $form yii\bootstrap\ActiveForm */
 /* @var $model cs\base\BaseForm */
 
-$this->title = 'Добавить курс';
+$this->title = 'Добавить прогноз';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="container">
