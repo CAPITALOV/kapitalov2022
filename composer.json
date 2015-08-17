@@ -1,33 +1,24 @@
 {
-    "name": "suffra-com/admin",
-    "description": "Административная панель для управления сайтом suffra.com",
-    "keywords": ["suffra"],
-    "homepage": "https://www.suffra.com/",
+    "name": "dram1008/capitalov",
+    "description": "capitalov.com",
+    "keywords": ["capitalov"],
+    "homepage": "http://www.capitalov.com/",
     "type": "project",
     "license": "BSD-3-Clause",
     "support": {
-        "source": "https://github.com/yiisoft/yii2"
+        "source": "https://github.com/dram1008/capitalov"
     },
     "authors": [
         {
             "name": "Dmitriy Mukhortov",
             "email": "dram1008@yandex.ru",
             "role": "developer"
-        },
-        {
-            "name": "Andrew Lykov",
-            "email": "andrew.lykov@yandex.ru",
-            "role": "developer"
         }
     ],
     "autoload": {
         "psr-4": {
-            "Suffra\\": "suffra",
             "cs\\": "app"
-        },
-        "classmap": [
-            "vendor/mustangostang/spyc/"
-        ]
+        }
     },
     "repositories": [
         {
@@ -63,7 +54,6 @@
         "yiisoft/yii2-swiftmailer": "*",
         "mustangostang/spyc": "*",
         "nnnick/Chart.js": "1.0.1",
-        "guzzle/http": "3.9.2",
         "isocra/TableDnD": "*"
     },
     "require-dev": {
@@ -72,16 +62,10 @@
         "yiisoft/yii2-gii": "*",
         "yiisoft/yii2-faker": "*",
         "fxp/composer-asset-plugin": "~1.0",
-        "ccampbell/chromephp": "dev-master",
         "yiisoft/yii2-apidoc": "~2.0.0"
     },
     "config": {
         "process-timeout": 1800
-    },
-    "scripts": {
-        "post-create-project-cmd": [
-            "yii\\composer\\Installer::postCreateProject"
-        ]
     },
     "extra": {
         "yii\\composer\\Installer::postCreateProject": {
@@ -95,10 +79,6 @@
             "generateCookieValidationKey": [
                 "config/web.php"
             ]
-        },
-        "asset-installer-paths": {
-            "npm-asset-library": "vendor/npm",
-            "bower-asset-library": "vendor/bower"
         }
     }
 }
