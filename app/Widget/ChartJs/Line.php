@@ -65,11 +65,12 @@ class Line extends Object
      */
     protected function getClientOptions()
     {
-        $options = ArrayHelper::merge($this->globalOptions, $this->chartOptions);
-        $optionsJson = Json::encode($options);
-        if (count($options) > 0){
+        $optionsJson = Json::encode($this->globalOptions);
+        if (count($this->globalOptions) > 0){
             $js[] = "Chart.defaults.global = {$optionsJson};";
         }
+        $optionsJson = Json::encode($this->chartOptions);
+        $js[] = "var options = {$optionsJson};";
 
         $js[] = <<<JS
         // Get the context of the canvas element we want to select
