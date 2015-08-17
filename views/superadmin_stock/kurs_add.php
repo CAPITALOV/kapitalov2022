@@ -53,7 +53,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 <?= $model->field($form, 'date10') ?>
                 <?= $model->field($form, 'kurs10') ?>
 
-                <input type="hidden" value="<?= $stock_id ?>" name="stock_id"/>
+                <input type="hidden" value="<?= $stock_id ?>" name="<?= $model->formName()  ?>[stock_id]"/>
 
                 <div class="form-group">
                     <hr>
