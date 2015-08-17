@@ -64,7 +64,6 @@ class Line extends Object
 
     public function run()
     {
-        \cs\services\VarDumper::dump($this);
         $this->registerClientScript();
         echo Html::tag('canvas', null, [
             'id'     => $this->id,
@@ -72,6 +71,12 @@ class Line extends Object
             'height' => $this->height,
         ]);
         $this->getClientOptions();
+    }
+
+    public static function widget($options)
+    {
+        $item = new static($options);
+        $item->run();
     }
 
     /**

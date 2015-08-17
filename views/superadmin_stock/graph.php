@@ -14,7 +14,7 @@ $this->title = 'Курсы';
     </div>
 
 
-    <?= (new \cs\Widget\ChartJs\Line([
+    <?= \cs\Widget\ChartJs\Line::widget([
         'width' => 800,
         'lineArray' => [
             'x' => ["January", "February", "March", "April", "May", "June", "July"],
@@ -23,5 +23,5 @@ $this->title = 'Курсы';
                 [28, null, 48, 40, 19, 86, 27],
             ]
         ],
-    ]))->run() ?>
+    ]) ?>
 </div>
