@@ -8,6 +8,7 @@ use yii\base\Object;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\helpers\Json;
+use yii\helpers\VarDumper;
 
 /*
 
@@ -63,6 +64,7 @@ class Line extends Object
 
     public function run()
     {
+        \cs\services\VarDumper::dump($this);
         $this->registerClientScript();
         echo Html::tag('canvas', null, [
             'id'     => $this->id,
