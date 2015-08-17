@@ -20,7 +20,7 @@ $this->title = 'Курсы';
             'x' => ["January", "February", "March", "April", "May", "June", "July"],
             'y' => [
                 [65, 59, 80, 81, 56, 55, 40],
-                [28, null, 48, 40, 19, 86, 27],
+                [null, null, 48, 40, 19, 86, 27],
             ]
         ],
     ]) ?>
