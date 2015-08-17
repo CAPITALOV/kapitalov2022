@@ -15,7 +15,7 @@ use app\models\Translator as T;
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-left">
-                <li><a class="navbar-brand" href="https://www.suffra.com/" target="_blank">Suffra.com</a></li>
+                <li><a class="navbar-brand" href="http://capitalov.com/" target="_blank">Capitalov.com</a></li>
                 <li><span class="navbar-brand">/</span></li>
                 <li><a class="navbar-brand" href="/"><?= T::t('Administration panel') ?></a></li>
             </ul>
