@@ -11,9 +11,11 @@ $(document).ready(function(){
                     type: t.data('type')
                 },
                 success: function(ret) {
-                    t.parent().addClass('has-success has-feedback');
+                    t.parent().addClass('has-success');
+                    t.parent().addClass('has-feedback');
                     setTimeout(function() {
-                        t.parent().removeClass('has-success has-feedback');
+                        t.parent().removeClass('has-success');
+                        t.parent().removeClass('has-feedback');
                     }, 2000);
                 }
             })
