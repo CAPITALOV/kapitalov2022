@@ -14,7 +14,7 @@ $this->registerJsFile('/js/pages/superadmin_stock/kurs_edit.js', ['depends' => [
     </div>
 
 
-    <table class="table">
+    <table class="table" style="width: auto;">
         <?php
         foreach ($items as $i) {
             ?>
