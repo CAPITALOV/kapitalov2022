@@ -20,5 +20,5 @@ JS
     </div>
 
 
-    <canvas id="myChart" width="400" height="400"></canvas>
+    <?= (new \cs\Widget\ChartJs\Line())->run() ?>
 </div>
