@@ -51,7 +51,7 @@ class Superadmin_stockController extends SuperadminBaseController
     {
         return $this->render([
             'items'    => \app\models\StockKurs::query(['stock_id' => $id])->orderBy(['date' => SORT_DESC])->all(),
-            'stock_id' => \app\models\Stock::find($id),
+            'item' => \app\models\Stock::find($id),
         ]);
     }
 
