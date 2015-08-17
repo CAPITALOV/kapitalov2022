@@ -228,6 +228,7 @@ class StockKursAdd extends \cs\base\BaseForm
 
     public function insert()
     {
+        VarDumper::dump($this);
         for ($c = 1; $c <= 10; $c++) {
             $fieldName = 'date' . $c;
             $date = $this->$fieldName;
