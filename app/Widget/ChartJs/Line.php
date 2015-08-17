@@ -74,7 +74,6 @@ class Line extends Object
         $js[] = <<<JS
         // Get the context of the canvas element we want to select
 var ctx = document.getElementById('{$this->id}').getContext("2d");
-var myNewChart = new Chart(ctx).PolarArea(data);
 var data = {
     labels: ["January", "February", "March", "April", "May", "June", "July"],
     datasets: [
