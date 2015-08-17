@@ -60,7 +60,6 @@ $config = [
             'rules'               => require(__DIR__ . '/urlRules.php'),
         ],
         'db'           => require(__DIR__ . '/db.php'),
-        'itrix'        => require(__DIR__ . '/itrix.php'),
         'i18n'         => [
             'translations' => [
                 'app*' => [

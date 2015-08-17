@@ -12,19 +12,7 @@ use app\models\Translator as T;
             <h4><a href="/superAdmin">superAdmin</a></h4>
             <ul class="list-unstyled col-md-offset-1">
                 <li><a href="/adminUsers">Админы</a></li>
-                <li><a href="/components">Компоненты</a></li>
-                <li><a href="/modules">Модули</a></li>
-                <li><a href="/plugins">Плагины</a></li>
-                <li><a href="/topMenu">Верхнее меню</a></li>
-                <li><a href="/userMenu">Меню пользователя</a></li>
-                <li><a href="/jsLogger">JsLogger</a></li>
-                <li><a href="/log">Лог пользователей</a></li>
-                <li><a href="/cron">Задачи крон</a></li>
-                <li><a href="/settings">Настройки сайта</a></li>
-				<li><a href="/check_files/db">Проверка файлов</a></li>
-				<li><a href="<?= Url::to(['superadmin/clear_cache'])?>">Очистить кеш</a></li>
-				<li><a href="<?= Url::to(['superadmin_communities/index'])?>">Управление категориями сообществ</a></li>
-				<li><a href="<?= Url::to(['superadmin_voting_price_list/index'])?>">Опросы, цена ответа и кол-во ответов</a></li>
+				<li><a href="<?= Url::to(['superadmin_stock/index'])?>">Курсы</a></li>
             </ul>
             <hr>
         <?php endif; ?>
