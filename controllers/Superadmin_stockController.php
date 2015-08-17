@@ -68,10 +68,10 @@ class Superadmin_stockController extends SuperadminBaseController
         $item = StockKurs::find($id);
         switch($type) {
             case 'date':
-                $item->update(['date', $value]);
+                $item->update(['date' => $value]);
                 break;
             case 'kurs':
-                $item->update(['kurs', $value]);
+                $item->update(['kurs' => $value]);
                 break;
         }
 
