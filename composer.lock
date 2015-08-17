@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "bower-asset/bootstrap",
-            "version": "v3.3.4",
+            "version": "v3.3.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twbs/bootstrap.git",
-                "reference": "a10eb60bc0b07b747fa0c4ebd8821eb7307bd07f"
+                "reference": "16b48259a62f576e52c903c476bd42b90ab22482"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twbs/bootstrap/zipball/a10eb60bc0b07b747fa0c4ebd8821eb7307bd07f",
-                "reference": "a10eb60bc0b07b747fa0c4ebd8821eb7307bd07f",
+                "url": "https://api.github.com/repos/twbs/bootstrap/zipball/16b48259a62f576e52c903c476bd42b90ab22482",
+                "reference": "16b48259a62f576e52c903c476bd42b90ab22482",
                 "shasum": ""
             },
             "require": {
@@ -27,13 +27,7 @@
             "extra": {
                 "bower-asset-main": [
                     "less/bootstrap.less",
-                    "dist/css/bootstrap.css",
-                    "dist/js/bootstrap.js",
-                    "dist/fonts/glyphicons-halflings-regular.eot",
-                    "dist/fonts/glyphicons-halflings-regular.svg",
-                    "dist/fonts/glyphicons-halflings-regular.ttf",
-                    "dist/fonts/glyphicons-halflings-regular.woff",
-                    "dist/fonts/glyphicons-halflings-regular.woff2"
+                    "dist/js/bootstrap.js"
                 ],
                 "bower-asset-ignore": [
                     "/.*",
@@ -46,6 +40,9 @@
                     "test-infra"
                 ]
             },
+            "license": [
+                "MIT"
+            ],
             "description": "The most popular front-end framework for developing responsive, mobile first projects on the web.",
             "keywords": [
                 "css",
@@ -643,16 +640,16 @@
         },
         {
             "name": "symfony/event-dispatcher",
-            "version": "v2.7.0",
+            "version": "v2.7.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/EventDispatcher.git",
-                "reference": "687039686d0e923429ba6e958d0baa920cd5d458"
+                "reference": "9310b5f9a87ec2ea75d20fec0b0017c77c66dac3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/EventDispatcher/zipball/687039686d0e923429ba6e958d0baa920cd5d458",
-                "reference": "687039686d0e923429ba6e958d0baa920cd5d458",
+                "url": "https://api.github.com/repos/symfony/EventDispatcher/zipball/9310b5f9a87ec2ea75d20fec0b0017c77c66dac3",
+                "reference": "9310b5f9a87ec2ea75d20fec0b0017c77c66dac3",
                 "shasum": ""
             },
             "require": {
@@ -697,20 +694,20 @@
             ],
             "description": "Symfony EventDispatcher Component",
             "homepage": "https://symfony.com",
-            "time": "2015-05-02 15:21:08"
+            "time": "2015-06-18 19:21:56"
         },
         {
             "name": "yiisoft/yii2",
-            "version": "2.0.4",
+            "version": "2.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-framework.git",
-                "reference": "726867caee3f23aa7a6975c801e64b6021e14f86"
+                "reference": "f42b2eb80f61992438661b01d0d74c6738e2ff38"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/726867caee3f23aa7a6975c801e64b6021e14f86",
-                "reference": "726867caee3f23aa7a6975c801e64b6021e14f86",
+                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/f42b2eb80f61992438661b01d0d74c6738e2ff38",
+                "reference": "f42b2eb80f61992438661b01d0d74c6738e2ff38",
                 "shasum": ""
             },
             "require": {
@@ -785,7 +782,7 @@
                 "framework",
                 "yii2"
             ],
-            "time": "2015-05-10 20:09:47"
+            "time": "2015-08-05 22:00:30"
         },
         {
             "name": "yiisoft/yii2-bootstrap",
@@ -1107,20 +1104,20 @@
         },
         {
             "name": "fxp/composer-asset-plugin",
-            "version": "v1.0.2",
+            "version": "v1.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/francoispluchino/composer-asset-plugin.git",
-                "reference": "c37a7ef0e253633ae0bdf29643129add73dfae71"
+                "reference": "c2b0406ac19e9ea2d9556987e827d4e7f6924fde"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/francoispluchino/composer-asset-plugin/zipball/c37a7ef0e253633ae0bdf29643129add73dfae71",
-                "reference": "c37a7ef0e253633ae0bdf29643129add73dfae71",
+                "url": "https://api.github.com/repos/francoispluchino/composer-asset-plugin/zipball/c2b0406ac19e9ea2d9556987e827d4e7f6924fde",
+                "reference": "c2b0406ac19e9ea2d9556987e827d4e7f6924fde",
                 "shasum": ""
             },
             "require": {
-                "composer-plugin-api": "1.0.0",
+                "composer-plugin-api": "^1.0",
                 "php": ">=5.3.3"
             },
             "require-dev": {
@@ -1159,7 +1156,7 @@
                 "npm",
                 "package"
             ],
-            "time": "2015-06-04 10:37:32"
+            "time": "2015-07-29 12:23:21"
         },
         {
             "name": "fzaninotto/faker",
@@ -1581,16 +1578,16 @@
         },
         {
             "name": "yiisoft/yii2-debug",
-            "version": "2.0.4",
+            "version": "2.0.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-debug.git",
-                "reference": "5c7081b2be71c61d3a50d978b31edc3e0b6f2f97"
+                "reference": "1b302e67521d46feb2413d9d96ca94ed82b39b0e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-debug/zipball/5c7081b2be71c61d3a50d978b31edc3e0b6f2f97",
-                "reference": "5c7081b2be71c61d3a50d978b31edc3e0b6f2f97",
+                "url": "https://api.github.com/repos/yiisoft/yii2-debug/zipball/1b302e67521d46feb2413d9d96ca94ed82b39b0e",
+                "reference": "1b302e67521d46feb2413d9d96ca94ed82b39b0e",
                 "shasum": ""
             },
             "require": {
@@ -1624,7 +1621,7 @@
                 "debugger",
                 "yii2"
             ],
-            "time": "2015-05-10 22:08:56"
+            "time": "2015-08-06 16:14:06"
         },
         {
             "name": "yiisoft/yii2-faker",
