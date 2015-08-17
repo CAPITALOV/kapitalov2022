@@ -4,6 +4,8 @@ use yii\helpers\Url;
 use yii\helpers\Html;
 
 $this->title = $item->getField('name');
+
+$this->registerJsFile('/js/pages/superadmin_stock/kurs_edit.js', ['depends' => ['yii\web\JqueryAsset']]);
 ?>
 
 <div class="container">
