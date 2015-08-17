@@ -11,7 +11,7 @@ use Yii;
 use yii\filters\AccessControl;
 use app\models\User;
 
-class SuperadminBaseController extends BaseController
+class SuperadminBaseController extends \cs\base\BaseController
 {
     public function behaviors()
     {

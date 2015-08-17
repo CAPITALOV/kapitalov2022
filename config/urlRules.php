@@ -16,11 +16,10 @@ return [
     'adminUsers/<id:\\d+>/delete'                    => 'superadmin/users_delete',
 
     // stock
-    'stock'                                    => 'superadmin_stock/index',
-    'stock/add'                                => 'superadmin_stock/add',
-    'stock/<id:\\d+>/edit'                     => 'superadmin_stock/edit',
-    'stock/<id:\\d+>/delete'                   => 'superadmin_stock/delete',
-    'stock/sort'                               => 'superadmin_stock/sort',
+    'stock'                                          => 'superadmin_stock/index',
+    'stock/add'                                      => 'superadmin_stock/add',
+    'stock/<id:\\d+>/edit'                           => 'superadmin_stock/edit',
+    'stock/<id:\\d+>/delete'                         => 'superadmin_stock/delete',
 
     'log'                                            => 'superadmin/log',
 

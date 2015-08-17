@@ -1,6 +1,6 @@
 <?php
 
-namespace app\models\Form;
+namespace app\models;
 
 use app\models\NewsItem;
 use app\models\User;
@@ -16,23 +16,8 @@ use yii\helpers\Html;
 /**
  * ContactForm is the model behind the contact form.
  */
-class Stock extends \cs\base\BaseForm
+class Stock extends \cs\base\DbRecord
 {
     const TABLE = 'cap_stock';
 
-    public $id;
-    public $name;
-
-    function __construct($fields = [])
-    {
-        static::$fields = [
-            [
-                'name',
-                'Название',
-                1,
-                'string'
-            ],
-        ];
-        parent::__construct($fields);
-    }
 }
