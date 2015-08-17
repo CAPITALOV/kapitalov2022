@@ -20,6 +20,11 @@ return [
     'stock/add'                                      => 'superadmin_stock/add',
     'stock/<id:\\d+>/edit'                           => 'superadmin_stock/edit',
     'stock/<id:\\d+>/delete'                         => 'superadmin_stock/delete',
+    'stock/<id:\\d+>/kurs/add'                       => 'superadmin_stock/kurs_add',
+    'stock/<id:\\d+>/kurs/edit'                      => 'superadmin_stock/kurs_edit',
+    'stock/<id:\\d+>/prognosis/add'                  => 'superadmin_stock/prognosis_add',
+    'stock/<id:\\d+>/prognosis/edit'                 => 'superadmin_stock/prognosis_edit',
+    'stock/<id:\\d+>/graph'                          => 'superadmin_stock/graph',
 
     'log'                                            => 'superadmin/log',
 
