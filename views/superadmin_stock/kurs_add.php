@@ -9,7 +9,7 @@ use yii\db\Query;
 /* @var $form yii\bootstrap\ActiveForm */
 /* @var $model cs\base\BaseForm */
 
-$this->title = 'Добавить курс';
+$this->title = 'Добавить практику';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="container">
@@ -32,7 +32,28 @@ $this->params['breadcrumbs'][] = $this->title;
                     'id'      => 'contact-form',
                     'options' => ['enctype' => 'multipart/form-data']
                 ]); ?>
-                <?= $model->field($form, 'name') ?>
+                <?= $model->field($form, 'date1') ?>
+                <?= $model->field($form, 'kurs1') ?>
+                <?= $model->field($form, 'date2') ?>
+                <?= $model->field($form, 'kurs2') ?>
+                <?= $model->field($form, 'date3') ?>
+                <?= $model->field($form, 'kurs3') ?>
+                <?= $model->field($form, 'date4') ?>
+                <?= $model->field($form, 'kurs4') ?>
+                <?= $model->field($form, 'date5') ?>
+                <?= $model->field($form, 'kurs5') ?>
+                <?= $model->field($form, 'date6') ?>
+                <?= $model->field($form, 'kurs6') ?>
+                <?= $model->field($form, 'date7') ?>
+                <?= $model->field($form, 'kurs7') ?>
+                <?= $model->field($form, 'date8') ?>
+                <?= $model->field($form, 'kurs8') ?>
+                <?= $model->field($form, 'date9') ?>
+                <?= $model->field($form, 'kurs9') ?>
+                <?= $model->field($form, 'date10') ?>
+                <?= $model->field($form, 'kurs10') ?>
+
+                <input type="hidden" value="1" name="stock_id"/>
 
                 <div class="form-group">
                     <hr>
