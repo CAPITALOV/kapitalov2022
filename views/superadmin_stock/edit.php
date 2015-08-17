@@ -11,6 +11,7 @@ use yii\db\Query;
 
 $this->title = $model->name;
 $this->params['breadcrumbs'][] = $this->title;
+
 ?>
 <div class="container">
     <div class="page-header">
