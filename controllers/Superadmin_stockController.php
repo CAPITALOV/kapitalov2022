@@ -47,6 +47,22 @@ class Superadmin_stockController extends SuperadminBaseController
         }
     }
 
+    public function actionKurs_edit($id)
+    {
+        return $this->render([
+            'items'    => \app\models\StockKurs::query(['stock_id' => $id])->orderBy(['date' => SORT_DESC]),
+            'stock_id' => $id,
+        ]);
+    }
+
+    public function actionPrognosis_edit($id)
+    {
+        return $this->render([
+            'items' => \app\models\StockPrognosis::query(['stock_id' => $id])->orderBy(['date' => SORT_DESC]),
+            'item'  => \app\models\Stock::find($id),
+        ]);
+    }
+
     public function actionPrognosis_add($id)
     {
         $model = new \app\models\Form\StockPrognosisAdd();
