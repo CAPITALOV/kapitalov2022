@@ -28,7 +28,7 @@ $this->registerJsFile('/js/pages/admin_events/index.js', [
                     <a href="<?= Url::to([
                         'superadmin_stock/edit',
                         'id' => $item['id']
-                    ]) ?>" class="list-group-item" id="newsItem-<?= $item['id'] ?>">
+                    ]) ?>" id="newsItem-<?= $item['id'] ?>">
                         <?= $item['name'] ?>
                     </a>
                 </td>
