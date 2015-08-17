@@ -230,7 +230,7 @@ class StockKursAdd extends \cs\base\BaseForm
             if ($date != '' && $kurs != '') {
                 StockKurs::insert([
                     'stock_id' => $this->stock_id,
-                    'date'     => $date,
+                    'date'     => $date->format('Ymd'),
                     'kurs'     => $kurs,
                 ]);
             }
