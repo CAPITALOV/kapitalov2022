@@ -22,6 +22,7 @@ return [
     'stock/<id:\\d+>/delete'                         => 'superadmin_stock/delete',
     'stock/<id:\\d+>/kurs/add'                       => 'superadmin_stock/kurs_add',
     'stock/<id:\\d+>/kurs/edit'                      => 'superadmin_stock/kurs_edit',
+    'stock/kurs/update'                              => 'superadmin_stock/kurs_update',
     'stock/<id:\\d+>/prognosis/add'                  => 'superadmin_stock/prognosis_add',
     'stock/<id:\\d+>/prognosis/edit'                 => 'superadmin_stock/prognosis_edit',
     'stock/<id:\\d+>/graph'                          => 'superadmin_stock/graph',

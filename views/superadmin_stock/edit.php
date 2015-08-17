@@ -11,6 +11,8 @@ use yii\db\Query;
 
 $this->title = $model->name;
 $this->params['breadcrumbs'][] = $this->title;
+
+$this->registerJsFile('/js/pages/superadmin_stock/kurs_edit.js', ['depends' => ['yii\grid\GridViewAsset']]);
 ?>
 <div class="container">
     <div class="page-header">

@@ -18,10 +18,14 @@ $this->title = $item->getField('name');
             ?>
             <tr>
                 <td>
-                    <input class="form-control inputKurs" type="text" value="<?= $i['kurs'] ?>" data-id="<?= $i['id'] ?>"/>
+                    <div class="form-group">
+                        <input class="form-control inputKurs" type="text" value="<?= $i['kurs'] ?>" data-id="<?= $i['id'] ?>" style="width: auto;" data-type="kurs"/>
+                    </div>
                 </td>
                 <td>
-                    <input class="form-control inputDate" type="text" value="<?= $i['date'] ?>" data-id="<?= $i['id'] ?>"/>
+                    <div class="form-group">
+                        <input class="form-control inputDate" type="text" value="<?= $i['date'] ?>" data-id="<?= $i['id'] ?>" style="width: auto;" data-type="date"/>
+                    </div>
                 </td>
             </tr>
         <?php
