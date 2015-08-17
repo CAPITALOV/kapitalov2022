@@ -4,7 +4,7 @@ $(document).ready(function(){
         var t = $(this);
         if (val != t.val()) {
             ajaxJson({
-                url: '/stock/kurs/update',
+                url: '/stock/prognosis/update',
                 data: {
                     id: t.data('id'),
                     value: t.val(),

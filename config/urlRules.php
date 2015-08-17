@@ -25,6 +25,7 @@ return [
     'stock/kurs/update'                              => 'superadmin_stock/kurs_update',
     'stock/<id:\\d+>/prognosis/add'                  => 'superadmin_stock/prognosis_add',
     'stock/<id:\\d+>/prognosis/edit'                 => 'superadmin_stock/prognosis_edit',
+    'stock/prognosis/update'                         => 'superadmin_stock/prognosis_update',
     'stock/<id:\\d+>/graph'                          => 'superadmin_stock/graph',
 
     'log'                                            => 'superadmin/log',

@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use app\models\Stock;
 use app\models\StockKurs;
+use app\models\StockPrognosis;
 use cs\services\VarDumper;
 use cs\web\Exception;
 use Yii;
@@ -66,6 +67,28 @@ class Superadmin_stockController extends SuperadminBaseController
         $value = self::getParam('value');
         $type = self::getParam('type');
         $item = StockKurs::find($id);
+        switch($type) {
+            case 'date':
+                $item->update(['date' => $value]);
+                break;
+            case 'kurs':
+                $item->update(['kurs' => $value]);
+                break;
+        }
+
+        return $this->jsonSuccess();
+    }
+
+    /**
+     * Обновляет по AJAX знчение
+     * @return \yii\web\Response
+     */
+    public function actionPrognosis_update()
+    {
+        $id = self::getParam('id');
+        $value = self::getParam('value');
+        $type = self::getParam('type');
+        $item = StockPrognosis::find($id);
         switch($type) {
             case 'date':
                 $item->update(['date' => $value]);
