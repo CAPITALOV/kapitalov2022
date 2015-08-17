@@ -91,17 +91,34 @@ class DbRecord
      * Возвращает значение поля
      * Если оно не найдено среди полей то будет возвращено null
      *
-     * @param $name
+     * @param string|int $name    индекс массива для $this->fields
+     * @param mixed      $default значение по умолчанию если нет индекса
      *
      * @return null|mixed
      */
-    public function getField($name)
+    public function getField($name, $default = null)
     {
         if (array_key_exists($name, $this->fields)) {
             return $this->fields[ $name ];
         }
 
-        return null;
+        return $default;
+    }
+
+    /**
+     * Возвращает значение поля
+     * Если оно не найдено среди полей то будет возвращено ''
+     * Если значение поля равно null то будет возвращено ''
+     *
+     * @param $name
+     *
+     * @return int|string
+     */
+    public function get($name)
+    {
+        $value = $this->getField($name);
+
+        return (is_null($value)) ? '' : $value;
     }
 
     /**
@@ -138,6 +155,11 @@ class DbRecord
         $fields['id'] = $id;
 
         return new static($fields);
+    }
+
+    public static function batchInsert($columns, $rows)
+    {
+        (new Query())->createCommand()->batchInsert(static::TABLE,$columns, $rows)->execute();
     }
 
     /**
