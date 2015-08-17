@@ -1,16 +1,9 @@
 <?php
 
 use yii\helpers\Url;
-use app\services\GsssHtml;
 use yii\helpers\Html;
 
 $this->title = 'Курсы';
-
-$this->registerJsFile('/js/pages/admin_events/index.js', [
-    'depends' => [
-        'app\assets\AppAsset',
-    ]
-]);
 ?>
 
 <div class="container">
