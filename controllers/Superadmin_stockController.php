@@ -47,6 +47,21 @@ class Superadmin_stockController extends SuperadminBaseController
         }
     }
 
+    public function actionPrognosis_add($id)
+    {
+        $model = new \app\models\Form\StockPrognosisAdd();
+        if ($model->load(Yii::$app->request->post()) && $model->insert()) {
+            Yii::$app->session->setFlash('contactFormSubmitted');
+
+            return $this->refresh();
+        } else {
+            return $this->render([
+                'model'    => $model,
+                'stock_id' => $id,
+            ]);
+        }
+    }
+
     public function actionEdit($id)
     {
         $model = \app\models\Form\Stock::find($id);
