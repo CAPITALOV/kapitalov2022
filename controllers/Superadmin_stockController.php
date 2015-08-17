@@ -49,16 +49,25 @@ class Superadmin_stockController extends SuperadminBaseController
         }
     }
 
+    public function actionGraph($id)
+    {
+        return $this->render([
+            'kurs'      => \app\models\StockKurs::query(['stock_id' => $id])->orderBy(['date' => SORT_ASC])->all(),
+            'prognosis' => \app\models\StockPrognosis::query(['stock_id' => $id])->orderBy(['date' => SORT_ASC])->all(),
+        ]);
+    }
+
     public function actionKurs_edit($id)
     {
         return $this->render([
-            'items'    => \app\models\StockKurs::query(['stock_id' => $id])->orderBy(['date' => SORT_DESC])->all(),
-            'item' => \app\models\Stock::find($id),
+            'items' => \app\models\StockKurs::query(['stock_id' => $id])->orderBy(['date' => SORT_DESC])->all(),
+            'item'  => \app\models\Stock::find($id),
         ]);
     }
 
     /**
      * Обновляет по AJAX знчение
+     *
      * @return \yii\web\Response
      */
     public function actionKurs_update()
@@ -67,7 +76,7 @@ class Superadmin_stockController extends SuperadminBaseController
         $value = self::getParam('value');
         $type = self::getParam('type');
         $item = StockKurs::find($id);
-        switch($type) {
+        switch ($type) {
             case 'date':
                 $item->update(['date' => $value]);
                 break;
@@ -81,6 +90,7 @@ class Superadmin_stockController extends SuperadminBaseController
 
     /**
      * Обновляет по AJAX знчение
+     *
      * @return \yii\web\Response
      */
     public function actionPrognosis_update()
@@ -89,7 +99,7 @@ class Superadmin_stockController extends SuperadminBaseController
         $value = self::getParam('value');
         $type = self::getParam('type');
         $item = StockPrognosis::find($id);
-        switch($type) {
+        switch ($type) {
             case 'date':
                 $item->update(['date' => $value]);
                 break;
