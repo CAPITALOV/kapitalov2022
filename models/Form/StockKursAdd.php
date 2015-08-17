@@ -216,6 +216,12 @@ class StockKursAdd extends \cs\base\BaseForm
                 0,
                 'double',
             ],
+            [
+                'stock_id',
+                'Курс',
+                0,
+                'integer',
+            ],
         ];
         parent::__construct($fields);
     }
