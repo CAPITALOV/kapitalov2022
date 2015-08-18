@@ -81,7 +81,7 @@ class Line extends Object
     public static function widget($options)
     {
         $item = new static($options);
-        $item->run();
+        return $item->run();
     }
 
     /**
