@@ -84,6 +84,7 @@ class GraphExporter extends Object
             for ($i = new \DateTime($this->start->format('Y-m-d')); $this->compare($i, $this->end); $i->add(new \DateInterval('P1D'))) {
                 $date = $i->format('Y-m-d');
                 $value = ArrayHelper::getValue($arrayOfDate, $date, null);
+                VarDumper::dump([$date,$value,$arrayOfDate]);
                 if ($value) {
                     $new[] = $date;
                 } else {
