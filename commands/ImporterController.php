@@ -43,7 +43,7 @@ class ImporterController extends Controller
                 $date->sub(new \DateInterval('P7D'));
                 $data = $class->import($date->format('Y-m-d'));
                 if ($stock_id == 4) {
-                    \cs\services\VarDumper::dump($data);
+                    echo VarDumper::dumpAsString($data);
                 }
                 // стратегия: Если данные есть то, они не трогаются
                 $dateArray = ArrayHelper::getColumn($data, 'date');
