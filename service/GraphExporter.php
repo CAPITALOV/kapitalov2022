@@ -122,8 +122,9 @@ class GraphExporter extends Object
     public function compare($d1, $d2)
     {
         try {
+            VarDumper::dump([$d1, $d2]);
             return ($d2->format('U') - $d1->format('U')) >= 0;
-        } catch (\Exception $e) {
+        } catch (\yii\base\ErrorException $e) {
             VarDumper::dump([$d1, $d2]);
         }
     }
