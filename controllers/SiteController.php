@@ -72,7 +72,8 @@ class SiteController extends BaseController
     public function actionImport()
     {
         $data = (new \app\service\DadaImporter\Finam())->import('2015-08-01');
-        // стратегия: Если данные есть то, они не трогаются
+        \cs\services\VarDumper::dump($data);
+// стратегия: Если данные есть то, они не трогаются
         $dateArray = ArrayHelper::getColumn($data, 'date');
         sort($dateArray);
         $rows = StockKurs::query(['between', 'date', $dateArray[0], $dateArray[count($dateArray)-1]])->all();
