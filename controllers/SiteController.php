@@ -7,10 +7,12 @@
 
 namespace app\controllers;
 
+use app\models\StockKurs;
 use app\models\User;
 use Yii;
 use yii\db\Query;
 use yii\filters\AccessControl;
+use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\helpers\VarDumper;
@@ -65,6 +67,28 @@ class SiteController extends BaseController
     public function actionIndex()
     {
         return $this->render('index');
+    }
+
+    public function actionImport()
+    {
+        $data = (new \app\services\DadaImporter\Finam())->import('2015-08-01');
+        // стратегия: Если данные есть то, они не трогаются
+        $dateArray = ArrayHelper::getColumn($data, 'date');
+        sort($dateArray);
+        $rows = StockKurs::query(['between', 'date', $dateArray[0], $dateArray[count($dateArray)-1]])->all();
+        $dateArrayRows = ArrayHelper::getColumn($rows, 'date');
+        $new = [];
+        foreach($data as $row) {
+            if (!in_array($row['date'], $dateArrayRows)) {
+                $new[] = [
+                     1,
+                     $row['date'],
+                     $row['kurs'],
+                ];
+            }
+        }
+        \cs\services\VarDumper::dump($new);
+        StockKurs::batchInsert(['stock_id', 'date', 'kurs'], $new);
     }
 
     /*
