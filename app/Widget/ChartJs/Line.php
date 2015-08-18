@@ -39,21 +39,21 @@ class Line extends Object
 
     public $colors = [
         [
-            'label' => "My First dataset",
-            'fillColor' => "rgba(220,220,220,0.2)",
-            'strokeColor' => "rgba(220,220,220,1)",
-            'pointColor' => "rgba(220,220,220,1)",
-            'pointStrokeColor' => "#fff",
-            'pointHighlightFill' => "#fff",
+            'label'                => "My First dataset",
+            'fillColor'            => "rgba(220,220,220,0.2)",
+            'strokeColor'          => "rgba(220,220,220,1)",
+            'pointColor'           => "rgba(220,220,220,1)",
+            'pointStrokeColor'     => "#fff",
+            'pointHighlightFill'   => "#fff",
             'pointHighlightStroke' => "rgba(220,220,220,1)",
         ],
         [
-            'label' => "My Second dataset",
-            'fillColor' => "rgba(151,187,205,0.2)",
-            'strokeColor' => "rgba(151,187,205,1)",
-            'pointColor' => "rgba(151,187,205,1)",
-            'pointStrokeColor' => "#fff",
-            'pointHighlightFill' => "#fff",
+            'label'                => "My Second dataset",
+            'fillColor'            => "rgba(151,187,205,0.2)",
+            'strokeColor'          => "rgba(151,187,205,1)",
+            'pointColor'           => "rgba(151,187,205,1)",
+            'pointStrokeColor'     => "#fff",
+            'pointHighlightFill'   => "#fff",
             'pointHighlightStroke' => "rgba(151,187,205,1)",
         ],
     ];
@@ -122,7 +122,6 @@ var data = {$dataJson};
 var myLineChart = new Chart(ctx).Line(data, options);
 JS
 ;
-        $js[] = "";
         Yii::$app->view->registerJs(join("\n", $js));
     }
 }
