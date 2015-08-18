@@ -57,7 +57,6 @@ class GraphExporter extends Object
 
     public function init()
     {
-        VarDumper::dump($this);
 
         // проверка на входящие данные
         if (!$this->compare($this->start, $this->end)) {
@@ -66,15 +65,16 @@ class GraphExporter extends Object
         if (is_null($this->start)) {
             $this->start = $this->getMin();
         }
-        if (! $this->start instanceof \DateTime) {
+        if (! ($this->start instanceof \DateTime)) {
             $this->start = new \DateTime($this->start);
         }
         if (is_null($this->end)) {
             $this->end = $this->getMax();
         }
-        if (! $this->end instanceof \DateTime) {
+        if (! ($this->end instanceof \DateTime)) {
             $this->end = new \DateTime($this->end);
         }
+        VarDumper::dump($this);
     }
 
     public function run()
