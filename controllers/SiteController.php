@@ -72,17 +72,17 @@ class SiteController extends BaseController
     public function actionImport()
     {
         $data = (new \app\service\DadaImporter\Finam())->import('2015-08-01');
-        \cs\services\VarDumper::dump($data);
-// стратегия: Если данные есть то, они не трогаются
+        $stock_id = 1;
+        // стратегия: Если данные есть то, они не трогаются
         $dateArray = ArrayHelper::getColumn($data, 'date');
         sort($dateArray);
-        $rows = StockKurs::query(['between', 'date', $dateArray[0], $dateArray[count($dateArray)-1]])->all();
+        $rows = StockKurs::query(['between', 'date', $dateArray[0], $dateArray[count($dateArray)-1]])->andWhere(['stock_id' => $stock_id])->all();
         $dateArrayRows = ArrayHelper::getColumn($rows, 'date');
         $new = [];
         foreach($data as $row) {
             if (!in_array($row['date'], $dateArrayRows)) {
                 $new[] = [
-                     1,
+                     $stock_id,
                      $row['date'],
                      $row['kurs'],
                 ];
