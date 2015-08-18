@@ -140,7 +140,7 @@ class GraphExporter extends Object
         $min = null;
         foreach ($this->rows as $row) {
             $dateArray = ArrayHelper::getColumn($row, 'date');
-            $dateArray = sort($dateArray);
+            sort($dateArray);
             if (is_null($min)) {
                 $min = $dateArray[0];
             } else {
@@ -162,7 +162,6 @@ class GraphExporter extends Object
         foreach ($this->rows as $row) {
             $dateArray = ArrayHelper::getColumn($row, 'date');
             sort($dateArray);
-            VarDumper::dump($dateArray);
             $dateArray = array_reverse($dateArray);
             if (is_null($max)) {
                 $max = $dateArray[0];
