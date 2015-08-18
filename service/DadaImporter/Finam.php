@@ -18,7 +18,7 @@ class Finam extends Object implements DadaImporterInterface
     public $default = [
         'market'    => 1,
         'em'        => 23,
-        'p'         => 8,
+        'p'         => 8,                     // шаг, 8 - по дням
         'f'         => 'SBERP_150805_150805', // название файла
         'e'         => '.txt',                // расширение файла с точкой
         'dtf'       => 1,
@@ -52,7 +52,6 @@ class Finam extends Object implements DadaImporterInterface
         $params['yt'] = $end->format('Y');
 
         $u = new Url($this->url . $this->path, $params);
-        echo \yii\helpers\VarDumper::dumpAsString($u);
 
         $url = (string) $u;
         $ch = curl_init();
@@ -61,8 +60,6 @@ class Finam extends Object implements DadaImporterInterface
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $out = curl_exec($ch);
         curl_close($ch);
-
-        echo $out;
 
         $arr = explode("\n", $out);
         $ret = [];
