@@ -57,10 +57,6 @@ class GraphExporter extends Object
 
     public function init()
     {
-        // проверка на входящие данные
-        if (!$this->compare($this->start, $this->end)) {
-            throw new Exception('Дата end больше start');
-        }
         if (is_null($this->start)) {
             $this->start = $this->getMin();
         }
@@ -72,6 +68,10 @@ class GraphExporter extends Object
         }
         if (! ($this->end instanceof \DateTime)) {
             $this->end = new \DateTime($this->end);
+        }
+        // проверка на входящие данные
+        if (!$this->compare($this->start, $this->end)) {
+            throw new Exception('Дата end больше start');
         }
     }
 
@@ -121,12 +121,8 @@ class GraphExporter extends Object
      */
     public function compare($d1, $d2)
     {
-        try {
-            VarDumper::dump([$d1, $d2]);
-            return ($d2->format('U') - $d1->format('U')) >= 0;
-        } catch (\yii\base\ErrorException $e) {
-            VarDumper::dump([$d1, $d2]);
-        }
+        return ($d2->format('U') - $d1->format('U')) >= 0;
+
     }
 
     /**
