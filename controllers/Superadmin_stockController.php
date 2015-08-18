@@ -52,6 +52,7 @@ class Superadmin_stockController extends SuperadminBaseController
     public function actionGraph($id)
     {
         return $this->render([
+            'item' => \app\models\Stock::find($id),
             'kurs'      => \app\models\StockKurs::query(['stock_id' => $id])->orderBy(['date' => SORT_ASC])->all(),
             'prognosis' => \app\models\StockPrognosis::query(['stock_id' => $id])->orderBy(['date' => SORT_ASC])->all(),
         ]);

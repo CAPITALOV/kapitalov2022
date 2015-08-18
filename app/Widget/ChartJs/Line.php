@@ -11,6 +11,8 @@ use yii\helpers\Json;
 use yii\helpers\VarDumper;
 
 /*
+Рисует линейный график
+http://www.chartjs.org/docs/#line-chart
 
 */
 
@@ -23,8 +25,11 @@ class Line extends Object
     /**
      * @var array
      * [
-     *     'name' => string,
-     *     'data' => []
+     * 'x' => ["January", "February", "March", "April", "May", "June", "July"],
+     * 'y' => [
+     * [65, 59, 80, 81, 56, 55, 40],
+     * [null, null, 48, 40, 19, 86, 27],
+     * ]
      * ]
      */
     public $lineArray;
@@ -65,12 +70,12 @@ class Line extends Object
     public function run()
     {
         $this->registerClientScript();
-        echo Html::tag('canvas', null, [
+        $this->getClientOptions();
+        return Html::tag('canvas', null, [
             'id'     => $this->id,
             'width'  => $this->width,
             'height' => $this->height,
         ]);
-        $this->getClientOptions();
     }
 
     public static function widget($options)
