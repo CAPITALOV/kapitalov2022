@@ -4,44 +4,23 @@ namespace app\service\DadaImporter;
 
 use cs\services\Url;
 use cs\services\VarDumper;
+use yii\base\Object;
+use yii\helpers\ArrayHelper;
 
-class Finam implements DadaImporterInterface
+class Finam extends Object implements DadaImporterInterface
 {
-    private $url    = 'http://195.128.78.52/SBERP_150701_150818.txt';
-//http://195.128.78.52/
-//US2.AAPL_150818_150818.txt?
-//market=25&
-//em=20569&
-//code=US2.AAPL&
-//df=18&mf=7&yf=2015&from=18.08.2015&dt=18&mt=7&yt=2015&to=18.08.2015&
-//
-//p=7&
-//f=US2.AAPL_150818_150818
-//&e=.txt&
-//cn=US2.AAPL&
-//dtf=1&
-//tmf=1&
-//MSOR=1&
-//mstimever=0&
-//sep=1&
-//sep2=1&
-//datf=4
-    private $params = [
+    private $url    = 'http://195.128.78.52';
+
+    public $path    = '/SBERP_150701_150818.txt';
+
+    public $params;
+    
+    public $default = [
         'market'    => 1,
         'em'        => 23,
-        'code'      => 'SBERP',       // кодовый шифр продукта
-        'df'        => 1,             // день стартовой даты
-        'mf'        => 6,             // месяц стартовой даты, с 0
-        'yf'        => 2015,          // год стартовой даты
-        'from'      => '01.07.2015',  // стартовая дата в формате dd.mm.yyyy
-        'dt'        => 18,
-        'mt'        => 7,
-        'yt'        => 2015,
-        'to'        => '18.08.2015',
         'p'         => 8,
         'f'         => 'SBERP_150805_150805', // название файла
         'e'         => '.txt',                // расширение файла с точкой
-        'cn'        => 'SBERP',               //
         'dtf'       => 1,
         'tmf'       => 1,
         'MSOR'      => 1,
@@ -62,15 +41,17 @@ class Finam implements DadaImporterInterface
         }
         $start = new \DateTime($start);
         $end = new \DateTime($end);
-        $this->params['from'] = $start->format('d.m.Y');
-        $this->params['df'] = (int)$start->format('j');
-        $this->params['mf'] = (int)$start->format('n') - 1;
-        $this->params['yf'] = (int)$start->format('Y');
-        $this->params['to'] = $end->format('d.m.Y');
-        $this->params['dt'] = (int)$end->format('j');
-        $this->params['mt'] = (int)$end->format('n') - 1;
-        $this->params['yt'] = $end->format('Y');
-        $u = new Url($this->url, $this->params);
+        $params = ArrayHelper::merge($this->default, $this->params);
+        $params['from'] = $start->format('d.m.Y');
+        $params['df'] = (int)$start->format('j');
+        $params['mf'] = (int)$start->format('n') - 1;
+        $params['yf'] = (int)$start->format('Y');
+        $params['to'] = $end->format('d.m.Y');
+        $params['dt'] = (int)$end->format('j');
+        $params['mt'] = (int)$end->format('n') - 1;
+        $params['yt'] = $end->format('Y');
+
+        $u = new Url($this->url, $params);
         $url = (string) $u;
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
