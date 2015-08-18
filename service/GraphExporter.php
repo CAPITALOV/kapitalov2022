@@ -97,11 +97,6 @@ class GraphExporter extends Object
             $x[] = $i->format($this->formatX);
         }
 
-        VarDumper::dump([
-            'x' => $x,
-            'y' => $y,
-        ]);
-
         return [
             'x' => $x,
             'y' => $y,
