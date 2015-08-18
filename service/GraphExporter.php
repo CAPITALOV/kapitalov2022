@@ -17,8 +17,10 @@ namespace app\service;
  *                    ]
  * @param \DateTime $start - стартовое значение на графике
  *                           можно задать как \DateTime или string 'yyyy-mm-dd'
+ *                           если значение не будет задано то будет использовано самое малое значение из тех что даны в $rows
  * @param \DateTime $end   - конечное значение на графике
  *                           можно задать как \DateTime или string 'yyyy-mm-dd'
+ *                           если значение не будет задано то будет использовано самое большое значение из тех что даны в $rows
  *
  * После экспорта все линии будут идти от `$start` до `$end`, если данных в таблице не хватает то они будут
  * дозаполнены значениями null
@@ -32,6 +34,7 @@ namespace app\service;
  *     ]
  * ]
  */
+use cs\services\VarDumper;
 use cs\web\Exception;
 use yii\base\Object;
 use yii\helpers\ArrayHelper;
@@ -58,8 +61,14 @@ class GraphExporter extends Object
         if (!$this->compare($this->start, $this->end)) {
             throw new Exception('Дата end больше start');
         }
+        if (is_null($this->start)) {
+            $this->start = $this->getMin();
+        }
         if (! $this->start instanceof \DateTime) {
             $this->start = new \DateTime($this->start);
+        }
+        if (is_null($this->end)) {
+            $this->end = $this->getMax();
         }
         if (! $this->end instanceof \DateTime) {
             $this->end = new \DateTime($this->end);
@@ -88,6 +97,11 @@ class GraphExporter extends Object
         for ($i = $this->start; $this->compare($i, $this->end); $i->add(new \DateInterval('P1D'))) {
             $x[] = $i->format($this->formatX);
         }
+
+        VarDumper::dump([
+            'x' => $x,
+            'y' => $y,
+        ]);
 
         return [
             'x' => $x,
@@ -121,5 +135,48 @@ class GraphExporter extends Object
         $item = new static($options);
 
         return $item->run();
+    }
+
+    /**
+     * Получает минимальную дату из $rows
+     */
+    public function getMin()
+    {
+        $min = null;
+        foreach ($this->rows as $row) {
+            $dateArray = ArrayHelper::getColumn($row, 'date');
+            $dateArray = sort($dateArray);
+            if (is_null($min)) {
+                $min = $dateArray[0];
+            } else {
+                if (!$this->compare($min, $dateArray[0])) {
+                    $min = $dateArray[0];
+                }
+            }
+        }
+
+        return $min;
+    }
+
+    /**
+     * Получает минимальную дату из $rows
+     */
+    public function getMax()
+    {
+        $max = null;
+        foreach ($this->rows as $row) {
+            $dateArray = ArrayHelper::getColumn($row, 'date');
+            $dateArray = sort($dateArray);
+            $dateArray = array_reverse($dateArray);
+            if (is_null($max)) {
+                $max = $dateArray[0];
+            } else {
+                if ($this->compare($max, $dateArray[0])) {
+                    $max = $dateArray[0];
+                }
+            }
+        }
+
+        return $max;
     }
 }
