@@ -161,8 +161,8 @@ class GraphExporter extends Object
         $max = null;
         foreach ($this->rows as $row) {
             $dateArray = ArrayHelper::getColumn($row, 'date');
-            VarDumper::dump($dateArray);
             $dateArray = sort($dateArray);
+            VarDumper::dump($dateArray);
             $dateArray = array_reverse($dateArray);
             if (is_null($max)) {
                 $max = $dateArray[0];
