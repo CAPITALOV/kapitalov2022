@@ -8,23 +8,40 @@ use cs\services\VarDumper;
 class Finam implements DadaImporterInterface
 {
     private $url    = 'http://195.128.78.52/SBERP_150701_150818.txt';
-
+//http://195.128.78.52/
+//US2.AAPL_150818_150818.txt?
+//market=25&
+//em=20569&
+//code=US2.AAPL&
+//df=18&mf=7&yf=2015&from=18.08.2015&dt=18&mt=7&yt=2015&to=18.08.2015&
+//
+//p=7&
+//f=US2.AAPL_150818_150818
+//&e=.txt&
+//cn=US2.AAPL&
+//dtf=1&
+//tmf=1&
+//MSOR=1&
+//mstimever=0&
+//sep=1&
+//sep2=1&
+//datf=4
     private $params = [
         'market'    => 1,
         'em'        => 23,
-        'code'      => 'SBERP',
-        'df'        => 1,
-        'mf'        => 6,
-        'yf'        => 2015,
-        'from'      => '01.07.2015',
+        'code'      => 'SBERP',       // кодовый шифр продукта
+        'df'        => 1,             // день стартовой даты
+        'mf'        => 6,             // месяц стартовой даты, с 0
+        'yf'        => 2015,          // год стартовой даты
+        'from'      => '01.07.2015',  // стартовая дата в формате dd.mm.yyyy
         'dt'        => 18,
         'mt'        => 7,
         'yt'        => 2015,
         'to'        => '18.08.2015',
         'p'         => 8,
-        'f'         => 'SBERP_150805_150805',
-        'e'         => '.txt',
-        'cn'        => 'SBERP',
+        'f'         => 'SBERP_150805_150805', // название файла
+        'e'         => '.txt',                // расширение файла с точкой
+        'cn'        => 'SBERP',               //
         'dtf'       => 1,
         'tmf'       => 1,
         'MSOR'      => 1,
@@ -32,7 +49,7 @@ class Finam implements DadaImporterInterface
         'sep'       => 1,
         'sep2'      => 1,
         'datf'      => 4,
-        'at'        => 0,
+        'at'        => 0,                     // использовать заголовок в генерируемом документе? 1 - да, 0 - нет
     ];
 
     /**
