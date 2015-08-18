@@ -81,7 +81,7 @@ class GraphExporter extends Object
         foreach($this->rows as $row) {
             $new = [];
             $arrayOfDate = ArrayHelper::getColumn($row, 'date');
-            for ($i = $this->start; $this->compare($i, $this->end); $i->add(new \DateInterval('P1D'))) {
+            for ($i = new \DateTime($this->start->format('Y-m-d')); $this->compare($i, $this->end); $i->add(new \DateInterval('P1D'))) {
                 $date = $i->format('Y-m-d');
                 $value = ArrayHelper::getValue($arrayOfDate, $date, null);
                 if ($value) {
