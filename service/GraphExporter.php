@@ -94,8 +94,7 @@ class GraphExporter extends Object
         }
 
         $x = [];
-        VarDumper::dump([$this->start,$this->end, $this->compare($this->start, $this->end)]);
-        for ($i = $this->start; $this->compare($i, $this->end); $i->add(new \DateInterval('P1D'))) {
+        for ($i = new \DateTime($this->start->format('Y-m-d')); $this->compare($i, $this->end); $i->add(new \DateInterval('P1D'))) {
             $x[] = $i->format($this->formatX);
         }
 
