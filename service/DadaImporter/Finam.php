@@ -1,6 +1,6 @@
 <?php
 
-namespace app\services\DadaImporter;
+namespace app\service\DadaImporter;
 
 use cs\services\Url;
 use cs\services\VarDumper;

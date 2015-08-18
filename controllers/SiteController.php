@@ -71,7 +71,7 @@ class SiteController extends BaseController
 
     public function actionImport()
     {
-        $data = (new \app\services\DadaImporter\Finam())->import('2015-08-01');
+        $data = (new \app\service\DadaImporter\Finam())->import('2015-08-01');
         // стратегия: Если данные есть то, они не трогаются
         $dateArray = ArrayHelper::getColumn($data, 'date');
         sort($dateArray);
