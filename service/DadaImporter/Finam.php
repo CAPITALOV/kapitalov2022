@@ -52,6 +52,8 @@ class Finam extends Object implements DadaImporterInterface
         $params['yt'] = $end->format('Y');
 
         $u = new Url($this->url, $params);
+        echo \yii\helpers\VarDumper::dumpAsString($u);
+
         $url = (string) $u;
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
@@ -59,6 +61,8 @@ class Finam extends Object implements DadaImporterInterface
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $out = curl_exec($ch);
         curl_close($ch);
+
+        echo $out;
 
         $arr = explode("\n", $out);
         $ret = [];
