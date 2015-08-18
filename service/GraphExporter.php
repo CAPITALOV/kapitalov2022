@@ -57,6 +57,8 @@ class GraphExporter extends Object
 
     public function init()
     {
+        VarDumper::dump($this);
+
         // проверка на входящие данные
         if (!$this->compare($this->start, $this->end)) {
             throw new Exception('Дата end больше start');
