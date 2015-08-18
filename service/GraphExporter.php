@@ -84,7 +84,7 @@ class GraphExporter extends Object
             for ($i = new \DateTime($this->start->format('Y-m-d')); $this->compare($i, $this->end); $i->add(new \DateInterval('P1D'))) {
                 $date = $i->format('Y-m-d');
                 if (in_array($date, $arrayOfDate)) {
-                    $new[] = $this->getKursByDate($row, $date);
+                    $new[] = (float)$this->getKursByDate($row, $date);
                 } else {
                     $new[] = null;
                 }
