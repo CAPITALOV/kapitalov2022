@@ -57,7 +57,6 @@ class GraphExporter extends Object
 
     public function init()
     {
-
         // проверка на входящие данные
         if (!$this->compare($this->start, $this->end)) {
             throw new Exception('Дата end больше start');
@@ -74,7 +73,6 @@ class GraphExporter extends Object
         if (! ($this->end instanceof \DateTime)) {
             $this->end = new \DateTime($this->end);
         }
-        VarDumper::dump($this);
     }
 
     public function run()
@@ -152,7 +150,7 @@ class GraphExporter extends Object
             if (is_null($min)) {
                 $min = $dateArray[0];
             } else {
-                if (!$this->compare($min, $dateArray[0])) {
+                if (!$this->compare($min, new \DateTime($dateArray[0]))) {
                     $min = $dateArray[0];
                 }
             }
@@ -174,7 +172,7 @@ class GraphExporter extends Object
             if (is_null($max)) {
                 $max = $dateArray[0];
             } else {
-                if ($this->compare($max, $dateArray[0])) {
+                if ($this->compare($max, new \DateTime($dateArray[0]))) {
                     $max = $dateArray[0];
                 }
             }
