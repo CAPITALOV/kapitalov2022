@@ -42,9 +42,6 @@ class ImporterController extends Controller
                 $date = new \DateTime();
                 $date->sub(new \DateInterval('P7D'));
                 $data = $class->import($date->format('Y-m-d'));
-                if ($stock_id == 4) {
-                    echo VarDumper::dumpAsString($data);
-                }
                 // стратегия: Если данные есть то, они не трогаются
                 $dateArray = ArrayHelper::getColumn($data, 'date');
                 sort($dateArray);

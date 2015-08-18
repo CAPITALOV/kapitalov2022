@@ -52,7 +52,6 @@ class Finam extends Object implements DadaImporterInterface
         $params['yt'] = $end->format('Y');
 
         $u = new Url($this->url . $this->path, $params);
-
         $url = (string) $u;
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
@@ -71,7 +70,6 @@ class Finam extends Object implements DadaImporterInterface
                     'kurs' => (float)trim($items[4]),
                 ];
             }
-
         }
 
         return $ret;
