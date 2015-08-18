@@ -3,6 +3,7 @@
 return [
     '/'                                              => 'site/index',
     'contact'                                        => 'site/contact',
+    'import'                                         => 'site/import',
     'login'                                          => 'site/login',
     'logout'                                         => 'site/logout',
     'profile'                                        => 'site/profile',
