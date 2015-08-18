@@ -41,10 +41,12 @@ class ImporterController extends Controller
                     ];
                 }
             }
-            \Yii::info('Импортированы данные: ' . VarDumper::dumpAsString($new), 'gs\\importer\\index');
-            echo 'Импортированы данные: ' . VarDumper::dumpAsString($new);
+            if (count($new) > 0) {
+                \Yii::info('Импортированы данные: ' . VarDumper::dumpAsString($new), 'gs\\importer\\index');
+                echo 'Импортированы данные: ' . VarDumper::dumpAsString($new);
 
-            StockKurs::batchInsert(['stock_id', 'date', 'kurs'], $new);
+                StockKurs::batchInsert(['stock_id', 'date', 'kurs'], $new);
+            }
         }
     }
 }
