@@ -6,7 +6,7 @@
  * Time: 14:41
  */
 
-namespace app\services\DadaImporter;
+namespace app\service\DadaImporter;
 
 
 interface DadaImporterInterface {
