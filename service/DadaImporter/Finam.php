@@ -51,7 +51,7 @@ class Finam extends Object implements DadaImporterInterface
         $params['mt'] = (int)$end->format('n') - 1;
         $params['yt'] = $end->format('Y');
 
-        $u = new Url($this->url, $params);
+        $u = new Url($this->url . $this->path, $params);
         echo \yii\helpers\VarDumper::dumpAsString($u);
 
         $url = (string) $u;
