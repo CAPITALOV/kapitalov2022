@@ -78,6 +78,7 @@ class GraphExporter extends Object
     public function run()
     {
         $y = [];
+        VarDumper::dump($this);
         foreach($this->rows as $row) {
             $new = [];
             $arrayOfDate = ArrayHelper::getColumn($row, 'date');
