@@ -9,6 +9,17 @@ return [
     'profile'                                        => 'site/profile',
     'passwordChange'                                 => 'site/profile_password_change',
 
+
+    'password/recover'                               => 'auth/password_recover',
+    'password/recover/activate/<code:\\w+>'          => 'auth/password_recover_activate',
+
+    'registration'                                   => 'auth/registration',
+    'registrationActivate/<code:\\w+>'               => 'auth/registration_activate',
+    'login2'                                         => 'auth/login',
+    'loginAjax'                                      => 'auth/login_ajax',
+    'logout2'                                        => 'auth/logout',
+    'auth'                                           => 'auth/auth',
+
     // superadmin
     'superAdmin'                                     => 'superadmin/index',
     'adminUsers'                                     => 'superadmin/users',
