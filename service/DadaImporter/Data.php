@@ -30,5 +30,16 @@ class Data
                 'cn'        => 'US2.AAPL',       // кодовый шифр продукта
             ],
         ],
+        [
+            'class' => 'app\service\DadaImporter\Finam',
+            'stock_id' => 5,
+            'path'     => '/GAZP_150818_150818.txt',
+            'params'   => [
+                'market'    => 1,
+                'em'        => 16842,
+                'code'      => 'GAZP',       // кодовый шифр продукта
+                'cn'        => 'GAZP',       // кодовый шифр продукта
+            ],
+        ],
     ];
 } 
