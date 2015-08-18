@@ -84,7 +84,7 @@ class GraphExporter extends Object
             for ($i = new \DateTime($this->start->format('Y-m-d')); $this->compare($i, $this->end); $i->add(new \DateInterval('P1D'))) {
                 $date = $i->format('Y-m-d');
                 if (in_array($date, $arrayOfDate)) {
-                    $new[] = $date;
+                    $new[] = $this->getKursByDate($row, $date);
                 } else {
                     $new[] = null;
                 }
@@ -178,5 +178,22 @@ class GraphExporter extends Object
         }
 
         return $max;
+    }
+
+    /**
+     * Выбирает курс по запросу date
+     *
+     * @param array $row массив значений
+     *
+     * @param string $date дата по которой выбирать
+     *
+     * @return mixed
+     */
+    function getKursByDate($row, $date){
+        foreach($row as $i) {
+            if ($i['date'] == $date) return $i['kurs'];
+        }
+
+        return null;
     }
 }
