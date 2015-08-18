@@ -87,8 +87,8 @@ class SiteController extends BaseController
                 ];
             }
         }
-        \cs\services\VarDumper::dump($new);
         StockKurs::batchInsert(['stock_id', 'date', 'kurs'], $new);
+        \cs\services\VarDumper::dump($new);
     }
 
     /*
