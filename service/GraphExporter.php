@@ -144,7 +144,7 @@ class GraphExporter extends Object
             if (is_null($min)) {
                 $min = $dateArray[0];
             } else {
-                if (!$this->compare($min, new \DateTime($dateArray[0]))) {
+                if (!$this->compare(new \DateTime($min), new \DateTime($dateArray[0]))) {
                     $min = $dateArray[0];
                 }
             }
@@ -166,7 +166,7 @@ class GraphExporter extends Object
             if (is_null($max)) {
                 $max = $dateArray[0];
             } else {
-                if ($this->compare($max, new \DateTime($dateArray[0]))) {
+                if ($this->compare(new \DateTime($max), new \DateTime($dateArray[0]))) {
                     $max = $dateArray[0];
                 }
             }
