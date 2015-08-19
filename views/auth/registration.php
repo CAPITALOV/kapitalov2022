@@ -17,9 +17,9 @@ $this->params['breadcrumbs'][] = $this->title;
         <?php if (Yii::$app->session->hasFlash('contactFormSubmitted')): ?>
 
             <div class="alert alert-success">
-                Благодрим вас за регистрацию.
+                <p>Благодрим вас за регистрацию.</p>
+                <p>Пройдите по ссылке для активации профиля: <a href="<?= \yii\helpers\Url::to(['auth/registration_activate', 'code' => \app\service\RegistrationDispatcher::query(['parent_id' => Yii::$app->session->getFlash('user_id') ])->select('code')->scalar()], true)?>">ссылка</a></p>
             </div>
-
         <?php else: ?>
 
             <div class="row">
@@ -37,13 +37,18 @@ $this->params['breadcrumbs'][] = $this->title;
                     <?= $form->field($model, 'password2', ['inputOptions' => ['placeholder' => 'Повторите пароль еще раз']])->passwordInput()->label('Пароль повтор', ['class' => 'hide']) ?>
                     <?php
                     $field = $form->field($model, 'verifyCode')->widget(Captcha::className(), [
-                        'template' => '<div class="row"><div class="col-lg-3">{image}</div><div class="col-lg-6">{input}</div></div>',
+                        'template' => '<div class="row"><div class="col-lg-12">{image}</div></div><div class="row"><div class="col-lg-12">{input}</div></div>',
                     ]);
                     $field->enableAjaxValidation = false;
                     echo $field;
                     ?>
+                    <hr>
                     <div class="form-group">
-                        <?= Html::submitButton('Зарегистрироваться', ['class' => 'btn btn-primary', 'name' => 'contact-button']) ?>
+                        <?= Html::submitButton('Зарегистрироваться', [
+                            'class' => 'btn btn-primary',
+                            'name' => 'contact-button',
+                            'style' => 'width: 100%;',
+                        ]) ?>
                     </div>
                     <?php ActiveForm::end(); ?>
                 </div>

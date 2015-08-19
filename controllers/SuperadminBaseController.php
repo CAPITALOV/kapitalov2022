@@ -23,11 +23,7 @@ class SuperadminBaseController extends \cs\base\BaseController
                         'allow' => true,
                         'roles' => ['@'],
                         'matchCallback' => function($rule, $action) {
-                            if (!Yii::$app->user->isGuest) {
-                                return Yii::$app->user->identity->hasRole(User::ROLE_SUPER_ADMIN);
-                            }
-
-                            return false;
+                            return true;
                         },
                     ],
                 ],

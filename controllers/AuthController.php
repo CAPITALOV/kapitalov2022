@@ -12,13 +12,13 @@ use app\models\LoginForm;
 use yii\web\Request;
 use yii\web\Response;
 use yii\widgets\ActiveForm;
-use app\services\RegistrationDispatcher;
-use app\services\PasswordRecoverDispatcher;
+use app\service\RegistrationDispatcher;
+use app\service\PasswordRecoverDispatcher;
 use cs\web\Exception;
 
 class AuthController extends BaseController
 {
-    public $layout = 'menu';
+    public $layout = 'main';
 
     public function behaviors()
     {
@@ -62,7 +62,7 @@ class AuthController extends BaseController
     public function successCallback($client)
     {
         $attributes = $client->getUserAttributes();
-        /** @var \app\services\authclient\authClientInterface $client */
+        /** @var \app\service\authclient\authClientInterface $client */
         $client->saveToken();
         if (Yii::$app->user->isGuest) {
             $user = $client->login($attributes);
@@ -182,8 +182,9 @@ class AuthController extends BaseController
             return ActiveForm::validate($model);
         }
 
-        if ($model->load(Yii::$app->request->post()) && $model->register()) {
+        if ($model->load(Yii::$app->request->post()) && ($user = $model->register())) {
             Yii::$app->session->setFlash('contactFormSubmitted');
+            Yii::$app->session->setFlash('user_id', $user->getId());
 
             return $this->refresh();
         }

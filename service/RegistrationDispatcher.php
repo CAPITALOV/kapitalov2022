@@ -7,7 +7,7 @@ use \yii\db\Query;
 
 class RegistrationDispatcher extends \cs\services\dispatcher\Registration
 {
-    const TABLE = 'gs_users_registration';
+    const TABLE = 'cap_users_registration';
 
     public static function cron($isEcho = true)
     {

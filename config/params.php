@@ -1,6 +1,8 @@
 <?php
 
 return [
-    'adminEmail' => 'admin@suffra.com',
-    'suffra_url' => YII_ENV == 'dev' ? 'http://suffra.dev' : 'https://www.suffra.com',
+    'adminEmail' => 'admin@capitalov.com',
+    'mailer'     => [
+        'from' => ['c@c.ru' => 'capitalov']
+    ],
 ];
