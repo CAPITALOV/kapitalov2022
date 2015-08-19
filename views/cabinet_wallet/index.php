@@ -16,5 +16,5 @@ $this->title = 'Счет';
 <?php } else { ?>
     <p>Оплачено до: <?= date('d.m.Y', $end) ?></p>
     <p>Вы можете еще пользоваться дней: <?= (int)(($end - time()) / (60 * 60 * 24)) ?></p>
-    <a href="<?= \yii\helpers\Url::to(['cabinet_wallet/add']) ?>" class="btn btn-default">Оплатить</a>
 <?php } ?>
+<a href="<?= \yii\helpers\Url::to(['cabinet_wallet/add']) ?>" class="btn btn-default">Оплатить</a>
