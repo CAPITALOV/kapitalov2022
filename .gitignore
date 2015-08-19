@@ -37,4 +37,5 @@ putty.exe
 public_html/cgi-bin
 
 config/mailerTransport.php
+config/authClientCollection.php
 composer.lock

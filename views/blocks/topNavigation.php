@@ -62,6 +62,8 @@ use yii\helpers\Html;
                             <li><a href="<?= Url::to(['site/profile']) ?>"><i class="glyphicon glyphicon-cog" style="padding-right: 5px;"></i>Мой профиль</a></li>
                             <li><a href="<?= Url::to(['cabinet/password_change']) ?>"><i class="glyphicon glyphicon-asterisk" style="padding-right: 5px;"></i>Сменить пароль</a></li>
                             <li class="divider"></li>
+                            <li><a href="<?= Url::to(['cabinet_wallet/index']) ?>"><i class="glyphicon glyphicon-euro" style="padding-right: 5px;"></i>Состояние кошелька</a></li>
+                            <li class="divider"></li>
                             <li><a href="<?= Url::to(['auth/logout']) ?>" data-method="post"><i class="glyphicon glyphicon-off" style="padding-right: 5px;"></i>Выйти</a></li>
                         </ul>
                     </li>

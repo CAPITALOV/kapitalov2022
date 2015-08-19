@@ -9,10 +9,7 @@ use yii\helpers\Html;
 $this->title = $item->getField('name');
 
 ?>
-
-    <div class="col-lg-12">
-        <h1 class="page-header"><?= $this->title ?></h1>
-    </div>
+    <h1 class="page-header"><?= $this->title ?></h1>
 
 
 <?= \cs\Widget\ChartJs\Line::widget([
