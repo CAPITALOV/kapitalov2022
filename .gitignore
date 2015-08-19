@@ -34,3 +34,4 @@ phpunit.phar
 
 public_html/index.php
 putty.exe
+public_html/cgi-bin
