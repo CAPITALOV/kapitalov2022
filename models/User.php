@@ -140,4 +140,14 @@ class User extends DbRecord implements \yii\web\IdentityInterface {
         return $this->authKey === $authKey;
     }
 
+    /**
+     * Оплачен ли личный кабинет?
+     */
+    public function isPaid()
+    {
+        $paid_time = $this->getField('paid_time');
+        if (is_null($paid_time)) return false;
+
+        return ($paid_time - time()) > 0;
+    }
 }
