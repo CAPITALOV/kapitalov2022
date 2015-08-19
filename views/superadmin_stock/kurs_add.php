@@ -32,26 +32,16 @@ $this->params['breadcrumbs'][] = $this->title;
                     'id'      => 'contact-form',
                     'options' => ['enctype' => 'multipart/form-data']
                 ]); ?>
-                <?= $model->field($form, 'date1') ?>
-                <?= $model->field($form, 'kurs1') ?>
-                <?= $model->field($form, 'date2') ?>
-                <?= $model->field($form, 'kurs2') ?>
-                <?= $model->field($form, 'date3') ?>
-                <?= $model->field($form, 'kurs3') ?>
-                <?= $model->field($form, 'date4') ?>
-                <?= $model->field($form, 'kurs4') ?>
-                <?= $model->field($form, 'date5') ?>
-                <?= $model->field($form, 'kurs5') ?>
-                <?= $model->field($form, 'date6') ?>
-                <?= $model->field($form, 'kurs6') ?>
-                <?= $model->field($form, 'date7') ?>
-                <?= $model->field($form, 'kurs7') ?>
-                <?= $model->field($form, 'date8') ?>
-                <?= $model->field($form, 'kurs8') ?>
-                <?= $model->field($form, 'date9') ?>
-                <?= $model->field($form, 'kurs9') ?>
-                <?= $model->field($form, 'date10') ?>
-                <?= $model->field($form, 'kurs10') ?>
+                <?php for ($i = 1; $i <= 10; $i++) { ?>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <?= $model->field($form, 'date' . $i) ?>
+                        </div>
+                        <div class="col-lg-6">
+                            <?= $model->field($form, 'kurs' . $i) ?>
+                        </div>
+                    </div>
+                <?php } ?>
 
                 <input type="hidden" value="<?= $stock_id ?>" name="<?= $model->formName()  ?>[stock_id]"/>
 
