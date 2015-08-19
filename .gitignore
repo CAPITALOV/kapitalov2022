@@ -32,4 +32,5 @@ phpunit.phar
 # local phpunit config
 /phpunit.xml
 
-puplic_html/index.php
+public_html/index.php
+putty.exe
