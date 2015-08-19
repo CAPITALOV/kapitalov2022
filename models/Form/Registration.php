@@ -73,14 +73,12 @@ class Registration extends \cs\base\BaseForm
      *
      * @param  string $email the target email address
      *
-     * @return boolean whether the model passes validation
+     * @return false|\app\models\User whether the model passes validation
      */
     public function register()
     {
         if ($this->validate()) {
-            \app\models\User::registration($this->email, $this->password1);
-
-            return true;
+            return \app\models\User::registration($this->email, $this->password1);
         } else {
             return false;
         }
