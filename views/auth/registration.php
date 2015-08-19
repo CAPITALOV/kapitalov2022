@@ -17,9 +17,9 @@ $this->params['breadcrumbs'][] = $this->title;
         <?php if (Yii::$app->session->hasFlash('contactFormSubmitted')): ?>
 
             <div class="alert alert-success">
-                Благодрим вас за регистрацию.
+                <p>Благодрим вас за регистрацию.</p>
+                <p>Пройдите по ссылке для активации профиля: <a href="<?= \yii\helpers\Url::to(['auth/registration_activate', 'code' => \app\service\RegistrationDispatcher::query(['parent_id' => Yii::$app->session->getFlash('user_id') ])->select('code')->scalar()], true)?>">ссылка</a></p>
             </div>
-
         <?php else: ?>
 
             <div class="row">

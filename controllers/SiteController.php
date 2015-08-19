@@ -114,14 +114,6 @@ class SiteController extends BaseController
         }
     }
 
-    public function actionLogout()
-    {
-        self::log('Вышел из системы');
-        Yii::$app->user->logout();
-
-        return $this->goHome();
-    }
-
     /**
      * Выводит профиль пользователя
      */

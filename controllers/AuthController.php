@@ -182,8 +182,9 @@ class AuthController extends BaseController
             return ActiveForm::validate($model);
         }
 
-        if ($model->load(Yii::$app->request->post()) && $model->register()) {
+        if ($model->load(Yii::$app->request->post()) && ($user = $model->register())) {
             Yii::$app->session->setFlash('contactFormSubmitted');
+            Yii::$app->session->setFlash('user_id', $user->getId());
 
             return $this->refresh();
         }

@@ -5,7 +5,6 @@ return [
     'contact'                                        => 'site/contact',
     'import'                                         => 'site/import',
     'login'                                          => 'site/login',
-    'logout'                                         => 'site/logout',
     'profile'                                        => 'site/profile',
     'passwordChange'                                 => 'site/profile_password_change',
     'captcha'                                                                              => 'site/captcha',
@@ -18,7 +17,7 @@ return [
     'registrationActivate/<code:\\w+>'               => 'auth/registration_activate',
     'login2'                                         => 'auth/login',
     'loginAjax'                                      => 'auth/login_ajax',
-    'logout2'                                        => 'auth/logout',
+    'logout'                                         => 'auth/logout',
     'auth'                                           => 'auth/auth',
 
     // superadmin
