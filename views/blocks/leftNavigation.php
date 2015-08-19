@@ -7,21 +7,11 @@ use app\models\Translator as T;
 ?>
 <?php if (!\Yii::$app->user->isGuest): ?>
     <ul class="nav nav-pills nav-stacked">
-        <?php if (in_array(User::ROLE_SUPER_ADMIN, \Yii::$app->user->identity->getRoleIds())): ?>
-
-            <h4><a href="/superAdmin">superAdmin</a></h4>
-            <ul class="list-unstyled col-md-offset-1">
-                <li><a href="/adminUsers">Админы</a></li>
-				<li><a href="<?= Url::to(['superadmin_stock/index'])?>">Курсы</a></li>
-            </ul>
-            <hr>
-        <?php endif; ?>
-        <?php if (in_array(User::ROLE_ADMIN, \Yii::$app->user->identity->getRoleIds())): ?>
-
-            <h4><a href="/admin">admin</a></h4>
-            <ul class="list-unstyled col-md-offset-1">
-            </ul>
-            <hr>
-        <?php endif; ?>
+        <h4><a href="/superAdmin">superAdmin</a></h4>
+        <ul class="list-unstyled col-md-offset-1">
+            <li><a href="/adminUsers">Админы</a></li>
+            <li><a href="<?= Url::to(['superadmin_stock/index'])?>">Курсы</a></li>
+        </ul>
+        <hr>
     </ul>
 <?php endif; ?>

@@ -37,13 +37,18 @@ $this->params['breadcrumbs'][] = $this->title;
                     <?= $form->field($model, 'password2', ['inputOptions' => ['placeholder' => 'Повторите пароль еще раз']])->passwordInput()->label('Пароль повтор', ['class' => 'hide']) ?>
                     <?php
                     $field = $form->field($model, 'verifyCode')->widget(Captcha::className(), [
-                        'template' => '<div class="row"><div class="col-lg-3">{image}</div><div class="col-lg-6">{input}</div></div>',
+                        'template' => '<div class="row"><div class="col-lg-12">{image}</div></div><div class="row"><div class="col-lg-12">{input}</div></div>',
                     ]);
                     $field->enableAjaxValidation = false;
                     echo $field;
                     ?>
+                    <hr>
                     <div class="form-group">
-                        <?= Html::submitButton('Зарегистрироваться', ['class' => 'btn btn-primary', 'name' => 'contact-button']) ?>
+                        <?= Html::submitButton('Зарегистрироваться', [
+                            'class' => 'btn btn-primary',
+                            'name' => 'contact-button',
+                            'style' => 'width: 100%;',
+                        ]) ?>
                     </div>
                     <?php ActiveForm::end(); ?>
                 </div>

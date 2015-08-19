@@ -10,6 +10,7 @@ use app\assets\AppAsset;
 /* @var $content string */
 
 AppAsset::register($this);
+\app\assets\Layout\Asset::register($this);
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -62,6 +63,9 @@ AppAsset::register($this);
         </div>
     </div>
 
+    <?php if (\Yii::$app->user->isGuest) : ?>
+        <?= $this->render('_modalLogin') ?>
+    <?php endif; ?>
 
     <?php $this->endBody() ?>
 </body>
