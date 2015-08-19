@@ -24,7 +24,5 @@ class ChartJs extends AssetBundle
         'Chart.js'
     ];
     public $depends  = [
-        'yii\web\YiiAsset',
-        'yii\bootstrap\BootstrapPluginAsset',
     ];
 }

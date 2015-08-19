@@ -19,12 +19,15 @@ use yii\helpers\VarDumper;
 class ImporterController extends Controller
 {
     /**
+     * Импортирует курсы сразу для всех индексов
      */
     public function actionIndex()
     {
-        $ids = Stock::query()->select('id')->column();
+        $rows = Stock::query()->select('id, name')->all();
 
-        foreach($ids as $stock_id) {
+        foreach($rows as $row) {
+            $stock_id = $row['id'];
+            $this->log('Попытка получить данные для: ' . $row['name']);
             // получаю список импортеров
             $importList = [];
             foreach (\app\service\DadaImporter\Data::$importerData as $d) {
@@ -59,11 +62,19 @@ class ImporterController extends Controller
                 }
                 if (count($new) > 0) {
                     \Yii::info('Импортированы данные: ' . VarDumper::dumpAsString($new), 'gs\\importer\\index');
-                    echo 'Импортированы данные: ' . VarDumper::dumpAsString($new);
+                    $this->log('Импортированы данные: ' . VarDumper::dumpAsString($new));
 
                     StockKurs::batchInsert(['stock_id', 'date', 'kurs'], $new);
+                } else {
+                    $this->log('Нечего импортировать');
                 }
             }
         }
+    }
+
+    public function log($message)
+    {
+        echo $message;
+        echo "\n";
     }
 }
