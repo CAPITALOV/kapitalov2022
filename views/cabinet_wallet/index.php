@@ -8,12 +8,13 @@ use yii\data\ActiveDataProvider;
 
 $this->title = 'Счет';
 ?>
-<div class="site-about">
-    <h1><?= Html::encode($this->title) ?></h1>
 
-    <?php if (is_null($end)) { ?>
-        <p>Демо режим</p>
-    <?php } else { ?>
-        <p>Оплачено до: <?=  date('dd.mm.yyyy', $end) ?></p>
-    <?php } ?>
-</div>
+<h1 class="page-header"><?= Html::encode($this->title) ?></h1>
+
+<?php if (is_null($end)) { ?>
+    <p>Демо режим</p>
+<?php } else { ?>
+    <p>Оплачено до: <?= date('d.m.Y', $end) ?></p>
+    <p>Вы можете еще пользоваться дней: <?= (int)(($end - time()) / (60 * 60 * 24)) ?></p>
+    <a href="<?= \yii\helpers\Url::to(['cabinet_wallet/add']) ?>" class="btn btn-default">Оплатить</a>
+<?php } ?>

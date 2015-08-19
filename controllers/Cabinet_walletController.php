@@ -38,4 +38,10 @@ class Cabinet_walletController extends SuperadminBaseController
         ]);
     }
 
+    public function actionAdd()
+    {
+        return $this->render([
+        ]);
+    }
+
 }

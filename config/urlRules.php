@@ -52,5 +52,6 @@ return [
     'cabinet/profile/subscribe'             => 'cabinet/profile_subscribe',
 
     'cabinet/wallet'                        => 'cabinet_wallet/index',
+    'cabinet/wallet/add'                    => 'cabinet_wallet/add',
 
 ];
