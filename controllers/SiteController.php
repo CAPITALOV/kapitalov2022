@@ -21,10 +21,8 @@ use app\models\LoginForm;
 use app\models\ContactForm;
 use app\models\UserForm;
 use app\models\Form\UserPassword as FormUserPassword;
-use Suffra\Config as SuffraConfig;
 
-
-class SiteController extends BaseController
+class SiteController extends \cs\base\BaseController
 {
     public function behaviors()
     {
@@ -105,7 +103,7 @@ class SiteController extends BaseController
         }
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            self::log('Вошел в систему');
+
             return $this->goBack();
         } else {
             return $this->render('login', [

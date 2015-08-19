@@ -142,6 +142,10 @@ class User extends DbRecord implements \yii\web\IdentityInterface {
 
     /**
      * Оплачен ли личный кабинет?
+     *
+     * @return bool
+     * true - кабинет оплачен
+     * false - кабинет не оплачен
      */
     public function isPaid()
     {
@@ -149,5 +153,27 @@ class User extends DbRecord implements \yii\web\IdentityInterface {
         if (is_null($paid_time)) return false;
 
         return ($paid_time - time()) > 0;
+    }
+
+    /**
+     * Пользователь админ?
+     *
+     * @return bool
+     */
+    public function isAdmin()
+    {
+        return $this->getField('is_admin', 0) == 1;
+    }
+
+    /**
+     * @param string $password некодированный пароль
+     *
+     * @return bool
+     */
+    public function setPassword($password)
+    {
+        return $this->update([
+            'password' => self::hashPassword($password)
+        ]);
     }
 }

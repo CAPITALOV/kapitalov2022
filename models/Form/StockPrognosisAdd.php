@@ -227,7 +227,7 @@ class StockPrognosisAdd extends \cs\base\BaseForm
         parent::__construct($fields);
     }
 
-    public function insert()
+    public function insert($fieldsCols = NULL)
     {
         for ($c = 1; $c <= 10; $c++) {
             $fieldName = 'date' . $c;

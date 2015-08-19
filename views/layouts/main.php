@@ -36,7 +36,7 @@ AppAsset::register($this);
     <?php $this->beginBody() ?>
     <?= $this->render('../blocks/topNavigation') ?>
     <div class="container-fluid">
-        <div class="row" style="padding-top: 80px;">
+        <div class="row" style="padding-top: 80px; padding-bottom: 40px;">
             <div class="col-sm-3 col-md-2 sidebar">
                 <?= $this->render('../blocks/leftNavigation') ?>
             </div>
@@ -66,6 +66,16 @@ AppAsset::register($this);
     <?php if (\Yii::$app->user->isGuest) : ?>
         <?= $this->render('_modalLogin') ?>
     <?php endif; ?>
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4">
+                    <p>&copy; 2015 Capitalov</p>
+                </div>
+
+            </div>
+        </div>
+    </footer>
 
     <?php $this->endBody() ?>
 </body>

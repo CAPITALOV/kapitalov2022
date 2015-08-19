@@ -7,7 +7,9 @@ return [
     'login'                                          => 'site/login',
     'profile'                                        => 'site/profile',
     'passwordChange'                                 => 'site/profile_password_change',
-    'captcha'                                                                              => 'site/captcha',
+    'captcha'                                        => 'site/captcha',
+
+    'about'                                          => 'page/about',
 
 
     'password/recover'                               => 'auth/password_recover',
@@ -40,43 +42,12 @@ return [
     'stock/prognosis/update'                         => 'superadmin_stock/prognosis_update',
     'stock/<id:\\d+>/graph'                          => 'superadmin_stock/graph',
 
-    'log'                                            => 'superadmin/log',
+    // cabinet
+    'stockList'                                      => 'cabinet/stock_list',
+    'stockList/<id:\\d+>'                            => 'cabinet/stock_item',
 
-
-    'settings'                                       => 'superadmin/settings',
-
-    // admin
-    'admin'                                          => 'admin/index',
-
-    'news'                                           => 'admin/news',
-    'news/add'                                       => 'admin/news_add',
-    'news/<id:\\d+>/edit'                            => 'admin/news_edit',
-    'news/<id:\\d+>/delete'                          => 'admin/news_delete',
-
-    // supermoderator
-    'superModerator'                                 => 'supermoderator/index',
-    'moderators'                                     => 'supermoderator/moderators',
-    'moderators/add'                                 => 'supermoderator/moderators_add',
-    'moderators/<id:\\d+>/edit'                      => 'supermoderator/moderators_edit',
-    'moderators/<id:\\d+>/delete'                    => 'supermoderator/moderators_delete',
-    'moderators/settings'                            => 'supermoderator/moderators_settings',
-    'moderators/setting/add'                         => 'supermoderator/moderators_setting_add',
-    'moderators/setting/<id:\\d+>/edit'              => 'supermoderator/moderators_setting_edit',
-    'moderators/setting/<id:\\d+>/remove'            => 'supermoderator/moderators_setting_remove',
-    'moderators/<id:\\d+>/violations'                => 'supermoderator/moderator_violations',
-
-    // moderator
-    'moderator'                                      => 'moderator/work',
-    'moderator/obj/<pid:\\d+>/<type:\\w+>/<id:\\d+>' => 'moderator/view_object',
-    'moderator/p'                                    => 'moderator/profile',
-    'moderator/<id:\\d+>/history'                    => 'moderator/history',
-
-    // superbuh
-    'superBuh'                                       => 'superbuh/index',
-
-    // buh
-    'buh'                                            => 'buh/index',
-
-    // editor
-    'editor'                                         => 'editor/index',
+    'cabinet/passwordChange'                         => 'cabinet/password_change',
+    'cabinet/profile'                                => 'cabinet/profile',
+    'cabinet/profile/unLinkSocialNetWork'            => 'cabinet/profile_unlink_social_network',
+    'cabinet/profile/subscribe'                      => 'cabinet/profile_subscribe',
 ];

@@ -23,7 +23,7 @@ class SuperadminBaseController extends \cs\base\BaseController
                         'allow' => true,
                         'roles' => ['@'],
                         'matchCallback' => function($rule, $action) {
-                            return true;
+                            return Yii::$app->user->identity->isAdmin();
                         },
                     ],
                 ],

@@ -188,7 +188,8 @@ class GraphExporter extends Object
      *
      * @return mixed
      */
-    function getKursByDate($row, $date){
+    function getKursByDate($row, $date)
+    {
         foreach($row as $i) {
             if ($i['date'] == $date) return $i['kurs'];
         }
