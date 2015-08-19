@@ -139,13 +139,15 @@ class GraphExporter extends Object
     {
         $min = null;
         foreach ($this->rows as $row) {
-            $dateArray = ArrayHelper::getColumn($row, 'date');
-            sort($dateArray);
-            if (is_null($min)) {
-                $min = $dateArray[0];
-            } else {
-                if (!$this->compare(new \DateTime($min), new \DateTime($dateArray[0]))) {
+            if (count($row) > 0) {
+                $dateArray = ArrayHelper::getColumn($row, 'date');
+                sort($dateArray);
+                if (is_null($min)) {
                     $min = $dateArray[0];
+                } else {
+                    if (!$this->compare(new \DateTime($min), new \DateTime($dateArray[0]))) {
+                        $min = $dateArray[0];
+                    }
                 }
             }
         }
@@ -160,14 +162,16 @@ class GraphExporter extends Object
     {
         $max = null;
         foreach ($this->rows as $row) {
-            $dateArray = ArrayHelper::getColumn($row, 'date');
-            sort($dateArray);
-            $dateArray = array_reverse($dateArray);
-            if (is_null($max)) {
-                $max = $dateArray[0];
-            } else {
-                if ($this->compare(new \DateTime($max), new \DateTime($dateArray[0]))) {
+            if (count($row) > 0) {
+                $dateArray = ArrayHelper::getColumn($row, 'date');
+                sort($dateArray);
+                $dateArray = array_reverse($dateArray);
+                if (is_null($max)) {
                     $max = $dateArray[0];
+                } else {
+                    if ($this->compare(new \DateTime($max), new \DateTime($dateArray[0]))) {
+                        $max = $dateArray[0];
+                    }
                 }
             }
         }

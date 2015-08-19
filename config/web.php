@@ -19,16 +19,20 @@ $config = [
             'enableCsrfValidation'   => false,
             'cookieValidationKey'    => '',
         ],
-        'cache' => [
-            'class' => 'yii\caching\MemCache',
-            'servers' => [
+        'cache' =>
+            (YII_ENV_PROD) ?
                 [
-                    'host' => '192.168.0.102',
-                    'port' => 11211,
-                    'weight' => 100,
+                    'class'   => 'yii\caching\MemCache',
+                    'servers' => [
+                        [
+                            'host' => 'localhost',
+                            'port' => 11211,
+                        ],
+                    ],
+                ] :
+                [
+                    'class' => 'yii\caching\FileCache',
                 ],
-            ],
-        ],
         'user'         => [
             'identityClass'   => 'app\models\User',
             'enableAutoLogin' => true,
