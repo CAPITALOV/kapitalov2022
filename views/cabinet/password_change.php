@@ -10,43 +10,39 @@ use yii\captcha\Captcha;
 $this->title = 'Смена пароля';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="container">
 
-    <div class="site-contact">
-        <div class="page-header">
-            <h1><?= Html::encode($this->title) ?></h1>
-        </div>
 
-        <?php if (Yii::$app->session->hasFlash('contactFormSubmitted')): ?>
+    <h1 class="page-header"><?= Html::encode($this->title) ?></h1>
 
-            <div class="alert alert-success">
-                Поздравляем вы успешно установили новый пароль.
-            </div>
 
-        <?php else: ?>
+<?php if (Yii::$app->session->hasFlash('contactFormSubmitted')): ?>
 
-            <div class="row">
-                <div class="col-lg-5">
-                    <?php $form = ActiveForm::begin([
-                        'id'                   => 'contact-form',
-                        'enableAjaxValidation' => true,
-                    ]); ?>
-                    <?php
-                    $field = $form->field($model, 'password1')->passwordInput()->label('Пароль');
-                    $field->validateOnBlur = true;
-                    echo $field;
-                    ?>
-                    <?= $form->field($model, 'password2')->passwordInput()->label('Повторите пароль') ?>
-                    <div class="form-group">
-                        <?= Html::submitButton('Подтвердить', [
-                            'class' => 'btn btn-primary',
-                            'name'  => 'contact-button'
-                        ]) ?>
-                    </div>
-                    <?php ActiveForm::end(); ?>
-                </div>
-            </div>
-
-        <?php endif; ?>
+    <div class="alert alert-success">
+        Поздравляем вы успешно установили новый пароль.
     </div>
-</div>
+
+<?php else: ?>
+
+    <div class="row">
+        <div class="col-lg-5">
+            <?php $form = ActiveForm::begin([
+                'id'                   => 'contact-form',
+                'enableAjaxValidation' => true,
+            ]); ?>
+            <?php
+            $field = $form->field($model, 'password1')->passwordInput()->label('Пароль');
+            $field->validateOnBlur = true;
+            echo $field;
+            ?>
+            <?= $form->field($model, 'password2')->passwordInput()->label('Повторите пароль') ?>
+            <div class="form-group">
+                <?= Html::submitButton('Подтвердить', [
+                    'class' => 'btn btn-primary',
+                    'name'  => 'contact-button'
+                ]) ?>
+            </div>
+            <?php ActiveForm::end(); ?>
+        </div>
+    </div>
+
+<?php endif; ?>
