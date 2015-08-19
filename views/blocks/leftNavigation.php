@@ -7,9 +7,8 @@ use app\models\Translator as T;
 ?>
 <?php if (!\Yii::$app->user->isGuest): ?>
     <ul class="nav nav-pills nav-stacked">
-        <h4><a href="/superAdmin">superAdmin</a></h4>
+        <h4><a href="<?= Url::to(['superadmin_stock/index'])?>">Курсы</a></h4>
         <ul class="list-unstyled col-md-offset-1">
-            <li><a href="/adminUsers">Админы</a></li>
             <li><a href="<?= Url::to(['superadmin_stock/index'])?>">Курсы</a></li>
         </ul>
         <hr>

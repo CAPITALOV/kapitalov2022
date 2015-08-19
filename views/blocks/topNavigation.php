@@ -20,7 +20,7 @@ use yii\helpers\Html;
             <ul class="nav navbar-nav navbar-left">
                 <li><a class="navbar-brand" href="http://capitalov.com/" target="_blank">Capitalov.com</a></li>
                 <li><span class="navbar-brand">/</span></li>
-                <li><a class="navbar-brand" href="/"><?= T::t('Administration panel') ?></a></li>
+                <li><a class="navbar-brand" href="/">Личный кабинет</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right" style="margin-right: 20px;">
                 <?php if (\Yii::$app->user->isGuest): ?>
@@ -59,8 +59,6 @@ use yii\helpers\Html;
                             <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu" role="menu">
-                            <li><a href="<?= Url::to(['cabinet/objects']) ?>">Мои объединения</a></li>
-                            <li><a href="<?= Url::to(['cabinet/poseleniya']) ?>">Мои поселения</a></li>
                             <li><a href="<?= Url::to(['site/profile']) ?>"><i class="glyphicon glyphicon-cog" style="padding-right: 5px;"></i>Мой профиль</a></li>
                             <li><a href="<?= Url::to(['cabinet/password_change']) ?>"><i class="glyphicon glyphicon-asterisk" style="padding-right: 5px;"></i>Сменить пароль</a></li>
                             <li class="divider"></li>
