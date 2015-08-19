@@ -10,6 +10,7 @@ use app\assets\AppAsset;
 /* @var $content string */
 
 AppAsset::register($this);
+\app\assets\Layout\Asset::register($this);
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -25,6 +26,7 @@ AppAsset::register($this);
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
     <script src="/js/ajaxJson.js"></script>
+    <link rel="shortcut icon" href="/images/capitalov32-1.png">
 
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
@@ -61,6 +63,9 @@ AppAsset::register($this);
         </div>
     </div>
 
+    <?php if (\Yii::$app->user->isGuest) : ?>
+        <?= $this->render('_modalLogin') ?>
+    <?php endif; ?>
 
     <?php $this->endBody() ?>
 </body>

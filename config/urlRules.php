@@ -8,6 +8,7 @@ return [
     'logout'                                         => 'site/logout',
     'profile'                                        => 'site/profile',
     'passwordChange'                                 => 'site/profile_password_change',
+    'captcha'                                                                              => 'site/captcha',
 
 
     'password/recover'                               => 'auth/password_recover',
