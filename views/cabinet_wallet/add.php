@@ -2,6 +2,7 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\data\ActiveDataProvider;
+use yii\authclient\widgets\AuthChoice;
 
 /* @var $this yii\web\View */
 /* @var $end integer до какого оплачен кабинет */
@@ -11,3 +12,15 @@ $this->title = 'Пополнение счета';
 <h1 class="page-header"><?= Html::encode($this->title) ?></h1>
 
 <p>1 мес - 100 $ <a href="//www.paypal.com" class="btn btn-default" target="_blank">Оплатить</a></p>
+
+<?php $authAuthChoice = AuthChoice::begin([
+    'baseAuthUrl' => ['auth/auth']
+]); ?>
+<?php foreach ($authAuthChoice->getClients() as $client) {
+    /** @var \yii\authclient\ClientInterface $client  */
+    if ($client instanceof \yii\authclient\clients\YandexOAuth) {
+        ?>
+        <li><?php $authAuthChoice->clientLink($client) ?></li>
+    <?php  } ?>
+<?php  } ?>
+<?php AuthChoice::end(); ?>
