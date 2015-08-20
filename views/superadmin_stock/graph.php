@@ -10,19 +10,16 @@ $this->title = $item->getField('name');
 
 ?>
 
-<div class="container">
-    <div class="col-lg-12">
-        <h1 class="page-header"><?= $this->title ?></h1>
-    </div>
+<h1 class="page-header"><?= $this->title ?></h1>
 
 
-    <?= \cs\Widget\ChartJs\Line::widget([
-        'width'     => 800,
-        'lineArray' => \app\service\GraphExporter::convert([
-            'rows'  => [
-                \app\models\StockKurs::query(['stock_id' => $item->getId()])->all(),
-                \app\models\StockPrognosis::query(['stock_id' => $item->getId()])->all(),
-            ]
-        ]),
-    ]) ?>
-</div>
+
+<?= \cs\Widget\ChartJs\Line::widget([
+    'width'     => 800,
+    'lineArray' => \app\service\GraphExporter::convert([
+        'rows' => [
+            \app\models\StockKurs::query(['stock_id' => $item->getId()])->all(),
+            \app\models\StockPrognosis::query(['stock_id' => $item->getId()])->all(),
+        ]
+    ]),
+]) ?>

@@ -9,6 +9,8 @@ return [
     'passwordChange'                        => 'site/profile_password_change',
     'captcha'                               => 'site/captcha',
 
+    'searchStockAutocomplete'               => 'site/search_stock_autocomplete',
+
     'about'                                 => 'page/about',
 
 
