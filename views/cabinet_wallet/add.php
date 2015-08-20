@@ -18,7 +18,7 @@ $this->title = 'Пополнение счета';
 ]); ?>
 <?php foreach ($authAuthChoice->getClients() as $client) {
     /** @var \yii\authclient\ClientInterface $client  */
-    if ($client instanceof \yii\authclient\clients\YandexOAuth) {
+    if ($client instanceof \app\service\authclient\YandexMoney) {
         ?>
         <li><?php $authAuthChoice->clientLink($client) ?></li>
     <?php  } ?>
