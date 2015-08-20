@@ -8,8 +8,6 @@ use yii\data\ActiveDataProvider;
 
 $this->title = 'Пополнение счета';
 ?>
-<div class="site-about">
-    <h1><?= Html::encode($this->title) ?></h1>
+<h1 class="page-header"><?= Html::encode($this->title) ?></h1>
 
-    <p>1 мес - 100 $ <a href="//www.paypal.com" class="btn btn-default" target="_blank">Оплатить</a></p>
-</div>
+<p>1 мес - 100 $ <a href="//www.paypal.com" class="btn btn-default" target="_blank">Оплатить</a></p>
