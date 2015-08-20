@@ -136,7 +136,13 @@ class YandexMoney extends OAuth2
         $errorMessage = curl_error($curlResource);
 
         curl_close($curlResource);
-        \cs\services\VarDumper::dump([$response,$responseHeaders,$errorNumber,$errorMessage]);
+
+        if ($responseHeaders['http_code'] == 302) {
+            $redirect_url = $responseHeaders['redirect_url'];
+            \Yii::$app->getResponse()->redirect($redirect_url);
+        }
+
+//        \cs\services\VarDumper::dump([$response,$responseHeaders,$errorNumber,$errorMessage]);
 //        return $this->processResponse($response, $this->determineContentTypeByHeaders($responseHeaders));
     }
 
