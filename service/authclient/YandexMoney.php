@@ -99,6 +99,45 @@ class YandexMoney extends OAuth2
             $defaultParams['scope'] = $this->scope;
         }
 
-        VarDumper::dump($this->sendRequest('POST', $this->authUrl, $defaultParams, []));
+        VarDumper::dump($this->sendRequest2('POST', $this->authUrl, $defaultParams, []));
     }
+
+
+    /**
+     * Sends HTTP request.
+     * @param string $method request type.
+     * @param string $url request URL.
+     * @param array $params request params.
+     * @param array $headers additional request headers.
+     * @return array response.
+     * @throws Exception on failure.
+     */
+    protected function sendRequest2($method, $url, array $params = [], array $headers = [])
+    {
+        $curlOptions = $this->mergeCurlOptions(
+            $this->defaultCurlOptions(),
+            $this->getCurlOptions(),
+            [
+                CURLOPT_HTTPHEADER => $headers,
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_URL => $url,
+            ],
+            $this->composeRequestCurlOptions(strtoupper($method), $url, $params)
+        );
+        $curlResource = curl_init();
+        foreach ($curlOptions as $option => $value) {
+            curl_setopt($curlResource, $option, $value);
+        }
+        $response = curl_exec($curlResource);
+        $responseHeaders = curl_getinfo($curlResource);
+
+        // check cURL error
+        $errorNumber = curl_errno($curlResource);
+        $errorMessage = curl_error($curlResource);
+
+        curl_close($curlResource);
+
+        return $this->processResponse($response, $this->determineContentTypeByHeaders($responseHeaders));
+    }
+
 }
