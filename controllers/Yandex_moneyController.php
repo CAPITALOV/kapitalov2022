@@ -15,6 +15,7 @@ use yii\widgets\ActiveForm;
 use app\service\RegistrationDispatcher;
 use app\service\PasswordRecoverDispatcher;
 use cs\web\Exception;
+use \YandexMoney\API;
 
 class Yandex_moneyController extends BaseController
 {
@@ -45,9 +46,12 @@ class Yandex_moneyController extends BaseController
 
     public function actionAuth()
     {
+
         /** @var \app\service\authclient\YandexMoney $client */
         $client = Yii::$app->authClientCollection->getClient('yandex_money');
-        $client->auth22();
+        $auth_url = API::buildObtainTokenUrl($client->clientId, 'http://c.galaxysss.ru/yandexMoney', $client->scope);
+        Yii::$app->response->redirect($auth_url);
+//        $client->auth22();
     }
 //    public function actions()
 //    {
