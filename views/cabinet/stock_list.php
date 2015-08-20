@@ -2,8 +2,11 @@
 
 use yii\helpers\Url;
 use yii\helpers\Html;
+/* @var $this yii\web\View */
 
 $this->title = 'Курсы';
+
+
 ?>
 
 <h1 class="page-header"><?= Html::encode($this->title) ?></h1>
