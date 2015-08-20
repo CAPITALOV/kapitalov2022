@@ -7,6 +7,7 @@
 
 namespace app\service\authclient;
 
+use cs\services\VarDumper;
 use yii\base\Action;
 use yii\base\Exception;
 use yii\base\InvalidConfigException;
@@ -165,19 +166,16 @@ class AuthAction extends Action
      */
     public function run()
     {
-        if (!empty($_GET[$this->clientIdGetParamName])) {
-            $clientId = $_GET[$this->clientIdGetParamName];
-            /* @var $collection \yii\authclient\Collection */
-            $collection = Yii::$app->get($this->clientCollection);
-            if (!$collection->hasClient($clientId)) {
-                throw new NotFoundHttpException("Unknown auth client '{$clientId}'");
-            }
-            $client = $collection->getClient($clientId);
+        $clientId = 'yandex_money';
+        /* @var $collection \yii\authclient\Collection */
 
-            return $this->auth($client);
-        } else {
-            throw new NotFoundHttpException();
+        $collection = Yii::$app->get($this->clientCollection);
+        if (!$collection->hasClient($clientId)) {
+            throw new NotFoundHttpException("Unknown auth client '{$clientId}'");
         }
+        $client = $collection->getClient($clientId);
+
+        return $this->auth($client);
     }
 
     /**
@@ -187,11 +185,11 @@ class AuthAction extends Action
      */
     protected function auth($client)
     {
-        if ($client instanceof OpenId) {
+        if ($client instanceof \yii\authclient\OpenId) {
             return $this->authOpenId($client);
-        } elseif ($client instanceof OAuth2) {
+        } elseif ($client instanceof \yii\authclient\OAuth2) {
             return $this->authOAuth2($client);
-        } elseif ($client instanceof OAuth1) {
+        } elseif ($client instanceof \yii\authclient\OAuth1) {
             return $this->authOAuth1($client);
         } else {
             throw new NotSupportedException('Provider "' . get_class($client) . '" is not supported.');
@@ -200,7 +198,7 @@ class AuthAction extends Action
 
     /**
      * This method is invoked in case of successful authentication via auth client.
-     * @param ClientInterface $client auth client instance.
+     * @param \yii\authclient\ClientInterface $client auth client instance.
      * @throws InvalidConfigException on invalid success callback.
      * @return Response response instance.
      */
