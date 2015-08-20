@@ -45,12 +45,33 @@ $config = [
             'errorAction' => 'site/error',
         ],
         'mailer'               => require(__DIR__ . '/mailerTransport.php'),
-        'log'          => [
-            'traceLevel' => YII_DEBUG ? 50 : 0,
+        'log'                  => [
+            'traceLevel' => YII_DEBUG ? 3 : 0,
             'targets'    => [
                 [
-                    'class'   => 'yii\log\FileTarget',
-                    'levels'  => ['error', 'warning'],
+                    'class'  => 'yii\log\FileTarget',
+                    'levels' => [
+                        'error',
+                        'warning',
+                    ],
+                    'maxLogFiles' => 1,
+                ],
+                [
+                    'class'  => 'yii\log\DbTarget',
+                    'categories' => ['cap\\*'],
+                ],
+                [
+                    'class'      => 'yii\log\EmailTarget',
+                    'levels'     => [
+                        'error',
+                        'warning',
+                    ],
+                    'categories' => ['yii\db\*'],
+                    'message'    => [
+                        'from'    => ['admin@capitalov.com'],
+                        'to'      => ['admin@capitalov.com'],
+                        'subject' => 'capitalov.com ERROR',
+                    ],
                 ],
             ],
         ],
