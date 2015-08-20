@@ -142,7 +142,7 @@ class YandexMoney extends OAuth2
             \Yii::$app->getResponse()->redirect($redirect_url);
         }
 
-//        \cs\services\VarDumper::dump([$response,$responseHeaders,$errorNumber,$errorMessage]);
+        \cs\services\VarDumper::dump([$response,$responseHeaders,$errorNumber,$errorMessage]);
 //        return $this->processResponse($response, $this->determineContentTypeByHeaders($responseHeaders));
     }
 
