@@ -99,7 +99,7 @@ class YandexMoney extends OAuth2
             $defaultParams['scope'] = $this->scope;
         }
 
-        VarDumper::dump($this->sendRequest('POST', $this->authUrl, $defaultParams, []));
+        VarDumper::dump($this->sendRequest2('POST', $this->authUrl, $defaultParams, []));
     }
 
 
