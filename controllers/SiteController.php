@@ -7,12 +7,14 @@
 
 namespace app\controllers;
 
+use app\models\Stock;
 use app\models\StockKurs;
 use app\models\User;
 use Yii;
 use yii\db\Query;
 use yii\filters\AccessControl;
 use yii\helpers\ArrayHelper;
+use yii\helpers\Json;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\helpers\VarDumper;
@@ -110,6 +112,18 @@ class SiteController extends \cs\base\BaseController
                 'model' => $model,
             ]);
         }
+    }
+
+    /**
+     * Выдает элементы поиска курсов для строки поиска Autocomplete
+     */
+    public function actionSearch_stock_autocomplete()
+    {
+        $term = self::getParam('term');
+
+        return self::jsonSuccess(
+            Stock::query(['like', 'name', $term . '%', false])->select('id, name as value')->all()
+        );
     }
 
     /**
