@@ -10,6 +10,7 @@ namespace app\controllers;
 use app\models\Stock;
 use app\models\StockKurs;
 use app\models\User;
+use cs\services\Url;
 use Yii;
 use yii\db\Query;
 use yii\filters\AccessControl;
@@ -66,6 +67,10 @@ class SiteController extends \cs\base\BaseController
 
     public function actionIndex()
     {
+//        \cs\services\VarDumper::dump(
+//            new Url('https://oauth.yandex.ru/authorize?client_id=B64E976FD0393C52F06BE7F6DA80983010F506D8B22B037E17458E154826D85B&response_type=code&redirect_uri=http%3A%2F%2Fc.galaxysss.ru%2Fauth%3Fauthclient%3Dyandex&xoauth_displayname=My%20Application')
+//
+//        );
         return $this->render('index');
     }
 
