@@ -45,13 +45,9 @@ class Yandex_moneyController extends BaseController
 
     public function actionAuth()
     {
-        $c = new \app\service\authclient\AuthAction('auth', 'yandex_money', [
-            'successCallback' => [
-                $this,
-                'successCallback'
-            ]
-        ]);
-        $c->run();
+        /** @var \app\service\authclient\YandexMoney $client */
+        $client = Yii::$app->authClientCollection->getClient('yandex_money');
+        $client->auth22();
     }
 //    public function actions()
 //    {
