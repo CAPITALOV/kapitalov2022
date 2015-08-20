@@ -4,6 +4,7 @@
 namespace app\service\authclient;
 
 use yii\authclient\OAuth2;
+use yii\helpers\VarDumper;
 
 /**
  * YandexMoney allows authentication via Yandex OAuth.
