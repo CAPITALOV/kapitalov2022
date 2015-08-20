@@ -13,14 +13,4 @@ $this->title = 'Пополнение счета';
 
 <p>1 мес - 100 $ <a href="//www.paypal.com" class="btn btn-default" target="_blank">Оплатить</a></p>
 
-<?php $authAuthChoice = AuthChoice::begin([
-    'baseAuthUrl' => ['auth/auth']
-]); ?>
-<?php foreach ($authAuthChoice->getClients() as $client) {
-    /** @var \yii\authclient\ClientInterface $client  */
-    if ($client instanceof \app\service\authclient\YandexMoney) {
-        ?>
-        <li><?php $authAuthChoice->clientLink($client) ?></li>
-    <?php  } ?>
-<?php  } ?>
-<?php AuthChoice::end(); ?>
+<p><a href="<?= \yii\helpers\Url::to(['yandex_money/auth']) ?>">Yandex</a></p>

@@ -56,4 +56,5 @@ return [
     'cabinet/wallet'                        => 'cabinet_wallet/index',
     'cabinet/wallet/add'                    => 'cabinet_wallet/add',
 
+    'yandexMoney'                           => 'yandex_money/auth',
 ];

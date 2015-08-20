@@ -39,7 +39,7 @@ class YandexMoney extends OAuth2
     /**
      * @inheritdoc
      */
-    public $authUrl = 'https://sp-money.yandex.ru/';
+    public $authUrl = 'https://sp-money.yandex.ru/oauth/authorize';
     /**
      * @inheritdoc
      */
