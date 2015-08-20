@@ -13,6 +13,10 @@ $config = [
         '@vendor' => __DIR__ . '/../vendor',
     ],
     'components'   => [
+        'authClientCollection' => [
+            'class'   => 'yii\authclient\Collection',
+            'clients' => require(__DIR__ . '/authClientCollection.php'),
+        ],
         'request'      => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'enableCookieValidation' => false,
