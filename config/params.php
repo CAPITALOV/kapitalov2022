@@ -3,6 +3,6 @@
 return [
     'adminEmail' => 'admin@capitalov.com',
     'mailer'     => [
-        'from' => ['c@c.ru' => 'capitalov']
+        'from' => ['capitalov@capitalov.com' => 'Capitalov.com']
     ],
 ];
