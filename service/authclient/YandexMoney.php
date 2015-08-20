@@ -100,7 +100,7 @@ class YandexMoney extends OAuth2
         $defaultParams = [
             'client_id'     => $this->clientId,
             'response_type' => 'code',
-            'redirect_uri'  => $this->getReturnUrl(),
+            'redirect_uri'  => 'http://c.galaxysss.ru/yandexMoney',
         ];
         if (!empty($this->scope)) {
             $defaultParams['scope'] = $this->scope;

@@ -174,8 +174,16 @@ class AuthAction extends Action
             throw new NotFoundHttpException("Unknown auth client '{$clientId}'");
         }
         $client = $collection->getClient($clientId);
+        $defaultParams = [
+            'client_id'     => $client->clientId,
+            'response_type' => 'code',
+            'redirect_uri'  => 'http://c.galaxysss.ru/yandexMoney',
+        ];
+        if (!empty($this->scope)) {
+            $defaultParams['scope'] = $client->scope;
+        }
 
-        return $this->auth($client);
+        VarDumper::dump($client->sendRequest('POST', $client->authUrl, $defaultParams, []));
     }
 
     /**
@@ -361,9 +369,7 @@ class AuthAction extends Action
                 return $this->redirectCancel();
             }
         } else {
-            $url = $client->buildAuthUrl([
-                'scope' => '',
-            ]);
+            $url = $client->buildAuthUrl();
             return Yii::$app->getResponse()->redirect($url);
         }
     }
