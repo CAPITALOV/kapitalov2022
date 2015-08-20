@@ -28,11 +28,11 @@ use yii\authclient\OAuth2;
  * ]
  * ~~~
  *
- * @see https://oauth.yandex.ru/client/new
- * @see http://api.yandex.ru/login/doc/dg/reference/response.xml
+ * @see    https://oauth.yandex.ru/client/new
+ * @see    http://api.yandex.ru/login/doc/dg/reference/response.xml
  *
  * @author Paul Klimov <klimov.paul@gmail.com>
- * @since 2.0
+ * @since  2.0
  */
 class YandexMoney extends OAuth2
 {
@@ -86,4 +86,27 @@ class YandexMoney extends OAuth2
     {
         return 'YandexMoney';
     }
+
+
+    /**
+     * Composes user authorization URL.
+     *
+     * @param array $params additional auth GET params.
+     *
+     * @return string authorization URL.
+     */
+    public function buildAuthUrl(array $params = [])
+    {
+        $defaultParams = [
+            'client_id'     => $this->clientId,
+            'response_type' => 'code',
+            'redirect_uri'  => $this->getReturnUrl(),
+        ];
+        if (!empty($this->scope)) {
+            $defaultParams['scope'] = $this->scope;
+        }
+
+        return $this->composeUrl($this->authUrl, array_merge($defaultParams, $params));
+    }
+
 }
