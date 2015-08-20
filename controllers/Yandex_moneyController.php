@@ -46,12 +46,11 @@ class Yandex_moneyController extends BaseController
 
     public function actionAuth()
     {
-
         /** @var \app\service\authclient\YandexMoney $client */
         $client = Yii::$app->authClientCollection->getClient('yandex_money');
         $auth_url = API::buildObtainTokenUrl($client->clientId, 'http://c.galaxysss.ru/yandexMoney', ['account-info']);
-        Yii::$app->response->redirect($auth_url);
-//        $client->auth22();
+//        Yii::$app->response->redirect($auth_url);
+        $client->auth22();
     }
 //    public function actions()
 //    {
