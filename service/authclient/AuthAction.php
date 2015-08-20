@@ -362,7 +362,7 @@ class AuthAction extends Action
             }
         } else {
             $url = $client->buildAuthUrl([
-                'scope' => 'account/info',
+                'scope' => 'account-info',
             ]);
             return Yii::$app->getResponse()->redirect($url);
         }
