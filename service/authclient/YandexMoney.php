@@ -87,15 +87,7 @@ class YandexMoney extends OAuth2
         return 'YandexMoney';
     }
 
-
-    /**
-     * Composes user authorization URL.
-     *
-     * @param array $params additional auth GET params.
-     *
-     * @return string authorization URL.
-     */
-    public function buildAuthUrl(array $params = [])
+    public function auth22()
     {
         $defaultParams = [
             'client_id'     => $this->clientId,
@@ -106,7 +98,6 @@ class YandexMoney extends OAuth2
             $defaultParams['scope'] = $this->scope;
         }
 
-        return $this->composeUrl($this->authUrl, array_merge($defaultParams, $params));
+        VarDumper::dump($this->sendRequest('POST', $this->authUrl, $defaultParams, []));
     }
-
 }
