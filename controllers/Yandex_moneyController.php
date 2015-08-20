@@ -43,19 +43,29 @@ class Yandex_moneyController extends BaseController
         ];
     }
 
-    public function actions()
+    public function actionAuth()
     {
-        return [
-            'auth' => [
-                'class'           => 'app\service\authclient\AuthAction',
-                'successCallback' => [
-                    $this,
-                    'successCallback'
-                ],
-            ],
-        ];
-
+        $c = new \app\service\authclient\AuthAction('auth', 'yandex_money', [
+            'successCallback' => [
+                $this,
+                'successCallback'
+            ]
+        ]);
+        $c->run();
     }
+//    public function actions()
+//    {
+//        return [
+//            'auth' => [
+//                'class'           => 'app\service\authclient\AuthAction',
+//                'successCallback' => [
+//                    $this,
+//                    'successCallback'
+//                ],
+//            ],
+//        ];
+//
+//    }
 
     /**
      * @param \yii\authclient\ClientInterface $client
@@ -72,8 +82,7 @@ class Yandex_moneyController extends BaseController
                 $user = $client->register($attributes);
             }
             if (!is_null($user)) Yii::$app->user->login($user);
-        }
-        else {
+        } else {
             $client->attach($attributes, Yii::$app->user->identity);
         }
         $client->setAuthFlag();
@@ -89,8 +98,7 @@ class Yandex_moneyController extends BaseController
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
             return $this->goBack();
-        }
-        else {
+        } else {
             return $this->render('login', [
                 'model' => $model,
             ]);
@@ -134,8 +142,7 @@ class Yandex_moneyController extends BaseController
             Yii::$app->user->login($user);
 
             return self::jsonSuccess();
-        }
-        else {
+        } else {
             return self::jsonErrorId(104, 'Не верный пароль');
         }
     }
@@ -163,8 +170,7 @@ class Yandex_moneyController extends BaseController
             Yii::$app->session->setFlash('contactFormSubmitted');
 
             return $this->refresh();
-        }
-        else {
+        } else {
             return $this->render([
                 'model' => $model,
             ]);
@@ -189,8 +195,7 @@ class Yandex_moneyController extends BaseController
             Yii::$app->session->setFlash('user_id', $user->getId());
 
             return $this->refresh();
-        }
-        else {
+        } else {
             return $this->render([
                 'model' => $model,
             ]);
@@ -253,8 +258,7 @@ class Yandex_moneyController extends BaseController
             Yii::$app->session->setFlash('contactFormSubmitted');
 
             return $this->goHome();
-        }
-        else {
+        } else {
             return $this->render([
                 'model' => $model,
             ]);
