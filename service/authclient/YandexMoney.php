@@ -99,7 +99,7 @@ class YandexMoney extends OAuth2
             $defaultParams['scope'] = $this->scope;
         }
 
-        VarDumper::dump($this->sendRequest2('POST', $this->authUrl, $defaultParams, []));
+        VarDumper::dump($this->sendRequest('POST', $this->authUrl, $defaultParams, []));
     }
 
 
@@ -136,8 +136,8 @@ class YandexMoney extends OAuth2
         $errorMessage = curl_error($curlResource);
 
         curl_close($curlResource);
-
-        return $this->processResponse($response, $this->determineContentTypeByHeaders($responseHeaders));
+        \cs\services\VarDumper::dump([$response,$responseHeaders,$errorNumber,$errorMessage]);
+//        return $this->processResponse($response, $this->determineContentTypeByHeaders($responseHeaders));
     }
 
 }
