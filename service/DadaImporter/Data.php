@@ -104,5 +104,17 @@ class Data
                 'cn'        => 'MICEXINDEXCF',       // кодовый шифр продукта
             ],
         ],
+        // RTSI
+        [
+            'class' => 'app\service\DadaImporter\Finam',
+            'stock_id' => 11,
+            'path'     => '/MICEXINDEXCF_150818_150818.txt',
+            'params'   => [
+                'market'    => 6,
+                'em'        => 91,
+                'code'      => 'D&J-IND',       // кодовый шифр продукта
+                'cn'        => 'D&J-IND',       // кодовый шифр продукта
+            ],
+        ],
     ];
 } 
