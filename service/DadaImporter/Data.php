@@ -8,6 +8,7 @@ namespace app\service\DadaImporter;
 class Data
 {
     public static $importerData = [
+        // сбербанк
         [
             'class' => 'app\service\DadaImporter\Finam',
             'stock_id' => 1,
@@ -19,6 +20,7 @@ class Data
                 'cn'        => 'SBERP',       // кодовый шифр продукта
             ],
         ],
+        // Aplle
         [
             'class' => 'app\service\DadaImporter\Finam',
             'stock_id' => 4,
@@ -30,6 +32,7 @@ class Data
                 'cn'        => 'US2.AAPL',       // кодовый шифр продукта
             ],
         ],
+        // газпром
         [
             'class' => 'app\service\DadaImporter\Finam',
             'stock_id' => 5,
@@ -41,6 +44,7 @@ class Data
                 'cn'        => 'GAZP',       // кодовый шифр продукта
             ],
         ],
+        // лукойл
         [
             'class' => 'app\service\DadaImporter\Finam',
             'stock_id' => 6,
@@ -50,6 +54,54 @@ class Data
                 'em'        => 8,
                 'code'      => 'LKOH',       // кодовый шифр продукта
                 'cn'        => 'LKOH',       // кодовый шифр продукта
+            ],
+        ],
+        // Золото
+        [
+            'class' => 'app\service\DadaImporter\Finam',
+            'stock_id' => 8,
+            'path'     => '/LKOH_150818_150818.txt',
+            'params'   => [
+                'market'    => 24,
+                'em'        => 18953,
+                'code'      => 'comex.GC',       // кодовый шифр продукта
+                'cn'        => 'comex.GC',       // кодовый шифр продукта
+            ],
+        ],
+        // Нефть
+        [
+            'class' => 'app\service\DadaImporter\Finam',
+            'stock_id' => 7,
+            'path'     => '/ICE.BRN_150818_150818.txt',
+            'params'   => [
+                'market'    => 24,
+                'em'        => 19473,
+                'code'      => 'ICE.BRN',       // кодовый шифр продукта
+                'cn'        => 'ICE.BRN',       // кодовый шифр продукта
+            ],
+        ],
+        // RTSI
+        [
+            'class' => 'app\service\DadaImporter\Finam',
+            'stock_id' => 10,
+            'path'     => '/RTSI_150818_150818.txt',
+            'params'   => [
+                'market'    => 6,
+                'em'        => 95,
+                'code'      => 'RTSI',       // кодовый шифр продукта
+                'cn'        => 'RTSI',       // кодовый шифр продукта
+            ],
+        ],
+        // RTSI
+        [
+            'class' => 'app\service\DadaImporter\Finam',
+            'stock_id' => 9,
+            'path'     => '/MICEXINDEXCF_150818_150818.txt',
+            'params'   => [
+                'market'    => 6,
+                'em'        => 13851,
+                'code'      => 'MICEXINDEXCF',       // кодовый шифр продукта
+                'cn'        => 'MICEXINDEXCF',       // кодовый шифр продукта
             ],
         ],
     ];
