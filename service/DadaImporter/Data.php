@@ -41,5 +41,16 @@ class Data
                 'cn'        => 'GAZP',       // кодовый шифр продукта
             ],
         ],
+        [
+            'class' => 'app\service\DadaImporter\Finam',
+            'stock_id' => 6,
+            'path'     => '/LKOH_150818_150818.txt',
+            'params'   => [
+                'market'    => 1,
+                'em'        => 8,
+                'code'      => 'LKOH',       // кодовый шифр продукта
+                'cn'        => 'LKOH',       // кодовый шифр продукта
+            ],
+        ],
     ];
 } 
