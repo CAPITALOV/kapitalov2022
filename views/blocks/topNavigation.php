@@ -63,7 +63,7 @@ JS
                             'select' => new \yii\web\JsExpression(<<<JS
 function(event, ui) {
     var stockId = ui.item.id;
-    window.location = '/stock/' + stockId + '/graph';
+    window.location = '/stockList/' + stockId;
 }
 JS
                             ),
