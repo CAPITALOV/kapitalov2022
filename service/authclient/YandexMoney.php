@@ -101,7 +101,6 @@ class YandexMoney extends OAuth2
         }
 
         $params = $this->sendRequest2('POST', $this->authUrl, $defaultParams, []);
-        \cs\services\VarDumper::dump($params);
         $url = new Url($params[1]['redirect_url']);
         $code = $url->getParam('requestid');
 
@@ -118,15 +117,14 @@ class YandexMoney extends OAuth2
 
 
     /**
-     * Sends HTTP request.
+     * Посылает HTTP запрос
      *
      * @param string $method  request type.
      * @param string $url     request URL.
      * @param array  $params  request params.
      * @param array  $headers additional request headers.
      *
-     * @return array response.
-     * @throws Exception on failure.
+     * @return array [$response, $responseHeaders]
      */
     protected function sendRequest2($method, $url, array $params = [], array $headers = [])
     {
