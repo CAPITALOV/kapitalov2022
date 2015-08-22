@@ -32,7 +32,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <p>Выберите периуд импорта</p>
             <?= $model->field($form, 'dateStart') ?>
             <?= $model->field($form, 'dateEnd') ?>
-            <?= $model->field($form, 'isReplaceExisting')->checkbox() ?>
+            <?= $model->field($form, 'isReplaceExisting') ?>
 
             <div class="form-group">
                 <hr>
