@@ -12,7 +12,7 @@ $this->title = 'Курсы';
         font-size: 80%;
     }
 </style>
-<table class="table tableMy" style="width:100%;">
+<table class="table tableMy table-striped" style="width:100%;">
     <thead>
         <tr>
             <th>Наименование</th>
@@ -39,7 +39,7 @@ $this->title = 'Курсы';
             </td>
             <td>
                 <a href="<?= Url::to([
-                    'superadmin_stock/graph',
+                    'cabinet/stock_item',
                     'id' => $item['id']
                 ]) ?>">
                     График

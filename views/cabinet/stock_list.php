@@ -13,7 +13,12 @@ $this->title = 'Курсы';
 
 
 
-<table class="table" style="width:100%;">
+<table class="table table-striped" style="width:100%;">
+    <thead>
+    <tr>
+        <th>Наименование</th>
+    </tr>
+    </thead>
     <?php
     foreach ($items as $item) {
         ?>
