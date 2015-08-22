@@ -91,8 +91,8 @@ class YandexMoney extends OAuth2
 
     public function auth22()
     {
-        [$defaultParams =
-                              'client_id'     => $this->clientId,
+        $defaultParams = [
+            'client_id'     => $this->clientId,
             'response_type' => 'code',
             'redirect_uri'  => 'http://c.galaxysss.ru/yandexMoney',
         ];
