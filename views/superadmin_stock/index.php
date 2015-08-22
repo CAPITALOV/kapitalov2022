@@ -12,17 +12,19 @@ $this->title = 'Курсы';
         font-size: 80%;
     }
 </style>
-<table class="table tableMy" style="width:100%;">
-    <tr>
-        <th>Наименование</th>
-        <th>График</th>
-        <th>add</th>
-        <th>edit</th>
-        <th>Имортировать</th>
-        <th>red</th>
-        <th>blue</th>
-        <th>kurs</th>
-    </tr>
+<table class="table tableMy table-striped" style="width:100%;">
+    <thead>
+        <tr>
+            <th>Наименование</th>
+            <th>График</th>
+            <th>add</th>
+            <th>edit</th>
+            <th>Имортировать</th>
+            <th>red</th>
+            <th>blue</th>
+            <th>kurs</th>
+        </tr>
+    </thead>
     <?php
     foreach ($items as $item) {
         ?>
@@ -37,7 +39,7 @@ $this->title = 'Курсы';
             </td>
             <td>
                 <a href="<?= Url::to([
-                    'superadmin_stock/graph',
+                    'cabinet/stock_item',
                     'id' => $item['id']
                 ]) ?>">
                     График
