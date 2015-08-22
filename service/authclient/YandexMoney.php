@@ -3,6 +3,7 @@
 
 namespace app\service\authclient;
 
+use cs\services\Url;
 use yii\authclient\OAuth2;
 use yii\helpers\VarDumper;
 
@@ -44,7 +45,7 @@ class YandexMoney extends OAuth2
     /**
      * @inheritdoc
      */
-    public $tokenUrl = 'https://sp-money.yandex.ru/token';
+    public $tokenUrl = 'https://sp-money.yandex.ru/oauth/token';
     /**
      * @inheritdoc
      */
@@ -99,7 +100,19 @@ class YandexMoney extends OAuth2
             $defaultParams['scope'] = $this->scope;
         }
 
-        VarDumper::dump($this->sendRequest2('POST', $this->authUrl, $defaultParams, []));
+        $params = $this->sendRequest2('POST', $this->authUrl, $defaultParams, []);
+        $url = new Url($params['redirect_url']);
+        $code = $url->getParam('requestid');
+
+        $defaultParams = [
+            'code' => $code,
+            'client_id'     => $this->clientId,
+            'grant_type'     => 'authorization_code',
+            'redirect_uri'  => 'http://c.galaxysss.ru/yandexMoney',
+        ];
+        $params = $this->sendRequest2('POST', $this->tokenUrl, $defaultParams, []);
+
+        VarDumper::dump($params);
     }
 
 
