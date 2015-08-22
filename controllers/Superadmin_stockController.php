@@ -65,7 +65,31 @@ class Superadmin_stockController extends SuperadminBaseController
         }
     }
 
+    /**
+     * Импортирует прогнозы
+     */
     public function actionImport($id)
+    {
+        $model = new \app\models\Form\StockPrognosisImport();
+        if ($model->load(Yii::$app->request->post()) && $model->import($id)) {
+            Yii::$app->session->setFlash('contactFormSubmitted');
+
+            return $this->refresh();
+        } else {
+            return $this->render([
+                'model' => $model,
+            ]);
+        }
+    }
+
+    /**
+     * Импортирует курсы с finam
+     *
+     * @param $id
+     *
+     * @return string|\yii\web\Response
+     */
+    public function actionImport_kurs($id)
     {
         $model = new \app\models\Form\StockKursImport();
         if ($model->load(Yii::$app->request->post()) && $model->import($id)) {
@@ -75,6 +99,7 @@ class Superadmin_stockController extends SuperadminBaseController
         } else {
             return $this->render([
                 'model' => $model,
+                'item' => Stock::find($id),
             ]);
         }
     }

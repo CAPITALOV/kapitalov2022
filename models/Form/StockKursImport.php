@@ -7,33 +7,64 @@ use app\models\StockPrognosis;
 use app\models\StockPrognosisBlue;
 use app\models\StockPrognosisRed;
 use app\models\User;
+use cs\services\VarDumper;
 use Yii;
 use yii\base\Model;
+use yii\db\Query;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Url;
 use yii\web\UploadedFile;
 
 /**
  *
  */
-class StockKursImport extends Model
+class StockKursImport extends \cs\base\BaseForm
 {
-    public $fileRed;
-    public $fileBlue;
+    /** @var  \DateTime */
+    public $dateStart;
 
-    /**
-     * @return array the validation rules.
+    /** @var  \DateTime */
+    public $dateEnd;
+
+    /** @var  bool Заменять уже имеющиеся данные?
+     *                                  true - если в таблице уже есть курс на эту дату то он будет перезатерт
+     *                                  false - если в таблице уже есть курс на эту дату то он сохранится
      */
-    public function rules()
+    public $isReplaceExisting;
+
+    public function __construct($config = [])
     {
-        return [
+        self::$fields = [
             [
-                [
-                    'fileRed',
-                    'fileBlue',
-                ],
-                'file',
+                'dateStart',
+                'Начало',
+                1,
+                'cs\Widget\DatePicker\Validator',
+                'widget' => ['\cs\Widget\DatePicker\DatePicker',
+                    [
+                        'dateFormat' => 'php:d.m.Y',
+                    ]
+                ]
+            ],
+            [
+                'dateEnd',
+                'Конец',
+                1,
+                'cs\Widget\DatePicker\Validator',
+                'widget' => ['\cs\Widget\DatePicker\DatePicker',
+                    [
+                        'dateFormat' => 'php:d.m.Y',
+                    ]
+                ]
+            ],
+            [
+                'isReplaceExisting',
+                'Заменять уже имеющиеся данные?',
+                1,
+                'integer',
             ],
         ];
+        parent::__construct($config);
     }
 
     /**
@@ -44,14 +75,7 @@ class StockKursImport extends Model
     public function import($stock_id)
     {
         if ($this->validate()) {
-            $dataArray = StockPrognosisRed::query()->select('date')->column();
-            $rows = $this->get('fileRed', $stock_id, $dataArray);
-            StockPrognosisRed::batchInsert(['stock_id', 'date', 'delta'], $rows);
-
-            $dataArray = StockPrognosisBlue::query()->select('date')->column();
-            $rows = $this->get('fileBlue', $stock_id, $dataArray);
-            StockPrognosisBlue::batchInsert(['stock_id', 'date', 'delta'], $rows);
-
+            self::importData($stock_id, $this->dateStart->format('Y-m-d'), $this->dateEnd->format('Y-m-d'), $this->isReplaceExisting);
 
             return true;
         } else {
@@ -60,47 +84,41 @@ class StockKursImport extends Model
     }
 
     /**
-     * Выбирает из файла данные и возвращает в виде массива
+     * Импортирует данные с Finam в таблицу курсов
      *
-     * @param string $fieldName
-     * @param integer $stock_id
-     * @param array $dataArray
+     * @param int    $stock_id
+     * @param string $start             дата 'yyyy-mm-dd'
+     * @param string $end               дата 'yyyy-mm-dd'
+     * @param bool   $isReplaceExisting Заменять уже имеющиеся данные
+     *                                  true - если в таблице уже есть курс на эту дату то он будет перезатерт
+     *                                  false - если в таблице уже есть курс на эту дату то он сохранится
      *
-     * @return array
+     * @throws \yii\base\InvalidConfigException
      */
-    public function get($fieldName, $stock_id, $dataArray)
+    public static function importData($stock_id, $start, $end, $isReplaceExisting = false)
     {
-        $fileModel = UploadedFile::getInstance($this, $fieldName);
-        if ($fileModel) {
-            $data = file_get_contents($fileModel->tempName);
-            $rows = explode("\n", $data);
-            $new = [];
-            foreach ($rows as $row) {
-                $items = explode(' ', $row);
-                $c = 1;
-                foreach ($items as $i) {
-                    if (trim($i) != '') {
-                        if ($c == 1) {
-                            $data = trim($i);
-                            $data = substr($data, 6, 4) . '-' . substr($data, 0, 2) . '-' . substr($data, 3, 2);
-                            $c++;
-                        } else {
-                            $delta = trim($i);
-                        }
-                    }
-                }
-                if (!in_array($data, $dataArray)) {
-                    $new[] = [
-                        $stock_id,
-                        $data,
-                        $delta,
-                    ];
-                }
+        $data = \app\service\DadaImporter\Data::getFirst($stock_id);
+        $importer = Yii::createObject($data);
+        $data = $importer->import($start, $end);
+        $dateArrayRows = StockKurs::query(['between', 'date', $start, $end])->select(['date'])->andWhere(['stock_id' => $stock_id])->column();
+        $insert = [];
+        $update = [];
+        foreach ($data as $row) {
+            if (in_array($row['date'], $dateArrayRows)) {
+                $update[ $row['date'] ] = $row['kurs'];
+            } else {
+                $insert[] = [
+                    $stock_id,
+                    $row['date'],
+                    $row['kurs'],
+                ];
             }
-
-            return $new;
-        } else {
-            return [];
+        }
+        StockKurs::batchInsert(['stock_id', 'date', 'kurs'], $insert);
+        if ($isReplaceExisting) {
+            foreach ($update as $date => $kurs) {
+                (new Query())->createCommand()->update(StockKurs::TABLE, ['kurs' => $kurs], ['date' => $date, 'stock_id' => $stock_id])->execute();
+            }
         }
     }
 }
