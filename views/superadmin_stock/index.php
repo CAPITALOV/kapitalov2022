@@ -3,6 +3,11 @@
 use yii\helpers\Url;
 use yii\helpers\Html;
 /** @var $items array cap_stok */
+/** @var $red array  */
+/** @var $blue array  */
+/** @var $kurs array  */
+
+
 $this->title = 'Курсы';
 ?>
 
