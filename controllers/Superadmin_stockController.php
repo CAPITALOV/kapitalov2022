@@ -34,6 +34,20 @@ class Superadmin_stockController extends SuperadminBaseController
         }
     }
 
+    public function actionImport($id)
+    {
+        $model = new \app\models\Form\StockKursImport();
+        if ($model->load(Yii::$app->request->post()) && $model->import($id)) {
+            Yii::$app->session->setFlash('contactFormSubmitted');
+
+            return $this->refresh();
+        } else {
+            return $this->render([
+                'model' => $model,
+            ]);
+        }
+    }
+
     public function actionKurs_add($id)
     {
         $model = new \app\models\Form\StockKursAdd();

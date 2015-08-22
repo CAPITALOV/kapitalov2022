@@ -35,6 +35,7 @@ return [
     'stock'                                 => 'superadmin_stock/index',
     'stock/add'                             => 'superadmin_stock/add',
     'stock/<id:\\d+>/edit'                  => 'superadmin_stock/edit',
+    'stock/<id:\\d+>/import'                => 'superadmin_stock/import',
     'stock/<id:\\d+>/delete'                => 'superadmin_stock/delete',
     'stock/<id:\\d+>/kurs/add'              => 'superadmin_stock/kurs_add',
     'stock/<id:\\d+>/kurs/edit'             => 'superadmin_stock/kurs_edit',

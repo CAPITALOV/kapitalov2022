@@ -45,6 +45,14 @@ $this->title = 'Курсы';
                     Редактировать прогноз
                 </a>
             </td>
+            <td>
+                <a href="<?= Url::to([
+                    'superadmin_stock/import',
+                    'id' => $item['id']
+                ]) ?>">
+                    Импортировать прогноз
+                </a>
+            </td>
         </tr>
 
     <?php
