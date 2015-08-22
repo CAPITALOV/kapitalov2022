@@ -1,7 +1,0 @@
-всего 6 файлов
-и четыре разновидности
-SBERBANKCL
-SBERBANKRF
-RPSBERBANK
-CLSBERBANK
-что за четыре типа?

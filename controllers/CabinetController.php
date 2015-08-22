@@ -59,7 +59,6 @@ class CabinetController extends SuperadminBaseController
             $params = ArrayHelper::merge($defaultParams, [
                 'rows'  => [
                     \app\models\StockKurs::query(['stock_id' => $id])->all(),
-                    \app\models\StockPrognosis::query(['stock_id' => $id])->all(),
                 ],
             ]);
             $lineArrayKurs = \app\service\GraphExporter::convert($params);
