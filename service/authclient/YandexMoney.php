@@ -110,10 +110,9 @@ class YandexMoney extends OAuth2
             'grant_type'   => 'authorization_code',
             'redirect_uri' => 'http://c.galaxysss.ru/yandexMoney',
         ];
-        VarDumper::dump($defaultParams);
         $params = $this->sendRequest2('POST', $this->tokenUrl, $defaultParams, []);
 
-        VarDumper::dump($params);
+        \cs\services\VarDumper::dump($params);
     }
 
 
