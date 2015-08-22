@@ -5,6 +5,9 @@ use yii\helpers\Html;
 
 /* @var $this \yii\web\View */
 /* @var $item  \app\models\Stock */
+/* @var $lineArrayKurs  array */
+/* @var $lineArrayRed  array */
+/* @var $lineArrayBlue  array */
 
 $this->title = $item->getField('name');
 
@@ -29,12 +32,47 @@ $('#slider').rangeSlider({
 JS
 );
 ?>
+
 <h1 class="page-header"><?= $this->title ?></h1>
 
-
+<h2>Прогноз (красный)</h2>
 <?= \cs\Widget\ChartJs\Line::widget([
     'width'     => 800,
-    'lineArray' => $lineArray,
+    'lineArray' => $lineArrayRed,
+    'colors' => [
+        [
+            'label'                => "Прогноз",
+            'fillColor'            => "rgba(220,220,220,0)",
+            'strokeColor'          => "rgba(255,229,229,1)",
+            'pointColor'           => "rgba(255,204,204,1)",
+            'pointStrokeColor'     => "#fff",
+            'pointHighlightFill'   => "#fff",
+            'pointHighlightStroke' => "rgba(220,220,220,1)",
+        ]
+    ],
+]) ?>
+
+<h2>Прогноз (синий)</h2>
+<?= \cs\Widget\ChartJs\Line::widget([
+    'width'     => 800,
+    'lineArray' => $lineArrayBlue,
+    'colors' => [
+        [
+            'label'                => "Прогноз",
+            'fillColor'            => "rgba(220,220,220,0)",
+            'strokeColor'          => "rgba(229,229,255,1)",
+            'pointColor'           => "rgba(204,204,255,1)",
+            'pointStrokeColor'     => "#fff",
+            'pointHighlightFill'   => "#fff",
+            'pointHighlightStroke' => "rgba(220,220,220,1)",
+        ]
+    ],
+]) ?>
+
+<h2>Курс</h2>
+<?= \cs\Widget\ChartJs\Line::widget([
+    'width'     => 800,
+    'lineArray' => $lineArrayKurs,
 ]) ?>
 
 <h2 class="page-header">Экспорт</h2>

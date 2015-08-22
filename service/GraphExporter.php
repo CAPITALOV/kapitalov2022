@@ -22,6 +22,9 @@ namespace app\service;
  *                           можно задать как \DateTime или string 'yyyy-mm-dd'
  *                           если значение не будет задано то будет использовано самое большое значение из тех что даны в $rows
  *
+ * @param bool $isExcludeWeekend - убирать выходные дни из графика?
+ *                               true - в графике будут отсутствовать выходные дни (по умолчанияю)
+ *                               false - в графике будут присутствовать выходные дни
  * После экспорта все линии будут идти от `$start` до `$end`, если данных в таблице не хватает то они будут
  * дозаполнены значениями null
  *
@@ -49,6 +52,9 @@ class GraphExporter extends Object
 
     /** @var array данные для графика */
     public $rows;
+
+    /** @var bool исключать выходные дни */
+    public $isExcludeWeekend = true;
 
     /**
      * @var string формат для значений оси X
@@ -82,11 +88,22 @@ class GraphExporter extends Object
             $new = [];
             $arrayOfDate = ArrayHelper::getColumn($row, 'date');
             for ($i = new \DateTime($this->start->format('Y-m-d')); $this->compare($i, $this->end); $i->add(new \DateInterval('P1D'))) {
-                $date = $i->format('Y-m-d');
-                if (in_array($date, $arrayOfDate)) {
-                    $new[] = (float)$this->getKursByDate($row, $date);
+                $isAdd = false;
+                if ($this->isExcludeWeekend) {
+                    // если день не выходной (пн-пт)
+                    if ($i->format('N') <= 5) {
+                        $isAdd = true;
+                    }
                 } else {
-                    $new[] = null;
+                    $isAdd = true;
+                }
+                if ($isAdd) {
+                    $date = $i->format('Y-m-d');
+                    if (in_array($date, $arrayOfDate)) {
+                        $new[] = (float)$this->getKursByDate($row, $date);
+                    } else {
+                        $new[] = null;
+                    }
                 }
             }
             $y[] = $new;
@@ -94,7 +111,14 @@ class GraphExporter extends Object
 
         $x = [];
         for ($i = new \DateTime($this->start->format('Y-m-d')); $this->compare($i, $this->end); $i->add(new \DateInterval('P1D'))) {
-            $x[] = $i->format($this->formatX);
+            if ($this->isExcludeWeekend) {
+                // если день не выходной (пн-пт)
+                if ($i->format('N') <= 5) {
+                    $x[] = $i->format($this->formatX);
+                }
+            } else {
+                $x[] = $i->format($this->formatX);
+            }
         }
 
         return [
@@ -134,6 +158,8 @@ class GraphExporter extends Object
 
     /**
      * Получает минимальную дату из $rows
+     *
+     * @return string дата в формате 'yyyy-mm-dd'
      */
     public function getMin()
     {
@@ -157,6 +183,8 @@ class GraphExporter extends Object
 
     /**
      * Получает минимальную дату из $rows
+     *
+     * @return string дата в формате 'yyyy-mm-dd'
      */
     public function getMax()
     {
@@ -180,13 +208,13 @@ class GraphExporter extends Object
     }
 
     /**
-     * Выбирает курс по запросу date
+     * Выбирает курс по запросу date, если он не будет найден то будет возвращено null
      *
      * @param array $row массив значений
      *
      * @param string $date дата по которой выбирать
      *
-     * @return mixed
+     * @return float|null
      */
     function getKursByDate($row, $date)
     {

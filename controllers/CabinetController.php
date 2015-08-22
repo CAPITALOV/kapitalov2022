@@ -12,6 +12,7 @@ use cs\services\VarDumper;
 use Yii;
 use yii\bootstrap\ActiveForm;
 use yii\filters\AccessControl;
+use yii\helpers\ArrayHelper;
 use yii\web\Response;
 
 class CabinetController extends SuperadminBaseController
@@ -46,21 +47,59 @@ class CabinetController extends SuperadminBaseController
     public function actionStock_item($id)
     {
         $item = \app\models\Stock::find($id);
-        $params = [
-            'rows'  => [
-                \app\models\StockKurs::query(['stock_id' => $id])->all(),
-                \app\models\StockPrognosis::query(['stock_id' => $id])->all(),
-            ]
+        $defaultParams = [
+            'start' => (new \DateTime())->sub(new \DateInterval('P30D'))
         ];
         if (!Yii::$app->user->identity->isPaid()) {
-            $params['end'] = new \DateTime();
+            $defaultParams['end'] = new \DateTime();
         }
 
-        $lineArray = \app\service\GraphExporter::convert($params);
+        // график с продажами
+        {
+            $params = ArrayHelper::merge($defaultParams, [
+                'rows'  => [
+                    \app\models\StockKurs::query(['stock_id' => $id])->all(),
+                    \app\models\StockPrognosis::query(['stock_id' => $id])->all(),
+                ],
+            ]);
+            $lineArrayKurs = \app\service\GraphExporter::convert($params);
+        }
+
+        // график с прогнозом (красная линия)
+        {
+            $params = ArrayHelper::merge($defaultParams, [
+                'rows'  => [
+                    \app\models\StockPrognosisRed::query(['stock_id' => $id])
+                        ->select([
+                            'date',
+                            'delta as kurs',
+                        ])
+                        ->all(),
+                ],
+            ]);
+            $lineArrayRed = \app\service\GraphExporter::convert($params);
+        }
+
+        // график с прогнозом (синяя линия)
+        {
+            $params = ArrayHelper::merge($defaultParams, [
+                'rows'  => [
+                    \app\models\StockPrognosisBlue::query(['stock_id' => $id])
+                        ->select([
+                            'date',
+                            'delta as kurs',
+                        ])
+                        ->all(),
+                ],
+            ]);
+            $lineArrayBlue = \app\service\GraphExporter::convert($params);
+        }
 
         return $this->render([
-            'item' => $item,
-            'lineArray' => $lineArray,
+            'item'          => $item,
+            'lineArrayKurs' => $lineArrayKurs,
+            'lineArrayRed'  => $lineArrayRed,
+            'lineArrayBlue' => $lineArrayBlue,
         ]);
     }
 
@@ -78,8 +117,7 @@ class CabinetController extends SuperadminBaseController
             Yii::$app->session->setFlash('contactFormSubmitted');
 
             return $this->refresh();
-        }
-        else {
+        } else {
             return $this->render([
                 'model' => $model,
             ]);
