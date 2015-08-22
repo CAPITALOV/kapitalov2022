@@ -11,7 +11,7 @@
     "authors": [
         {
             "name": "Dmitriy Mukhortov",
-            "email": "dram1008@yandex.ru",
+            "email": "god@galaxysss.ru",
             "role": "developer"
         }
     ],
@@ -55,7 +55,6 @@
         "yiisoft/yii2-jui": "*",
         "yiisoft/yii2-swiftmailer": "*",
         "yandex-money/yandex-money-sdk-php": "3.0.*",
-        "mustangostang/spyc": "*",
         "nnnick/Chart.js": "1.0.1",
         "isocra/TableDnD": "*"
     },
