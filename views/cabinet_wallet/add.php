@@ -13,4 +13,4 @@ $this->title = 'Пополнение счета';
 
 <p>1 мес - 100 $ <a href="//www.paypal.com" class="btn btn-default" target="_blank">Оплатить</a></p>
 
-<p><a href="<?= \yii\helpers\Url::to(['yandex_money/auth']) ?>">Yandex</a></p>
+<p><a href="<?= $url ?>" target="_blank">Yandex</a></p>

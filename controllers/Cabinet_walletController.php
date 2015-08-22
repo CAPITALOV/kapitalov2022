@@ -9,6 +9,7 @@ namespace app\controllers;
 
 use app\models\Stock;
 use cs\services\VarDumper;
+use YandexMoney\API;
 use Yii;
 use yii\bootstrap\ActiveForm;
 use yii\filters\AccessControl;
@@ -40,7 +41,13 @@ class Cabinet_walletController extends SuperadminBaseController
 
     public function actionAdd()
     {
+
+        /** @var \app\service\authclient\YandexMoney $client */
+        $client = Yii::$app->authClientCollection->getClient('yandex_money');
+        $auth_url = API::buildObtainTokenUrl($client->clientId, 'http://c.galaxysss.ru/yandexMoney', ['account-info']);
+
         return $this->render([
+            'url' => $auth_url,
         ]);
     }
 
