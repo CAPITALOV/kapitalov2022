@@ -79,7 +79,6 @@ class StockKursImport extends \cs\base\BaseForm
     public function import($stock_id)
     {
         if ($this->validate()) {
-            VarDumper::dump($this);
             self::importData($stock_id, $this->dateStart->format('Y-m-d'), $this->dateEnd->format('Y-m-d'), $this->isReplaceExisting);
 
             return true;
