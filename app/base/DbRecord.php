@@ -159,7 +159,9 @@ class DbRecord
 
     public static function batchInsert($columns, $rows)
     {
-        (new Query())->createCommand()->batchInsert(static::TABLE,$columns, $rows)->execute();
+        if (count($rows) > 0) {
+            (new Query())->createCommand()->batchInsert(static::TABLE,$columns, $rows)->execute();
+        }
     }
 
     /**
