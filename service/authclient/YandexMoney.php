@@ -105,11 +105,12 @@ class YandexMoney extends OAuth2
         $code = $url->getParam('requestid');
 
         $defaultParams = [
-            'code' => $code,
-            'client_id'     => $this->clientId,
-            'grant_type'     => 'authorization_code',
-            'redirect_uri'  => 'http://c.galaxysss.ru/yandexMoney',
+            'code'         => $code,
+            'client_id'    => $this->clientId,
+            'grant_type'   => 'authorization_code',
+            'redirect_uri' => 'http://c.galaxysss.ru/yandexMoney',
         ];
+        VarDumper::dump($defaultParams);
         $params = $this->sendRequest2('POST', $this->tokenUrl, $defaultParams, []);
 
         VarDumper::dump($params);
@@ -118,10 +119,12 @@ class YandexMoney extends OAuth2
 
     /**
      * Sends HTTP request.
-     * @param string $method request type.
-     * @param string $url request URL.
-     * @param array $params request params.
-     * @param array $headers additional request headers.
+     *
+     * @param string $method  request type.
+     * @param string $url     request URL.
+     * @param array  $params  request params.
+     * @param array  $headers additional request headers.
+     *
      * @return array response.
      * @throws Exception on failure.
      */
@@ -131,9 +134,9 @@ class YandexMoney extends OAuth2
             $this->defaultCurlOptions(),
             $this->getCurlOptions(),
             [
-                CURLOPT_HTTPHEADER => $headers,
+                CURLOPT_HTTPHEADER     => $headers,
                 CURLOPT_RETURNTRANSFER => true,
-                CURLOPT_URL => $url,
+                CURLOPT_URL            => $url,
             ],
             $this->composeRequestCurlOptions(strtoupper($method), $url, $params)
         );
@@ -155,7 +158,7 @@ class YandexMoney extends OAuth2
 //            \Yii::$app->getResponse()->redirect($redirect_url);
 //        }
 
-        \cs\services\VarDumper::dump([$response,$responseHeaders,$errorNumber,$errorMessage]);
+        \cs\services\VarDumper::dump([$response, $responseHeaders, $errorNumber, $errorMessage]);
 //        return $this->processResponse($response, $this->determineContentTypeByHeaders($responseHeaders));
     }
 
