@@ -117,4 +117,45 @@ class Data
             ],
         ],
     ];
-} 
+
+    /**
+     * Выдает данные по запросу stock_id
+     * Удаляет переменную `stock_id` из блака данных
+     *
+     * @param $stock_id
+     *
+     * @return array массив найденых блоков данных для инициализации импортера
+     */
+    public static function get($stock_id)
+    {
+        $ret = [];
+        foreach(self::$importerData as $item) {
+            if ($item['stock_id'] == $stock_id) {
+                unset($item['stock_id']);
+                $ret[] = $item;
+            }
+        }
+
+        return $ret;
+    }
+
+    /**
+     * Выдает данные по запросу stock_id первый найденный
+     * Удаляет переменную `stock_id` из блака данных
+     *
+     * @param $stock_id
+     *
+     * @return array данные для инициализации импортера
+     */
+    public static function getFirst($stock_id)
+    {
+        foreach(self::$importerData as $item) {
+            if ($item['stock_id'] == $stock_id) {
+                unset($item['stock_id']);
+                return  $item;
+            }
+        }
+
+        return null;
+    }
+}

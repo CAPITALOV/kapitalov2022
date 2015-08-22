@@ -24,10 +24,11 @@ $this->title = 'Курсы';
             <th>График</th>
             <th>add</th>
             <th>edit</th>
-            <th>Имортировать</th>
             <th>red</th>
             <th>blue</th>
+            <th>Имортировать</th>
             <th>kurs</th>
+            <th>Импортировать</th>
         </tr>
     </thead>
     <?php
@@ -66,14 +67,6 @@ $this->title = 'Курсы';
                     edit
                 </a>
             </td>
-            <td>
-                <a href="<?= Url::to([
-                    'superadmin_stock/import',
-                    'id' => $item['id']
-                ]) ?>">
-                    Импортировать
-                </a>
-            </td>
             <td class="date">
                 <?php
                 foreach($red as $row) {
@@ -96,6 +89,14 @@ $this->title = 'Курсы';
                 }
                 ?>
             </td>
+            <td>
+                <a href="<?= Url::to([
+                    'superadmin_stock/import',
+                    'id' => $item['id']
+                ]) ?>" class="btn btn-default">
+                    Импортировать
+                </a>
+            </td>
             <td class="date">
                 <?php
                 foreach($kurs as $row) {
@@ -106,6 +107,14 @@ $this->title = 'Курсы';
                     }
                 }
                 ?>
+            </td>
+            <td>
+                <a href="<?= Url::to([
+                    'superadmin_stock/import_kurs',
+                    'id' => $item['id']
+                ]) ?>" class="btn btn-default">
+                    Импортировать
+                </a>
             </td>
         </tr>
 

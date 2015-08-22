@@ -48,8 +48,8 @@ class ImporterController extends Controller
                 // стратегия: Если данные есть то, они не трогаются
                 $dateArray = ArrayHelper::getColumn($data, 'date');
                 sort($dateArray);
-                $rows = StockKurs::query(['between', 'date', $dateArray[0], $dateArray[count($dateArray)-1]])->andWhere(['stock_id' => $stock_id])->all();
-                $dateArrayRows = ArrayHelper::getColumn($rows, 'date');
+                $rows2 = StockKurs::query(['between', 'date', $dateArray[0], $dateArray[count($dateArray)-1]])->andWhere(['stock_id' => $stock_id])->all();
+                $dateArrayRows = ArrayHelper::getColumn($rows2, 'date');
                 $new = [];
                 foreach($data as $row) {
                     if (!in_array($row['date'], $dateArrayRows)) {
