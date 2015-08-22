@@ -101,7 +101,7 @@ class YandexMoney extends OAuth2
         }
 
         $params = $this->sendRequest2('POST', $this->authUrl, $defaultParams, []);
-        $url = new Url($params['redirect_url']);
+        $url = new Url($params[1]['redirect_url']);
         $code = $url->getParam('requestid');
 
         $defaultParams = [
@@ -152,7 +152,7 @@ class YandexMoney extends OAuth2
 
         curl_close($curlResource);
 
-        return $responseHeaders;
+        return [$response,$responseHeaders];
     }
 
 }
