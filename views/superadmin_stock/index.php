@@ -2,13 +2,27 @@
 
 use yii\helpers\Url;
 use yii\helpers\Html;
-
+/** @var $items array cap_stok */
 $this->title = 'Курсы';
 ?>
 
 <h1 class="page-header"><?= $this->title ?></h1>
-
-<table class="table" style="width:100%;">
+<style>
+    .tableMy .date {
+        font-size: 80%;
+    }
+</style>
+<table class="table tableMy" style="width:100%;">
+    <tr>
+        <th>Наименование</th>
+        <th>График</th>
+        <th>add</th>
+        <th>edit</th>
+        <th>Имортировать</th>
+        <th>red</th>
+        <th>blue</th>
+        <th>kurs</th>
+    </tr>
     <?php
     foreach ($items as $item) {
         ?>
@@ -34,7 +48,7 @@ $this->title = 'Курсы';
                     'superadmin_stock/prognosis_add',
                     'id' => $item['id']
                 ]) ?>">
-                    Добавить прогноз
+                    add
                 </a>
             </td>
             <td>
@@ -42,7 +56,7 @@ $this->title = 'Курсы';
                     'superadmin_stock/prognosis_edit',
                     'id' => $item['id']
                 ]) ?>">
-                    Редактировать прогноз
+                    edit
                 </a>
             </td>
             <td>
@@ -50,8 +64,41 @@ $this->title = 'Курсы';
                     'superadmin_stock/import',
                     'id' => $item['id']
                 ]) ?>">
-                    Импортировать прогноз
+                    Импортировать
                 </a>
+            </td>
+            <td class="date">
+                <?php
+                foreach($red as $row) {
+                    if ($row['stock_id'] == $item['id']) {
+                        $min = (new DateTime($row['min']))->format('d.m.Y');
+                        $max = (new DateTime($row['max']))->format('d.m.Y');
+                        echo "{$min} ... {$max}";
+                    }
+                }
+                ?>
+            </td>
+            <td class="date">
+                <?php
+                foreach($blue as $row) {
+                    if ($row['stock_id'] == $item['id']) {
+                        $min = (new DateTime($row['min']))->format('d.m.Y');
+                        $max = (new DateTime($row['max']))->format('d.m.Y');
+                        echo "{$min} ... {$max}";
+                    }
+                }
+                ?>
+            </td>
+            <td class="date">
+                <?php
+                foreach($kurs as $row) {
+                    if ($row['stock_id'] == $item['id']) {
+                        $min = (new DateTime($row['min']))->format('d.m.Y');
+                        $max = (new DateTime($row['max']))->format('d.m.Y');
+                        echo "{$min} ... {$max}";
+                    }
+                }
+                ?>
             </td>
         </tr>
 
