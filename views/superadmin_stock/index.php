@@ -13,16 +13,18 @@ $this->title = 'Курсы';
     }
 </style>
 <table class="table tableMy" style="width:100%;">
-    <tr>
-        <th>Наименование</th>
-        <th>График</th>
-        <th>add</th>
-        <th>edit</th>
-        <th>Имортировать</th>
-        <th>red</th>
-        <th>blue</th>
-        <th>kurs</th>
-    </tr>
+    <thead>
+        <tr>
+            <th>Наименование</th>
+            <th>График</th>
+            <th>add</th>
+            <th>edit</th>
+            <th>Имортировать</th>
+            <th>red</th>
+            <th>blue</th>
+            <th>kurs</th>
+        </tr>
+    </thead>
     <?php
     foreach ($items as $item) {
         ?>
