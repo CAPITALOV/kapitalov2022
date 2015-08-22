@@ -5,6 +5,8 @@ namespace app\controllers;
 use app\models\Stock;
 use app\models\StockKurs;
 use app\models\StockPrognosis;
+use app\models\StockPrognosisBlue;
+use app\models\StockPrognosisRed;
 use cs\services\VarDumper;
 use cs\web\Exception;
 use Yii;
@@ -15,8 +17,37 @@ class Superadmin_stockController extends SuperadminBaseController
 
     public function actionIndex()
     {
+        $items = Stock::query()->all();
+        $red = StockPrognosisRed::query()
+            ->select([
+                'stock_id',
+                'MIN(`date`) as min',
+                'MAX(`date`) as max',
+            ])
+            ->groupBy('stock_id')
+            ->all();
+        $blue = StockPrognosisBlue::query()
+            ->select([
+                'stock_id',
+                'MIN(`date`) as min',
+                'MAX(`date`) as max',
+            ])
+            ->groupBy('stock_id')
+            ->all();
+        $kurs = StockKurs::query()
+            ->select([
+                'stock_id',
+                'MIN(`date`) as min',
+                'MAX(`date`) as max',
+            ])
+            ->groupBy('stock_id')
+            ->all();
+
         return $this->render([
-            'items' => Stock::query()->all(),
+            'items' => $items,
+            'red'   => $red,
+            'blue'  => $blue,
+            'kurs'  => $kurs,
         ]);
     }
 
