@@ -29,8 +29,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 'id'      => 'contact-form',
                 'options' => ['enctype' => 'multipart/form-data']
             ]); ?>
-            <?= $form->field($model, 'fileRed')->fileInput()->label('Красная линия') ?>
-            <?= $form->field($model, 'fileBlue')->fileInput()->label('Синяя линия') ?>
+            <?= $form->field($model, 'fileRed')->fileInput()->label('Красная линия')->hint('Данные на уже загруженные дни будут проигнорированы') ?>
+            <?= $form->field($model, 'fileBlue')->fileInput()->label('Синяя линия')->hint('Данные на уже загруженные дни будут проигнорированы') ?>
 
             <div class="form-group">
                 <hr>
