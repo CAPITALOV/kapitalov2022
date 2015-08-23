@@ -116,6 +116,18 @@ class Data
                 'cn'        => 'D&J-IND',       // кодовый шифр продукта
             ],
         ],
+        // RTSI
+        [
+            'class' => 'app\service\DadaImporter\Finam',
+            'stock_id' => 12,
+            'path'     => '/SBER_150818_150818.txt',
+            'params'   => [
+                'market'    => 1,
+                'em'        => 3,
+                'code'      => 'SBER',       // кодовый шифр продукта
+                'cn'        => 'SBER',       // кодовый шифр продукта
+            ],
+        ],
     ];
 
     /**
