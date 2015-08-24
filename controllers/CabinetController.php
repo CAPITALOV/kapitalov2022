@@ -47,11 +47,15 @@ class CabinetController extends SuperadminBaseController
     public function actionStock_item($id)
     {
         $item = \app\models\Stock::find($id);
+        $now = new \DateTime();
         $defaultParams = [
-            'start' => (new \DateTime())->sub(new \DateInterval('P30D'))
+            'start' => $now->sub(new \DateInterval('P30D'))
         ];
-        if (!Yii::$app->user->identity->isPaid()) {
-            $defaultParams['end'] = new \DateTime();
+        $isPaid = Yii::$app->user->identity->isPaid($id);
+        if ($isPaid) {
+            $defaultParams['end'] = $now->add(new \DateInterval('P30D'));
+        } else {
+            $defaultParams['end'] = $now;
         }
 
         // график с продажами
@@ -99,6 +103,7 @@ class CabinetController extends SuperadminBaseController
             'lineArrayKurs' => $lineArrayKurs,
             'lineArrayRed'  => $lineArrayRed,
             'lineArrayBlue' => $lineArrayBlue,
+            'isPaid'        => $isPaid,
         ]);
     }
 
