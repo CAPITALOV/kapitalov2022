@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Класс для действий Superadmin
+ * Класс для действий кабинета
  *
  */
 
@@ -31,6 +31,58 @@ class CabinetController extends SuperadminBaseController
                 ],
             ],
         ];
+    }
+
+    /**
+     * Ajax
+     * Выдает значения для графика курса по заданному диапазону
+     *
+     * REQUEST:
+     * - id - int - идентификатор курса
+     * - min - string - дата начала графика 'yyyy-mm-dd'
+     * - max - string - дата окончания графика 'yyyy-mm-dd'
+     *
+     * @return string json
+     *                {
+     *                   'red': - object - data которая для графика нужна
+     *                   'blue': - object - data которая для графика нужна
+     *                   'kurs': - object - data которая для графика нужна
+     *                }
+     */
+    public function actionGraph_ajax()
+    {
+        $start = self::getParam('min');
+        $end = self::getParam('max');
+        $id = self::getParam('id');
+
+        $defaultParams = [
+            'start' => new \DateTime($start),
+            'end'   => new \DateTime($end),
+        ];
+
+        // график с продажами
+        {
+            $params = ArrayHelper::merge($defaultParams, [
+                'rows'  => [
+                    \app\models\StockKurs::query(['stock_id' => $id])
+                        ->andWhere(['between', 'date', $start, $end])
+                        ->select(['date', 'kurs'])
+                        ->all(),
+                ],
+            ]);
+            $lineArrayKurs = \app\service\GraphExporter::convert($params);
+        }
+
+        $graph3 = new \cs\Widget\ChartJs\Line([
+            'width'     => 800,
+            'lineArray' => $lineArrayKurs,
+        ]);
+
+        return self::jsonSuccess([
+            'red'  => [],
+            'blue' => [],
+            'kurs' => $graph3->getData(),
+        ]);
     }
 
     public function actionStock_list()
@@ -65,21 +117,25 @@ class CabinetController extends SuperadminBaseController
     public function actionStock_item($id)
     {
         $item = \app\models\Stock::find($id);
-        $defaultParams = [
-            'start' => (new \DateTime())->sub(new \DateInterval('P30D'))
-        ];
+        $start = (new \DateTime())->sub(new \DateInterval('P30D'));
         $isPaid = Yii::$app->user->identity->isPaid($id);
         if ($isPaid) {
-            $defaultParams['end'] = (new \DateTime())->add(new \DateInterval('P30D'));
+            $end = (new \DateTime())->add(new \DateInterval('P30D'));
         } else {
-            $defaultParams['end'] = (new \DateTime());
+            $end = (new \DateTime());
         }
+        $defaultParams = [
+            'start' => $start,
+            'end'   => $end,
+        ];
 
         // график с продажами
         {
             $params = ArrayHelper::merge($defaultParams, [
                 'rows'  => [
-                    \app\models\StockKurs::query(['stock_id' => $id])->all(),
+                    \app\models\StockKurs::query(['stock_id' => $id])
+                        ->andWhere(['between', 'date', $start->format('Y-m-d'), $end->format('Y-m-d')])
+                        ->all(),
                 ],
             ]);
             $lineArrayKurs = \app\service\GraphExporter::convert($params);
@@ -90,6 +146,7 @@ class CabinetController extends SuperadminBaseController
             $params = ArrayHelper::merge($defaultParams, [
                 'rows'  => [
                     \app\models\StockPrognosisRed::query(['stock_id' => $id])
+                        ->andWhere(['between', 'date', $start->format('Y-m-d'), $end->format('Y-m-d')])
                         ->select([
                             'date',
                             'delta as kurs',
@@ -105,6 +162,7 @@ class CabinetController extends SuperadminBaseController
             $params = ArrayHelper::merge($defaultParams, [
                 'rows'  => [
                     \app\models\StockPrognosisBlue::query(['stock_id' => $id])
+                        ->andWhere(['between', 'date', $start->format('Y-m-d'), $end->format('Y-m-d')])
                         ->select([
                             'date',
                             'delta as kurs',

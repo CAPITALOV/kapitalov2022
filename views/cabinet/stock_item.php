@@ -2,6 +2,7 @@
 
 use yii\helpers\Url;
 use yii\helpers\Html;
+use yii\bootstrap\ActiveForm;
 
 /* @var $this \yii\web\View */
 /* @var $item  \app\models\Stock */
@@ -11,6 +12,8 @@ use yii\helpers\Html;
 /* @var $isPaid  bool опачена ли эта акция? */
 
 $this->title = $item->getField('name');
+
+$model = new \app\models\Form\StockItemGraph();
 
 \app\assets\Slider\Asset::register($this);
 
@@ -32,6 +35,8 @@ $('#slider').rangeSlider({
 });
 JS
 );
+
+
 ?>
 
 <h1 class="page-header"><?= $this->title ?></h1>
@@ -71,10 +76,44 @@ JS
 ]) ?>
 
 <h2>Курс</h2>
-<?= \cs\Widget\ChartJs\Line::widget([
+<?php
+
+$graph3 = new \cs\Widget\ChartJs\Line([
     'width'     => 800,
     'lineArray' => $lineArrayKurs,
-]) ?>
+]);
+echo $graph3->run();
+$url = Url::to(['cabinet/graph_ajax']);
+$this->registerJs(<<<JS
+    $('#buttonRecalculate').click(function() {
+        if ($('#stockitemgraph-datemin').val() == '') {
+            showInfo('Нужно заполнить дату начала');
+            return;
+        }
+        if ($('#stockitemgraph-datemax').val() == '') {
+            showInfo('Нужно заполнить дату начала');
+            return;
+        }
+        {$graph3->varName}.destroy();
+        var start = $('#stockitemgraph-datemin').val();
+        var end = $('#stockitemgraph-datemax').val();
+        start = start.substring(6,10) + '-' + start.substring(3,5) + '-' + start.substring(0,2);
+        end = end.substring(6,10) + '-' + end.substring(3,5) + '-' + end.substring(0,2);
+        ajaxJson({
+            url: '$url',
+            data: {
+                'min': start,
+                'max': end,
+                'id': {$item->getId()}
+            },
+            success: function(ret) {
+                {$graph3->varName} = new Chart(document.getElementById('$graph3->id').getContext('2d')).Line(ret.kurs, []);
+            }
+        })
+    })
+JS
+);
+?>
 
 <?php if (!$isPaid) { ?>
     <hr>
@@ -85,6 +124,26 @@ JS
         style="width: 100%;"
         >Купить</a>
 <?php } ?>
+
+<div class="row">
+    <div class="col-lg-6">
+        <?php $form = ActiveForm::begin(['id' => 'contact-form']); ?>
+        <?= $model->field($form, 'dateMin') ?>
+        <?= $model->field($form, 'dateMax') ?>
+        <hr>
+        <div class="form-group">
+            <?= Html::button('Показать', [
+                'class' => 'btn btn-default',
+                'name'  => 'contact-button',
+                'style' => 'width:100%',
+                'id'    => 'buttonRecalculate',
+            ]) ?>
+        </div>
+        <?php ActiveForm::end(); ?>
+    </div>
+</div>
+
+
 
 <h2 class="page-header">Экспорт</h2>
 
