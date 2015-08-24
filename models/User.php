@@ -9,6 +9,7 @@ use yii\debug\models\search\Db;
 use yii\helpers\Url;
 use yii\helpers\VarDumper;
 use yii\helpers\ArrayHelper;
+use app\models\UserStock;
 
 class User extends DbRecord implements \yii\web\IdentityInterface {
 
@@ -141,18 +142,17 @@ class User extends DbRecord implements \yii\web\IdentityInterface {
     }
 
     /**
-     * Оплачен ли личный кабинет?
+     * Оплачена акция?
+     *
+     * @param integer $stock_id идентификатор акции cap_stock.id
      *
      * @return bool
-     * true - кабинет оплачен
-     * false - кабинет не оплачен
+     * true -  оплачена
+     * false - не оплачена
      */
-    public function isPaid()
+    public function isPaid($stock_id)
     {
-        $paid_time = $this->getField('paid_time');
-        if (is_null($paid_time)) return false;
-
-        return ($paid_time - time()) > 0;
+        return UserStock::isPaidStatic($this->getId(), $stock_id);
     }
 
     /**

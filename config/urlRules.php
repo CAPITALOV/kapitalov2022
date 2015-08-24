@@ -56,7 +56,7 @@ return [
     'cabinet/profile/subscribe'             => 'cabinet/profile_subscribe',
 
     'cabinet/wallet'                        => 'cabinet_wallet/index',
-    'cabinet/wallet/add'                    => 'cabinet_wallet/add',
+    'cabinet/wallet/add/<id:\\d+>'          => 'cabinet_wallet/add',
 
     'yandexMoney'                           => 'yandex_money/auth',
 ];

@@ -95,6 +95,16 @@ $config = [
                 ],
             ],
         ],
+        'formatter'            => [
+            'dateFormat'        => 'dd.MM.yyyy',
+            'timeFormat'        => 'php:H:i:s',
+            'datetimeFormat'    => 'php:d.m.Y H:i',
+            'decimalSeparator'  => '.',
+            'thousandSeparator' => ' ',
+            'currencyCode'      => 'RUB',
+            'locale'            => 'ru-RU',
+            'nullDisplay'       => '',
+        ],
     ],
     'params'       => $params,
 ];

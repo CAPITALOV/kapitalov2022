@@ -6,17 +6,17 @@ use yii\helpers\Html;
 
 $this->title = 'Курсы';
 
-
 ?>
 
 <h1 class="page-header"><?= Html::encode($this->title) ?></h1>
 
 
-
-<table class="table table-striped" style="width:100%;">
+<table class="table table-striped" style="width:auto;">
     <thead>
     <tr>
         <th>Наименование</th>
+        <th>Оплачено до</th>
+        <th>Оплатить</th>
     </tr>
     </thead>
     <?php
@@ -30,6 +30,12 @@ $this->title = 'Курсы';
                 ]) ?>">
                     <?= $item['name'] ?>
                 </a>
+            </td>
+            <td>
+                <?= (is_null($item['date_finish']))? '' : \Yii::$app->formatter->asDate($item['date_finish']) ?>
+            </td>
+            <td>
+                <a href="<?= Url::to(['cabinet_wallet/add', 'id' => $item['id']]) ?>" class="btn btn-default btn-xs">Оплатить</a>
             </td>
         </tr>
 

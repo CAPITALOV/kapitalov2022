@@ -39,16 +39,26 @@ class Cabinet_walletController extends SuperadminBaseController
         ]);
     }
 
-    public function actionAdd()
+    /**
+     * Форма покупки месяцев
+     *
+     * @param int $id идентификатор акции
+     *
+     * @return string|\yii\web\Response
+     */
+    public function actionAdd($id)
     {
+        $model = new \app\models\Form\CabinetWalletAdd();
+        if ($model->load(Yii::$app->request->post()) && $model->add($id)) {
+            Yii::$app->session->setFlash('contactFormSubmitted');
 
-        /** @var \app\service\authclient\YandexMoney $client */
-        $client = Yii::$app->authClientCollection->getClient('yandex_money');
-        $auth_url = API::buildObtainTokenUrl($client->clientId, 'http://c.galaxysss.ru/yandexMoney', ['account-info']);
+            return $this->refresh();
+        } else {
+            return $this->render([
+                'model' => $model,
+            ]);
+        }
 
-        return $this->render([
-            'url' => $auth_url,
-        ]);
     }
 
 }

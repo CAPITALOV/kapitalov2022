@@ -8,6 +8,7 @@ use yii\helpers\Html;
 /* @var $lineArrayKurs  array */
 /* @var $lineArrayRed  array */
 /* @var $lineArrayBlue  array */
+/* @var $isPaid  bool опачена ли эта акция? */
 
 $this->title = $item->getField('name');
 
@@ -74,6 +75,16 @@ JS
     'width'     => 800,
     'lineArray' => $lineArrayKurs,
 ]) ?>
+
+<?php if (!$isPaid) { ?>
+    <hr>
+
+    <a
+        href="<?= Url::to(['cabinet_wallet/add', 'id' => $item->getId()]) ?>"
+        class="btn btn-default"
+        style="width: 100%;"
+        >Купить</a>
+<?php } ?>
 
 <h2 class="page-header">Экспорт</h2>
 

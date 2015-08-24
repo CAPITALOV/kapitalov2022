@@ -8,6 +8,7 @@
 namespace app\controllers;
 
 use app\models\Stock;
+use app\models\UserStock;
 use cs\services\VarDumper;
 use Yii;
 use yii\bootstrap\ActiveForm;
@@ -34,8 +35,25 @@ class CabinetController extends SuperadminBaseController
 
     public function actionStock_list()
     {
+        $items = Stock::query()->orderBy(['name' => SORT_ASC])->all();
+        $dateFinishList = UserStock::query(['user_id' => \Yii::$app->user->getId()])->select([
+            'stock_id',
+            'date_finish',
+        ])->all();
+        for($i=0;$i<count($items);$i++) {
+            $item = &$items[$i];
+            foreach($dateFinishList as $row) {
+                if ($row['stock_id'] == $item['id']) {
+                    $item['date_finish'] = $row['date_finish'];
+                }
+            }
+            if (!isset($item['date_finish'])) {
+                $item['date_finish'] = null;
+            }
+        }
+
         return $this->render([
-            'items' => Stock::query()->orderBy(['name' => SORT_ASC])->all(),
+            'items' => $items,
         ]);
     }
 
@@ -50,8 +68,11 @@ class CabinetController extends SuperadminBaseController
         $defaultParams = [
             'start' => (new \DateTime())->sub(new \DateInterval('P30D'))
         ];
-        if (!Yii::$app->user->identity->isPaid()) {
-            $defaultParams['end'] = new \DateTime();
+        $isPaid = Yii::$app->user->identity->isPaid($id);
+        if ($isPaid) {
+            $defaultParams['end'] = (new \DateTime())->add(new \DateInterval('P30D'));
+        } else {
+            $defaultParams['end'] = (new \DateTime());
         }
 
         // график с продажами
@@ -99,6 +120,7 @@ class CabinetController extends SuperadminBaseController
             'lineArrayKurs' => $lineArrayKurs,
             'lineArrayRed'  => $lineArrayRed,
             'lineArrayBlue' => $lineArrayBlue,
+            'isPaid'        => $isPaid,
         ]);
     }
 
