@@ -22,6 +22,9 @@ class Line extends Object
     public $id;
     public $width  = 400;
     public $height = 400;
+
+    /** @var  string название переменной JS */
+    public $varName;
     /**
      * @var array
      * [
@@ -65,6 +68,7 @@ class Line extends Object
         if (!$this->id) {
             $this->id = 'w_' . Security::generateRandomString();
         }
+        $this->varName = 'graph_' . Security::generateRandomString();
     }
 
     public function run()
@@ -102,6 +106,25 @@ class Line extends Object
             $js[] = "Chart.defaults.global = {$optionsJson};";
         }
         $optionsJson = Json::encode($this->chartOptions);
+        $dataJson = Json::encode($this->getData());
+        $js[] = <<<JS
+var {$this->varName} = new Chart(document.getElementById('{$this->id}').getContext('2d')).Line({$dataJson}, {$optionsJson});
+JS
+;
+        Yii::$app->view->registerJs(join("\n", $js));
+    }
+
+    /**
+     * Возвращает массив данных data для графика
+     *
+     * @return array
+     * [
+     *     'labels' => array
+     *     'datasets' => array
+     * ]
+     */
+    public function getData()
+    {
         $c = 0;
         $datasets = [];
         foreach($this->lineArray['y'] as $line) {
@@ -110,18 +133,10 @@ class Line extends Object
             $datasets[] = $data;
             $c++;
         }
-        $data = [
-            'labels' => $this->lineArray['x'],
+
+        return [
+            'labels'   => $this->lineArray['x'],
             'datasets' => $datasets,
         ];
-        $dataJson = Json::encode($data);
-        $js[] = <<<JS
-var options = {$optionsJson};
-var ctx = document.getElementById('{$this->id}').getContext('2d');
-var data = {$dataJson};
-var myLineChart = new Chart(ctx).Line(data, options);
-JS
-;
-        Yii::$app->view->registerJs(join("\n", $js));
     }
 }
