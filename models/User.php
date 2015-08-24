@@ -152,7 +152,7 @@ class User extends DbRecord implements \yii\web\IdentityInterface {
      */
     public function isPaid($stock_id)
     {
-        return UserStock::isPaid($this->getId(), $stock_id);
+        return UserStock::isPaidStatic($this->getId(), $stock_id);
     }
 
     /**

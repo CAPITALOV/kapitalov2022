@@ -76,8 +76,14 @@ JS
     'lineArray' => $lineArrayKurs,
 ]) ?>
 
-<?php if ($isPaid) { ?>
-    <a href="<?= Url::to(['cabinet_wallet/add', 'id' => $item->getId()]) ?>" class="btn btn-default">Купить</a>
+<?php if (!$isPaid) { ?>
+    <hr>
+
+    <a
+        href="<?= Url::to(['cabinet_wallet/add', 'id' => $item->getId()]) ?>"
+        class="btn btn-default"
+        style="width: 100%;"
+        >Купить</a>
 <?php } ?>
 
 <h2 class="page-header">Экспорт</h2>

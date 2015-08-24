@@ -2,16 +2,7 @@
 
 namespace app\models;
 
-use app\models\NewsItem;
-use app\models\User;
-use app\services\GsssHtml;
-use cs\services\Str;
-use cs\services\VarDumper;
 use Yii;
-use yii\base\Model;
-use cs\Widget\FileUpload2\FileUpload;
-use yii\db\Query;
-use yii\helpers\Html;
 
 /**
  * Обслуживает таблицу cap_users_stock_buy, которая хранит информацию до какого времени была оплачена акция конкретного пользователя
@@ -19,6 +10,14 @@ use yii\helpers\Html;
 class UserStock extends \cs\base\DbRecord
 {
     const TABLE = 'cap_users_stock_buy';
+
+    public static function get2($userId, $stockId)
+    {
+        return self::find([
+            'user_id'  => $userId,
+            'stock_id' => $stockId,
+        ]);
+    }
 
     /**
      * Возвращает временную метку до какого времени проплачена акция
@@ -32,9 +31,25 @@ class UserStock extends \cs\base\DbRecord
     public static function getDateFinish($userId, $stockId)
     {
         return self::query([
-            'user_id' => $userId,
+            'user_id'  => $userId,
             'stock_id' => $stockId,
         ])->select(['date_finish'])->scalar();
+    }
+
+    /**
+     * Оплачена акиця на настоящий момент?
+     *
+     * @return bool
+     */
+    public function isPaid()
+    {
+        $datetime = $this->getField('date_finish', false);
+        if ($datetime === false) return false;
+
+        $nextMonth = self::addMonthCounter($datetime, 1);
+        $now = \Yii::$app->formatter->asDate(time(), 'php:Y-m-d');
+
+        return (self::dateCompare($nextMonth, $now) > 0);
     }
 
     /**
@@ -45,11 +60,94 @@ class UserStock extends \cs\base\DbRecord
      *
      * @return bool
      */
-    public static function isPaid($userId, $stockId)
+    public static function isPaidStatic($userId, $stockId)
     {
         $datetime = self::getDateFinish($userId, $stockId);
         if ($datetime === false) return false;
 
-        return $datetime >= time();
+        $nextMonth = self::addMonthCounter($datetime, 1);
+        $now = \Yii::$app->formatter->asDate(time(), 'php:Y-m-d');
+
+        return (self::dateCompare($nextMonth, $now) > 0);
+    }
+
+    /**
+     * Добавляет количество оплаченных месяцев
+     *
+     * @param int $userId       идентификатор пользователя
+     * @param int $stockId      идентификатор акции
+     * @param int $monthCounter количество месяцев которые надо добавить
+     *
+     * @throws \yii\db\Exception
+     */
+    public static function add($userId, $stockId, $monthCounter)
+    {
+        $item = self::find([
+            'stock_id' => $stockId,
+            'user_id'  => $userId,
+        ]);
+        if (is_null($item)) {
+            self::insert([
+                'stock_id'    => $stockId,
+                'user_id'     => $userId,
+                'date_finish' => self::addMonthCounter(\Yii::$app->formatter->asDate(time(), 'php:Y-m-d'), $monthCounter + 1),
+            ]);
+        } else {
+            if ($item->isPaid()) {
+                $item->update([
+                    'date_finish' => self::addMonthCounter($item->getField('date_finish'), $monthCounter),
+                ]);
+            } else {
+                $item->update([
+                    'date_finish' => self::addMonthCounter(\Yii::$app->formatter->asDate(time(), 'php:Y-m-d'), $monthCounter + 1),
+                ]);
+            }
+        }
+    }
+
+    /**
+     * Прибавляет к текущей дате $monthCounter оплаченных месяцев
+     * оплаченные месяца идут с начала следующего календарного месяца
+     * Возвращаемая дата содержит первый день месяца сдедующего за последним оплаченым
+     *
+     * @param string  $date формат 'yyyy-mm-dd'
+     * @param int $monthCounter
+     *
+     * @return string дата содержащая год и месяц до которого оплачен курс, формат 'yyyy-mm-dd'
+     */
+    public static function addMonthCounter($date, $monthCounter)
+    {
+        $date = new \DateTime($date);
+        $month = (int)$date->format('n');
+        $year = (int)$date->format('Y');
+        $month += $monthCounter;
+        $monthFullYear = (int)(($month - 1) / 12);
+        if ($monthFullYear > 0) $year += $monthFullYear;
+        $month -= $monthFullYear * 12;
+        if ($month == 0) {
+            $month = 1;
+        }
+        if ($month < 10) $month = '0' . $month;
+
+        return $year . '-' . $month . '-01';
+    }
+
+    /**
+     * Сравнивает даты
+     *
+     * @param string $d1 в формате 'yyyy-mm-dd'
+     * @param string $d2 в формате 'yyyy-mm-dd'
+     *
+     * @return int
+     * 1 - d1 больше d2
+     * 0 - d1=d2
+     * -1 - d1 меньше d2
+     */
+    public static function dateCompare($d1, $d2)
+    {
+        $delta = (new \DateTime($d1))->format('U') - (new \DateTime($d2))->format('U');
+        if ($delta > 0) return 1;
+        if ($delta < 0) return -1;
+        return 0;
     }
 }
