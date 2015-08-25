@@ -43,7 +43,7 @@ JS
 
 <h1 class="page-header"><?= $this->title ?></h1>
 
-<h2>Прогноз (красный)</h2>
+<h2 class="page-header">Прогноз (красный)</h2>
 <?= \cs\Widget\ChartJs\Line::widget([
     'width'     => 800,
     'lineArray' => $lineArrayRed,
@@ -60,7 +60,7 @@ JS
     ],
 ]) ?>
 
-<h2>Прогноз (синий)</h2>
+<h2 class="page-header">Прогноз (синий)</h2>
 <?= \cs\Widget\ChartJs\Line::widget([
     'width'     => 800,
     'lineArray' => $lineArrayBlue,
@@ -77,7 +77,7 @@ JS
     ],
 ]) ?>
 
-<h2>Прогноз (кр+син)</h2>
+<h2 class="page-header">Прогноз (кр+син)</h2>
 <?= \cs\Widget\ChartJs\Line::widget([
     'width'     => 800,
     'lineArray' => $lineArrayUnion,
@@ -103,7 +103,7 @@ JS
     ],
 ]) ?>
 
-<h2>Прогноз (общий)</h2>
+<h2 class="page-header">Общий</h2>
 <?= \cs\Widget\ChartJs\Line::widget([
     'width'     => 800,
     'lineArray' => $lineArrayUnion2,
@@ -128,7 +128,7 @@ JS
         ],
         [
             'label'                => "Курс",
-            'fillColor'            => "rgba(220,220,220,0.2)",
+            'fillColor'            => "rgba(220,220,220,0)",
             'strokeColor'          => "rgba(229,255,229,1)",
             'pointColor'           => "rgba(204,255,204,1)",
             'pointStrokeColor'     => "#fff",
@@ -138,7 +138,7 @@ JS
     ],
 ]) ?>
 
-<h2>Курс</h2>
+<h2 class="page-header">Курс</h2>
 <?php
 
 $graph3 = new \cs\Widget\ChartJs\Line([
@@ -178,10 +178,14 @@ $this->registerJs(<<<JS
             data: {
                 'min': start,
                 'max': end,
-                'id': {$item->getId()}
+                'id': {$item->getId()},
+                'isUseRed': $('#stockitemgraph-isusered').is(':checked')? 1: 0,
+                'isUseBlue': $('#stockitemgraph-isuseblue').is(':checked')? 1: 0,
+                'isUseKurs': $('#stockitemgraph-isusekurs').is(':checked')? 1: 0,
+                'y': $('#stockitemgraph-y').val()
             },
             success: function(ret) {
-                {$graph3->varName} = new Chart(document.getElementById('$graph3->id').getContext('2d')).Line(ret.kurs, []);
+                {$graph3->varName} = new Chart(document.getElementById('$graph3->id').getContext('2d')).Line(ret, []);
             }
         })
     })
@@ -199,11 +203,19 @@ JS
         >Купить</a>
 <?php } ?>
 
-<div class="row">
-    <div class="col-lg-6">
+<div class="row hidden-print">
+    <div class="col-lg-8">
         <?php $form = ActiveForm::begin(['id' => 'contact-form']); ?>
         <?= $model->field($form, 'dateMin') ?>
         <?= $model->field($form, 'dateMax') ?>
+        <?= $model->field($form, 'isUseRed') ?>
+        <?= $model->field($form, 'isUseBlue') ?>
+        <?= $model->field($form, 'isUseKurs') ?>
+        <?= $model->field($form, 'y')->dropDownList([
+            1 => 'Курс',
+            2 => 'Красный прогноз',
+            3 => 'Синий прогноз',
+        ]); ?>
         <hr>
         <div class="form-group">
             <?= Html::button('Показать', [
@@ -219,11 +231,12 @@ JS
 
 
 
-<h2 class="page-header">Экспорт</h2>
+<!--<h2 class="page-header">Экспорт</h2>-->
 
-<div class="col-lg-6">
-    <div style="margin: 10px 0px 20px 0px;">
-        <div id="slider"></div>
-    </div>
-    <button class="btn btn-default" style="width: 100%;">Экспортировать</button>
-</div>
+
+<!--<div class="col-lg-6 row">-->
+<!--    <div style="margin: 10px 0px 20px 0px;">-->
+<!--        <div id="slider"></div>-->
+<!--    </div>-->
+<!--    <button class="btn btn-default" style="width: 100%;">Экспортировать</button>-->
+<!--</div>-->

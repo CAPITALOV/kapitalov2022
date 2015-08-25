@@ -34,13 +34,17 @@ class CabinetController extends SuperadminBaseController
     }
 
     /**
-     * Ajax
+     * AJAX
      * Выдает значения для графика курса по заданному диапазону
      *
      * REQUEST:
-     * - id - int - идентификатор курса
-     * - min - string - дата начала графика 'yyyy-mm-dd'
-     * - max - string - дата окончания графика 'yyyy-mm-dd'
+     * - id        - int    - идентификатор курса
+     * - min       - string - дата начала графика 'yyyy-mm-dd'
+     * - max       - string - дата окончания графика 'yyyy-mm-dd'
+     * - isUseRed  - int    - 1 - на графике будет присутствовать прогноз красный, 0 - не будет присутствовать
+     * - isUseBlue - int    - 1 - на графике будет присутствовать прогноз синий, 0 - не будет присутствовать
+     * - isUseKurs - int    - 1 - на графике будет присутствовать курс, 0 - не будет присутствовать
+     * - y         - int    - какие значения использовать для оси Y (1 => 'Курс', 2 => 'Красный прогноз', 3 => 'Синий прогноз',)
      *
      * @return string json
      *                {
@@ -54,35 +58,250 @@ class CabinetController extends SuperadminBaseController
         $start = self::getParam('min');
         $end = self::getParam('max');
         $id = self::getParam('id');
+        $isUseRed = self::getParam('isUseRed', 0);
+        $isUseBlue = self::getParam('isUseBlue', 0);
+        $isUseKurs = self::getParam('isUseKurs', 0);
+        $y = self::getParam('y');
 
+        $colorGreen = [
+            'label'                => "Курс",
+            'fillColor'            => "rgba(220,220,220,0)",
+            'strokeColor'          => "rgba(229,255,229,1)",
+            'pointColor'           => "rgba(204,255,204,1)",
+            'pointStrokeColor'     => "#fff",
+            'pointHighlightFill'   => "#fff",
+            'pointHighlightStroke' => "rgba(220,220,220,1)",
+        ];
+        $colorRed = [
+            'label'                => "Прогноз",
+            'fillColor'            => "rgba(220,220,220,0)",
+            'strokeColor'          => "rgba(255,229,229,1)",
+            'pointColor'           => "rgba(255,204,204,1)",
+            'pointStrokeColor'     => "#fff",
+            'pointHighlightFill'   => "#fff",
+            'pointHighlightStroke' => "rgba(220,220,220,1)",
+        ];
+        $colorBlue = [
+            'label'                => "Прогноз",
+            'fillColor'            => "rgba(220,220,220,0)",
+            'strokeColor'          => "rgba(229,229,255,1)",
+            'pointColor'           => "rgba(204,204,255,1)",
+            'pointStrokeColor'     => "#fff",
+            'pointHighlightFill'   => "#fff",
+            'pointHighlightStroke' => "rgba(220,220,220,1)",
+        ];
         $defaultParams = [
             'start' => new \DateTime($start),
             'end'   => new \DateTime($end),
         ];
+        $colors = [
+            $colorGreen, $colorRed, $colorBlue,
+        ];
 
         // график с продажами
+        $lineArrayKurs = \app\service\GraphExporter::convert(ArrayHelper::merge($defaultParams, [
+            'rows'  => [
+                \app\models\StockKurs::query(['stock_id' => $id])
+                    ->andWhere(['between', 'date', $start, $end])
+                    ->select(['date', 'kurs'])
+                    ->all(),
+            ],
+        ]));
+
+        // график с прогнозом (красная линия)
+        $lineArrayRed = \app\service\GraphExporter::convert(ArrayHelper::merge($defaultParams, [
+            'rows'  => [
+                \app\models\StockPrognosisRed::query(['stock_id' => $id])
+                    ->andWhere(['between', 'date', $start, $end])
+                    ->select([
+                        'date',
+                        'delta as kurs',
+                    ])
+                    ->all(),
+            ],
+        ]));
+
+        // график с прогнозом (синяя линия)
+        $lineArrayBlue = \app\service\GraphExporter::convert(ArrayHelper::merge($defaultParams, [
+            'rows'  => [
+                \app\models\StockPrognosisBlue::query(['stock_id' => $id])
+                    ->andWhere(['between', 'date', $start, $end])
+                    ->select([
+                        'date',
+                        'delta as kurs',
+                    ])
+                    ->all(),
+            ],
+        ]));
+
+        // Объединение
         {
-            $params = ArrayHelper::merge($defaultParams, [
-                'rows'  => [
-                    \app\models\StockKurs::query(['stock_id' => $id])
-                        ->andWhere(['between', 'date', $start, $end])
-                        ->select(['date', 'kurs'])
-                        ->all(),
-                ],
-            ]);
-            $lineArrayKurs = \app\service\GraphExporter::convert($params);
+            if  (
+            ($isUseRed == 1 && $isUseBlue == 0 && $isUseKurs == 0)  ||
+            ($isUseRed == 0 && $isUseBlue == 1 && $isUseKurs == 0)  ||
+            ($isUseRed == 0 && $isUseBlue == 0 && $isUseKurs == 1)
+            ) {
+                // показывается только один график
+                if ($isUseRed == 1) {
+                    // показываю красный
+                    $lineArray = $lineArrayRed;
+                    $colors = [
+                        $colorRed,
+                    ];
+                } else if ($isUseBlue == 1) {
+                    // показываю синий
+                    $lineArray = $lineArrayBlue;
+                    $colors = [
+                        $colorBlue,
+                    ];
+                } else {
+                    // показываю курс
+                    $lineArray = $lineArrayKurs;
+                    $colors = [
+                        $colorGreen
+                    ];
+                }
+            } else if (
+                ($isUseRed == 0 && $isUseBlue == 1 && $isUseKurs == 1)  ||
+                ($isUseRed == 1 && $isUseBlue == 0 && $isUseKurs == 1)  ||
+                ($isUseRed == 1 && $isUseBlue == 1 && $isUseKurs == 0)
+            ) {
+                // показывается два графика
+                if ($isUseRed == 0) {
+                    switch($y) {
+                        case 1: // Курс
+                            $lineArray = \app\service\GraphUnion::convert([
+                                'x' => $lineArrayRed['x'],
+                                'y' => [
+                                    $lineArrayKurs['y'][0],
+                                    $lineArrayBlue['y'][0],
+                                ]
+                            ]);
+                            $colors = [
+                                $colorGreen, $colorBlue,
+                            ];
+                            break;
+                        case 3: // Синий
+                            $lineArray = \app\service\GraphUnion::convert([
+                                'x' => $lineArrayRed['x'],
+                                'y' => [
+                                    $lineArrayBlue['y'][0],
+                                    $lineArrayKurs['y'][0],
+                                ]
+                            ]);
+                            $colors = [
+                                $colorBlue, $colorGreen,
+                            ];
+                            break;
+                    }
+                } else if ($isUseBlue == 0) {
+                    switch($y) {
+                        case 1: // Курс
+                            $lineArray = \app\service\GraphUnion::convert([
+                                'x' => $lineArrayRed['x'],
+                                'y' => [
+                                    $lineArrayKurs['y'][0],
+                                    $lineArrayRed['y'][0],
+                                ]
+                            ]);
+                            $colors = [
+                                $colorGreen, $colorRed,
+                            ];
+                            break;
+                        case 2: // Красный
+                            $lineArray = \app\service\GraphUnion::convert([
+                                'x' => $lineArrayRed['x'],
+                                'y' => [
+                                    $lineArrayRed['y'][0],
+                                    $lineArrayKurs['y'][0],
+                                ]
+                            ]);
+                            $colors = [
+                                $colorRed, $colorGreen,
+                            ];
+                            break;
+                    }
+                } else {
+                    switch($y) {
+                        case 2: // Красный
+                            $lineArray = \app\service\GraphUnion::convert([
+                                'x' => $lineArrayRed['x'],
+                                'y' => [
+                                    $lineArrayRed['y'][0],
+                                    $lineArrayBlue['y'][0],
+                                ]
+                            ]);
+                            $colors = [
+                                $colorRed, $colorBlue,
+                            ];
+                            break;
+                        case 3: // Синий
+                            $lineArray = \app\service\GraphUnion::convert([
+                                'x' => $lineArrayRed['x'],
+                                'y' => [
+                                    $lineArrayBlue['y'][0],
+                                    $lineArrayRed['y'][0],
+                                ]
+                            ]);
+                            $colors = [
+                                $colorBlue, $colorRed,
+                            ];
+                            break;
+                    }
+                }
+            } else {
+                // показывается три графика
+                switch($y) {
+                    case 1: // Курс
+                        $lineArray = \app\service\GraphUnion::convert([
+                            'x' => $lineArrayRed['x'],
+                            'y' => [
+                                $lineArrayKurs['y'][0],
+                                $lineArrayRed['y'][0],
+                                $lineArrayBlue['y'][0],
+                            ]
+                        ]);
+                        $colors = [
+                            $colorGreen, $colorRed, $colorBlue,
+                        ];
+                        break;
+                    case 2: // Красный
+                        $lineArray = \app\service\GraphUnion::convert([
+                            'x' => $lineArrayRed['x'],
+                            'y' => [
+                                $lineArrayRed['y'][0],
+                                $lineArrayKurs['y'][0],
+                                $lineArrayBlue['y'][0],
+                            ]
+                        ]);
+                        $colors = [
+                            $colorRed, $colorGreen, $colorBlue,
+                        ];
+                        break;
+                    case 3: // Синий
+                        $lineArray = \app\service\GraphUnion::convert([
+                            'x' => $lineArrayRed['x'],
+                            'y' => [
+                                $lineArrayBlue['y'][0],
+                                $lineArrayRed['y'][0],
+                                $lineArrayKurs['y'][0],
+                            ]
+                        ]);
+                        $colors = [
+                            $colorBlue, $colorRed, $colorGreen,
+                        ];
+                        break;
+                }
+            }
         }
 
         $graph3 = new \cs\Widget\ChartJs\Line([
             'width'     => 800,
-            'lineArray' => $lineArrayKurs,
+            'lineArray' => $lineArray,
+            'colors' => $colors,
         ]);
 
-        return self::jsonSuccess([
-            'red'  => [],
-            'blue' => [],
-            'kurs' => $graph3->getData(),
-        ]);
+        return self::jsonSuccess($graph3->getData());
     }
 
     public function actionStock_list()
