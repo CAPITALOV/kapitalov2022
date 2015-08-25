@@ -1,7 +1,7 @@
 function ajaxJson(options){
     return $.ajax({
         url: options.url,
-        type: (typeof options.type != 'undefined')? options.type:'get',
+        type: (typeof options.type != 'undefined')? options.type:'post',
         data: options.data,
         dataType: 'json',
         beforeSend: options.beforeSend,
