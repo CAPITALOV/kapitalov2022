@@ -173,12 +173,37 @@ class CabinetController extends SuperadminBaseController
             $lineArrayBlue = \app\service\GraphExporter::convert($params);
         }
 
+        // union
+        {
+            $lineArrayUnion = \app\service\GraphUnion::convert([
+                'x' => $lineArrayRed['x'],
+                'y' => [
+                    $lineArrayRed['y'][0],
+                    $lineArrayBlue['y'][0],
+                ]
+            ]);
+        }
+
+        // union2
+        {
+            $lineArrayUnion2 = \app\service\GraphUnion::convert([
+                'x' => $lineArrayRed['x'],
+                'y' => [
+                    $lineArrayRed['y'][0],
+                    $lineArrayBlue['y'][0],
+                    $lineArrayKurs['y'][0],
+                ]
+            ]);
+        }
+
         return $this->render([
-            'item'          => $item,
-            'lineArrayKurs' => $lineArrayKurs,
-            'lineArrayRed'  => $lineArrayRed,
-            'lineArrayBlue' => $lineArrayBlue,
-            'isPaid'        => $isPaid,
+            'item'           => $item,
+            'lineArrayKurs'  => $lineArrayKurs,
+            'lineArrayRed'   => $lineArrayRed,
+            'lineArrayBlue'  => $lineArrayBlue,
+            'lineArrayUnion' => $lineArrayUnion,
+            'lineArrayUnion2' => $lineArrayUnion2,
+            'isPaid'         => $isPaid,
         ]);
     }
 
