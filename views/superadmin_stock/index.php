@@ -22,8 +22,6 @@ $this->title = 'Курсы';
         <tr>
             <th>Наименование</th>
             <th>График</th>
-            <th>add</th>
-            <th>edit</th>
             <th>red</th>
             <th>blue</th>
             <th>Имортировать</th>
@@ -49,22 +47,6 @@ $this->title = 'Курсы';
                     'id' => $item['id']
                 ]) ?>">
                     График
-                </a>
-            </td>
-            <td>
-                <a href="<?= Url::to([
-                    'superadmin_stock/prognosis_add',
-                    'id' => $item['id']
-                ]) ?>">
-                    add
-                </a>
-            </td>
-            <td>
-                <a href="<?= Url::to([
-                    'superadmin_stock/prognosis_edit',
-                    'id' => $item['id']
-                ]) ?>">
-                    edit
                 </a>
             </td>
             <td class="date">
