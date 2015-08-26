@@ -32,13 +32,6 @@ class Cabinet_walletController extends SuperadminBaseController
         ];
     }
 
-    public function actionIndex()
-    {
-        return $this->render([
-            'end' => Yii::$app->user->identity->getField('paid_time'),
-        ]);
-    }
-
     /**
      * Форма покупки месяцев
      *

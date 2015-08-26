@@ -56,7 +56,6 @@ return [
     'cabinet/profile/unLinkSocialNetWork'   => 'cabinet/profile_unlink_social_network',
     'cabinet/profile/subscribe'             => 'cabinet/profile_subscribe',
 
-    'cabinet/wallet'                        => 'cabinet_wallet/index',
     'cabinet/wallet/add/<id:\\d+>'          => 'cabinet_wallet/add',
 
     'yandexMoney'                           => 'yandex_money/auth',
