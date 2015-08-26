@@ -7,6 +7,8 @@ use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\App\Asset;
 
+\app\assets\CheckBox\Asset::register($this);
+
 ?>
 <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
      aria-hidden="true">
