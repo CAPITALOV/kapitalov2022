@@ -22,19 +22,19 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <?php else: ?>
 
-
     <div class="row">
         <div class="col-lg-5">
             <?php $form = ActiveForm::begin([
                 'id'      => 'contact-form',
                 'options' => ['enctype' => 'multipart/form-data']
             ]); ?>
-            <?= $form->field($model, 'fileRed')->fileInput()->label('Красная линия')->hint('Данные на уже загруженные дни будут проигнорированы') ?>
-            <?= $form->field($model, 'fileBlue')->fileInput()->label('Синяя линия')->hint('Данные на уже загруженные дни будут проигнорированы') ?>
+            <?= $model->field($form, 'fileRed')->fileInput() ?>
+            <?= $model->field($form, 'fileBlue')->fileInput() ?>
+            <?= $model->field($form, 'isReplaceExisting') ?>
 
             <div class="form-group">
                 <hr>
-                <?= Html::submitButton('Добавить', [
+                <?= Html::submitButton('Импортировать', [
                     'class' => 'btn btn-default',
                     'name'  => 'contact-button',
                     'style' => 'width:100%',
