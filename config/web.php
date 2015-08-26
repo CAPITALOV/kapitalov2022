@@ -10,6 +10,7 @@ $config = [
     'language'     => 'ru',
     'timeZone'     => 'Europe/Moscow',
     'aliases'       => [
+        '@web'    => __DIR__ . '/../public_html',
         '@vendor' => __DIR__ . '/../vendor',
     ],
     'components'   => [
