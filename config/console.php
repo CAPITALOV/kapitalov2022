@@ -13,6 +13,11 @@ return [
     'modules' => [
         'gii' => 'yii\gii\Module',
     ],
+    'aliases'          => [
+        '@web'    => __DIR__ . '/../public_html/',
+        '@csRoot' => __DIR__ . '/../../app',
+        '@upload' => __DIR__ . '/../public_html/upload',
+    ],
     'components' => [
         'cache' => [
             'class' => 'yii\caching\FileCache',
