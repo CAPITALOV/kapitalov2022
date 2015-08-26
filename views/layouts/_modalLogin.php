@@ -41,6 +41,12 @@ use app\assets\App\Asset;
                     </div>
                     <p class="text-danger" style="margin-top: 10px;display: none;" id="loginFormError">Здесь выводятся ошибки</p>
                 </div>
+                <div class="form-group">
+                    <div class="input-group input-group-lg">
+                        <p>Оставаться в системе?</p>
+                        <input type="checkbox" data-toggle="toggle" data-on="Да" data-off="Нет" id="loginFormIsStay" checked="checked">
+                    </div>
+                </div>
             </div>
             <div class="modal-footer">
                 <div class="btn-group" role="group" aria-label="...">
