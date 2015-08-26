@@ -51,6 +51,12 @@ class GraphUnion extends Object
     {
         // получаю минимальное значение из первого графика и максимальное значение
         $minMax = self::getMinMax($this->y[0]);
+        if (is_null($minMax['min']) && is_null($minMax['max'])) {
+            return [
+                'x' => $this->x,
+                'y' => $this->y,
+            ];
+        }
         $newRows = [];
         $newRows[] = $this->y[0];
         for ($i = 1; $i < count($this->y); $i++) {
