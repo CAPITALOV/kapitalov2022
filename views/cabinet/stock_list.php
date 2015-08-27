@@ -28,8 +28,9 @@ $this->title = 'Курсы';
                 <?php
                     if (!is_null($item['logo'])) {
                         echo Html::a(Html::img($item['logo'], [
-                            'width' => 100,
+                            'width' => 50,
                             'class' => 'thumbnail',
+                            'style' => 'margin-bottom: 0px;',
                         ]), [
                             'cabinet/stock_item',
                             'id' => $item['id']
