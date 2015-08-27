@@ -13,6 +13,7 @@ $config = [
         '@web'    => __DIR__ . '/../public_html',
         '@csRoot' => __DIR__ . '/../app',
         '@vendor' => __DIR__ . '/../vendor',
+        '@bower'  => __DIR__ . '/../vendor/bower-asset',
     ],
     'components'   => [
         'authClientCollection' => [
