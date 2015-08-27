@@ -11,6 +11,7 @@ $config = [
     'timeZone'     => 'Europe/Moscow',
     'aliases'       => [
         '@web'    => __DIR__ . '/../public_html',
+        '@csRoot' => __DIR__ . '/../app',
         '@vendor' => __DIR__ . '/../vendor',
     ],
     'components'   => [
@@ -41,6 +42,19 @@ $config = [
         'user'         => [
             'identityClass'   => 'app\models\User',
             'enableAutoLogin' => true,
+        ],
+        'view'                 => [
+            'renderers' => [
+                'tpl' => [
+                    'class'     => 'yii\smarty\ViewRenderer',
+                    'cachePath' => '@runtime/Smarty/cache',
+                    'widgets'   => [
+                        'blocks' => [
+                            'ActiveForm' => 'yii\widgets\ActiveForm',
+                        ],
+                    ],
+                ],
+            ],
         ],
         'errorHandler' => [
             'errorAction' => 'site/error',

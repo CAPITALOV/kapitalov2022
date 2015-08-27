@@ -43,6 +43,14 @@ JS
 
 <h1 class="page-header"><?= $this->title ?></h1>
 
+<?php
+$logo = $item->getField('logo', '');
+if ($logo) {
+    ?>
+<img src="<?= $logo ?>" class="thumbnail">
+<?php
+}
+?>
 <h2 class="page-header">Прогноз (красный)</h2>
 <?= \cs\Widget\ChartJs\Line::widget([
     'width'     => 800,

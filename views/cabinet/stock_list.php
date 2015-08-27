@@ -14,6 +14,7 @@ $this->title = 'Курсы';
 <table class="table table-striped" style="width:auto;">
     <thead>
     <tr>
+        <th></th>
         <th>Наименование</th>
         <th>Оплачено до</th>
         <th>Оплатить</th>
@@ -23,6 +24,19 @@ $this->title = 'Курсы';
     foreach ($items as $item) {
         ?>
         <tr>
+            <td>
+                <?php
+                    if (!is_null($item['logo'])) {
+                        echo Html::a(Html::img($item['logo'], [
+                            'width' => 100,
+                            'class' => 'thumbnail',
+                        ]), [
+                            'cabinet/stock_item',
+                            'id' => $item['id']
+                        ]);
+                    }
+                ?>
+            </td>
             <td>
                 <a href="<?= Url::to([
                     'cabinet/stock_item',

@@ -22,6 +22,7 @@ class Stock extends \cs\base\BaseForm
 
     public $id;
     public $name;
+    public $logo;
 
     function __construct($fields = [])
     {
@@ -31,6 +32,20 @@ class Stock extends \cs\base\BaseForm
                 'Название',
                 1,
                 'string'
+            ],
+            [
+                'logo',
+                'Картинка',
+                0,
+                'string',
+                'widget' => [
+                    FileUpload::className(),
+                    [
+                        'options' => [
+                            'small' => [200,200]
+                        ]
+                    ]
+                ]
             ],
         ];
         parent::__construct($fields);
