@@ -48,7 +48,14 @@ $colorBlue = [
 ?>
 
 <h1 class="page-header"><?= $this->title ?></h1>
-
+<?php
+$logo = $item->getField('logo', '');
+if ($logo) {
+    ?>
+    <img src="<?= $logo ?>" class="thumbnail">
+<?php
+}
+?>
 <h2 class="page-header">Прошлое</h2>
 <?php
 $graph3 = new \cs\Widget\ChartJs\Line([
