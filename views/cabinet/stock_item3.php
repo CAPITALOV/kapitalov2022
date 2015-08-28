@@ -91,7 +91,7 @@ $url = Url::to(['cabinet/graph_ajax']);
 $timeEnd = time() - 60 * 60 * 24;
 $timeStart = $timeEnd - 60 * 60 * 24 * 30 * 6;
 $defaultEnd = $timeEnd;
-$defaultStart = $defaultEnd - 60*60*24*30;
+$defaultStart = $defaultEnd - 60 * 60 * 24 * 30;
 
 $this->registerJs(<<<JS
     /**
@@ -145,9 +145,11 @@ $this->registerJs(<<<JS
 JS
 );
 ?>
-<div class="col-lg-8">
-    <div style="margin: 10px 0px 20px 0px;">
-        <div id="slider"></div>
+<div class="row col-lg-12">
+    <div class="col-lg-8">
+        <div style="margin: 10px 0px 20px 0px;">
+            <div id="slider"></div>
+        </div>
     </div>
 </div>
 
@@ -207,9 +209,11 @@ JS
     );
     ?>
 
-    <div class="col-lg-8">
-        <div style="margin: 10px 0px 20px 0px;">
-            <div id="sliderFuture"></div>
+    <div class="row col-lg-12">
+        <div class="col-lg-8">
+            <div style="margin: 10px 0px 20px 0px;">
+                <div id="sliderFuture"></div>
+            </div>
         </div>
     </div>
 <?php } else { ?>
