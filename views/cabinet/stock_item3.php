@@ -166,9 +166,9 @@ JS
     echo $graphFuture->run();
 
     $timeStart = time();
-    $timeEnd = $timeStart + 60 * 60 * 24 * 30 * 6;
+    $timeEnd = $timeStart + 60 * 60 * 24 * 30;
     $defaultEnd = $timeStart;
-    $defaultStart = $timeStart + 60*60*24*30;
+    $defaultStart = $timeEnd;
 
     $this->registerJs(<<<JS
     $('#sliderFuture').rangeSlider({
