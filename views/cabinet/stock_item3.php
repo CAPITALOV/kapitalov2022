@@ -133,7 +133,7 @@ JS
     </div>
 </div>
 
-<h2 class="page-header">Будущее</h2>
+<h2 class="page-header" style="page-break-before: always;">Будущее</h2>
 <?php if ($isPaid) { ?>
     <?php
 
