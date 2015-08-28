@@ -64,11 +64,9 @@ class UserStock extends \cs\base\DbRecord
     {
         $datetime = self::getDateFinish($userId, $stockId);
         if ($datetime === false) return false;
-
-        $nextMonth = self::addMonthCounter($datetime, 1);
         $now = \Yii::$app->formatter->asDate(time(), 'php:Y-m-d');
 
-        return (self::dateCompare($nextMonth, $now) > 0);
+        return (self::dateCompare($datetime, $now) > 0);
     }
 
     /**
