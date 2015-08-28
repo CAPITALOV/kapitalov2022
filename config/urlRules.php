@@ -38,6 +38,7 @@ return [
     'stock/<id:\\d+>/import'                => 'superadmin_stock/import',
     'stock/<id:\\d+>/importKurs'            => 'superadmin_stock/import_kurs',
     'stock/<id:\\d+>/delete'                => 'superadmin_stock/delete',
+    'stock/<id:\\d+>/deletePrognosisRed'    => 'superadmin_stock/prognosis_delete_red',
     'stock/<id:\\d+>/kurs/add'              => 'superadmin_stock/kurs_add',
     'stock/<id:\\d+>/kurs/edit'             => 'superadmin_stock/kurs_edit',
     'stock/kurs/update'                     => 'superadmin_stock/kurs_update',
@@ -49,8 +50,8 @@ return [
     // cabinet
     'stockList'                             => 'cabinet/stock_list',
     'stockList/<id:\\d+>'                   => 'cabinet/stock_item',
-    'stockList2/<id:\\d+>'                   => 'cabinet/stock_item2',
-    'stockList3/<id:\\d+>'                   => 'cabinet/stock_item3',
+    'stockList2/<id:\\d+>'                  => 'cabinet/stock_item2',
+    'stockList3/<id:\\d+>'                  => 'cabinet/stock_item3',
     'stockList/graphAjax'                   => 'cabinet/graph_ajax',
 
     'cabinet/passwordChange'                => 'cabinet/password_change',

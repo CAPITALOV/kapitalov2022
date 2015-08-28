@@ -223,4 +223,25 @@ class Superadmin_stockController extends SuperadminBaseController
 
         return self::jsonSuccess();
     }
+
+    /**
+     * Выводит форму и обрабатывает "Удаление прогноза"
+     *
+     * @param $id
+     *
+     * @return \yii\web\Response
+     */
+    public function actionPrognosis_delete_red($id)
+    {
+        $model = new \app\models\Form\StockPrognosisRedDelete();
+        if ($model->load(Yii::$app->request->post()) && $model->remove($id)) {
+            Yii::$app->session->setFlash('contactFormSubmitted');
+
+            return $this->refresh();
+        } else {
+            return $this->render([
+                'model' => $model,
+            ]);
+        }
+    }
 }
