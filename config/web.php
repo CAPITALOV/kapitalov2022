@@ -69,6 +69,7 @@ $config = [
                     'levels' => [
                         'error',
                         'warning',
+                        'info',
                     ],
                     'maxLogFiles' => 1,
                 ],

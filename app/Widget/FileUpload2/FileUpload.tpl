@@ -28,8 +28,7 @@
 		</div>
 
         <div class="photo_form_upload blue_button">
-			Изменить
-			<input type="file" name="{$attrName}" id="{$attrId}" accept="image/*">
+			<input type="file" name="{$attrName}" id="{$attrId}" accept="image/*" title="Изменить">
 		</div>
 
         <div id="{$attrId}-img_name">
@@ -39,8 +38,7 @@
 	{else}
 		
 		<div class="photo_form_upload blue_button">
-			Загрузить
-			<input type="file" name="{$attrName}" id="{$attrId}" accept="image/*">
+			<input type="file" name="{$attrName}" id="{$attrId}" accept="image/*" title="Загрузить">
 		</div>
 
         <div id="{$attrId}-img_name">

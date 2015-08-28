@@ -1,1 +1,1 @@
-/opt/php5.6/bin/php ./composer.phar update
+/opt/php56/bin/php ./composer.phar update

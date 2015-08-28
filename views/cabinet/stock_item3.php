@@ -49,6 +49,31 @@ $colorBlue = [
 
 <h1 class="page-header"><?= $this->title ?></h1>
 
+<div class="row col-lg-12">
+    <?php
+    $logo = $item->getField('logo', '');
+    if ($logo) {
+        ?>
+        <div class="col-lg-3">
+            <img src="<?= $logo ?>" class="thumbnail">
+        </div>
+    <?php
+    }
+    ?>
+    <?php
+    $d = $item->getField('description', '');
+    if ($d) {
+        ?>
+        <div class="col-lg-9">
+            <p><?= $d ?></p>
+        </div>
+    <?php
+    }
+    ?>
+
+</div>
+
+
 <h2 class="page-header">Прошлое</h2>
 <?php
 $graph3 = new \cs\Widget\ChartJs\Line([
@@ -66,7 +91,7 @@ $url = Url::to(['cabinet/graph_ajax']);
 $timeEnd = time() - 60 * 60 * 24;
 $timeStart = $timeEnd - 60 * 60 * 24 * 30 * 6;
 $defaultEnd = $timeEnd;
-$defaultStart = $defaultEnd - 60*60*24*30;
+$defaultStart = $defaultEnd - 60 * 60 * 24 * 30;
 
 $this->registerJs(<<<JS
     /**
@@ -120,13 +145,15 @@ $this->registerJs(<<<JS
 JS
 );
 ?>
-<div class="col-lg-6">
-    <div style="margin: 10px 0px 20px 0px;">
-        <div id="slider"></div>
+<div class="row col-lg-12">
+    <div class="col-lg-8">
+        <div style="margin: 10px 0px 20px 0px;">
+            <div id="slider"></div>
+        </div>
     </div>
 </div>
 
-<h2 class="page-header">Будущее</h2>
+<h2 class="page-header row col-lg-12" style="page-break-before: always;">Будущее</h2>
 <?php if ($isPaid) { ?>
     <?php
 
@@ -141,9 +168,9 @@ JS
     echo $graphFuture->run();
 
     $timeStart = time();
-    $timeEnd = $timeStart + 60 * 60 * 24 * 30 * 6;
+    $timeEnd = $timeStart + 60 * 60 * 24 * 30;
     $defaultEnd = $timeStart;
-    $defaultStart = $timeStart + 60*60*24*30;
+    $defaultStart = $timeEnd;
 
     $this->registerJs(<<<JS
     $('#sliderFuture').rangeSlider({
@@ -182,9 +209,11 @@ JS
     );
     ?>
 
-    <div class="col-lg-6">
-        <div style="margin: 10px 0px 20px 0px;">
-            <div id="sliderFuture"></div>
+    <div class="row col-lg-12">
+        <div class="col-lg-8">
+            <div style="margin: 10px 0px 20px 0px;">
+                <div id="sliderFuture"></div>
+            </div>
         </div>
     </div>
 <?php } else { ?>

@@ -24,5 +24,6 @@ class Asset extends AssetBundle
     ];
     public $depends = [
         'yii\web\JqueryAsset',
+        'cs\assets\FileInput\Asset',
     ];
 }

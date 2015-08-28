@@ -32,7 +32,7 @@ $this->title = 'Курсы';
                             'class' => 'thumbnail',
                             'style' => 'margin-bottom: 0px;',
                         ]), [
-                            'cabinet/stock_item',
+                            'cabinet/stock_item3',
                             'id' => $item['id']
                         ]);
                     }
@@ -40,7 +40,7 @@ $this->title = 'Курсы';
             </td>
             <td>
                 <a href="<?= Url::to([
-                    'cabinet/stock_item',
+                    'cabinet/stock_item3',
                     'id' => $item['id']
                 ]) ?>">
                     <?= $item['name'] ?>

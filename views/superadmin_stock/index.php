@@ -59,6 +59,20 @@ $this->title = 'Курсы';
                     }
                 }
                 ?>
+                <div class="row col-lg-12" style="margin-top: 4px;">
+                    <a
+                        href="<?= Url::to([
+                        'superadmin_stock/prognosis_delete_red',
+                        'id' => $item['id']
+                    ]) ?>"
+                        class="btn btn-default btn-xs"
+                        onmouseover="$(this).removeClass('btn-default').addClass('btn-danger')"
+                        onmouseout="$(this).removeClass('btn-danger').addClass('btn-default')"
+                        >
+                        Удалить
+                    </a>
+                </div>
+
             </td>
             <td class="date">
                 <?php
@@ -70,6 +84,19 @@ $this->title = 'Курсы';
                     }
                 }
                 ?>
+                <div class="row col-lg-12" style="margin-top: 4px;">
+                    <a
+                        href="<?= Url::to([
+                            'superadmin_stock/prognosis_delete_blue',
+                            'id' => $item['id']
+                        ]) ?>"
+                        class="btn btn-default btn-xs"
+                        onmouseover="$(this).removeClass('btn-default').addClass('btn-danger')"
+                        onmouseout="$(this).removeClass('btn-danger').addClass('btn-default')"
+                        >
+                        Удалить
+                    </a>
+                </div>
             </td>
             <td>
                 <a href="<?= Url::to([
@@ -79,6 +106,7 @@ $this->title = 'Курсы';
                     Импортировать
                 </a>
             </td>
+
             <td class="date">
                 <?php
                 foreach($kurs as $row) {
