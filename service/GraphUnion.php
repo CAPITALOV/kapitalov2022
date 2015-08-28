@@ -66,10 +66,14 @@ class GraphUnion extends Object
         $newRows[] = $this->y[0];
         for ($i = 1; $i < count($this->y); $i++) {
             $minMax2 = self::getMinMax($this->y[$i]);
-            if (is_null($minMax['min']) && is_null($minMax['max'])) {
+            if (is_null($minMax2['min']) && is_null($minMax2['max'])) {
 
             } else {
-                $scaleRatio = ($minMax['max'] - $minMax['min'])/($minMax2['max'] - $minMax2['min']);
+                try{
+                    $scaleRatio = ($minMax['max'] - $minMax['min'])/($minMax2['max'] - $minMax2['min']);
+                } catch(\Exception $e) {
+                    VarDumper::dump([$minMax2, $minMax]);
+                }
                 $new = [];
                 foreach($this->y[$i] as $y2) {
                     if (is_null($y2)) {
