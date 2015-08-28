@@ -25,20 +25,27 @@ use app\models\Translator as T;
     <div class="list-group">
 
         <?php
-        foreach (\app\models\Stock::query()
-                     ->leftJoin('cap_users_stock_buy', 'cap_users_stock_buy.stock_id = cap_stock.id and cap_users_stock_buy.date_finish > :date', [':date' => date('Y-m-d')])
-                     ->select([
-                         'cap_stock.id',
-                         'cap_stock.name',
-                         'if(ifnull(cap_users_stock_buy.id, 0) = 0,0,1) as is_paid',
-                     ])
-                     ->orderBy(['cap_stock.name' => SORT_ASC])
-             ->all() as $item) {
+        $items = \app\models\Stock::query()->orderBy(['name' => SORT_ASC])->all();
+        $dateFinishList = \app\models\UserStock::query(['user_id' => \Yii::$app->user->getId()])->select([
+            'stock_id',
+            'date_finish',
+        ])->all();
+        for ($i = 0; $i < count($items); $i++) {
+            $item = &$items[ $i ];
+            foreach ($dateFinishList as $row) {
+                if ($row['stock_id'] == $item['id']) {
+                    $item['is_paid'] = \Yii::$app->user->identity->isPaid($item['id'] );
+                }
+            }
+            if (!isset($item['is_paid'])) $item['is_paid'] = false;
+        }
+
+        foreach ($items as $item) {
             $url = Url::to(['cabinet/stock_item3', 'id' => $item['id']]);
             ?>
         <a href="<?= $url ?>" class="list-group-item<?= ($url == Url::current())? ' active' : '' ?>">
             <?= $item['name'] ?>
-            <?php if ($item['is_paid'] == 1) {?>
+            <?php if ($item['is_paid']) {?>
                 <span class="badge"><i class="glyphicon glyphicon-ok"></i></span>
             <?php } ?>
         </a>
