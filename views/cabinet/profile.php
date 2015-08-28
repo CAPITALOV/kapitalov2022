@@ -14,4 +14,4 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <h1 class="page-header">Профиль пользователя</h1>
 <p>Почта: <?= $user->getField('email') ?></p>
-<p><a href="/passwordChange">Поменять пароль</a></p>
+<p><a href="<?= \yii\helpers\Url::to(['cabinet/password_change'])?>">Поменять пароль</a></p>

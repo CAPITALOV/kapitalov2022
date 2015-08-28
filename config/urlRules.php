@@ -3,10 +3,9 @@
 return [
     '/'                                     => 'landing/index',
     'contact'                               => 'site/contact',
-    'price'                               => 'site/price',
+    'price'                                 => 'site/price',
     'captcha'                               => 'site/captcha',
 
-    'searchStockAutocomplete'               => 'site/search_stock_autocomplete',
 
     'about'                                 => 'site/about',
 
@@ -57,6 +56,7 @@ return [
     'passwordChange'                        => 'cabinet/profile_password_change',
 
 
+    'searchStockAutocomplete'               => 'cabinet/search_stock_autocomplete',
     'cabinet/passwordChange'                => 'cabinet/password_change',
     'cabinet/profile'                       => 'cabinet/profile',
     'cabinet/profile/unLinkSocialNetWork'   => 'cabinet/profile_unlink_social_network',

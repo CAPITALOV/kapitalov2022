@@ -83,38 +83,6 @@ class SiteController extends \cs\base\BaseController
         return $this->render();
     }
 
-    /**
-     * Выдает элементы поиска курсов для строки поиска Autocomplete
-     */
-    public function actionSearch_stock_autocomplete()
-    {
-        $term = self::getParam('term');
-
-        return self::jsonSuccess(
-            Stock::query(['like', 'name', $term . '%', false])->select('id, name as value')->all()
-        );
-    }
-
-    /**
-     * Выводит форму редактирования для новостной ленты и обновляет через POST
-     */
-    public function actionProfile_password_change()
-    {
-        $model = FormUserPassword::find(
-            Yii::$app->user->getId()
-        );
-        if ($model->load(Yii::$app->request->post()) && $model->update()) {
-            Yii::$app->session->setFlash('contactFormSubmitted');
-
-            self::log('Поменял пароль себе');
-            return $this->refresh();
-        } else {
-            return $this->render('profile_password_change', [
-                'model' => $model,
-            ]);
-        }
-    }
-
     public function actionContact()
     {
         $model = new ContactForm();
@@ -129,10 +97,4 @@ class SiteController extends \cs\base\BaseController
         }
     }
 
-    /**
-     * Логирует действие пользователя
-     */
-    public function log($description) {
-        parent::logAction(Yii::$app->user->identity->id, $description);
-    }
 }

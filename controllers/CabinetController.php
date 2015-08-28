@@ -46,6 +46,18 @@ class CabinetController extends SuperadminBaseController
         ]);
     }
 
+    /**
+     * Выдает элементы поиска курсов для строки поиска Autocomplete
+     */
+    public function actionSearch_stock_autocomplete()
+    {
+        $term = self::getParam('term');
+
+        return self::jsonSuccess(
+            Stock::query(['like', 'name', $term . '%', false])->select('id, name as value')->all()
+        );
+    }
+
     public function actionIndex()
     {
         $items = Stock::query()->orderBy(['name' => SORT_ASC])->all();

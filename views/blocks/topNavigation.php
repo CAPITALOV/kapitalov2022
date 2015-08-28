@@ -40,7 +40,7 @@ use yii\bootstrap\ActiveForm;
                         'role'  => "search",
                     ],
                 ]);
-                $url = Url::to(['site/search_stock_autocomplete']);
+                $url = Url::to(['cabinet/search_stock_autocomplete']);
                 echo $form
                     ->field(new \app\models\Form\Search(), 'searchText', ['inputOptions' => ['placeholder' => 'Поиск']])
                     ->label('Поиск', ['class' => 'hide'])
