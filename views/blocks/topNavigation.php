@@ -22,7 +22,7 @@ use yii\bootstrap\ActiveForm;
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-left">
-                <li><a class="navbar-brand" href="http://capitalov.com/" target="_blank">Capitalov.com</a></li>
+                <li><a class="navbar-brand" href="<?= Url::to(['landing/index']) ?>" target="_blank">Capitalov.com</a></li>
                 <li><span class="navbar-brand">/</span></li>
                 <li><a class="navbar-brand" href="<?= Url::to(['cabinet/index']) ?>">Личный кабинет</a></li>
             </ul>
