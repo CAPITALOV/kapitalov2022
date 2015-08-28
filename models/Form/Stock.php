@@ -23,6 +23,7 @@ class Stock extends \cs\base\BaseForm
     public $id;
     public $name;
     public $logo;
+    public $description;
 
     function __construct($fields = [])
     {
@@ -32,6 +33,14 @@ class Stock extends \cs\base\BaseForm
                 'Название',
                 1,
                 'string'
+            ],
+            [
+                'description',
+                'Описание',
+                1,
+                'string',
+                [],
+                'до 255 символов'
             ],
             [
                 'logo',

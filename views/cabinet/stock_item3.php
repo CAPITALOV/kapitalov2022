@@ -48,7 +48,13 @@ $colorBlue = [
 ?>
 
 <h1 class="page-header"><?= $this->title ?></h1>
+
 <?php
+$d = $item->getField('description', '');
+if ($d) {
+    echo Html::tag('p', $d);
+}
+
 $logo = $item->getField('logo', '');
 if ($logo) {
     ?>

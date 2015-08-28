@@ -30,6 +30,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'options' => ['enctype' => 'multipart/form-data']
         ]); ?>
         <?= $model->field($form, 'name') ?>
+        <?= $model->field($form, 'description') ?>
         <?= $model->field($form, 'logo') ?>
 
         <div class="form-group">
