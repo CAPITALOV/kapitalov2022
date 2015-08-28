@@ -50,6 +50,7 @@ class Finam extends Object implements DadaImporterInterface
         $params['dt'] = (int)$end->format('j');
         $params['mt'] = (int)$end->format('n') - 1;
         $params['yt'] = $end->format('Y');
+        $params['cn'] = $params['code'];
 
         $u = new Url($this->url . $this->path, $params);
         $url = (string) $u;
