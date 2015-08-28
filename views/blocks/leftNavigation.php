@@ -41,7 +41,7 @@ use app\models\Translator as T;
         }
 
         foreach ($items as $item) {
-            Yii::info(\yii\helpers\VarDumper::dumpAsString($item), 'cap\\test');
+            Yii::info(\yii\helpers\VarDumper::dumpAsString($item), 'gs\\test');
             $url = Url::to(['cabinet/stock_item3', 'id' => $item['id']]);
             ?>
         <a href="<?= $url ?>" class="list-group-item<?= ($url == Url::current())? ' active' : '' ?>">
