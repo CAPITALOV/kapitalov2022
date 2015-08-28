@@ -1,7 +1,9 @@
 <?php
 
 use yii\helpers\Url;
+use yii\helpers\Html;
 
+/** @var  $this \yii\web\View */
 
 ?>
 <!-- Navigation -->
@@ -86,6 +88,7 @@ use yii\helpers\Url;
 <!--                        </li>-->
 <!--                    </ul>-->
 <!--                </li>-->
+                <?php if (Yii::$app->user->isGuest) { ?>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Вход <b class="caret"></b></a>
                     <ul class="dropdown-menu">
@@ -100,6 +103,21 @@ use yii\helpers\Url;
                         </li>
                     </ul>
                 </li>
+                <?php } else {?>
+                <li>
+                    <a
+                        href="<?= Url::to(['cabinet/index']) ?>"
+                        style="padding: 5px 10px 5px 10px;"
+                        title="Перейти в личный кабинет"
+                        id="linkCabinet"
+                        ><?php $this->registerJs("$('#linkCabinet').tooltip({placement:'bottom'});") ?>
+                    <?= Html::img(Yii::$app->user->identity->getAvatar(), [
+                        'height' => '40px',
+                        'class'  => 'img-circle'
+                    ]) ?>
+                        </a>
+                </li>
+                <?php }?>
             </ul>
         </div>
         <!-- /.navbar-collapse -->

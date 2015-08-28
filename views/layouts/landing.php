@@ -1,6 +1,11 @@
 <?php
 
 use yii\helpers\Url;
+use yii\helpers\Html;
+
+\app\assets\LayoutSite\Asset::register($this);
+
+/** @var $this \yii\web\View */
 
 ?>
 
@@ -16,16 +21,9 @@ use yii\helpers\Url;
     <meta name="description" content="">
     <meta name="author" content="">
 
+    <?= Html::csrfMetaTags() ?>
     <title><?= $this->title ?></title>
-
-    <!-- Bootstrap Core CSS -->
-    <link href="/startbootstrap-modern-business-1.0.3/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom CSS -->
-    <link href="/startbootstrap-modern-business-1.0.3/css/modern-business.css" rel="stylesheet">
-
-    <!-- Custom Fonts -->
-    <link href="/startbootstrap-modern-business-1.0.3/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <?php $this->head() ?>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -37,24 +35,22 @@ use yii\helpers\Url;
 </head>
 
 <body>
+<?php $this->beginBody() ?>
 
 <?= $this->render('_landing_nav') ?>
 
 <?= $content ?>
 
-<!-- jQuery -->
-<script src="/startbootstrap-modern-business-1.0.3/js/jquery.js"></script>
-
-<!-- Bootstrap Core JavaScript -->
-<script src="/startbootstrap-modern-business-1.0.3/js/bootstrap.min.js"></script>
-
-<!-- Script to Activate the Carousel -->
-<script>
+<?php
+$this->registerJs(<<<JS
     $('.carousel').carousel({
         interval: 5000 //changes the speed
-    })
-</script>
+    });
+JS
+);
+?>
 
+<?php $this->endBody() ?>
 </body>
-
 </html>
+<?php $this->endPage() ?>
