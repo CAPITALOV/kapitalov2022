@@ -49,19 +49,31 @@ $colorBlue = [
 
 <h1 class="page-header"><?= $this->title ?></h1>
 
-<?php
-$d = $item->getField('description', '');
-if ($d) {
-    echo Html::tag('p', $d);
-}
-
-$logo = $item->getField('logo', '');
-if ($logo) {
+<div class="row col-lg-12">
+    <?php
+    $logo = $item->getField('logo', '');
+    if ($logo) {
+        ?>
+        <div class="col-lg-3">
+            <img src="<?= $logo ?>" class="thumbnail">
+        </div>
+    <?php
+    }
     ?>
-    <img src="<?= $logo ?>" class="thumbnail">
-<?php
-}
-?>
+    <?php
+    $d = $item->getField('description', '');
+    if ($d) {
+        ?>
+        <div class="col-lg-9">
+            <p><?= $d ?></p>
+        </div>
+    <?php
+    }
+    ?>
+
+</div>
+
+
 <h2 class="page-header">Прошлое</h2>
 <?php
 $graph3 = new \cs\Widget\ChartJs\Line([

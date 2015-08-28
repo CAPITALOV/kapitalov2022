@@ -80,7 +80,7 @@ class StockPrognosisRedDelete extends \cs\base\BaseForm
     {
         if ($this->validate()) {
             StockPrognosisRed::deleteByCondition(
-                "(`date` BETWEE :dateMin and :dateMax) and (`stock_id` = :stock_id)", [
+                "(`date` BETWEEN :dateMin and :dateMax) and (`stock_id` = :stock_id)", [
                     ':stock_id' => $id,
                     ':dateMin' => $this->dateMin->format('Y-m-d'),
                     ':dateMax' => $this->dateMax->format('Y-m-d'),
