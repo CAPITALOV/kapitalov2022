@@ -11,21 +11,18 @@
     <!-- Wrapper for slides -->
     <div class="carousel-inner">
         <div class="item active">
-            <div class="fill" style="background-image:url('http://placehold.it/1900x1080&text=Slide One');"></div>
+            <div class="fill" style="background-image:url('/images/1.jpg');"></div>
             <div class="carousel-caption">
-                <h2>Caption 1</h2>
             </div>
         </div>
         <div class="item">
-            <div class="fill" style="background-image:url('http://placehold.it/1900x1080&text=Slide Two');"></div>
+            <div class="fill" style="background-image:url('/images/2.jpg');"></div>
             <div class="carousel-caption">
-                <h2>Caption 2</h2>
             </div>
         </div>
         <div class="item">
-            <div class="fill" style="background-image:url('http://placehold.it/1900x1080&text=Slide Three');"></div>
+            <div class="fill" style="background-image:url('/images/3.jpg');"></div>
             <div class="carousel-caption">
-                <h2>Caption 3</h2>
             </div>
         </div>
     </div>
