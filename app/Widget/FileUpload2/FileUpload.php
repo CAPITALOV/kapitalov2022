@@ -38,14 +38,12 @@ use cs\services\UploadFolderDispatcher;
  *      ],
  *      'quality'    => 80,
  *      'folder'     => 'users',
- *      'serverName' => 'http://' . \cs\models\Client::getServerName(),
  * ]
  * ```
  *
  * `quality`    - integer - качество сохранения пережимаемых изображений
  * `folder`     - string - папка для сохранения файлов в папке upload, по умолчанию используется название таблицы
  *                формат /upload/FileUpload2/{folder}/[rowId]/ ...
- * `serverName` - string    - имя сервера на котором лежит картинка, используется для [[self::getOriginal()]] и  [[self::onDraw()]]
  * `small`      - array|int - если array, то первое формат [width, height, resizeOption]
  *                          `width`        - int - ширина
  *                          `height`       - int - высота
@@ -57,7 +55,7 @@ use cs\services\UploadFolderDispatcher;
  *                          `isExpandSmall`   - bool   - true - расширять картинку если она маленькая до размеров формата
  *                                                       false - недостающие области закрасить полями белыми
  * `original`   - array|int   - формат тот же что и для `small` и применяется для оригинальной картинки
- * `extended`   - array       - массив дополнительных форматов картинок
+ * `extended`   - array       - массив дополнительных форматов картинок // в разработке
  * [
  *      'name' => format
  * ]
@@ -68,8 +66,6 @@ use cs\services\UploadFolderDispatcher;
  *                                    то есть функция onUpdate будет возвращать два поля
  *
  */
-
-
 class FileUpload extends InputWidget
 {
     /** с обрезкой, по умолчанию */
@@ -136,7 +132,7 @@ class FileUpload extends InputWidget
             $fieldName = $this->attribute;
             $value = $this->model->$fieldName;
 
-            return $this->render('@csRoot/Widget/FileUpload2/FileUpload.tpl', [
+            return $this->render('@csRoot/Widget/FileUpload2/template', [
                 'value'         => $value,
                 'original'      => self::getOriginal($value),
                 'formName'      => $this->model->formName(),
@@ -153,11 +149,7 @@ class FileUpload extends InputWidget
      */
     public function registerClientScript()
     {
-        $deleteCallback = <<<JSSS
-FileUpload2.init('#{$this->attrId}');
-JSSS;
-
-        $this->getView()->registerJs($deleteCallback);
+        $this->getView()->registerJs("FileUpload2.init('#{$this->attrId}');");
         Asset::register($this->getView());
     }
 
@@ -408,29 +400,5 @@ JSSS;
         $arr = explode('/', $path);
 
         return $arr[4] == 'small';
-    }
-
-    /**
-     * Рисует просмотр файла для детального просмотра
-     *
-     * @param \yii\base\Model $model
-     * @param array           $field
-     *
-     * @return string
-     *
-     */
-    public static function drawDetailView($model, $field)
-    {
-        $fieldName = $field[ \cs\base\BaseForm::POS_DB_NAME ];
-        $small = $model->$fieldName;
-        if ($small == '') return '';
-        $original = self::getOriginal($small);
-        $serverName = ArrayHelper::getValue($field, 'widget.1.options.serverName', '');
-        if ($serverName != '') {
-            $small = $serverName . $small;
-            $original = $serverName . $original;
-        }
-
-        return Html::a(Html::img($small), $original, ['target' => '_blank']);
     }
 }

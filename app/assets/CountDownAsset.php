@@ -5,25 +5,24 @@
  * @license http://www.yiiframework.com/license/
  */
 
-namespace cs\Widget\FileUpload2;
+namespace cs\assets;
 
 use yii\web\AssetBundle;
+use cs\Application;
 
 /**
  * @author Qiang Xue <qiang.xue@gmail.com>
  * @since 2.0
  */
-class Asset extends AssetBundle
+class CountDownAsset extends AssetBundle
 {
-    public $sourcePath = '@csRoot/Widget/FileUpload2/assets';
+    public $sourcePath = '@csRoot/vendor/Reflejo/jquery-countdown';
     public $css = [
-        'index.css'
     ];
     public $js = [
-        'handlers.js',
+        'js/jquery.countdown.js'
     ];
     public $depends = [
         'yii\web\JqueryAsset',
-        'cs\assets\FileInput\Asset',
     ];
 }

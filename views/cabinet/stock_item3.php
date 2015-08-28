@@ -127,13 +127,13 @@ $this->registerJs(<<<JS
 JS
 );
 ?>
-<div class="col-lg-6">
+<div class="col-lg-8">
     <div style="margin: 10px 0px 20px 0px;">
         <div id="slider"></div>
     </div>
 </div>
 
-<h2 class="page-header" style="page-break-before: always;">Будущее</h2>
+<h2 class="page-header row col-lg-12" style="page-break-before: always;">Будущее</h2>
 <?php if ($isPaid) { ?>
     <?php
 
@@ -189,7 +189,7 @@ JS
     );
     ?>
 
-    <div class="col-lg-6">
+    <div class="col-lg-8">
         <div style="margin: 10px 0px 20px 0px;">
             <div id="sliderFuture"></div>
         </div>
