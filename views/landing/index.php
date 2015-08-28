@@ -1,4 +1,7 @@
+<?php
 
+$this->title = 'Шедевр изобилия';
+?>
 <!-- Header Carousel -->
 <header id="myCarousel" class="carousel slide">
     <!-- Indicators -->
