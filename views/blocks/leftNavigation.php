@@ -42,7 +42,6 @@ use app\models\Translator as T;
 
         for ($i=0;$i<count($items);$i++ ) {
             $item = &$items[$i];
-            Yii::info(\yii\helpers\VarDumper::dumpAsString([$i,$item]), 'gs\\test');
             $url = Url::to(['cabinet/stock_item3', 'id' => $item['id']]);
             ?>
         <a href="<?= $url ?>" class="list-group-item<?= ($url == Url::current())? ' active' : '' ?>">
