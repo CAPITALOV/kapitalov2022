@@ -26,6 +26,7 @@ use app\models\Translator as T;
 
         <?php
         $items = \app\models\Stock::query()->orderBy(['name' => SORT_ASC])->all();
+        \cs\services\VarDumper::dump($items);
         $dateFinishList = \app\models\UserStock::query(['user_id' => \Yii::$app->user->getId()])->select([
             'stock_id',
             'date_finish',
