@@ -39,7 +39,6 @@ use app\models\Translator as T;
             }
             if (!isset($item['is_paid'])) $item['is_paid'] = false;
         }
-        \cs\services\VarDumper::dump($items);
 
         foreach ($items as $item) {
             $url = Url::to(['cabinet/stock_item3', 'id' => $item['id']]);
