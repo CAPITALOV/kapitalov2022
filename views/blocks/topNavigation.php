@@ -9,7 +9,7 @@ use yii\bootstrap\ActiveForm;
 
 ?>
 
-<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
     <div class="container-fluid">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
@@ -24,7 +24,7 @@ use yii\bootstrap\ActiveForm;
             <ul class="nav navbar-nav navbar-left">
                 <li><a class="navbar-brand" href="http://capitalov.com/" target="_blank">Capitalov.com</a></li>
                 <li><span class="navbar-brand">/</span></li>
-                <li><a class="navbar-brand" href="/">Личный кабинет</a></li>
+                <li><a class="navbar-brand" href="<?= Url::to(['cabinet/index']) ?>">Личный кабинет</a></li>
             </ul>
 
 
@@ -63,7 +63,7 @@ JS
                             'select' => new \yii\web\JsExpression(<<<JS
 function(event, ui) {
     var stockId = ui.item.id;
-    window.location = '/stockList/' + stockId;
+    window.location = '/stockList3/' + stockId;
 }
 JS
                             ),
@@ -75,57 +75,33 @@ JS
                     ]);
                 ActiveForm::end();
                 ?>
-                <?php if (\Yii::$app->user->isGuest): ?>
-                    <li>
-                        <!-- Split button -->
-                        <div class="btn-group" style="margin-top: 9px; opacity: 0.5;" id="loginBarButton">
-                            <button type="button" class="btn btn-default" id="modalLogin"><i
-                                    class="glyphicon glyphicon-user" style="padding-right: 5px;"></i>Войти
-                            </button>
-                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
-                                    aria-expanded="false">
-                                <span class="caret"></span>
-                                <span class="sr-only">Toggle Dropdown</span>
-                            </button>
-                            <ul class="dropdown-menu" role="menu">
-                                <li><a href="<?= Url::to(['auth/password_recover']) ?>">Напомнить пароль</a></li>
-                                <li><a href="<?= Url::to(['auth/registration']) ?>">Регистрация</a></li>
-                            </ul>
-                        </div>
-                    </li>
-                <?php
-                else:
-
-
-                    ?>
-                    <li class="dropdown">
-                        <a
-                            href="#"
-                            class="dropdown-toggle"
-                            data-toggle="dropdown"
-                            aria-expanded="false"
-                            role="button"
-                            style="padding: 5px 10px 5px 10px;"
-                            >
-                            <?= Html::img(Yii::$app->user->identity->getAvatar(), [
-                                'height' => '40px',
-                                'class'  => 'img-circle'
-                            ]) ?>
-                            <span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li><a href="<?= Url::to(['site/profile']) ?>"><i class="glyphicon glyphicon-cog"
-                                                                              style="padding-right: 5px;"></i>Мой
-                                    профиль</a></li>
-                            <li><a href="<?= Url::to(['cabinet/password_change']) ?>"><i
-                                        class="glyphicon glyphicon-asterisk" style="padding-right: 5px;"></i>Сменить
-                                    пароль</a></li>
-                            <li class="divider"></li>
-                            <li><a href="<?= Url::to(['auth/logout']) ?>" data-method="post"><i
-                                        class="glyphicon glyphicon-off" style="padding-right: 5px;"></i>Выйти</a></li>
-                        </ul>
-                    </li>
-                <?php endif; ?>
+                <li class="dropdown">
+                    <a
+                        href="#"
+                        class="dropdown-toggle"
+                        data-toggle="dropdown"
+                        aria-expanded="false"
+                        role="button"
+                        style="padding: 5px 10px 5px 10px;"
+                        >
+                        <?= Html::img(Yii::$app->user->identity->getAvatar(), [
+                            'height' => '40px',
+                            'class'  => 'img-circle'
+                        ]) ?>
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="<?= Url::to(['cabinet/profile']) ?>"><i class="glyphicon glyphicon-cog"
+                                                                          style="padding-right: 5px;"></i>Мой
+                                профиль</a></li>
+                        <li><a href="<?= Url::to(['cabinet/password_change']) ?>"><i
+                                    class="glyphicon glyphicon-asterisk" style="padding-right: 5px;"></i>Сменить
+                                пароль</a></li>
+                        <li class="divider"></li>
+                        <li><a href="<?= Url::to(['auth/logout']) ?>" data-method="post"><i
+                                    class="glyphicon glyphicon-off" style="padding-right: 5px;"></i>Выйти</a></li>
+                    </ul>
+                </li>
             </ul>
         </div>
     </div>

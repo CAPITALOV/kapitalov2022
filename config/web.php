@@ -9,24 +9,25 @@ $config = [
     'defaultRoute' => 'site/index',
     'language'     => 'ru',
     'timeZone'     => 'Europe/Moscow',
-    'aliases'       => [
+    'aliases'      => [
         '@web'    => __DIR__ . '/../public_html',
         '@csRoot' => __DIR__ . '/../app',
         '@vendor' => __DIR__ . '/../vendor',
         '@bower'  => __DIR__ . '/../vendor/bower-asset',
     ],
+    'homeUrl'      => ['cabinet/index'],
     'components'   => [
         'authClientCollection' => [
             'class'   => 'yii\authclient\Collection',
             'clients' => require(__DIR__ . '/authClientCollection.php'),
         ],
-        'request'      => [
+        'request'              => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'enableCookieValidation' => false,
             'enableCsrfValidation'   => false,
             'cookieValidationKey'    => '',
         ],
-        'cache' =>
+        'cache'                =>
             (YII_ENV_PROD) ?
                 [
                     'class'   => 'yii\caching\MemCache',
@@ -40,9 +41,10 @@ $config = [
                 [
                     'class' => 'yii\caching\FileCache',
                 ],
-        'user'         => [
+        'user'                 => [
             'identityClass'   => 'app\models\User',
             'enableAutoLogin' => true,
+            'loginUrl'        => ['auth/login'],
         ],
         'view'                 => [
             'renderers' => [
@@ -57,7 +59,7 @@ $config = [
                 ],
             ],
         ],
-        'errorHandler' => [
+        'errorHandler'         => [
             'errorAction' => 'site/error',
         ],
         'mailer'               => require(__DIR__ . '/mailerTransport.php'),
@@ -65,8 +67,8 @@ $config = [
             'traceLevel' => YII_DEBUG ? 3 : 0,
             'targets'    => [
                 [
-                    'class'  => 'yii\log\FileTarget',
-                    'levels' => [
+                    'class'       => 'yii\log\FileTarget',
+                    'levels'      => [
                         'error',
                         'warning',
                         'info',
@@ -74,7 +76,7 @@ $config = [
                     'maxLogFiles' => 1,
                 ],
                 [
-                    'class'  => 'yii\log\DbTarget',
+                    'class'      => 'yii\log\DbTarget',
                     'categories' => ['cap\\*'],
                 ],
                 [
@@ -92,15 +94,15 @@ $config = [
                 ],
             ],
         ],
-        'urlManager'   => [
+        'urlManager'           => [
             'enablePrettyUrl'     => true,
             'showScriptName'      => false,
             'enableStrictParsing' => true,
             'suffix'              => '',
             'rules'               => require(__DIR__ . '/urlRules.php'),
         ],
-        'db'           => require(__DIR__ . '/db.php'),
-        'i18n'         => [
+        'db'                   => require(__DIR__ . '/db.php'),
+        'i18n'                 => [
             'translations' => [
                 'app*' => [
                     'class'          => 'yii\i18n\PhpMessageSource',

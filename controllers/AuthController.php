@@ -18,7 +18,7 @@ use cs\web\Exception;
 
 class AuthController extends BaseController
 {
-    public $layout = 'main';
+    public $layout = 'site';
 
     public function behaviors()
     {

@@ -28,6 +28,8 @@ use app\models\Form\UserPassword as FormUserPassword;
 
 class SiteController extends \cs\base\BaseController
 {
+    public $layout = 'site';
+
     public function behaviors()
     {
         return [
@@ -71,49 +73,14 @@ class SiteController extends \cs\base\BaseController
         return $this->render('index');
     }
 
-    public function actionImport()
+    public function actionAbout()
     {
-        $data = (new \app\service\DadaImporter\Finam())->import('2015-08-01');
-        $stock_id = 1;
-        // стратегия: Если данные есть то, они не трогаются
-        $dateArray = ArrayHelper::getColumn($data, 'date');
-        sort($dateArray);
-        $rows = StockKurs::query(['between', 'date', $dateArray[0], $dateArray[count($dateArray)-1]])->andWhere(['stock_id' => $stock_id])->all();
-        $dateArrayRows = ArrayHelper::getColumn($rows, 'date');
-        $new = [];
-        foreach($data as $row) {
-            if (!in_array($row['date'], $dateArrayRows)) {
-                $new[] = [
-                     $stock_id,
-                     $row['date'],
-                     $row['kurs'],
-                ];
-            }
-        }
-        StockKurs::batchInsert(['stock_id', 'date', 'kurs'], $new);
-        \cs\services\VarDumper::dump($new);
+        return $this->render();
     }
 
-    /*
-     * Выводит страницу логина по запросу GET
-     * и логинит пользователя если был запрос POST
-     *
-     *
-     */
-    public function actionLogin()
+    public function actionPrice()
     {
-        if (!\Yii::$app->user->isGuest) {
-            return $this->goHome();
-        }
-        $model = new LoginForm();
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
-
-            return $this->goBack();
-        } else {
-            return $this->render('login', [
-                'model' => $model,
-            ]);
-        }
+        return $this->render();
     }
 
     /**
@@ -126,18 +93,6 @@ class SiteController extends \cs\base\BaseController
         return self::jsonSuccess(
             Stock::query(['like', 'name', $term . '%', false])->select('id, name as value')->all()
         );
-    }
-
-    /**
-     * Выводит профиль пользователя
-     */
-    public function actionProfile()
-    {
-        return $this->render('profile', [
-            'user' => User::findIdentity(
-                Yii::$app->user->getId()
-            ),
-        ]);
     }
 
     /**
