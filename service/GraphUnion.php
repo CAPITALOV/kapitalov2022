@@ -13,6 +13,7 @@ namespace app\service;
  *                     []  - значения оси Y для каждого Х
  *                     , ...
  *                 ]
+ * @param bool $isExcludeNull - удалять после объединения пустые точки? для которых все значения грфиков для одной точки равны null
  *
  * Алгоритм вычислений следующий
  * вычисляется множитель scaleRatio = delta1/delta2
@@ -40,7 +41,11 @@ use yii\helpers\ArrayHelper;
 class GraphUnion extends Object
 {
     public $x;
+
     public $y;
+
+    /** @var  bool удалять после объединения пустые точки? для которых все значения грфиков для одной точки равны null */
+    public $isExcludeNull = true;
 
     public function init()
     {
@@ -74,9 +79,50 @@ class GraphUnion extends Object
             $newRows[] = $new;
         }
 
+        if ($this->isExcludeNull) {
+            return $this->excludeNullPoints($this->x, $newRows);
+        } else {
+            return [
+                'x' => $this->x,
+                'y' => $newRows,
+            ];
+        }
+    }
+
+    /**
+     * Удаляет нулевые точки в графике
+     * то есть те для которых все значения графиков равны Null
+     *
+     * @param array $x ось X
+     * @param array $y линии графиков со значениями Y
+     *
+     * @return array
+     * [
+     *    'x' => array
+     *    'y' => array
+     * ]
+     */
+    private function excludeNullPoints($x, $y)
+    {
+        $c = count($x);
+        $newX = [];
+        $newY = [];
+        for($i = 0; $i < $c; $i++) {
+            $y1 = [];
+            for($j = 0; $j < count($y); $j++ ) {
+                if (!is_null($y[$j][$i])) {
+                    $newX[] = $x[$i];
+                    for($j = 0; $j < count($y); $j++ ) {
+                        $newY[$j][] = $y[$j][$i];
+                    }
+                    break;
+                }
+            }
+        }
+
         return [
-            'x' => $this->x,
-            'y' => $newRows,
+            'x' => $newX,
+            'y' => $newY,
         ];
     }
 

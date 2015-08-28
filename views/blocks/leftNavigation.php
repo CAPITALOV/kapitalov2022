@@ -7,15 +7,32 @@ use app\models\Translator as T;
 
 ?>
 <?php if (!\Yii::$app->user->isGuest): ?>
-    <ul class="nav nav-pills nav-stacked">
+    <?php if (\Yii::$app->user->identity->isAdmin()) { ?>
+        <div class="list-group">
+            <a href="<?= Url::to(['superadmin_stock/index']) ?>" class="list-group-item">
+                Админ
+            </a>
+        </div>
+    <?php } ?>
 
-        <?php if (\Yii::$app->user->identity->isAdmin()) { ?>
-            <h4>Админ</h4>
-            <ul class="list-unstyled col-md-offset-1">
-                <li><a href="<?= Url::to(['superadmin_stock/index']) ?>">Курсы</a></li>
-            </ul>
-            <hr>
+    <div class="list-group">
+        <a href="<?= Url::to(['cabinet/stock_list']) ?>" class="list-group-item">
+            Курсы
+        </a>
+    </div>
+
+
+    <div class="list-group">
+
+        <?php
+        foreach (\app\models\Stock::query()->orderBy(['name' => SORT_ASC])->all() as $item) {
+            $url = Url::to(['cabinet/stock_item3', 'id' => $item['id']]);
+            ?>
+        <a href="<?= $url ?>" class="list-group-item<?= ($url == Url::current())? ' active' : '' ?>">
+            <?= $item['name'] ?>
+        </a>
         <?php } ?>
-        <h4><a href="<?= Url::to(['cabinet/stock_list']) ?>">Курсы</a></h4>
-    </ul>
+    </div>
+
+
 <?php endif; ?>

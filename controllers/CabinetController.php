@@ -65,7 +65,7 @@ class CabinetController extends SuperadminBaseController
 
         $colorGreen = [
             'label'                => "Курс",
-            'fillColor'            => "rgba(220,220,220,0)",
+            'fillColor'            => "rgba(220,220,220,0.2)",
             'strokeColor'          => "rgba(229,255,229,1)",
             'pointColor'           => "rgba(204,255,204,1)",
             'pointStrokeColor'     => "#fff",
@@ -298,7 +298,7 @@ class CabinetController extends SuperadminBaseController
         $graph3 = new \cs\Widget\ChartJs\Line([
             'width'     => 800,
             'lineArray' => $lineArray,
-            'colors' => $colors,
+            'colors'    => $colors,
         ]);
 
         return self::jsonSuccess($graph3->getData());
@@ -423,6 +423,272 @@ class CabinetController extends SuperadminBaseController
             'lineArrayUnion' => $lineArrayUnion,
             'lineArrayUnion2' => $lineArrayUnion2,
             'isPaid'         => $isPaid,
+        ]);
+    }
+
+    /**
+     * Рисует графики с прошлым и будущим
+     *
+     * @param int $id идентификатор курса
+     *
+     * @return string
+     */
+    public function actionStock_item2($id)
+    {
+        $item = \app\models\Stock::find($id);
+        $start = (new \DateTime())->sub(new \DateInterval('P31D'));
+        $end = (new \DateTime())->sub(new \DateInterval('P1D'));
+        $isPaid = Yii::$app->user->identity->isPaid($id);
+        $defaultParams = [
+            'start' => $start,
+            'end'   => $end,
+        ];
+
+        // график с продажами
+        {
+            $params = ArrayHelper::merge($defaultParams, [
+                'rows'  => [
+                    \app\models\StockKurs::query(['stock_id' => $id])
+                        ->andWhere(['between', 'date', $start->format('Y-m-d'), $end->format('Y-m-d')])
+                        ->all(),
+                ],
+            ]);
+            $lineArrayKurs = \app\service\GraphExporter::convert($params);
+        }
+
+        // график с прогнозом (красная линия)
+        {
+            $params = ArrayHelper::merge($defaultParams, [
+                'rows'  => [
+                    \app\models\StockPrognosisRed::query(['stock_id' => $id])
+                        ->andWhere(['between', 'date', $start->format('Y-m-d'), $end->format('Y-m-d')])
+                        ->select([
+                            'date',
+                            'delta as kurs',
+                        ])
+                        ->all(),
+                ],
+            ]);
+            $lineArrayRed = \app\service\GraphExporter::convert($params);
+        }
+
+        // график с прогнозом (синяя линия)
+        {
+            $params = ArrayHelper::merge($defaultParams, [
+                'rows'  => [
+                    \app\models\StockPrognosisBlue::query(['stock_id' => $id])
+                        ->andWhere(['between', 'date', $start->format('Y-m-d'), $end->format('Y-m-d')])
+                        ->select([
+                            'date',
+                            'delta as kurs',
+                        ])
+                        ->all(),
+                ],
+            ]);
+            $lineArrayBlue = \app\service\GraphExporter::convert($params);
+        }
+
+        // union
+        {
+            $lineArrayPast = \app\service\GraphUnion::convert([
+                'x' => $lineArrayRed['x'],
+                'y' => [
+                    $lineArrayKurs['y'][0],
+                    $lineArrayRed['y'][0],
+                    $lineArrayBlue['y'][0],
+                ]
+            ]);
+        }
+
+        if ($isPaid) {
+            $start = (new \DateTime());
+            $end = (new \DateTime())->add(new \DateInterval('P30D'));
+            $defaultParams = [
+                'start' => $start,
+                'end'   => $end,
+            ];
+
+            // график с прогнозом (красная линия)
+            {
+                $params = ArrayHelper::merge($defaultParams, [
+                    'rows'  => [
+                        \app\models\StockPrognosisRed::query(['stock_id' => $id])
+                            ->andWhere(['between', 'date', $start->format('Y-m-d'), $end->format('Y-m-d')])
+                            ->select([
+                                'date',
+                                'delta as kurs',
+                            ])
+                            ->all(),
+                    ],
+                ]);
+                $lineArrayRed = \app\service\GraphExporter::convert($params);
+            }
+
+            // график с прогнозом (синяя линия)
+            {
+                $params = ArrayHelper::merge($defaultParams, [
+                    'rows'  => [
+                        \app\models\StockPrognosisBlue::query(['stock_id' => $id])
+                            ->andWhere(['between', 'date', $start->format('Y-m-d'), $end->format('Y-m-d')])
+                            ->select([
+                                'date',
+                                'delta as kurs',
+                            ])
+                            ->all(),
+                    ],
+                ]);
+                $lineArrayBlue = \app\service\GraphExporter::convert($params);
+            }
+
+            $lineArrayFuture = \app\service\GraphUnion::convert([
+                'x' => $lineArrayRed['x'],
+                'y' => [
+                    $lineArrayRed['y'][0],
+                    $lineArrayBlue['y'][0],
+                ]
+            ]);
+        } else {
+            $lineArrayFuture = null;
+        }
+
+        return $this->render([
+            'item'            => $item,
+            'lineArrayPast'   => $lineArrayPast,
+            'lineArrayFuture' => $lineArrayFuture,
+            'isPaid'          => $isPaid,
+        ]);
+    }
+
+    /**
+     * Рисует графики с прошлым и будущим
+     *
+     * @param int $id идентификатор курса
+     *
+     * @return string
+     */
+    public function actionStock_item3($id)
+    {
+        $item = \app\models\Stock::find($id);
+        $start = (new \DateTime())->sub(new \DateInterval('P31D'));
+        $end = (new \DateTime())->sub(new \DateInterval('P1D'));
+        $isPaid = Yii::$app->user->identity->isPaid($id);
+        $defaultParams = [
+            'start' => $start,
+            'end'   => $end,
+        ];
+
+        // график с продажами
+        {
+            $params = ArrayHelper::merge($defaultParams, [
+                'rows'  => [
+                    \app\models\StockKurs::query(['stock_id' => $id])
+                        ->andWhere(['between', 'date', $start->format('Y-m-d'), $end->format('Y-m-d')])
+                        ->all(),
+                ],
+            ]);
+            $lineArrayKurs = \app\service\GraphExporter::convert($params);
+        }
+
+        // график с прогнозом (красная линия)
+        {
+            $params = ArrayHelper::merge($defaultParams, [
+                'rows'  => [
+                    \app\models\StockPrognosisRed::query(['stock_id' => $id])
+                        ->andWhere(['between', 'date', $start->format('Y-m-d'), $end->format('Y-m-d')])
+                        ->select([
+                            'date',
+                            'delta as kurs',
+                        ])
+                        ->all(),
+                ],
+            ]);
+            $lineArrayRed = \app\service\GraphExporter::convert($params);
+        }
+
+        // график с прогнозом (синяя линия)
+        {
+            $params = ArrayHelper::merge($defaultParams, [
+                'rows'  => [
+                    \app\models\StockPrognosisBlue::query(['stock_id' => $id])
+                        ->andWhere(['between', 'date', $start->format('Y-m-d'), $end->format('Y-m-d')])
+                        ->select([
+                            'date',
+                            'delta as kurs',
+                        ])
+                        ->all(),
+                ],
+            ]);
+            $lineArrayBlue = \app\service\GraphExporter::convert($params);
+        }
+
+        // union
+        {
+            $lineArrayPast = \app\service\GraphUnion::convert([
+                'x' => $lineArrayRed['x'],
+                'y' => [
+                    $lineArrayKurs['y'][0],
+                    $lineArrayRed['y'][0],
+                    $lineArrayBlue['y'][0],
+                ]
+            ]);
+        }
+
+        if ($isPaid) {
+            $start = (new \DateTime());
+            $end = (new \DateTime())->add(new \DateInterval('P30D'));
+            $defaultParams = [
+                'start' => $start,
+                'end'   => $end,
+            ];
+
+            // график с прогнозом (красная линия)
+            {
+                $params = ArrayHelper::merge($defaultParams, [
+                    'rows'  => [
+                        \app\models\StockPrognosisRed::query(['stock_id' => $id])
+                            ->andWhere(['between', 'date', $start->format('Y-m-d'), $end->format('Y-m-d')])
+                            ->select([
+                                'date',
+                                'delta as kurs',
+                            ])
+                            ->all(),
+                    ],
+                ]);
+                $lineArrayRed = \app\service\GraphExporter::convert($params);
+            }
+
+            // график с прогнозом (синяя линия)
+            {
+                $params = ArrayHelper::merge($defaultParams, [
+                    'rows'  => [
+                        \app\models\StockPrognosisBlue::query(['stock_id' => $id])
+                            ->andWhere(['between', 'date', $start->format('Y-m-d'), $end->format('Y-m-d')])
+                            ->select([
+                                'date',
+                                'delta as kurs',
+                            ])
+                            ->all(),
+                    ],
+                ]);
+                $lineArrayBlue = \app\service\GraphExporter::convert($params);
+            }
+
+            $lineArrayFuture = \app\service\GraphUnion::convert([
+                'x' => $lineArrayRed['x'],
+                'y' => [
+                    $lineArrayRed['y'][0],
+                    $lineArrayBlue['y'][0],
+                ]
+            ]);
+        } else {
+            $lineArrayFuture = null;
+        }
+
+        return $this->render([
+            'item'            => $item,
+            'lineArrayPast'   => $lineArrayPast,
+            'lineArrayFuture' => $lineArrayFuture,
+            'isPaid'          => $isPaid,
         ]);
     }
 

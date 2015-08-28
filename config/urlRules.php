@@ -49,6 +49,8 @@ return [
     // cabinet
     'stockList'                             => 'cabinet/stock_list',
     'stockList/<id:\\d+>'                   => 'cabinet/stock_item',
+    'stockList2/<id:\\d+>'                   => 'cabinet/stock_item2',
+    'stockList3/<id:\\d+>'                   => 'cabinet/stock_item3',
     'stockList/graphAjax'                   => 'cabinet/graph_ajax',
 
     'cabinet/passwordChange'                => 'cabinet/password_change',
