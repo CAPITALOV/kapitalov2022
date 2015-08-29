@@ -32,6 +32,7 @@ $mysqlPassword = "galaxysss_41";
 
 // Создаем папку для обновлений чатов
 if (!is_dir($tbRootDir . "/chatUpdates")) {
+    print_r($tbRootDir . "/chatUpdates");exit;
     mkdir($tbRootDir . "/chatUpdates");
 }
 
