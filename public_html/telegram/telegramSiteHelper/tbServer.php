@@ -1,7 +1,7 @@
 <?php
 //>> sudo crontab -e
 //* * * * * /usr/bin/php5 /var/www/***/server.php
-
+print_r($_SERVER);exit;
 set_time_limit(0);
 error_reporting(E_ALL); //Выводим все ошибки и предупреждения
 set_time_limit(0);	//Время выполнения скрипта не ограничено
