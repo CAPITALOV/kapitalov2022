@@ -12,14 +12,8 @@ $this->title = 'Цены';
 <!-- Page Heading/Breadcrumbs -->
 <div class="row">
     <div class="col-lg-12">
-        <h1 class="page-header">Pricing Table
-            <small>Subheading</small>
-        </h1>
-        <ol class="breadcrumb">
-            <li><a href="index.html">Home</a>
-            </li>
-            <li class="active">Pricing Table</li>
-        </ol>
+        <h1 class="page-header">Наши цены</h1>
+
     </div>
 </div>
 <!-- /.row -->
@@ -29,11 +23,11 @@ $this->title = 'Цены';
     <div class="col-md-4">
         <div class="panel panel-default text-center">
             <div class="panel-heading">
-                <h3 class="panel-title">Basic</h3>
+                <h3 class="panel-title">Демо</h3>
             </div>
             <div class="panel-body">
-                <span class="price"><sup>$</sup>19<sup>99</sup></span>
-                <span class="period">per month</span>
+                <span class="price"><sup>$</sup>0<sup>00</sup></span>
+                <span class="period">до конца месяца</span>
             </div>
             <ul class="list-group">
                 <li class="list-group-item"><strong>1</strong> User</li>
@@ -41,7 +35,7 @@ $this->title = 'Цены';
                 <li class="list-group-item"><strong>Unlimited</strong> Email Accounts</li>
                 <li class="list-group-item"><strong>10GB</strong> Disk Space</li>
                 <li class="list-group-item"><strong>100GB</strong> Monthly Bandwidth</li>
-                <li class="list-group-item"><a href="#" class="btn btn-primary">Sign Up!</a>
+                <li class="list-group-item"><a href="#" class="btn btn-primary" style="width:100%;">Получить!</a>
                 </li>
             </ul>
         </div>
@@ -49,19 +43,19 @@ $this->title = 'Цены';
     <div class="col-md-4">
         <div class="panel panel-primary text-center">
             <div class="panel-heading">
-                <h3 class="panel-title">Plus <span class="label label-success">Best Value</span></h3>
+                <h3 class="panel-title">Базовый <span class="label label-success">Оптимальный выбор</span></h3>
             </div>
             <div class="panel-body">
-                <span class="price"><sup>$</sup>39<sup>99</sup></span>
-                <span class="period">per month</span>
+                <span class="price"><sup>$</sup>99<sup>99</sup></span>
+                <span class="period">за месяц</span>
             </div>
             <ul class="list-group">
-                <li class="list-group-item"><strong>10</strong> User</li>
+                <li class="list-group-item"><strong>1</strong> Акция</li>
                 <li class="list-group-item"><strong>500</strong> Projects</li>
                 <li class="list-group-item"><strong>Unlimited</strong> Email Accounts</li>
                 <li class="list-group-item"><strong>1000GB</strong> Disk Space</li>
                 <li class="list-group-item"><strong>10000GB</strong> Monthly Bandwidth</li>
-                <li class="list-group-item"><a href="#" class="btn btn-primary">Sign Up!</a>
+                <li class="list-group-item"><a href="#" class="btn btn-primary" style="width:100%;">Получить!</a>
                 </li>
             </ul>
         </div>
@@ -69,19 +63,19 @@ $this->title = 'Цены';
     <div class="col-md-4">
         <div class="panel panel-default text-center">
             <div class="panel-heading">
-                <h3 class="panel-title">Ultra</h3>
+                <h3 class="panel-title">Профессиональный</h3>
             </div>
             <div class="panel-body">
-                <span class="price"><sup>$</sup>159<sup>99</sup></span>
-                <span class="period">per month</span>
+                <span class="price"><sup>$</sup>999<sup>99</sup></span>
+                <span class="period">за месяц</span>
             </div>
             <ul class="list-group">
-                <li class="list-group-item"><strong>Unlimted</strong> Users</li>
+                <li class="list-group-item"><strong>Все</strong> Акции</li>
                 <li class="list-group-item"><strong>Unlimited</strong> Projects</li>
                 <li class="list-group-item"><strong>Unlimited</strong> Email Accounts</li>
                 <li class="list-group-item"><strong>10000GB</strong> Disk Space</li>
                 <li class="list-group-item"><strong>Unlimited</strong> Monthly Bandwidth</li>
-                <li class="list-group-item"><a href="#" class="btn btn-primary">Sign Up!</a>
+                <li class="list-group-item"><a href="#" class="btn btn-primary" style="width:100%;">Получить!</a>
                 </li>
             </ul>
         </div>
