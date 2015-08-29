@@ -64,5 +64,9 @@ return [
 
     'cabinet/wallet/add/<id:\\d+>'          => 'cabinet_wallet/add',
 
+    'money/history'                         => 'money/history',
+
     'yandexMoney'                           => 'yandex_money/auth',
+    'yandexMoney/test1'                     => 'yandex_money/test1',
+    'yandexMoney/test2'                     => 'yandex_money/test2',
 ];

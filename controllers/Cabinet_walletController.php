@@ -15,23 +15,8 @@ use yii\bootstrap\ActiveForm;
 use yii\filters\AccessControl;
 use yii\web\Response;
 
-class Cabinet_walletController extends SuperadminBaseController
+class Cabinet_walletController extends CabinetBaseController
 {
-    public function behaviors()
-    {
-        return [
-            'access' => [
-                'class' => AccessControl::className(),
-                'rules' => [
-                    [
-                        'allow' => true,
-                        'roles' => ['@'],
-                    ],
-                ],
-            ],
-        ];
-    }
-
     /**
      * Форма покупки месяцев
      *

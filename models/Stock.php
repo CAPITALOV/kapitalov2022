@@ -20,4 +20,8 @@ class Stock extends \cs\base\DbRecord
 {
     const TABLE = 'cap_stock';
 
+    public function getName()
+    {
+        return $this->getField('name', '');
+    }
 }

@@ -76,6 +76,8 @@ class UserStock extends \cs\base\DbRecord
      * @param int $stockId      идентификатор акции
      * @param int $monthCounter количество месяцев которые надо добавить
      *
+     * @return string дату до какого было оплачено в формате 'yyyy-mm-dd'
+     *
      * @throws \yii\db\Exception
      */
     public static function add($userId, $stockId, $monthCounter)
@@ -84,23 +86,29 @@ class UserStock extends \cs\base\DbRecord
             'stock_id' => $stockId,
             'user_id'  => $userId,
         ]);
+        $dateFinish = '';
         if (is_null($item)) {
+            $dateFinish = self::addMonthCounter(\Yii::$app->formatter->asDate(time(), 'php:Y-m-d'), $monthCounter + 1);
             self::insert([
                 'stock_id'    => $stockId,
                 'user_id'     => $userId,
-                'date_finish' => self::addMonthCounter(\Yii::$app->formatter->asDate(time(), 'php:Y-m-d'), $monthCounter + 1),
+                'date_finish' => $dateFinish,
             ]);
         } else {
             if ($item->isPaid()) {
+                $dateFinish = self::addMonthCounter($item->getField('date_finish'), $monthCounter);
                 $item->update([
-                    'date_finish' => self::addMonthCounter($item->getField('date_finish'), $monthCounter),
+                    'date_finish' => $dateFinish,
                 ]);
             } else {
+                $dateFinish = self::addMonthCounter(\Yii::$app->formatter->asDate(time(), 'php:Y-m-d'), $monthCounter + 1);
                 $item->update([
-                    'date_finish' => self::addMonthCounter(\Yii::$app->formatter->asDate(time(), 'php:Y-m-d'), $monthCounter + 1),
+                    'date_finish' => $dateFinish,
                 ]);
             }
         }
+
+        return $dateFinish;
     }
 
     /**

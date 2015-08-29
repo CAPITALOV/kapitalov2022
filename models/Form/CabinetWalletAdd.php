@@ -3,6 +3,7 @@
 namespace app\models\Form;
 
 use app\models\NewsItem;
+use app\models\Stock;
 use app\models\StockKurs;
 use app\models\StockPrognosis;
 use app\models\User;
@@ -39,7 +40,10 @@ class CabinetWalletAdd extends \cs\base\BaseForm
     public function add($stock_id)
     {
         if ($this->validate()) {
-            \app\models\UserStock::add(\Yii::$app->user->getId(), $stock_id, $this->monthCounter);
+            $dateFinish = \app\models\UserStock::add(\Yii::$app->user->getId(), $stock_id, $this->monthCounter);
+            $stock = Stock::find($stock_id);
+            $dateFinish = Yii::$app->formatter->asDate($dateFinish);
+            WalletHistory::insert("Оплачена акция: {$stock->getName()}, месяцев: {$this->monthCounter}, оплачено до: {$dateFinish}");
 
             return true;
         } else {
