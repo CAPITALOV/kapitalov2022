@@ -148,7 +148,7 @@ function tbDatabase(){
 		}
 		catch(PDOException $e)
 		{
-		return(false);
+		 print_r($e);exit;
 		}
 		
 		
