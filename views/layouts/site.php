@@ -20,6 +20,7 @@ use yii\helpers\Html;
     <?= Html::csrfMetaTags() ?>
     <title><?= $this->title ?></title>
     <?php $this->head() ?>
+    <link rel="shortcut icon" href="/images/capitalov32-1.png">
 
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -48,7 +49,7 @@ use yii\helpers\Html;
     <footer>
         <div class="row">
             <div class="col-lg-12">
-                <p>&copy; https://www.capitalov.com 2015</p>
+                <p>&copy; www.capitalov.com 2015</p>
             </div>
         </div>
     </footer>

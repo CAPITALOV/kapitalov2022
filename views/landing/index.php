@@ -14,17 +14,17 @@ $this->title = 'Шедевр изобилия';
     <!-- Wrapper for slides -->
     <div class="carousel-inner">
         <div class="item active">
-            <div class="fill" style="background-image:url('/images/1.jpg');"></div>
+            <div class="fill" style="background-image:url('/images/index/1.jpg');"></div>
             <div class="carousel-caption">
             </div>
         </div>
         <div class="item">
-            <div class="fill" style="background-image:url('/images/2.jpg');"></div>
+            <div class="fill" style="background-image:url('/images/index/2.jpg');"></div>
             <div class="carousel-caption">
             </div>
         </div>
         <div class="item">
-            <div class="fill" style="background-image:url('/images/3.jpg');"></div>
+            <div class="fill" style="background-image:url('/images/index/3.jpg');"></div>
             <div class="carousel-caption">
             </div>
         </div>
@@ -52,33 +52,35 @@ $this->title = 'Шедевр изобилия';
         <div class="col-md-4">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h4><i class="fa fa-fw fa-check"></i> Bootstrap v3.2.0</h4>
+                    <h4><i class="fa fa-fw fa-check"></i> Полный контроль</h4>
                 </div>
                 <div class="panel-body">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque, optio corporis quae nulla aspernatur in alias at numquam rerum ea excepturi expedita tenetur assumenda voluptatibus eveniet incidunt dicta nostrum quod?</p>
-                    <a href="#" class="btn btn-default">Learn More</a>
+                    <p>CAPITALOV.com является одним из ведущих поставщиков инсайдерской информации для участников финансового рынка Европы, России и США и продолжает развивать новые бизнес-направления в интересах исключительно своих клиентов</p>
+                    <a href="<?= \yii\helpers\Url::to(['site/price'])?>" class="btn btn-default">Подробнее</a>
                 </div>
             </div>
         </div>
         <div class="col-md-4">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h4><i class="fa fa-fw fa-gift"></i> Free &amp; Open Source</h4>
+                    <h4><i class="fa fa-fw fa-gift"></i> Гарантировано</h4>
                 </div>
                 <div class="panel-body">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque, optio corporis quae nulla aspernatur in alias at numquam rerum ea excepturi expedita tenetur assumenda voluptatibus eveniet incidunt dicta nostrum quod?</p>
-                    <a href="#" class="btn btn-default">Learn More</a>
+                    <p>Вероятность сбывания прогноза превышает 90%. Мы хранители информации. Мы - будущее.</p>
+                    <a href="<?= \yii\helpers\Url::to(['site/price'])?>" class="btn btn-default">Подробнее</a>
                 </div>
             </div>
         </div>
         <div class="col-md-4">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h4><i class="fa fa-fw fa-compass"></i> Easy to Use</h4>
+                    <h4><i class="fa fa-fw fa-compass"></i> Очень дешево</h4>
                 </div>
                 <div class="panel-body">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque, optio corporis quae nulla aspernatur in alias at numquam rerum ea excepturi expedita tenetur assumenda voluptatibus eveniet incidunt dicta nostrum quod?</p>
-                    <a href="#" class="btn btn-default">Learn More</a>
+                    <p>Регистрируясь в кабинете вы получаете просмотр прогнозов до начала следующего календарного месяца.
+
+                        Если вы оплатили сколько-то месяцев, вы получаете в открытом доступе прогнозы на этот месяц бесплатно до его окончания и полных n оплаченных месяцев.</p>
+                    <a href="<?= \yii\helpers\Url::to(['site/price'])?>" class="btn btn-default">Подробнее</a>
                 </div>
             </div>
         </div>
@@ -88,7 +90,7 @@ $this->title = 'Шедевр изобилия';
     <!-- Portfolio Section -->
     <div class="row">
         <div class="col-lg-12">
-            <h2 class="page-header">Portfolio Heading</h2>
+            <h2 class="page-header">Дополнительные преимущества</h2>
         </div>
         <div class="col-md-4 col-sm-6">
             <a href="portfolio-item.html">
@@ -126,23 +128,20 @@ $this->title = 'Шедевр изобилия';
     <!-- Features Section -->
     <div class="row">
         <div class="col-lg-12">
-            <h2 class="page-header">Modern Business Features</h2>
+            <h2 class="page-header">Личный кабинет</h2>
         </div>
         <div class="col-md-6">
-            <p>The Modern Business template by Start Bootstrap includes:</p>
+            <p>Регистрируясь в кабинете вы получаете просмотр прогнозов до начала следующего календарного месяца.</p>
+            <p>Если вы оплатили сколько-то месяцев, вы получаете в открытом доступе прогнозы на этот месяц бесплатно до его окончания и полных n оплаченных месяцев.</p>
+            <p>В тариф включено:</p>
             <ul>
-                <li><strong>Bootstrap v3.2.0</strong>
-                </li>
-                <li>jQuery v1.11.0</li>
-                <li>Font Awesome v4.1.0</li>
-                <li>Working PHP contact form with validation</li>
-                <li>Unstyled page elements for easy customization</li>
-                <li>17 HTML pages</li>
+                <li>сопровождение</li>
+                <li>консультация по стратегии клиента</li>
+                <li>просмотр прогноза на один месяц вперед конкретной оплаченной акции</li>
             </ul>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis, omnis doloremque non cum id reprehenderit, quisquam totam aspernatur tempora minima unde aliquid ea culpa sunt. Reiciendis quia dolorum ducimus unde.</p>
         </div>
         <div class="col-md-6">
-            <img class="img-responsive" src="http://placehold.it/700x450" alt="">
+            <img class="img-responsive img-thumbnail" src="/images/index/cabinet.png" alt="">
         </div>
     </div>
     <!-- /.row -->
@@ -153,10 +152,10 @@ $this->title = 'Шедевр изобилия';
     <div class="well">
         <div class="row">
             <div class="col-md-8">
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias, expedita, saepe, vero rerum deleniti beatae veniam harum neque nemo praesentium cum alias asperiores commodi.</p>
+                <p>До конца месяца вы получаете для просмотра прогнозов всех акции <span style="color: #008000; font-weight: bold;">бесплатно</span>. Убедитесь лично в действенности нашего инструмента. Проверьте прогнозы на основе прошедших дней.</p>
             </div>
             <div class="col-md-4">
-                <a class="btn btn-lg btn-default btn-block" href="#">Call to Action</a>
+                <a class="btn btn-lg btn-default btn-block" href="<?= \yii\helpers\Url::to(['auth/registration']) ?>">Подключиться</a>
             </div>
         </div>
     </div>
@@ -167,7 +166,7 @@ $this->title = 'Шедевр изобилия';
     <footer>
         <div class="row">
             <div class="col-lg-12">
-                <p>Copyright &copy; Your Website 2014</p>
+                <p>&copy; www.capitalov.com 2015</p>
             </div>
         </div>
     </footer>

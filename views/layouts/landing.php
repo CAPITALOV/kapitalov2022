@@ -24,6 +24,7 @@ use yii\helpers\Html;
     <?= Html::csrfMetaTags() ?>
     <title><?= $this->title ?></title>
     <?php $this->head() ?>
+    <link rel="shortcut icon" href="/images/capitalov32-1.png">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
