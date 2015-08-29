@@ -3,7 +3,7 @@
 
 // Корневая директория для TelegramSiteHelper
 // Root dir for TelegramSiteHelper
-$tbRootDir = $_SERVER['DOCUMENT_ROOT'] . "/telegram/telegramSiteHelper";
+$tbRootDir = $_SERVER['OLDPWD'] . "/telegram/telegramSiteHelper";
 
 // Пароль для авторизации менеджера через телеграм бота
 // Password for manager auth (in Telegram bot), you must write some non-so-easy
