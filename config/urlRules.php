@@ -65,4 +65,5 @@ return [
     'cabinet/wallet/add/<id:\\d+>'          => 'cabinet_wallet/add',
 
     'yandexMoney'                           => 'yandex_money/auth',
+    'yandexMoney/test1'                     => 'yandex_money/test1',
 ];

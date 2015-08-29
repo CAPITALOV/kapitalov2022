@@ -48,205 +48,27 @@ class Yandex_moneyController extends BaseController
     {
         /** @var \app\service\authclient\YandexMoney $client */
         $client = Yii::$app->authClientCollection->getClient('yandex_money');
-        $auth_url = API::buildObtainTokenUrl($client->clientId, 'http://c.galaxysss.ru/yandexMoney', ['account-info']);
-        $client->auth22();
+        $code = self::getParam('code');
+        $access_token_response = API::getAccessToken($client->clientId, $code, 'http://capitalov.localhost/yandexMoney', $client->clientSecret);
+        VarDumper::dump($access_token_response);
+        if(property_exists($access_token_response, "error")) {
+            // process error
+        }
+        $access_token = $access_token_response->access_token;
     }
+
 
     /**
-     * @param \yii\authclient\ClientInterface $client
+     * Попытка сгенерировать auth_url перейти на него в новом окне
      */
-    public function successCallback($client)
+    public function actionTest1()
     {
-        VarDumper::dump($client);
-        $attributes = $client->getUserAttributes();
-        /** @var \app\service\authclient\authClientInterface $client */
-        $client->saveToken();
-        if (Yii::$app->user->isGuest) {
-            $user = $client->login($attributes);
-            if (is_null($user)) {
-                $user = $client->register($attributes);
-            }
-            if (!is_null($user)) Yii::$app->user->login($user);
-        } else {
-            $client->attach($attributes, Yii::$app->user->identity);
-        }
-        $client->setAuthFlag();
-        Yii::$app->user->setReturnUrl($_SERVER['HTTP_REFERER']);
-    }
+        /** @var \app\service\authclient\YandexMoney $client */
+        $client = Yii::$app->authClientCollection->getClient('yandex_money');
+        $auth_url = API::buildObtainTokenUrl($client->clientId, 'http://capitalov.localhost/yandexMoney', ['account-info']);
 
-    public function actionLogin()
-    {
-        if (!\Yii::$app->user->isGuest) {
-            return $this->goHome();
-        }
-
-        $model = new LoginForm();
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
-        } else {
-            return $this->render('login', [
-                'model' => $model,
-            ]);
-        }
-    }
-
-    /**
-     * Провряет логин
-     * REQUEST:
-     * - email - string - почта/логин
-     * - password - string - пароль
-     *
-     * @return string
-     * errors
-     * 101, 'Пользователь не найден'
-     * 102, 'Пользователь не активирован'
-     * 103, 'Пользователь заблокирован'
-     * 104, 'Не верный пароль'
-     * 105, 'Вы  не завели себе пароль для аккаунта. Зайдите в восстановление пароля'
-     */
-    public function actionLogin_ajax()
-    {
-        $email = strtolower(self::getParam('email'));
-        $password = self::getParam('password');
-        $user = User::find([
-            'email' => $email,
+        return $this->render([
+            'url' => $auth_url,
         ]);
-        if (is_null($user)) {
-            return self::jsonErrorId(101, 'Пользователь не найден');
-        }
-        if ($user->getField('is_confirm') != 1) {
-            return self::jsonErrorId(102, 'Пользователь не активирован');
-        }
-        if ($user->getField('is_active') != 1) {
-            return self::jsonErrorId(103, 'Пользователь заблокирован');
-        }
-        if ($user->getField('password') == '') {
-            return self::jsonErrorId(105, 'Вы  не завели себе пароль для аккаунта. Зайдите в восстановление пароля');
-        }
-        if ($user->validatePassword($password)) {
-            Yii::$app->user->login($user);
-
-            return self::jsonSuccess();
-        } else {
-            return self::jsonErrorId(104, 'Не верный пароль');
-        }
-    }
-
-    public function actionLogout()
-    {
-        Yii::$app->user->logout();
-
-        return $this->redirect($_SERVER['HTTP_REFERER']);
-    }
-
-    public function actionPassword_recover()
-    {
-        $model = new \app\models\Form\PasswordRecover();
-        $model->setScenario('insert');
-
-        if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
-            $model->setScenario('ajax');
-            Yii::$app->response->format = Response::FORMAT_JSON;
-
-            return ActiveForm::validate($model);
-        }
-
-        if ($model->load(Yii::$app->request->post()) && $model->send()) {
-            Yii::$app->session->setFlash('contactFormSubmitted');
-
-            return $this->refresh();
-        } else {
-            return $this->render([
-                'model' => $model,
-            ]);
-        }
-
-    }
-
-    public function actionRegistration()
-    {
-        $model = new \app\models\Form\Registration();
-        $model->setScenario('insert');
-
-        if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
-            $model->setScenario('ajax');
-            Yii::$app->response->format = Response::FORMAT_JSON;
-
-            return ActiveForm::validate($model);
-        }
-
-        if ($model->load(Yii::$app->request->post()) && ($user = $model->register())) {
-            Yii::$app->session->setFlash('contactFormSubmitted');
-            Yii::$app->session->setFlash('user_id', $user->getId());
-
-            return $this->refresh();
-        } else {
-            return $this->render([
-                'model' => $model,
-            ]);
-        }
-    }
-
-    /**
-     * Активация регистрации
-     *
-     * @param string $code
-     *
-     * @return Response
-     * @throws Exception
-     */
-    public function actionRegistration_activate($code)
-    {
-        $row = RegistrationDispatcher::query(['code' => $code])->one();
-        if ($row === false) {
-            throw new Exception('Срок ссылки истек или не верный код активации');
-        }
-        $user = User::find($row['parent_id']);
-        if (is_null($user)) {
-            throw new Exception('Пользователь не найден');
-        }
-        $user->activate();
-        Yii::$app->user->login($user);
-        RegistrationDispatcher::delete($row['parent_id']);
-
-        return $this->goHome();
-    }
-
-    /**
-     * Активация восстановления пароля
-     *
-     * @param string $code
-     *
-     * @return Response
-     * @throws Exception
-     */
-    public function actionPassword_recover_activate($code)
-    {
-        $row = PasswordRecoverDispatcher::query(['code' => $code])->one();
-        if ($row === false) {
-            throw new Exception('Не верный код активации');
-        }
-        $user = User::find($row['parent_id']);
-        if (is_null($user)) {
-            throw new Exception('Пользователь не найден');
-        }
-
-        $model = new \app\models\Form\PasswordNew();
-        if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
-            Yii::$app->response->format = Response::FORMAT_JSON;
-
-            return ActiveForm::validate($model);
-        }
-        if ($model->load(Yii::$app->request->post()) && $model->action($user)) {
-            PasswordRecoverDispatcher::delete($row['parent_id']);
-            Yii::$app->user->login($user);
-            Yii::$app->session->setFlash('contactFormSubmitted');
-
-            return $this->goHome();
-        } else {
-            return $this->render([
-                'model' => $model,
-            ]);
-        }
     }
 }
