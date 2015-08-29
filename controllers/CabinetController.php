@@ -17,22 +17,8 @@ use yii\filters\AccessControl;
 use yii\helpers\ArrayHelper;
 use yii\web\Response;
 
-class CabinetController extends SuperadminBaseController
+class CabinetController extends CabinetBaseController
 {
-    public function behaviors()
-    {
-        return [
-            'access' => [
-                'class' => AccessControl::className(),
-                'rules' => [
-                    [
-                        'allow' => true,
-                        'roles' => ['@'],
-                    ],
-                ],
-            ],
-        ];
-    }
 
     /**
      * Выводит профиль пользователя

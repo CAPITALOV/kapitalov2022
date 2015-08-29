@@ -42,5 +42,3 @@ $this->title = 'Пополнение счета';
     </div>
 
 <?php endif; ?>
-
-<p><a href="/yandexMoney">Yandex</a></p>

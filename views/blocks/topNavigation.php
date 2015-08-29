@@ -98,6 +98,9 @@ JS
                                     class="glyphicon glyphicon-asterisk" style="padding-right: 5px;"></i>Сменить
                                 пароль</a></li>
                         <li class="divider"></li>
+                        <li><a href="<?= Url::to(['money/history']) ?>"><i
+                                    class="glyphicon glyphicon-rub" style="padding-right: 5px;"></i>История платежей</a></li>
+                        <li class="divider"></li>
                         <li><a href="<?= Url::to(['auth/logout']) ?>" data-method="post"><i
                                     class="glyphicon glyphicon-off" style="padding-right: 5px;"></i>Выйти</a></li>
                     </ul>

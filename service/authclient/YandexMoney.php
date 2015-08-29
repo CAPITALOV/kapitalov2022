@@ -49,7 +49,7 @@ class YandexMoney extends OAuth2
     /**
      * @inheritdoc
      */
-    public $apiBaseUrl = 'https://login.yandex.ru';
+    public $apiBaseUrl = 'https://money.yandex.ru/api';
 
 
     /**
