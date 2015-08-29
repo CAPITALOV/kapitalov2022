@@ -16,7 +16,6 @@ class User extends DbRecord implements \yii\web\IdentityInterface {
     const TABLE = 'cap_users';
 
 
-    public $authKey;
     /**
      * Возвращает аватар
      * Если не установлен то возвращает заглушку
@@ -125,12 +124,17 @@ class User extends DbRecord implements \yii\web\IdentityInterface {
         return $this->getField('id');
     }
 
+    public function getEmail()
+    {
+        return $this->getField('email');
+    }
+
     /**
      * @inheritdoc
      */
     public function getAuthKey()
     {
-        return $this->authKey;
+        return md5($this->getEmail() . '12345');
     }
 
     /**
@@ -138,7 +142,7 @@ class User extends DbRecord implements \yii\web\IdentityInterface {
      */
     public function validateAuthKey($authKey)
     {
-        return $this->authKey === $authKey;
+        return $this->getAuthKey() === $authKey;
     }
 
     /**

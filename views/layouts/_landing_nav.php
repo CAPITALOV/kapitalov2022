@@ -104,19 +104,31 @@ use yii\helpers\Html;
                     </ul>
                 </li>
                 <?php } else {?>
-                <li>
-                    <a
-                        href="<?= Url::to(['cabinet/index']) ?>"
-                        style="padding: 5px 10px 5px 10px;"
-                        title="Перейти в личный кабинет"
-                        id="linkCabinet"
-                        ><?php $this->registerJs("$('#linkCabinet').tooltip({placement:'bottom'});") ?>
-                    <?= Html::img(Yii::$app->user->identity->getAvatar(), [
-                        'height' => '40px',
-                        'class'  => 'img-circle'
-                    ]) ?>
-                        </a>
-                </li>
+                    <li>
+                        <!-- Split button -->
+                        <div class="btn-group" style="margin-top: 9px;" id="loginBarButton">
+                            <a href="<?= Url::to(['cabinet/index']) ?>" class="btn btn-default" id="modalLogin"><i class="glyphicon glyphicon-user" style="padding-right: 5px;"></i>Кабинет</a>
+                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
+                                    aria-expanded="false">
+                                <span class="caret"></span>
+                                <span class="sr-only">Toggle Dropdown</span>
+                            </button>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="<?= Url::to(['cabinet/profile']) ?>"><i class="glyphicon glyphicon-cog"
+                                                                                     style="padding-right: 5px;"></i>Мой
+                                        профиль</a></li>
+                                <li><a href="<?= Url::to(['cabinet/password_change']) ?>"><i
+                                            class="glyphicon glyphicon-asterisk" style="padding-right: 5px;"></i>Сменить
+                                        пароль</a></li>
+                                <li class="divider"></li>
+                                <li><a href="<?= Url::to(['money/history']) ?>"><i
+                                            class="glyphicon glyphicon-rub" style="padding-right: 5px;"></i>История платежей</a></li>
+                                <li class="divider"></li>
+                                <li><a href="<?= Url::to(['auth/logout']) ?>" data-method="post"><i
+                                            class="glyphicon glyphicon-off" style="padding-right: 5px;"></i>Выйти</a></li>
+                            </ul>
+                        </div>
+                    </li>
                 <?php }?>
             </ul>
         </div>
