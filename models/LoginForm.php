@@ -2,13 +2,14 @@
 
 namespace app\models;
 
+use cs\base\BaseForm;
 use Yii;
 use yii\base\Model;
 
 /**
  * LoginForm is the model behind the login form.
  */
-class LoginForm extends Model
+class LoginForm extends BaseForm
 {
     public $username;
     public $password;
@@ -16,19 +17,31 @@ class LoginForm extends Model
 
     private $_user = false;
 
-
-    /**
-     * @return array the validation rules.
-     */
-    public function rules()
+    public function __construct($config = [])
     {
-        return [
-            // username and password are both required
-            [['username', 'password'], 'required'],
-            // rememberMe must be a boolean value
-            ['rememberMe', 'boolean'],
-            // password is validated by validatePassword()
-            ['password', 'validatePassword'],
+        self::$fields = [
+            [
+                'username',
+                'Email',
+                1,
+                'email',
+                [],
+            ],
+            [
+                'password',
+                'Пароль',
+                1,
+                'validatePassword',
+            ],
+            [
+                'rememberMe',
+                'Запомнить меня',
+                0,
+                'cs\Widget\CheckBox2\Validator',
+                'widget' => [
+                    'cs\Widget\CheckBox2\CheckBox', []
+                ]
+            ],
         ];
     }
 
@@ -44,8 +57,25 @@ class LoginForm extends Model
         if (!$this->hasErrors()) {
             $user = $this->getUser();
 
-            if (!$user || !$user->validatePassword($this->password)) {
-                $this->addError($attribute, 'Incorrect username or password.');
+            if (is_null($user)) {
+                $this->addError($attribute, 'Пользователь не найден');
+                return;
+            }
+            if ($user->getField('is_confirm') != 1) {
+                $this->addError($attribute, 'Пользователь не активирован');
+                return;
+            }
+            if ($user->getField('is_active') != 1) {
+                $this->addError($attribute, 'Пользователь заблокирован');
+                return;
+            }
+            if ($user->getField('password') == '') {
+                $this->addError($attribute, 'Вы  не завели себе пароль для аккаунта. Зайдите в восстановление пароля');
+                return;
+            }
+            if (!$user->validatePassword($this->password)) {
+                $this->addError($attribute, 'Не правильное имя или пароль');
+                return;
             }
         }
     }

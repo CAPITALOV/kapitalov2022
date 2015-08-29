@@ -72,7 +72,7 @@ class GraphUnion extends Object
                 try{
                     $scaleRatio = ($minMax['max'] - $minMax['min'])/($minMax2['max'] - $minMax2['min']);
                 } catch(\Exception $e) {
-                    VarDumper::dump([$minMax2, $minMax]);
+                    continue;
                 }
                 $new = [];
                 foreach($this->y[$i] as $y2) {

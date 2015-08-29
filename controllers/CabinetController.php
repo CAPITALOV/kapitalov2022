@@ -8,6 +8,7 @@
 namespace app\controllers;
 
 use app\models\Stock;
+use app\models\User;
 use app\models\UserStock;
 use cs\services\VarDumper;
 use Yii;
@@ -31,6 +32,54 @@ class CabinetController extends SuperadminBaseController
                 ],
             ],
         ];
+    }
+
+    /**
+     * Выводит профиль пользователя
+     */
+    public function actionProfile()
+    {
+        return $this->render('profile', [
+            'user' => User::findIdentity(
+                Yii::$app->user->getId()
+            ),
+        ]);
+    }
+
+    /**
+     * Выдает элементы поиска курсов для строки поиска Autocomplete
+     */
+    public function actionSearch_stock_autocomplete()
+    {
+        $term = self::getParam('term');
+
+        return self::jsonSuccess(
+            Stock::query(['like', 'name', $term . '%', false])->select('id, name as value')->all()
+        );
+    }
+
+    public function actionIndex()
+    {
+        $items = Stock::query()->orderBy(['name' => SORT_ASC])->all();
+        $dateFinishList = UserStock::query(['user_id' => \Yii::$app->user->getId()])->select([
+            'stock_id',
+            'date_finish',
+        ])->all();
+        for($i=0;$i<count($items);$i++) {
+            $item = &$items[$i];
+            foreach($dateFinishList as $row) {
+                if ($row['stock_id'] == $item['id']) {
+                    $item['date_finish'] = $row['date_finish'];
+                }
+            }
+            if (!isset($item['date_finish'])) {
+                $item['date_finish'] = null;
+            }
+        }
+
+        return $this->render([
+            'items' => $items,
+        ]);
     }
 
     /**

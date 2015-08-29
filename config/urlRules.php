@@ -1,17 +1,13 @@
 <?php
 
 return [
-    '/'                                     => 'site/index',
+    '/'                                     => 'landing/index',
     'contact'                               => 'site/contact',
-    'import'                                => 'site/import',
-    'login'                                 => 'site/login',
-    'profile'                               => 'site/profile',
-    'passwordChange'                        => 'site/profile_password_change',
+    'price'                                 => 'site/price',
     'captcha'                               => 'site/captcha',
 
-    'searchStockAutocomplete'               => 'site/search_stock_autocomplete',
 
-    'about'                                 => 'page/about',
+    'about'                                 => 'site/about',
 
 
     'password/recover'                      => 'auth/password_recover',
@@ -19,7 +15,7 @@ return [
 
     'registration'                          => 'auth/registration',
     'registrationActivate/<code:\\w+>'      => 'auth/registration_activate',
-    'login2'                                => 'auth/login',
+    'login'                                 => 'auth/login',
     'loginAjax'                             => 'auth/login_ajax',
     'logout'                                => 'auth/logout',
     'auth'                                  => 'auth/auth',
@@ -49,12 +45,18 @@ return [
     'stock/<id:\\d+>/graph'                 => 'superadmin_stock/graph',
 
     // cabinet
+    'cabinet'                               => 'cabinet/index',
     'stockList'                             => 'cabinet/stock_list',
     'stockList/<id:\\d+>'                   => 'cabinet/stock_item',
     'stockList2/<id:\\d+>'                  => 'cabinet/stock_item2',
     'stockList3/<id:\\d+>'                  => 'cabinet/stock_item3',
     'stockList/graphAjax'                   => 'cabinet/graph_ajax',
 
+    'profile'                               => 'cabinet/profile',
+    'passwordChange'                        => 'cabinet/profile_password_change',
+
+
+    'searchStockAutocomplete'               => 'cabinet/search_stock_autocomplete',
     'cabinet/passwordChange'                => 'cabinet/password_change',
     'cabinet/profile'                       => 'cabinet/profile',
     'cabinet/profile/unLinkSocialNetWork'   => 'cabinet/profile_unlink_social_network',

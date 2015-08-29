@@ -4,50 +4,33 @@ use yii\bootstrap\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $form yii\bootstrap\ActiveForm */
-/* @var $model app\models\LoginForm */
+/* @var $model cs\base\BaseForm */
 
-$this->title = 'Вход в измерение личного счастья';
-$this->params['breadcrumbs'][] = $this->title;
+$this->title = 'Вход в измерение личного изобилия';
 ?>
-<style>
-    #passwordrecover-email {
 
-    }
-</style>
-<div class="container">
 
-    <div class="site-login">
-        <h1><?= Html::encode($this->title) ?></h1>
+    <h1 class="page-header"><?= Html::encode($this->title) ?></h1>
 
-        <p>Пожалуйста заполните следующие поля для входа:</p>
+    <p>Пожалуйста заполните следующие поля для входа:</p>
 
-        <?php $form = ActiveForm::begin([
-            'id'          => 'login-form',
-            'options'     => ['class' => 'form-horizontal'],
-            'fieldConfig' => [
-                'template'     => "{label}\n<div class=\"col-lg-3\">{input}</div>\n<div class=\"col-lg-8\">{error}</div>",
-                'labelOptions' => ['class' => 'col-lg-1 control-label'],
-            ],
-        ]); ?>
+<?php $form = ActiveForm::begin([
+    'id'          => 'login-form',
+    'layout'      => 'horizontal',
+]); ?>
 
-        <?= $form->field($model, 'username')->label('Email') ?>
+<?= $model->field($form, 'username') ?>
+<?= $model->field($form, 'password')->passwordInput() ?>
+<?= $model->field($form, 'rememberMe') ?>
 
-        <?= $form->field($model, 'password')->passwordInput()->label('Пароль') ?>
-
-        <?= $form->field($model, 'rememberMe', [
-            'template' => "<div class=\"col-lg-offset-1 col-lg-3\">{input}</div>\n<div class=\"col-lg-8\">{error}</div>",
-        ])->checkbox()->label('Запомнить меня') ?>
-
-        <div class="form-group">
-            <div class="col-lg-offset-1 col-lg-11">
-                <?= Html::submitButton('Вход', [
-                        'class' => 'btn btn-primary',
-                        'name'  => 'login-button'
-                    ]) ?>
-            </div>
+    <div class="form-group">
+        <div class="col-lg-12">
+            <?= Html::submitButton('Вход', [
+                'class' => 'btn btn-primary',
+                'name'  => 'login-button',
+                'style' => 'width: 100%;',
+            ]) ?>
         </div>
-
-        <?php ActiveForm::end(); ?>
-
     </div>
-</div>
+
+<?php ActiveForm::end(); ?>
