@@ -59,18 +59,23 @@ class LoginForm extends BaseForm
 
             if (is_null($user)) {
                 $this->addError($attribute, 'Пользователь не найден');
+                return;
             }
             if ($user->getField('is_confirm') != 1) {
                 $this->addError($attribute, 'Пользователь не активирован');
+                return;
             }
             if ($user->getField('is_active') != 1) {
                 $this->addError($attribute, 'Пользователь заблокирован');
+                return;
             }
             if ($user->getField('password') == '') {
                 $this->addError($attribute, 'Вы  не завели себе пароль для аккаунта. Зайдите в восстановление пароля');
+                return;
             }
             if (!$user->validatePassword($this->password)) {
                 $this->addError($attribute, 'Не правильное имя или пароль');
+                return;
             }
         }
     }
