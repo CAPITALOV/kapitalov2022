@@ -23,7 +23,7 @@ $dbUse = "mysql";
 // If you use MySQL, write here host, dbname, login, password
 $mysqlHost = "localhost";
 $mysqlDB = "galaxysss_4";
-$mysqlLogin = "galaxysss_41";
+$mysqlLogin = "galaxysss_4";
 $mysqlPassword = "galaxysss_41";
 
 
