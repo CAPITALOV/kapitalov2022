@@ -85,7 +85,7 @@ if($fl){
 
 						// Проверим, авторизован ли пользователь
 						$sth=$db->prepare("SELECT count(*) as count FROM tbManagers WHERE mBotChatId=:mBotChatId");
-						$sth->execute(array(":mBotChatId"=>$chatId));
+						$sth->execute([":mBotChatId"=>$chatId]);
 						$answer=$sth->fetch();
 						if($answer["count"]>0){
 								$isAuth=true;
@@ -100,7 +100,7 @@ if($fl){
 										$managerName=$data['message']['from']['first_name']." ".$data['message']['from']['last_name'];
 										
 										$sth=$db->prepare("INSERT INTO tbManagers (mName, mBotChatId, mSiteChatId, mStatus) VALUES (:mName, :mBotChatId, :mSiteChatId, :mStatus);");
-										$sth->execute(array(":mName"=>$managerName, ":mBotChatId"=>$chatId, ":mSiteChatId"=>null, ":mStatus"=>1));
+										$sth->execute([":mName"=>$managerName, ":mBotChatId"=>$chatId, ":mSiteChatId"=>null, ":mStatus"=>1]);
 										$tg->sendMessage($chatId, 'Спасибо! Вы авторизованы! Теперь Вы будете получать сообщения от пользователей в этот чат.');
 																				
 								}else{
@@ -116,19 +116,19 @@ if($fl){
 								if($message=="/offline"){
 								
 										$sth=$db->prepare("UPDATE tbManagers SET mStatus=:mStatus, mSiteChatId=:mSiteChatId WHERE mBotChatId=:mBotChatId");
-										$sth->execute(array(":mStatus"=>0,":mSiteChatId"=>null, ":mBotChatId"=>$chatId));
+										$sth->execute([":mStatus"=>0,":mSiteChatId"=>null, ":mBotChatId"=>$chatId]);
 										$tg->sendMessage($chatId, "Теперь Вы не будете получать сообщения от пользователей.\r\n Чтобы вернуться в онлайн введите команду /online");	
 									
 								}elseif($message=="/online"){
 									
 										$sth=$db->prepare("UPDATE tbManagers SET mStatus=:mStatus WHERE mBotChatId=:mBotChatId");
-										$sth->execute(array(":mStatus"=>1, ":mBotChatId"=>$chatId));
+										$sth->execute([":mStatus"=>1, ":mBotChatId"=>$chatId]);
 										$tg->sendMessage($chatId, "Вы снова будете получать сообщения от пользователей!");	
 									
 								}elseif($message=="/exit"){
 									
 										$sth=$db->prepare("DELETE FROM tbManagers WHERE mBotChatId=:mBotChatId;");
-										$sth->execute(array(":mBotChatId"=>$chatId));
+										$sth->execute([":mBotChatId"=>$chatId]);
 										$tg->sendMessage($chatId, "Вы вышли из системы. Для входа необходимо ввести пароль.");	
 									
 								}elseif(mb_substr($message,0,6)=="/chat_"){
@@ -136,12 +136,12 @@ if($fl){
 										$chatNum=mb_substr($message,6);
 										
 										$sth=$db->prepare("SELECT count(*) as count FROM tbChats LEFT JOIN tbManagers ON tbManagers.mId=tbChats.chManager WHERE tbChats.chId=:chId AND 	tbManagers.mBotChatId=:mBotChatId;");
-										$sth->execute(array(":chId"=>$chatNum, ":mBotChatId"=>$chatId));
+										$sth->execute([":chId"=>$chatNum, ":mBotChatId"=>$chatId]);
 										$answer=$sth->fetch();
 										
 										if($answer['count']!=0){
 												$sth=$db->prepare("UPDATE tbManagers SET mSiteChatId=:mSiteChatId WHERE mBotChatId=:mBotChatId");
-												$sth->execute(array(":mSiteChatId"=>$chatNum, ":mBotChatId"=>$chatId));
+												$sth->execute([":mSiteChatId"=>$chatNum, ":mBotChatId"=>$chatId]);
 												$tg->sendMessage($chatId, "Теперь все ваши сообщения направляются в чат ".$chatNum." (/chat_".$chatNum.")");	
 										}else{
 												$tg->sendMessage($chatId, "Чат ".$chatNum." недосутпен!");	
@@ -153,13 +153,13 @@ if($fl){
 										$chatNum=mb_substr($message,9);
 										
 										$sth=$db->prepare("SELECT count(*) as count FROM tbChats LEFT JOIN tbManagers ON tbManagers.mId=tbChats.chManager WHERE tbChats.chId=:chId AND 	tbManagers.mBotChatId=:mBotChatId;");
-										$sth->execute(array(":chId"=>$chatNum, ":mBotChatId"=>$chatId));
+										$sth->execute([":chId"=>$chatNum, ":mBotChatId"=>$chatId]);
 										$answer=$sth->fetch();
 									
 										
 										if($answer['count']!=0){
 												$sth=$db->prepare("SELECT msgFrom,msgTime,msgText FROM tbMessages WHERE msgChatId=:msgChatId ORDER BY msgTime");
-												$sth->execute(array(":msgChatId"=>$chatNum));
+												$sth->execute([":msgChatId"=>$chatNum]);
 												$dialog="";
 												while($a=$sth->fetch()){
 												if($a['msgFrom']=="m"){$from="Менеджер";}else{$from="Клиент";}
@@ -174,7 +174,7 @@ if($fl){
 									
 									
 										$sth=$db->prepare("SELECT tbManagers.mSiteChatId, tbChats.chHash FROM tbManagers LEFT JOIN tbChats ON tbChats.chId=tbManagers.mSiteChatId WHERE mBotChatId=:mBotChatId");
-										$sth->execute(array(":mBotChatId"=>$chatId));
+										$sth->execute([":mBotChatId"=>$chatId]);
 										$answer=$sth->fetch();
 										
 										if($answer['mSiteChatId']!=null){
@@ -182,7 +182,7 @@ if($fl){
 										
 												
 												$sth=$db->prepare("INSERT INTO tbMessages (msgChatId, msgFrom, msgTime, msgText) VALUES (:msgChatId, :msgFrom, :msgTime, :msgText)");
-												$sth->execute(array(":msgChatId"=>$answer['mSiteChatId'], ":msgFrom"=>"m", ":msgTime"=>time(), ":msgText"=>$message));
+												$sth->execute([":msgChatId"=>$answer['mSiteChatId'], ":msgFrom"=>"m", ":msgTime"=>time(), ":msgText"=>$message]);
 												
 												$file=$tbRootDir."/chatUpdates/".$answer['chHash'].".manager";
 												$f=fopen($file,"w");
