@@ -3,7 +3,7 @@
 
 // Корневая директория для TelegramSiteHelper
 // Root dir for TelegramSiteHelper
-$tbRootDir = $_SERVER['OLDPWD'] . "/public_html/telegram/telegramSiteHelper";
+$tbRootDir = "/var/www/capitalov.com/data/www/staging.capitalov.com/capitalov/public_html/telegram/telegramSiteHelper";
 
 // Пароль для авторизации менеджера через телеграм бота
 // Password for manager auth (in Telegram bot), you must write some non-so-easy
