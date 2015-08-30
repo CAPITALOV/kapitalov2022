@@ -38,7 +38,33 @@ $('#slider').rangeSlider({
 JS
 );
 
-
+$colorGreen = [
+    'label'                => "Курс",
+    'fillColor'            => "rgba(220,220,220,0.2)",
+    'strokeColor'          => "rgba(120,255,120,1)",
+    'pointColor'           => "rgba(70,255,70,1)",
+    'pointStrokeColor'     => "#fff",
+    'pointHighlightFill'   => "#fff",
+    'pointHighlightStroke' => "rgba(220,220,220,1)",
+];
+$colorRed = [
+    'label'                => "Прогноз",
+    'fillColor'            => "rgba(220,220,220,0)",
+    'strokeColor'          => "rgba(255,120,120,1)",
+    'pointColor'           => "rgba(255,70,70,1)",
+    'pointStrokeColor'     => "#fff",
+    'pointHighlightFill'   => "#fff",
+    'pointHighlightStroke' => "rgba(220,220,220,1)",
+];
+$colorBlue = [
+    'label'                => "Прогноз",
+    'fillColor'            => "rgba(220,220,220,0)",
+    'strokeColor'          => "rgba(120,120,255,1)",
+    'pointColor'           => "rgba(70,70,255,1)",
+    'pointStrokeColor'     => "#fff",
+    'pointHighlightFill'   => "#fff",
+    'pointHighlightStroke' => "rgba(220,220,220,1)",
+];
 ?>
 
 <h1 class="page-header"><?= $this->title ?></h1>
@@ -55,34 +81,14 @@ if ($logo) {
 <?= \cs\Widget\ChartJs\Line::widget([
     'width'     => 800,
     'lineArray' => $lineArrayRed,
-    'colors' => [
-        [
-            'label'                => "Прогноз",
-            'fillColor'            => "rgba(220,220,220,0)",
-            'strokeColor'          => "rgba(255,229,229,1)",
-            'pointColor'           => "rgba(255,204,204,1)",
-            'pointStrokeColor'     => "#fff",
-            'pointHighlightFill'   => "#fff",
-            'pointHighlightStroke' => "rgba(220,220,220,1)",
-        ],
-    ],
+    'colors' => [$colorRed],
 ]) ?>
 
 <h2 class="page-header">Прогноз (синий)</h2>
 <?= \cs\Widget\ChartJs\Line::widget([
     'width'     => 800,
     'lineArray' => $lineArrayBlue,
-    'colors' => [
-        [
-            'label'                => "Прогноз",
-            'fillColor'            => "rgba(220,220,220,0)",
-            'strokeColor'          => "rgba(229,229,255,1)",
-            'pointColor'           => "rgba(204,204,255,1)",
-            'pointStrokeColor'     => "#fff",
-            'pointHighlightFill'   => "#fff",
-            'pointHighlightStroke' => "rgba(220,220,220,1)",
-        ],
-    ],
+    'colors' => [$colorBlue],
 ]) ?>
 
 <h2 class="page-header">Прогноз (кр+син)</h2>
@@ -90,24 +96,7 @@ if ($logo) {
     'width'     => 800,
     'lineArray' => $lineArrayUnion,
     'colors' => [
-        [
-            'label'                => "Прогноз",
-            'fillColor'            => "rgba(220,220,220,0)",
-            'strokeColor'          => "rgba(255,229,229,1)",
-            'pointColor'           => "rgba(255,204,204,1)",
-            'pointStrokeColor'     => "#fff",
-            'pointHighlightFill'   => "#fff",
-            'pointHighlightStroke' => "rgba(220,220,220,1)",
-        ],
-        [
-            'label'                => "Прогноз",
-            'fillColor'            => "rgba(220,220,220,0)",
-            'strokeColor'          => "rgba(229,229,255,1)",
-            'pointColor'           => "rgba(204,204,255,1)",
-            'pointStrokeColor'     => "#fff",
-            'pointHighlightFill'   => "#fff",
-            'pointHighlightStroke' => "rgba(220,220,220,1)",
-        ],
+        $colorRed,$colorBlue
     ],
 ]) ?>
 
@@ -116,33 +105,7 @@ if ($logo) {
     'width'     => 800,
     'lineArray' => $lineArrayUnion2,
     'colors' => [
-        [
-            'label'                => "Прогноз",
-            'fillColor'            => "rgba(220,220,220,0)",
-            'strokeColor'          => "rgba(255,229,229,1)",
-            'pointColor'           => "rgba(255,204,204,1)",
-            'pointStrokeColor'     => "#fff",
-            'pointHighlightFill'   => "#fff",
-            'pointHighlightStroke' => "rgba(220,220,220,1)",
-        ],
-        [
-            'label'                => "Прогноз",
-            'fillColor'            => "rgba(220,220,220,0)",
-            'strokeColor'          => "rgba(229,229,255,1)",
-            'pointColor'           => "rgba(204,204,255,1)",
-            'pointStrokeColor'     => "#fff",
-            'pointHighlightFill'   => "#fff",
-            'pointHighlightStroke' => "rgba(220,220,220,1)",
-        ],
-        [
-            'label'                => "Курс",
-            'fillColor'            => "rgba(220,220,220,0)",
-            'strokeColor'          => "rgba(229,255,229,1)",
-            'pointColor'           => "rgba(204,255,204,1)",
-            'pointStrokeColor'     => "#fff",
-            'pointHighlightFill'   => "#fff",
-            'pointHighlightStroke' => "rgba(220,220,220,1)",
-        ],
+        $colorRed,$colorBlue,$colorGreen,
     ],
 ]) ?>
 
@@ -153,15 +116,7 @@ $graph3 = new \cs\Widget\ChartJs\Line([
     'width'     => 800,
     'lineArray' => $lineArrayKurs,
     'colors' => [
-        [
-            'label'                => "Курс",
-            'fillColor'            => "rgba(220,220,220,0.2)",
-            'strokeColor'          => "rgba(229,255,229,1)",
-            'pointColor'           => "rgba(204,255,204,1)",
-            'pointStrokeColor'     => "#fff",
-            'pointHighlightFill'   => "#fff",
-            'pointHighlightStroke' => "rgba(220,220,220,1)",
-        ],
+        $colorGreen,
     ],
 ]);
 echo $graph3->run();

@@ -106,8 +106,8 @@ class CabinetController extends CabinetBaseController
         $colorGreen = [
             'label'                => "Курс",
             'fillColor'            => "rgba(220,220,220,0.2)",
-            'strokeColor'          => "rgba(229,255,229,1)",
-            'pointColor'           => "rgba(204,255,204,1)",
+            'strokeColor'          => "rgba(120,255,120,1)",
+            'pointColor'           => "rgba(70,255,70,1)",
             'pointStrokeColor'     => "#fff",
             'pointHighlightFill'   => "#fff",
             'pointHighlightStroke' => "rgba(220,220,220,1)",
@@ -115,8 +115,8 @@ class CabinetController extends CabinetBaseController
         $colorRed = [
             'label'                => "Прогноз",
             'fillColor'            => "rgba(220,220,220,0)",
-            'strokeColor'          => "rgba(255,229,229,1)",
-            'pointColor'           => "rgba(255,204,204,1)",
+            'strokeColor'          => "rgba(255,120,120,1)",
+            'pointColor'           => "rgba(255,70,70,1)",
             'pointStrokeColor'     => "#fff",
             'pointHighlightFill'   => "#fff",
             'pointHighlightStroke' => "rgba(220,220,220,1)",
@@ -124,8 +124,8 @@ class CabinetController extends CabinetBaseController
         $colorBlue = [
             'label'                => "Прогноз",
             'fillColor'            => "rgba(220,220,220,0)",
-            'strokeColor'          => "rgba(229,229,255,1)",
-            'pointColor'           => "rgba(204,204,255,1)",
+            'strokeColor'          => "rgba(120,120,255,1)",
+            'pointColor'           => "rgba(70,70,255,1)",
             'pointStrokeColor'     => "#fff",
             'pointHighlightFill'   => "#fff",
             'pointHighlightStroke' => "rgba(220,220,220,1)",
