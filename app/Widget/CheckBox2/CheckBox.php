@@ -50,7 +50,6 @@ class CheckBox extends InputWidget
      */
     public function run()
     {
-
         $this->registerClientScript();
         $options = ArrayHelper::merge($this->options, [
             'data-toggle' => 'toggle',

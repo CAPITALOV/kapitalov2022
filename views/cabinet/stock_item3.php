@@ -121,10 +121,11 @@ $this->registerJs(<<<JS
         },
         defaultValues:{min: {$defaultStart}, max: {$defaultEnd}}
     });
-    $("#slider").bind("valuesChanged", function(e, data){
+    var functionOnChange = function(e, data)  {
         {$graph3->varName}.destroy();
-        var start = getDate(data.values.min);
-        var end = getDate(data.values.max);
+        var values = $('#slider').rangeSlider('values');
+        var start = getDate(values.min);
+        var end = getDate(values.max);
         console.log([start, end ]);
         ajaxJson({
             url: '$url',
@@ -132,16 +133,20 @@ $this->registerJs(<<<JS
                 'min': start,
                 'max': end,
                 'id': {$item->getId()},
-                'isUseRed': 1,
-                'isUseBlue': 1,
-                'isUseKurs': 1,
+                'isUseRed': $('#stockitem3-isred').is(':checked')? 1 : 0,
+                'isUseBlue': $('#stockitem3-isblue').is(':checked')? 1 : 0,
+                'isUseKurs': $('#stockitem3-iskurs').is(':checked')? 1 : 0,
                 'y': 1
             },
             success: function(ret) {
                 {$graph3->varName} = new Chart(document.getElementById('$graph3->id').getContext('2d')).Line(ret, []);
             }
         });
-    });
+    };
+    $("#slider").bind("valuesChanged", functionOnChange);
+    $('#stockitem3-isred').change(functionOnChange);
+    $('#stockitem3-isblue').change(functionOnChange);
+    $('#stockitem3-iskurs').change(functionOnChange);
 JS
 );
 ?>
@@ -152,7 +157,27 @@ JS
         </div>
     </div>
 </div>
-
+<div class="row col-lg-12">
+    <?php
+    $model = new \app\models\Form\StockItem3();
+    $form = ActiveForm::begin([
+        'id' => 'contact-form',
+    ]);
+    ?>
+    <div class="col-lg-2">
+        Прогноз
+        <?= $form->field($model, 'isRed')->widget('cs\Widget\CheckBox2\CheckBox', ['options' => ['data-onstyle' => 'danger']])->label('', ['class' => 'hide'])?>
+    </div>
+    <div class="col-lg-2">
+        Прогноз
+        <?= $form->field($model, 'isBlue')->widget('cs\Widget\CheckBox2\CheckBox', ['options' => ['data-onstyle' => 'primary']])->label('', ['class' => 'hide']) ?>
+    </div>
+    <div class="col-lg-2">
+        Курс
+        <?= $form->field($model, 'isKurs')->widget('cs\Widget\CheckBox2\CheckBox', ['options' => ['data-onstyle' => 'success']])->label('', ['class' => 'hide']) ?>
+    </div>
+    <?php ActiveForm::end() ?>
+</div>
 <h2 class="page-header row col-lg-12" style="page-break-before: always;">Будущее</h2>
 <?php if ($isPaid) { ?>
     <?php
@@ -184,7 +209,7 @@ JS
         },
         defaultValues:{min: {$defaultStart}, max: {$defaultEnd}}
     });
-    $("#sliderFuture").bind("valuesChanged", function(e, data){
+    var functionOnChangeFuture = function(e, data){
         {$graphFuture->varName}.destroy();
         var start = getDate(data.values.min);
         var end = getDate(data.values.max);
@@ -195,16 +220,18 @@ JS
                 'min': start,
                 'max': end,
                 'id': {$item->getId()},
-                'isUseRed': 1,
-                'isUseBlue': 1,
-                'isUseKurs': 1,
+                'isUseRed': $('#stockitem3-isred').is(':checked')? 1 : 0,
+                'isUseBlue': $('#stockitem3-isblue').is(':checked')? 1 : 0,
+                'isUseKurs': $('#stockitem3-iskurs').is(':checked')? 1 : 0,
                 'y': 1
             },
             success: function(ret) {
-                {$graphFuture->varName} = new Chart(document.getElementById('$graphFuture->id').getContext('2d')).Line(ret, []);
+                    {$graphFuture->varName} = new Chart(document.getElementById('$graphFuture->id').getContext('2d')).Line(ret, []);
             }
         });
-    });
+    };
+    $("#sliderFuture").bind("valuesChanged", functionOnChangeFuture);
+
 JS
     );
     ?>
