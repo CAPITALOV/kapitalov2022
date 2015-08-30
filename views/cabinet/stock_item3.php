@@ -164,15 +164,15 @@ JS
         'id' => 'contact-form',
     ]);
     ?>
-    <div class="col-lg-2">
+    <div class="col-lg-1">
         Прогноз
         <?= $form->field($model, 'isRed')->widget('cs\Widget\CheckBox2\CheckBox', ['options' => ['data-onstyle' => 'danger']])->label('', ['class' => 'hide'])?>
     </div>
-    <div class="col-lg-2">
+    <div class="col-lg-1">
         Прогноз
         <?= $form->field($model, 'isBlue')->widget('cs\Widget\CheckBox2\CheckBox', ['options' => ['data-onstyle' => 'primary']])->label('', ['class' => 'hide']) ?>
     </div>
-    <div class="col-lg-2">
+    <div class="col-lg-1">
         Курс
         <?= $form->field($model, 'isKurs')->widget('cs\Widget\CheckBox2\CheckBox', ['options' => ['data-onstyle' => 'success']])->label('', ['class' => 'hide']) ?>
     </div>

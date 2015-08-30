@@ -263,6 +263,18 @@ class CabinetController extends CabinetBaseController
                     }
                 } else {
                     switch($y) {
+                        case 1: // Курс
+                            $lineArray = \app\service\GraphUnion::convert([
+                                'x' => $lineArrayRed['x'],
+                                'y' => [
+                                    $lineArrayRed['y'][0],
+                                    $lineArrayBlue['y'][0],
+                                ]
+                            ]);
+                            $colors = [
+                                $colorRed, $colorBlue,
+                            ];
+                            break;
                         case 2: // Красный
                             $lineArray = \app\service\GraphUnion::convert([
                                 'x' => $lineArrayRed['x'],
