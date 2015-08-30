@@ -11,10 +11,11 @@ use yii\helpers\VarDumper;
 use yii\helpers\ArrayHelper;
 use app\models\UserStock;
 
-class User extends DbRecord implements \yii\web\IdentityInterface {
+class User extends DbRecord implements \yii\web\IdentityInterface
+{
+    use UserCache;
 
     const TABLE = 'cap_users';
-
 
     /**
      * Возвращает аватар
@@ -24,7 +25,30 @@ class User extends DbRecord implements \yii\web\IdentityInterface {
      */
     public function getAvatar($isFullPath = false)
     {
-        return '/images/iam.png';
+        $avatar =  $this->getField('avatar', '');
+        if ($avatar == '') {
+            $avatar = '/images/iam.png';
+        }
+
+        return Url::to($avatar, $isFullPath);
+    }
+
+    /**
+     * Возвращает имя полное (Имя Фамилия)
+     * Если не установлено то возвращает email
+     *
+     * @return string
+     */
+    public function getNameFull()
+    {
+        $arr[] = $this->getField('name_first');
+        $arr[] = $this->getField('name_last');
+        $name = join(' ', $arr);
+        if (trim($name) == '') {
+            return $this->getEmail();
+        }
+
+        return $name;
     }
 
     public function activate()

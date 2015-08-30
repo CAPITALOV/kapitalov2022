@@ -24,6 +24,30 @@
         {
             "type": "package",
             "package": {
+                "name": "vlucas/valitron",
+                "version": "1.0.1",
+                "source": {
+                    "url": "https://github.com/vlucas/valitron",
+                    "type": "git",
+                    "reference": "master"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "ExactTarget/fuelux",
+                "version": "1.0.1",
+                "source": {
+                    "url": "https://github.com/ExactTarget/fuelux",
+                    "type": "git",
+                    "reference": "master"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
                 "name": "nnnick/Chart.js",
                 "version": "1.0.1",
                 "source": {
@@ -68,6 +92,8 @@
         "yiisoft/yii2-swiftmailer": "*",
         "yiisoft/yii2-imagine": "~2.0.0",
         "yiisoft/yii2-smarty": "*",
+        "ExactTarget/fuelux": "*",
+        "vlucas/valitron": "*",
         "Surzhikov/TelegramSiteHelper": "*",
         "yandex-money/yandex-money-sdk-php": "3.0.*",
         "nnnick/Chart.js": "1.0.1",

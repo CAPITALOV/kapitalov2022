@@ -20,16 +20,21 @@ use yii\web\Response;
 class CabinetController extends CabinetBaseController
 {
 
-    /**
-     * Выводит профиль пользователя
-     */
+
     public function actionProfile()
     {
-        return $this->render('profile', [
-            'user' => User::findIdentity(
-                Yii::$app->user->getId()
-            ),
-        ]);
+        $model = \app\models\Form\Profile::find(Yii::$app->user->getId());
+        if ($model->load(Yii::$app->request->post()) && ($fields = $model->update())) {
+            Yii::$app->user->identity->cacheClear();
+            Yii::$app->session->setFlash('contactFormSubmitted');
+
+            return $this->refresh();
+        } else {
+            return $this->render([
+                'model' => $model,
+                'user'  => Yii::$app->user->identity
+            ]);
+        }
     }
 
     /**

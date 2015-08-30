@@ -66,6 +66,13 @@ return [
 
     'money/history'                         => 'money/history',
 
+    'chat'                                  => 'cabinet_chat/index',
+    'chat/send'                             => 'cabinet_chat/send',
+    'chat/list'                             => 'superadmin_chat/index',
+    'chat/user/<id:\\d+>'                   => 'superadmin_chat/user',
+    'chat/getNewMessages'                   => 'cabinet_chat/get_new_messages',
+    'chat/test'                             => 'cabinet_chat/test',
+
     'yandexMoney'                           => 'yandex_money/auth',
     'yandexMoney/test1'                     => 'yandex_money/test1',
     'yandexMoney/test2'                     => 'yandex_money/test2',
