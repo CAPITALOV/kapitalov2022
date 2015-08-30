@@ -1,12 +1,17 @@
 <?php
 
-
 namespace cs\services;
 
 use DateTime;
 use cs\models\Response;
-use yii\helpers\VarDumper;
 
+/**
+ * Используется для расчета строки "{n времени} назад"
+ *
+ * Class DatePeriod
+ *
+ * @package cs\services
+ */
 class DatePeriod
 {
     private static $messageBig  = 'более пяти лет назад';
@@ -237,11 +242,15 @@ class DatePeriod
     private static function convertDate($date)
     {
         if (is_string($date)) {
-            return Response::success((new \DateTime($date, new \DateTimeZone('UTC')))->format('U'));
-        } else if ($date instanceof DateTime) {
-            return Response::success($date->format('U'));
+            if (Str::isContain($date, '-')) {
+                return Response::success((new \DateTime($date, new \DateTimeZone('UTC')))->format('U'));
+            } else {
+                return Response::success((int)$date);
+            }
         } else if (is_integer($date)) {
             return Response::success($date);
+        } else if ($date instanceof DateTime) {
+            return Response::success($date->format('U'));
         } else {
             return Response::error('Не верный формат данных');
         }
@@ -277,7 +286,7 @@ class DatePeriod
     public static function backInt($date, $messageGregerThenNow = 'больше настоящего')
     {
         $start = $date;
-        $now = gmdate('U');
+        $now = time();
         if ($start > $now) return $messageGregerThenNow;
         $diff = $now - $start;
         return self::backConvert($diff);

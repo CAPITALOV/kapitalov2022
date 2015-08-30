@@ -6,7 +6,14 @@ use app\models\Translator as T;
 use yii\helpers\Url;
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
-
+$this->registerJs(<<<JS
+    $('#layoutCabinetLinkBack').tooltip({
+        placement: 'right',
+        animation: true,
+        delay: 300
+    });
+JS
+);
 ?>
 
 <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -22,59 +29,59 @@ use yii\bootstrap\ActiveForm;
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-left">
-                <li><a class="navbar-brand" href="<?= Url::to(['landing/index']) ?>">Capitalov.com</a></li>
-                <li><span class="navbar-brand">/</span></li>
-                <li><a class="navbar-brand" href="<?= Url::to(['cabinet/index']) ?>">Личный кабинет</a></li>
+                <li><a class="navbar-brand" href="<?= Url::to(['landing/index']) ?>" id="layoutCabinetLinkBack" title="Назад на главный сайт"><span class="glyphicon glyphicon-menu-left"></span></a></li>
+                <li><a href="<?= Url::to(['cabinet/index']) ?>">Личный кабинет</a></li>
+                <li<?php if (Url::to(['cabinet_chat/index']) == Url::current()) { echo(' class="active"');} ?>><a href="<?= Url::to(['cabinet_chat/index']) ?>">Обратная связь</a></li>
             </ul>
 
 
             <ul class="nav navbar-nav navbar-right" style="margin-right: 20px;">
-                <?php
-                $this->registerCss('.ui-autocomplete {z-index: 9999;}');
-                // форма поиска
-                $form = ActiveForm::begin([
-                    'enableClientValidation' => false,
-                    'options'                => [
-                        'style' => 'margin-bottom: 0px;',
-                        'class' => "navbar-form navbar-left",
-                        'role'  => "search",
-                    ],
-                ]);
-                $url = Url::to(['cabinet/search_stock_autocomplete']);
-                echo $form
-                    ->field(new \app\models\Form\Search(), 'searchText', ['inputOptions' => ['placeholder' => 'Поиск']])
-                    ->label('Поиск', ['class' => 'hide'])
-                    ->widget(\yii\jui\AutoComplete::classname(), [
-                        'clientOptions' => [
-                            'source' => new  \yii\web\JsExpression(<<<JS
-function (request, response) {
-    ajaxJson({
-        url: '{$url}',
-        data: {
-        term: request.term
-        },
-        success: function(ret) {
-            response(ret);
-        }
-    });
-  }
-JS
-                            ),
-                            'select' => new \yii\web\JsExpression(<<<JS
-function(event, ui) {
-    var stockId = ui.item.id;
-    window.location = '/stockList3/' + stockId;
-}
-JS
-                            ),
-                        ],
-                        'options'       => [
-                            'class'       => 'form-control',
-                            'placeholder' => 'Поиск',
-                        ]
-                    ]);
-                ActiveForm::end();
-                ?>
+<!--                --><?php
+//                $this->registerCss('.ui-autocomplete {z-index: 9999;}');
+//                // форма поиска
+//                $form = ActiveForm::begin([
+//                    'enableClientValidation' => false,
+//                    'options'                => [
+//                        'style' => 'margin-bottom: 0px;',
+//                        'class' => "navbar-form navbar-left",
+//                        'role'  => "search",
+//                    ],
+//                ]);
+//                $url = Url::to(['cabinet/search_stock_autocomplete']);
+//                echo $form
+//                    ->field(new \app\models\Form\Search(), 'searchText', ['inputOptions' => ['placeholder' => 'Поиск']])
+//                    ->label('Поиск', ['class' => 'hide'])
+//                    ->widget(\yii\jui\AutoComplete::classname(), [
+//                        'clientOptions' => [
+//                            'source' => new  \yii\web\JsExpression(<<<JS
+//function (request, response) {
+//    ajaxJson({
+//        url: '{$url}',
+//        data: {
+//        term: request.term
+//        },
+//        success: function(ret) {
+//            response(ret);
+//        }
+//    });
+//  }
+//JS
+//                            ),
+//                            'select' => new \yii\web\JsExpression(<<<JS
+//function(event, ui) {
+//    var stockId = ui.item.id;
+//    window.location = '/stockList3/' + stockId;
+//}
+//JS
+//                            ),
+//                        ],
+//                        'options'       => [
+//                            'class'       => 'form-control',
+//                            'placeholder' => 'Поиск',
+//                        ]
+//                    ]);
+//                ActiveForm::end();
+//                ?>
                 <li class="dropdown">
                     <a
                         href="#"
