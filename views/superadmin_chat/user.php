@@ -11,10 +11,6 @@ use yii\helpers\Html;
 
 $this->title = 'Обратная связь';
 $this->registerJsFile('/js/pages/superadmin_chat/user.js', ['depends' => ['yii\web\JqueryAsset']]);
-$this->registerJs(<<<JS
-    $('.chat-datetime').tooltip();
-JS
-);
 
 ?>
 <style>
