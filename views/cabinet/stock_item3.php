@@ -55,7 +55,7 @@ $url = Url::to(['cabinet/graph_ajax']);
     $logo = $item->getField('logo', '');
     if ($logo) {
         ?>
-        <div class="col-lg-3">
+        <div class="col-lg-1">
             <img src="<?= $logo ?>" class="thumbnail" width="50">
         </div>
     <?php
@@ -65,7 +65,7 @@ $url = Url::to(['cabinet/graph_ajax']);
     $d = $item->getField('description', '');
     if ($d) {
         ?>
-        <div class="col-lg-9">
+        <div class="col-lg-11">
             <p><?= $d ?></p>
         </div>
     <?php
