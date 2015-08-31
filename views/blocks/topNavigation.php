@@ -32,6 +32,7 @@ JS
                 <li><a class="navbar-brand" href="<?= Url::to(['landing/index']) ?>" id="layoutCabinetLinkBack" title="Назад на главный сайт"><span class="glyphicon glyphicon-menu-left"></span></a></li>
                 <li><a href="<?= Url::to(['cabinet/index']) ?>">Личный кабинет</a></li>
                 <li<?php if (Url::to(['cabinet_chat/index']) == Url::current()) { echo(' class="active"');} ?>><a href="<?= Url::to(['cabinet_chat/index']) ?>">Обратная связь</a></li>
+                <?php if (Yii::$app->user->identity->isRole(\app\models\UserRole::ROLE_DESIGNER)) { ?>
                 <li class="dropdown<?php if (Yii::$app->controller->id == 'designer') { echo(' active');} ?>">
                     <a
                         href="#"
@@ -48,6 +49,7 @@ JS
 
                     </ul>
                 </li>
+                <?php } ?>
             </ul>
 
 
