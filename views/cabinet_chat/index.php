@@ -64,40 +64,40 @@ JS
 <div class="panel-heading">
     <i class="glyphicon glyphicon-comment"></i>
     Переписка
-    <div class="btn-group pull-right">
-        <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown"
-                aria-expanded="false">
-            <i class="glyphicon glyphicon-menu-down"></i>
-        </button>
-        <ul class="dropdown-menu slidedown">
-            <li>
-                <a href="#">
-                    <i class="fa fa-refresh fa-fw"></i> Refresh
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <i class="fa fa-check-circle fa-fw"></i> Available
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <i class="fa fa-times fa-fw"></i> Busy
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <i class="glyphicon glyphicon-time"></i> Away
-                </a>
-            </li>
-            <li class="divider"></li>
-            <li>
-                <a href="#">
-                    <i class="fa fa-sign-out fa-fw"></i> Sign Out
-                </a>
-            </li>
-        </ul>
-    </div>
+<!--    <div class="btn-group pull-right">-->
+<!--        <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown"-->
+<!--                aria-expanded="false">-->
+<!--            <i class="glyphicon glyphicon-menu-down"></i>-->
+<!--        </button>-->
+<!--        <ul class="dropdown-menu slidedown">-->
+<!--            <li>-->
+<!--                <a href="#">-->
+<!--                    <i class="fa fa-refresh fa-fw"></i> Refresh-->
+<!--                </a>-->
+<!--            </li>-->
+<!--            <li>-->
+<!--                <a href="#">-->
+<!--                    <i class="fa fa-check-circle fa-fw"></i> Available-->
+<!--                </a>-->
+<!--            </li>-->
+<!--            <li>-->
+<!--                <a href="#">-->
+<!--                    <i class="fa fa-times fa-fw"></i> Busy-->
+<!--                </a>-->
+<!--            </li>-->
+<!--            <li>-->
+<!--                <a href="#">-->
+<!--                    <i class="glyphicon glyphicon-time"></i> Away-->
+<!--                </a>-->
+<!--            </li>-->
+<!--            <li class="divider"></li>-->
+<!--            <li>-->
+<!--                <a href="#">-->
+<!--                    <i class="fa fa-sign-out fa-fw"></i> Sign Out-->
+<!--                </a>-->
+<!--            </li>-->
+<!--        </ul>-->
+<!--    </div>-->
 </div>
 <!-- /.panel-heading -->
 <div class="panel-body">

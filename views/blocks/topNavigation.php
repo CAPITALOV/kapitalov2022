@@ -32,8 +32,42 @@ JS
                 <li><a class="navbar-brand" href="<?= Url::to(['landing/index']) ?>" id="layoutCabinetLinkBack" title="Назад на главный сайт"><span class="glyphicon glyphicon-menu-left"></span></a></li>
                 <li><a href="<?= Url::to(['cabinet/index']) ?>">Личный кабинет</a></li>
                 <li<?php if (Url::to(['cabinet_chat/index']) == Url::current()) { echo(' class="active"');} ?>><a href="<?= Url::to(['cabinet_chat/index']) ?>">Обратная связь</a></li>
+                <?php if (Yii::$app->user->identity->isAdmin()) { ?>
+                    <li class="dropdown<?php if (Yii::$app->controller->id == 'superadmin_stock') { echo(' active');} ?>">
+                        <a
+                            href="#"
+                            class="dropdown-toggle"
+                            data-toggle="dropdown"
+                            aria-expanded="false"
+                            role="button"
+                            >
+                            Админ
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="<?= Url::to(['superadmin_stock/index']) ?>">Курсы</a></li>
+                        </ul>
+                    </li>
+                <?php } ?>
                 <?php if (Yii::$app->user->identity->isRole(\app\models\UserRole::ROLE_DESIGNER)) { ?>
-                <li class="dropdown<?php if (Yii::$app->controller->id == 'designer') { echo(' active');} ?>">
+                    <li class="dropdown<?php if (Yii::$app->controller->id == 'designer') { echo(' active');} ?>">
+                        <a
+                            href="#"
+                            class="dropdown-toggle"
+                            data-toggle="dropdown"
+                            aria-expanded="false"
+                            role="button"
+                            >
+                            Дизайн
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="<?= Url::to(['designer/landing']) ?>">Главная страница</a></li>
+
+                        </ul>
+                    </li>
+                <?php } ?>
+                <li class="dropdown<?php if (Yii::$app->controller->id == 'cabinet') { echo(' active');} ?>">
                     <a
                         href="#"
                         class="dropdown-toggle"
@@ -41,15 +75,25 @@ JS
                         aria-expanded="false"
                         role="button"
                         >
-                        Дизайн
+                        Акции
                         <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu" role="menu">
-                        <li><a href="<?= Url::to(['designer/landing']) ?>">Главная страница</a></li>
+                        <li><a href="<?= Url::to(['cabinet/index']) ?>">Все</a></li>
+                        <li class="divider"></li>
+                        <li role="presentation" class="dropdown-header">Оплаченные</li>
+                        <?php foreach(\app\models\Stock::getPaid()->all() as $item) { ?>
+                            <li><a href="<?= Url::to(['cabinet/stock_item3', 'id' => $item['id']]) ?>"><?= $item['name'] ?></a></li>
+                        <?php } ?>
+                        <li class="divider"></li>
+                        <li role="presentation" class="dropdown-header">Не оплаченные</li>
+                        <?php
 
+                        foreach(\app\models\Stock::getNotPaid()->all() as $item) { ?>
+                            <li><a href="<?= Url::to(['cabinet/stock_item3', 'id' => $item['id']]) ?>"><?= $item['name'] ?></a></li>
+                        <?php } ?>
                     </ul>
                 </li>
-                <?php } ?>
             </ul>
 
 

@@ -36,13 +36,8 @@ AppAsset::register($this);
     <?php $this->beginBody() ?>
     <?= $this->render('../blocks/topNavigation') ?>
     <div class="container-fluid">
-        <div class="row" style="padding-top: 80px; padding-bottom: 40px;">
-            <div class="col-sm-3 col-md-2 sidebar">
-                <?= $this->render('../blocks/leftNavigation') ?>
-            </div>
-            <div class="col-sm-9 col-md-10 main">
-                <?= $content ?>
-            </div>
+        <div class="row col-lg-12" style="padding-top: 80px; padding-bottom: 40px;">
+            <?= $content ?>
         </div>
     </div>
 

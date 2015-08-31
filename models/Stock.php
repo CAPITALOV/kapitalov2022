@@ -14,7 +14,6 @@ use yii\db\Query;
 use yii\helpers\Html;
 
 /**
- * ContactForm is the model behind the contact form.
  */
 class Stock extends \cs\base\DbRecord
 {
@@ -23,5 +22,39 @@ class Stock extends \cs\base\DbRecord
     public function getName()
     {
         return $this->getField('name', '');
+    }
+
+    /**
+     * Возвращает акции которые оплаченые
+     *
+     * @return \yii\db\Query
+     */
+    public static function getPaid()
+    {
+        return self::query()
+            ->select([
+                'cap_stock.id',
+                'cap_stock.name',
+            ])
+            ->innerJoin('cap_users_stock_buy', 'cap_users_stock_buy.stock_id = cap_stock.id and cap_users_stock_buy.user_id = :uid', [':uid' => Yii::$app->user->id])
+            ->orderBy(['cap_stock.name' => SORT_ASC])
+            ;
+    }
+
+    /**
+     * Возвращает акции которые оплачены
+     * @return \yii\db\Query
+     */
+    public static function getNotPaid()
+    {
+        return self::query()
+            ->select([
+                'cap_stock.id',
+                'cap_stock.name',
+            ])
+            ->leftJoin('cap_users_stock_buy', 'cap_users_stock_buy.stock_id = cap_stock.id and cap_users_stock_buy.user_id = :uid', [':uid' => Yii::$app->user->id])
+            ->orderBy(['cap_stock.name' => SORT_ASC])
+            ->where(['cap_users_stock_buy.stock_id' => null])
+            ;
     }
 }
