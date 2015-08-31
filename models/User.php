@@ -51,6 +51,18 @@ class User extends DbRecord implements \yii\web\IdentityInterface
         return $name;
     }
 
+    /**
+     * Имеет ли пользователь роль
+     *
+     * @param int $id идентификатор роли
+     *
+     * @return bool
+     */
+    public function isRole($id)
+    {
+        return UserRoleLink::isRole($this->getId(), $id);
+    }
+
     public function activate()
     {
         $this->update([

@@ -45,6 +45,10 @@ return [
     'stock/prognosis/update'                => 'superadmin_stock/prognosis_update',
     'stock/<id:\\d+>/graph'                 => 'superadmin_stock/graph',
 
+    // designer
+    'designer'                              => 'designer/index',
+    'designer/landing'                      => 'designer/landing',
+
     // cabinet
     'cabinet'                               => 'cabinet/index',
     'cabinet/savePng'                       => 'cabinet/save_png',
