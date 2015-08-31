@@ -218,21 +218,20 @@ $url = Url::to(['cabinet/graph_ajax']);
         },
         defaultValues:{min: {$defaultStart}, max: {$defaultEnd}}
     });
-    var functionOnChangeFuture = function(e, data){
+    var functionOnChangeFuture = function(e, data) {
         {$graphFuture->varName}.destroy();
         var start = getDate(data.values.min);
         var end = getDate(data.values.max);
-        console.log([start, end ]);
         ajaxJson({
             url: '$url',
             data: {
                 'min': start,
                 'max': end,
                 'id': {$item->getId()},
-                'isUseRed': $('#stockitem3-isred').is(':checked')? 1 : 0,
-                'isUseBlue': $('#stockitem3-isblue').is(':checked')? 1 : 0,
-                'isUseKurs': $('#stockitem3-iskurs').is(':checked')? 1 : 0,
-                'y': 1
+                'isUseRed': 1,
+                'isUseBlue': 1,
+                'isUseKurs': 0,
+                'y': 2
             },
             success: function(ret) {
                     {$graphFuture->varName} = new Chart(document.getElementById('$graphFuture->id').getContext('2d')).Line(ret, []);
