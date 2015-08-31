@@ -764,4 +764,20 @@ class CabinetController extends CabinetBaseController
             ]);
         }
     }
+
+    /**
+     * AJAX
+     * Сохраняет base64 в картинку
+     *
+     * REQUEST:
+     * - base64 - string - data:image/png;base64,iVBORw0KGgoAAAA .. и так далее
+     */
+    public function actionSave_png()
+    {
+        $img = self::getParam('base64');
+        $img = str_replace('data:image/png;base64,', '', $img);
+        $img = str_replace(' ', '+', $img);
+
+        return Yii::$app->response->sendContentAsFile(base64_decode($img), 'img.png');
+    }
 }
