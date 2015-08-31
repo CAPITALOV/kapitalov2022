@@ -11,7 +11,17 @@ $(document).ready(function()
      */
     var lastDatetime = 0;
 
-    $('#btn-chat-send').click(function() {
+    $('.chat-datetime').tooltip();
+    $('#btn-chat-input').on('keypress', function (e) {
+        // Производит нажатие по кнопке отправить сообщение. Отлавливает ctrl+enter
+        e = e || window.event;
+
+        if (e.keyCode == 10 || e.keyCode == 13) {
+            functionSend();
+        }
+    });
+
+    var functionSend = function() {
         var text = $('#btn-chat-input').val();
         var user_id_to = chatObject.data('user-to');
         if (text == '') {
@@ -34,7 +44,9 @@ $(document).ready(function()
                 $('#btn-chat-input').val('');
             }
         });
-    });
+    };
+
+    $('#btn-chat-send').click(functionSend);
 
     setInterval(function() {
         if (lastDatetime == 0) {
