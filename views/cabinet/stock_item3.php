@@ -42,6 +42,7 @@ $colorBlue = [
 
 \app\assets\Slider\Asset::register($this);
 
+$url = Url::to(['cabinet/graph_ajax']);
 
 
 
@@ -54,8 +55,8 @@ $colorBlue = [
     $logo = $item->getField('logo', '');
     if ($logo) {
         ?>
-        <div class="col-lg-3">
-            <img src="<?= $logo ?>" class="thumbnail">
+        <div class="col-lg-1">
+            <img src="<?= $logo ?>" class="thumbnail" width="50">
         </div>
     <?php
     }
@@ -64,7 +65,7 @@ $colorBlue = [
     $d = $item->getField('description', '');
     if ($d) {
         ?>
-        <div class="col-lg-9">
+        <div class="col-lg-11">
             <p><?= $d ?></p>
         </div>
     <?php
@@ -86,7 +87,6 @@ $graph3 = new \cs\Widget\ChartJs\Line([
     ],
 ]);
 echo $graph3->run();
-$url = Url::to(['cabinet/graph_ajax']);
 
 $timeEnd = time() - 60 * 60 * 24;
 $timeStart = $timeEnd - 60 * 60 * 24 * 30 * 6;
@@ -161,7 +161,7 @@ JS
     <?php
     $model = new \app\models\Form\StockItem3();
     $form = ActiveForm::begin([
-        'id' => 'contact-form',
+        'id' => 'contact-form2',
     ]);
     ?>
     <div class="col-lg-1">
@@ -178,6 +178,15 @@ JS
     </div>
     <?php ActiveForm::end() ?>
 </div>
+
+
+
+
+
+
+
+
+
 <h2 class="page-header row col-lg-12" style="page-break-before: always;">Будущее</h2>
 <?php if ($isPaid) { ?>
     <?php
@@ -209,21 +218,20 @@ JS
         },
         defaultValues:{min: {$defaultStart}, max: {$defaultEnd}}
     });
-    var functionOnChangeFuture = function(e, data){
+    var functionOnChangeFuture = function(e, data) {
         {$graphFuture->varName}.destroy();
         var start = getDate(data.values.min);
         var end = getDate(data.values.max);
-        console.log([start, end ]);
         ajaxJson({
             url: '$url',
             data: {
                 'min': start,
                 'max': end,
                 'id': {$item->getId()},
-                'isUseRed': $('#stockitem3-isred').is(':checked')? 1 : 0,
-                'isUseBlue': $('#stockitem3-isblue').is(':checked')? 1 : 0,
-                'isUseKurs': $('#stockitem3-iskurs').is(':checked')? 1 : 0,
-                'y': 1
+                'isUseRed': 1,
+                'isUseBlue': 1,
+                'isUseKurs': 0,
+                'y': 2
             },
             success: function(ret) {
                     {$graphFuture->varName} = new Chart(document.getElementById('$graphFuture->id').getContext('2d')).Line(ret, []);
