@@ -42,6 +42,7 @@ $colorBlue = [
 
 \app\assets\Slider\Asset::register($this);
 
+$url = Url::to(['cabinet/graph_ajax']);
 
 
 
@@ -86,7 +87,6 @@ $colorBlue = [
 //    ],
 //]);
 //echo $graph3->run();
-//$url = Url::to(['cabinet/graph_ajax']);
 //
 //$timeEnd = time() - 60 * 60 * 24;
 //$timeStart = $timeEnd - 60 * 60 * 24 * 30 * 6;
