@@ -32,7 +32,7 @@ JS
                 <li><a class="navbar-brand" href="<?= Url::to(['landing/index']) ?>" id="layoutCabinetLinkBack" title="Назад на главный сайт"><span class="glyphicon glyphicon-menu-left"></span></a></li>
                 <li><a href="<?= Url::to(['cabinet/index']) ?>">Личный кабинет</a></li>
                 <li<?php if (Url::to(['cabinet_chat/index']) == Url::current()) { echo(' class="active"');} ?>><a href="<?= Url::to(['cabinet_chat/index']) ?>">Обратная связь</a></li>
-                <li class="dropdown<?php if (Yii::$app->controller->id == 'designer') { echo(' class="active"');} ?>">
+                <li class="dropdown<?php if (Yii::$app->controller->id == 'designer') { echo(' active');} ?>">
                     <a
                         href="#"
                         class="dropdown-toggle"
