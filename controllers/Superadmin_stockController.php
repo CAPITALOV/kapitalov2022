@@ -265,4 +265,25 @@ class Superadmin_stockController extends SuperadminBaseController
             ]);
         }
     }
+
+    /**
+     * Выводит форму и обрабатывает "Удаление курса"
+     *
+     * @param int $id идентификатор акции
+     *
+     * @return \yii\web\Response
+     */
+    public function actionKurs_delete($id)
+    {
+        $model = new \app\models\Form\StockKursDelete();
+        if ($model->load(Yii::$app->request->post()) && $model->remove($id)) {
+            Yii::$app->session->setFlash('contactFormSubmitted');
+
+            return $this->refresh();
+        } else {
+            return $this->render([
+                'model' => $model,
+            ]);
+        }
+    }
 }

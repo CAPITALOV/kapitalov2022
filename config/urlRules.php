@@ -38,6 +38,7 @@ return [
     'stock/<id:\\d+>/deletePrognosisBlue'   => 'superadmin_stock/prognosis_delete_blue',
     'stock/<id:\\d+>/kurs/add'              => 'superadmin_stock/kurs_add',
     'stock/<id:\\d+>/kurs/edit'             => 'superadmin_stock/kurs_edit',
+    'stock/<id:\\d+>/kurs/delete'           => 'superadmin_stock/kurs_delete',
     'stock/kurs/update'                     => 'superadmin_stock/kurs_update',
     'stock/<id:\\d+>/prognosis/add'         => 'superadmin_stock/prognosis_add',
     'stock/<id:\\d+>/prognosis/edit'        => 'superadmin_stock/prognosis_edit',
@@ -46,6 +47,7 @@ return [
 
     // cabinet
     'cabinet'                               => 'cabinet/index',
+    'cabinet/savePng'                       => 'cabinet/save_png',
     'stockList'                             => 'cabinet/stock_list',
     'stockList/<id:\\d+>'                   => 'cabinet/stock_item',
     'stockList2/<id:\\d+>'                  => 'cabinet/stock_item2',

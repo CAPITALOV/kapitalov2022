@@ -151,9 +151,9 @@ JS
 );
 ?>
 <div class="row col-lg-12">
-    <div class="col-lg-8">
-        <div style="margin: 10px 0px 20px 0px;">
-            <div id="slider"></div>
+    <div class="row col-lg-8">
+        <div style="margin: 10px 0px 20px 0px;width: 800px;">
+            <div id="slider" style=""></div>
         </div>
     </div>
 </div>
@@ -237,8 +237,8 @@ JS
     ?>
 
     <div class="row col-lg-12">
-        <div class="col-lg-8">
-            <div style="margin: 10px 0px 20px 0px;">
+        <div class="row col-lg-8">
+            <div style="margin: 10px 0px 20px 0px; width: 800px;">
                 <div id="sliderFuture"></div>
             </div>
         </div>
