@@ -22,17 +22,17 @@ use yii\helpers\Url;
 
 <!-- Content Row -->
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-offset-2 col-md-4">
         <div class="panel panel-default text-center">
             <div class="panel-heading">
                 <h3 class="panel-title">Демо</h3>
             </div>
             <div class="panel-body">
-                <span class="price"><sup>$</sup>0<sup>00</sup></span>
+                <span class="price"><sup>$</sup>0</span>
                 <span class="period">до конца месяца</span>
             </div>
             <ul class="list-group">
-                <li class="list-group-item"><strong>1</strong> User</li>
+                <li class="list-group-item"><strong>1</strong> Акиця</li>
                 <li class="list-group-item"><strong>Нет</strong> поддержки</li>
                 <li class="list-group-item"><a href="<?= Url::to(['auth/registartion']) ?>" class="btn btn-primary" style="width:100%;">Получить!</a>
                 </li>
@@ -45,28 +45,11 @@ use yii\helpers\Url;
                 <h3 class="panel-title">Базовый <span class="label label-success">Оптимальный выбор</span></h3>
             </div>
             <div class="panel-body">
-                <span class="price"><sup>$</sup>99<sup>99</sup></span>
+                <span class="price"><sup>$</sup>100</span>
                 <span class="period">за месяц</span>
             </div>
             <ul class="list-group">
                 <li class="list-group-item"><strong>1</strong> Акция</li>
-                <li class="list-group-item"><strong>Есть</strong> поддержка</li>
-                <li class="list-group-item"><a href="<?= Url::to(['auth/registartion']) ?>" class="btn btn-primary" style="width:100%;">Получить!</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-    <div class="col-md-4">
-        <div class="panel panel-default text-center">
-            <div class="panel-heading">
-                <h3 class="panel-title">Профессиональный</h3>
-            </div>
-            <div class="panel-body">
-                <span class="price"><sup>$</sup>999<sup>99</sup></span>
-                <span class="period">за месяц</span>
-            </div>
-            <ul class="list-group">
-                <li class="list-group-item"><strong>Все</strong> Акции</li>
                 <li class="list-group-item"><strong>Есть</strong> поддержка</li>
                 <li class="list-group-item"><a href="<?= Url::to(['auth/registartion']) ?>" class="btn btn-primary" style="width:100%;">Получить!</a>
                 </li>
