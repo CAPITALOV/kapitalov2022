@@ -23,10 +23,10 @@ use yii\helpers\Html;
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
                 <li>
-                    <a href="<?= Url::to(['site/about']) ?>">О шедевре</a>
+                    <a href="<?= Url::to(['site/about']) ?>">О продукте</a>
                 </li>
                 <li>
-                    <a href="<?= Url::to(['site/price']) ?>">Цены</a>
+                    <a href="<?= Url::to(['site/price']) ?>">Тарифы</a>
                 </li>
 <!--                <li>-->
 <!--                    <a href="/startbootstrap-modern-business-1.0.3/services.html">Services</a>-->
@@ -89,20 +89,15 @@ use yii\helpers\Html;
 <!--                    </ul>-->
 <!--                </li>-->
                 <?php if (Yii::$app->user->isGuest) { ?>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Вход <b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <li>
-                            <a href="<?= Url::to(['auth/login']) ?>">Авторизация</a>
-                        </li>
-                        <li>
-                            <a href="<?= Url::to(['auth/password_recover']) ?>">Восстановить пароль</a>
-                        </li>
-                        <li>
-                            <a href="<?= Url::to(['auth/registration']) ?>">Регистрация</a>
-                        </li>
-                    </ul>
-                </li>
+                    <li>
+                        <a href="<?= Url::to(['auth/login']) ?>">Вход</a>
+                    </li>
+                    <li>
+                        <a href="<?= Url::to(['auth/registration']) ?>">Регистрация</a>
+                    </li>
+                    <li>
+                        <a href="<?= Url::to(['auth/password_recover']) ?>">Восстановить пароль</a>
+                    </li>
                 <?php } else {?>
                     <li>
                         <!-- Split button -->
