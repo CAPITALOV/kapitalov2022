@@ -31,10 +31,7 @@ $this->title = 'Цены';
             </div>
             <ul class="list-group">
                 <li class="list-group-item"><strong>1</strong> User</li>
-                <li class="list-group-item"><strong>5</strong> Projects</li>
-                <li class="list-group-item"><strong>Unlimited</strong> Email Accounts</li>
-                <li class="list-group-item"><strong>10GB</strong> Disk Space</li>
-                <li class="list-group-item"><strong>100GB</strong> Monthly Bandwidth</li>
+                <li class="list-group-item"><strong>Нет</strong> поддержки</li>
                 <li class="list-group-item"><a href="#" class="btn btn-primary" style="width:100%;">Получить!</a>
                 </li>
             </ul>
@@ -51,10 +48,7 @@ $this->title = 'Цены';
             </div>
             <ul class="list-group">
                 <li class="list-group-item"><strong>1</strong> Акция</li>
-                <li class="list-group-item"><strong>500</strong> Projects</li>
-                <li class="list-group-item"><strong>Unlimited</strong> Email Accounts</li>
-                <li class="list-group-item"><strong>1000GB</strong> Disk Space</li>
-                <li class="list-group-item"><strong>10000GB</strong> Monthly Bandwidth</li>
+                <li class="list-group-item"><strong>Есть</strong> поддержка</li>
                 <li class="list-group-item"><a href="#" class="btn btn-primary" style="width:100%;">Получить!</a>
                 </li>
             </ul>
@@ -71,10 +65,7 @@ $this->title = 'Цены';
             </div>
             <ul class="list-group">
                 <li class="list-group-item"><strong>Все</strong> Акции</li>
-                <li class="list-group-item"><strong>Unlimited</strong> Projects</li>
-                <li class="list-group-item"><strong>Unlimited</strong> Email Accounts</li>
-                <li class="list-group-item"><strong>10000GB</strong> Disk Space</li>
-                <li class="list-group-item"><strong>Unlimited</strong> Monthly Bandwidth</li>
+                <li class="list-group-item"><strong>Есть</strong> поддержка</li>
                 <li class="list-group-item"><a href="#" class="btn btn-primary" style="width:100%;">Получить!</a>
                 </li>
             </ul>
