@@ -32,7 +32,7 @@ $this->title = 'Цены';
             <ul class="list-group">
                 <li class="list-group-item"><strong>1</strong> User</li>
                 <li class="list-group-item"><strong>Нет</strong> поддержки</li>
-                <li class="list-group-item"><a href="#" class="btn btn-primary" style="width:100%;">Получить!</a>
+                <li class="list-group-item"><a href="<?= \cs\services\Url::to(['auth/registartion']) ?>" class="btn btn-primary" style="width:100%;">Получить!</a>
                 </li>
             </ul>
         </div>
@@ -49,7 +49,7 @@ $this->title = 'Цены';
             <ul class="list-group">
                 <li class="list-group-item"><strong>1</strong> Акция</li>
                 <li class="list-group-item"><strong>Есть</strong> поддержка</li>
-                <li class="list-group-item"><a href="#" class="btn btn-primary" style="width:100%;">Получить!</a>
+                <li class="list-group-item"><a href="<?= \cs\services\Url::to(['auth/registartion']) ?>" class="btn btn-primary" style="width:100%;">Получить!</a>
                 </li>
             </ul>
         </div>
@@ -66,7 +66,7 @@ $this->title = 'Цены';
             <ul class="list-group">
                 <li class="list-group-item"><strong>Все</strong> Акции</li>
                 <li class="list-group-item"><strong>Есть</strong> поддержка</li>
-                <li class="list-group-item"><a href="#" class="btn btn-primary" style="width:100%;">Получить!</a>
+                <li class="list-group-item"><a href="<?= \cs\services\Url::to(['auth/registartion']) ?>" class="btn btn-primary" style="width:100%;">Получить!</a>
                 </li>
             </ul>
         </div>
