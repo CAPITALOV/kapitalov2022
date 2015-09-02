@@ -95,9 +95,9 @@ class BaseForm extends Model
      *
      * @return \yii\bootstrap\ActiveField
      */
-    public function field($form, $name)
+    public function field($form, $name, $options = [])
     {
-        $fieldObject = $form->field($this, $name);
+        $fieldObject = $form->field($this, $name, $options);
         $fieldArray = $this->findField($name);
         $label = ArrayHelper::getValue($fieldArray, self::POS_RUS_NAME, '');
         if ($label != '') {

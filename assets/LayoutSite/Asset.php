@@ -14,6 +14,7 @@ class Asset extends AssetBundle
     public $css      = [
         'css/modern-business.css',
         'font-awesome/css/font-awesome.min.css',
+        '/css/landing.css',
     ];
     public $js       = [
         'js/index.js'

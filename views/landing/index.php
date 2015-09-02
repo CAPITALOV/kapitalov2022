@@ -1,6 +1,6 @@
 <?php
 
-$this->title = 'Шедевр изобилия';
+$this->title = 'Capitalov.com Эксклюзивные финансовые услуги';
 
 $design = \app\models\Design::find(1);
 ?>
