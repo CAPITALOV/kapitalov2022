@@ -5,7 +5,6 @@ return [
     'contact'                               => 'site/contact',
     'price'                                 => 'site/price',
     'captcha'                               => 'site/captcha',
-    'time'                               => 'site/time',
 
 
     'about'                                 => 'site/about',

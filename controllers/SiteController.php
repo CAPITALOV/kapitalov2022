@@ -73,11 +73,6 @@ class SiteController extends \cs\base\BaseController
         return $this->render('index');
     }
 
-    public function actionTime()
-    {
-        \cs\services\VarDumper::dump(time());
-    }
-
     public function actionAbout()
     {
         return $this->render();
