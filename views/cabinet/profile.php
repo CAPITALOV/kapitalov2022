@@ -32,10 +32,12 @@ $this->params['breadcrumbs'][] = $this->title;
             'options' => ['enctype' => 'multipart/form-data'],
             'layout'  => 'horizontal',
         ]); ?>
-        <?= $form->field($model, 'name_first')->label('Имя') ?>
-        <?= $form->field($model, 'name_last')->label('Фамилия') ?>
-        <?= $form->field($model, 'avatar')->label('Картинка')->widget('cs\Widget\FileUpload2\FileUpload') ?>
+        <?= $model->field($form, 'name_org') ?>
+        <?= $model->field($form, 'name_first') ?>
+        <?= $model->field($form, 'name_last') ?>
+        <?= $model->field($form, 'avatar') ?>
         <?= $model->field($form, 'birth_date') ?>
+        <?= $model->field($form, 'phone') ?>
 
 
 

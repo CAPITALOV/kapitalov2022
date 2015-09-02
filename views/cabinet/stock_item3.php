@@ -48,52 +48,84 @@ $url = Url::to(['cabinet/graph_ajax']);
 
 ?>
 
-<h1 class="page-header"><?= $this->title ?></h1>
-
-<div class="row col-lg-12">
-    <?php
+<h1 class="page-header"><?php
     $logo = $item->getField('logo', '');
     if ($logo) {
         ?>
-        <div class="col-lg-1">
-            <img src="<?= $logo ?>" class="thumbnail" width="50">
-        </div>
+            <img src="<?= $logo ?>" width="50">
     <?php
     }
-    ?>
-    <?php
-    $d = $item->getField('description', '');
-    if ($d) {
-        ?>
-        <div class="col-lg-11">
-            <p><?= $d ?></p>
-        </div>
-    <?php
-    }
-    ?>
+    ?><?= $this->title ?></h1>
 
-</div>
+<?php
+$d = $item->getField('description', '');
+if ($d) {
+    ?>
+    <div class="row col-lg-12">
+        <p><?= $d ?></p>
+    </div>
+<?php
+}
+?>
 
 
 <h2 class="page-header">Прошлое</h2>
+
 <?php
-$graph3 = new \cs\Widget\ChartJs\Line([
-    'width'     => 800,
-    'lineArray' => $lineArrayPast,
-    'colors'    => [
-        $colorGreen,
-        $colorRed,
-        $colorBlue,
-    ],
+$model = new \app\models\Form\StockItem3();
+$form = ActiveForm::begin([
+    'id' => 'contact-form2',
 ]);
-echo $graph3->run();
+?>
+<div class="col-sm-1">
+    Прогноз <a href="javascript:void(0);" id="linkInfoRed"><span class="glyphicon glyphicon-info-sign"></span></a>
+    <?php
+    $this->registerJs(<<<JS
+$('#linkInfoRed').click(function(){
+    $('#myModalRed').modal('show');
+});
+JS
+    );
+    ?>
+    <?= $form->field($model, 'isRed')->widget('cs\Widget\CheckBox2\CheckBox', ['options' => ['data-onstyle' => 'danger']])->label('', ['class' => 'hide'])?>
+</div>
+<div class="col-sm-1">
+    Прогноз <a href="javascript:void(0);" id="linkInfoBlue"><span class="glyphicon glyphicon-info-sign"></span></a>
+    <?php
+    $this->registerJs(<<<JS
+$('#linkInfoBlue').click(function(){
+    $('#myModalBlue').modal('show');
+});
+JS
+);
+    ?>
+    <?= $form->field($model, 'isBlue')->widget('cs\Widget\CheckBox2\CheckBox', ['options' => ['data-onstyle' => 'primary']])->label('', ['class' => 'hide']) ?>
+</div>
+<div class="col-sm-1">
+    Курс
+    <?= $form->field($model, 'isKurs')->widget('cs\Widget\CheckBox2\CheckBox', ['options' => ['data-onstyle' => 'success']])->label('', ['class' => 'hide']) ?>
+</div>
+<?php ActiveForm::end() ?>
 
-$timeEnd = time() - 60 * 60 * 24;
-$timeStart = $timeEnd - 60 * 60 * 24 * 30 * 6;
-$defaultEnd = $timeEnd;
-$defaultStart = $defaultEnd - 60 * 60 * 24 * 30;
+<div class="row col-lg-12">
+    <?php
+    $graph3 = new \cs\Widget\ChartJs\Line([
+        'width'     => 800,
+        'lineArray' => $lineArrayPast,
+        'colors'    => [
+            $colorGreen,
+            $colorRed,
+            $colorBlue,
+        ],
+    ]);
+    echo $graph3->run();
 
-$this->registerJs(<<<JS
+    $timeEnd = time() - 60 * 60 * 24;
+    $timeStart = $timeEnd - 60 * 60 * 24 * 30 * 6;
+    $defaultEnd = $timeEnd;
+    $defaultStart = $defaultEnd - 60 * 60 * 24 * 30;
+
+    $this->registerJs(<<<JS
     /**
     *
     * @param f float
@@ -148,8 +180,10 @@ $this->registerJs(<<<JS
     $('#stockitem3-isblue').change(functionOnChange);
     $('#stockitem3-iskurs').change(functionOnChange);
 JS
-);
-?>
+    );
+    ?>
+</div>
+
 <div class="row col-lg-12">
     <div class="row col-lg-8">
         <div style="margin: 10px 0px 20px 0px;width: 800px;">
@@ -157,27 +191,7 @@ JS
         </div>
     </div>
 </div>
-<div class="row col-lg-12">
-    <?php
-    $model = new \app\models\Form\StockItem3();
-    $form = ActiveForm::begin([
-        'id' => 'contact-form2',
-    ]);
-    ?>
-    <div class="col-lg-1">
-        Прогноз
-        <?= $form->field($model, 'isRed')->widget('cs\Widget\CheckBox2\CheckBox', ['options' => ['data-onstyle' => 'danger']])->label('', ['class' => 'hide'])?>
-    </div>
-    <div class="col-lg-1">
-        Прогноз
-        <?= $form->field($model, 'isBlue')->widget('cs\Widget\CheckBox2\CheckBox', ['options' => ['data-onstyle' => 'primary']])->label('', ['class' => 'hide']) ?>
-    </div>
-    <div class="col-lg-1">
-        Курс
-        <?= $form->field($model, 'isKurs')->widget('cs\Widget\CheckBox2\CheckBox', ['options' => ['data-onstyle' => 'success']])->label('', ['class' => 'hide']) ?>
-    </div>
-    <?php ActiveForm::end() ?>
-</div>
+
 
 
 
@@ -261,3 +275,42 @@ JS
         style="width: 100%"
         >Купить</a>
 <?php } ?>
+
+<div class="modal fade" id="myModalBlue" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Относительный ценовой генератор</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    Ценовой осциллятор – это индикатор, основанный на разнице между двумя Скользящими средними, и выражаемый в процентах или в абсолютных значениях. Ценовой Осциллятор, выраженный в процентах, соответственно называется Процентный Ценовой осциллятор (PPO - Percentage Price Oscillator), а Ценовой Осциллятор, выраженный в абсолютных значениях, называется Абсолютный Ценовой осциллятор (ACO - Absolute Price Oscillator). Число временных периодов может изменяться в зависимости от предпочтений пользователя. Для дневных графиков, могут быть предпочтены более длинные Скользящие средние, чтобы отфильтровывать часть «рыночного шума», связанного с ежедневными движениями цены. Для недельных графиков, которые уже отфильтровывают, часть «рыночного шума», более соответствующими можно считать более короткие Скользящие средние. Кроме того, может быть наложена последующая Скользящая средняя для использования ее в качестве  импульсной линии, подобно тому, как это происходит в индикаторе MACD.
+                </p>
+                <p><a href="http://www.fxmag.ru/pub/20/tsenovoj_ostsilljator/" target="_blank">Подробнее</a></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="myModalRed" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Цена по закрытию торгов</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    ...
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+            </div>
+        </div>
+    </div>
+</div>
