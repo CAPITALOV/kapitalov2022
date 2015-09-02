@@ -73,6 +73,11 @@ class SiteController extends \cs\base\BaseController
         return $this->render('index');
     }
 
+    public function actionTime()
+    {
+        \cs\services\VarDumper::dump(Yii::$app->formatter->asDatetime(time()));
+    }
+
     public function actionAbout()
     {
         return $this->render();
