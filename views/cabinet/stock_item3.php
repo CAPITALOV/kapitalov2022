@@ -307,7 +307,6 @@ JS
                 <p>
                     ...
                 </p>
-                <p><a href="http://www.fxmag.ru/pub/20/tsenovoj_ostsilljator/" target="_blank">Подробнее</a></p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
