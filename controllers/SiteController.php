@@ -75,7 +75,7 @@ class SiteController extends \cs\base\BaseController
 
     public function actionTime()
     {
-        \cs\services\VarDumper::dump(time())
+        \cs\services\VarDumper::dump(time());
     }
 
     public function actionAbout()
