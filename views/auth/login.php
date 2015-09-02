@@ -6,7 +6,7 @@ use yii\bootstrap\ActiveForm;
 /* @var $form yii\bootstrap\ActiveForm */
 /* @var $model cs\base\BaseForm */
 
-$this->title = 'Вход в измерение личного изобилия';
+$this->title = 'Вход в личный кабинет';
 ?>
 
 
@@ -20,7 +20,10 @@ $this->title = 'Вход в измерение личного изобилия';
 ]); ?>
 
 <?= $model->field($form, 'username') ?>
-<?= $model->field($form, 'password')->passwordInput() ?>
+<?= $model->field($form, 'password', [
+    'template' => '{label}{beginWrapper}{input}<div style="margin-top: 5px;"><b>Забыли пароль?</b><span style="margin-left: 20px;"><a href='. \yii\helpers\Url::to(['auth/password_recover']) .'>Восстановить</a></span></div>{hint}{error}{endWrapper}',
+])->passwordInput() ?>
+
 <?= $model->field($form, 'rememberMe') ?>
 
     <div class="form-group">
