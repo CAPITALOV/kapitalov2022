@@ -75,7 +75,7 @@ class SiteController extends \cs\base\BaseController
 
     public function actionTime()
     {
-        \cs\services\VarDumper::dump(Yii::$app->formatter->asDatetime(time()));
+        \cs\services\VarDumper::dump(Yii::$app->getTimeZone());
     }
 
     public function actionAbout()
