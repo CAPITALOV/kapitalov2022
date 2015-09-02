@@ -70,6 +70,7 @@ class User extends DbRecord implements \yii\web\IdentityInterface
             'is_confirm'        => 1,
             'datetime_activate' => gmdate('YmdHis'),
         ]);
+        UserStock::add($this->getId(), 1, 0);
     }
 
     /**
