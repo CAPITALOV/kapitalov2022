@@ -9,6 +9,7 @@ use Yii;
 use yii\base\Model;
 use yii\helpers\Url;
 use cs\Widget\FileUpload2\FileUpload;
+use yii\widgets\MaskedInput;
 
 /**
  *
@@ -38,6 +39,7 @@ class Profile extends BaseForm
     public $fb_link;
     public $birth_date;
     public $last_action;
+    public $name_org;
 
     public $subscribe_is_news;
     public $subscribe_is_site_update;
@@ -46,7 +48,12 @@ class Profile extends BaseForm
 
     function __construct($fields = [])
     {
+
         static::$fields = [
+            ['name_org', 'Название организации', 0, 'string'],
+            ['phone', 'Контактный телефон', 0, 'string', 'widget' => [MaskedInput::className(), [
+                'mask' => '+7-(999)-999-99-99',
+            ]]],
             ['name_first', 'Имя', 1, 'string'],
             ['name_last', 'Фамилия', 0, 'string'],
             ['avatar', 'Картинка', 0, 'string', 'widget' => [FileUpload::className(), ['options' => [
