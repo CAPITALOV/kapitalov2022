@@ -3,12 +3,15 @@
 namespace app\models\Form;
 
 use app\models\NewsItem;
+use app\models\Request;
 use app\models\Stock;
 use app\models\StockKurs;
 use app\models\StockPrognosis;
 use app\models\User;
 use app\models\WalletHistory;
 use app\services\GsssHtml;
+use cs\Application;
+use cs\services\Security;
 use cs\services\Str;
 use cs\services\VarDumper;
 use Yii;
@@ -40,10 +43,17 @@ class CabinetWalletAdd extends \cs\base\BaseForm
     public function add($stock_id)
     {
         if ($this->validate()) {
-            $dateFinish = \app\models\UserStock::add(\Yii::$app->user->getId(), $stock_id, $this->monthCounter);
             $stock = Stock::find($stock_id);
-            $dateFinish = Yii::$app->formatter->asDate($dateFinish);
-            WalletHistory::insert("Оплачена акция: {$stock->getName()}, месяцев: {$this->monthCounter}, оплачено до: {$dateFinish}");
+            $request = Request::insert([
+                'stock_id' => $stock_id,
+                'month'    => $this->monthCounter,
+                'hash'     => Security::generateRandomString(60),
+            ]);
+            Application::mail(User::find(Yii::$app->params['chat']['consultant_id'])->getEmail(), 'Запрос на добавление услуги', 'request', [
+                'stock'    => $stock,
+                'user'     => \Yii::$app->user->identity,
+                'request'  => $request,
+            ]);
 
             return true;
         } else {

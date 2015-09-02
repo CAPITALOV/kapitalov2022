@@ -45,6 +45,7 @@ JS
                             <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu" role="menu">
+                            <li><a href="<?= Url::to(['superadmin_requests/index']) ?>">Заявки</a></li>
                             <li><a href="<?= Url::to(['superadmin_stock/index']) ?>">Курсы</a></li>
                         </ul>
                     </li>

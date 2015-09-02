@@ -27,6 +27,10 @@ return [
     'adminUsers/<id:\\d+>/edit'             => 'superadmin/users_edit',
     'adminUsers/<id:\\d+>/delete'           => 'superadmin/users_delete',
 
+    'requests'                              => 'superadmin_requests/index',
+    'requests/activate/<hash:\\w+>'         => 'superadmin_requests/activate',
+    'requests/activate'         => 'superadmin_requests/activate_ajax',
+
     // stock
     'stock'                                 => 'superadmin_stock/index',
     'stock/add'                             => 'superadmin_stock/add',

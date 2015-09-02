@@ -29,6 +29,8 @@ class Cabinet_walletController extends CabinetBaseController
         $model = new \app\models\Form\CabinetWalletAdd();
         if ($model->load(Yii::$app->request->post()) && $model->add($id)) {
             Yii::$app->session->setFlash('contactFormSubmitted');
+            Yii::$app->session->setFlash('monthAdd', $model->monthCounter);
+            Yii::$app->session->setFlash('stock', Stock::find($id));
 
             return $this->refresh();
         } else {

@@ -80,15 +80,18 @@ class UserStock extends \cs\base\DbRecord
      *
      * @throws \yii\db\Exception
      */
-    public static function add($userId, $stockId, $monthCounter)
+    public static function add($userId, $stockId, $monthCounter, $timeStart = null)
     {
+        if (is_null($timeStart)) {
+            $timeStart = time();
+        }
         $item = self::find([
             'stock_id' => $stockId,
             'user_id'  => $userId,
         ]);
         $dateFinish = '';
         if (is_null($item)) {
-            $dateFinish = self::addMonthCounter(\Yii::$app->formatter->asDate(time(), 'php:Y-m-d'), $monthCounter + 1);
+            $dateFinish = self::addMonthCounter(\Yii::$app->formatter->asDate($timeStart, 'php:Y-m-d'), $monthCounter + 1);
             self::insert([
                 'stock_id'    => $stockId,
                 'user_id'     => $userId,
@@ -101,7 +104,7 @@ class UserStock extends \cs\base\DbRecord
                     'date_finish' => $dateFinish,
                 ]);
             } else {
-                $dateFinish = self::addMonthCounter(\Yii::$app->formatter->asDate(time(), 'php:Y-m-d'), $monthCounter + 1);
+                $dateFinish = self::addMonthCounter(\Yii::$app->formatter->asDate($timeStart, 'php:Y-m-d'), $monthCounter + 1);
                 $item->update([
                     'date_finish' => $dateFinish,
                 ]);
