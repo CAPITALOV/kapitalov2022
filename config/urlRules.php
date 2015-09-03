@@ -5,7 +5,7 @@ return [
     'contact'                               => 'site/contact',
     'price'                                 => 'site/price',
     'captcha'                               => 'site/captcha',
-    'time'                               => 'site/time',
+    'time'                                  => 'site/time',
 
 
     'about'                                 => 'site/about',
@@ -30,7 +30,7 @@ return [
 
     'requests'                              => 'superadmin_requests/index',
     'requests/activate/<hash:\\w+>'         => 'superadmin_requests/activate',
-    'requests/activate'         => 'superadmin_requests/activate_ajax',
+    'requests/activate'                     => 'superadmin_requests/activate_ajax',
 
     // stock
     'stock'                                 => 'superadmin_stock/index',
