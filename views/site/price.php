@@ -35,7 +35,7 @@ use yii\helpers\Url;
             <ul class="list-group">
                 <li class="list-group-item"><strong>1</strong> Акция</li>
                 <li class="list-group-item"><strong>Нет</strong> поддержки</li>
-                <li class="list-group-item"><a href="<?= Url::to(['auth/registartion']) ?>" class="btn btn-primary"
+                <li class="list-group-item"><a href="<?= Url::to(['auth/registration']) ?>" class="btn btn-primary"
                                                style="width:100%;">Получить!</a>
                 </li>
             </ul>
@@ -53,7 +53,7 @@ use yii\helpers\Url;
             <ul class="list-group">
                 <li class="list-group-item"><strong>1</strong> Акция</li>
                 <li class="list-group-item"><strong>Есть</strong> поддержка</li>
-                <li class="list-group-item"><a href="<?= Url::to(['auth/registartion']) ?>" class="btn btn-primary"
+                <li class="list-group-item"><a href="<?= Url::to(['auth/registration']) ?>" class="btn btn-primary"
                                                style="width:100%;">Получить!</a>
                 </li>
             </ul>
