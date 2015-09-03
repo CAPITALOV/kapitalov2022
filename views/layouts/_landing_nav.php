@@ -25,10 +25,7 @@ use yii\helpers\Html;
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li style="margin-top: 15px;
-    margin-bottom: 15px;">
-                    +7-499-394-27-43
-                </li>
+
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li>
