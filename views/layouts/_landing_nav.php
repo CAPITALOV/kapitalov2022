@@ -14,11 +14,6 @@ use yii\helpers\Html;
             <a class="navbar-brand" href="/" style="padding: 5px 10px 5px 10px;"><img
                     src="<?= Yii::$app->getAssetManager()->getBundle('app\assets\LayoutSite\Asset')->baseUrl ?>/images/capitalovlogo2.png"
                     class="siteLayoutLogo"></a>
-            <ul class="nav navbar-nav navbar-left">
-                <li>
-                    <a href="javascript:void(0)">+7-499-394-27-43</a>
-                </li>
-            </ul>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
