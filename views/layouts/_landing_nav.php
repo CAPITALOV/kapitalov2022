@@ -16,7 +16,11 @@ use yii\helpers\Html;
                     class="siteLayoutLogo"></a>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
+
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+
+            </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li>
                     <a href="<?= Url::to(['site/about']) ?>">О продукте</a>
@@ -24,66 +28,7 @@ use yii\helpers\Html;
                 <li>
                     <a href="<?= Url::to(['site/price']) ?>">Тарифы</a>
                 </li>
-                <!--                <li>-->
-                <!--                    <a href="/startbootstrap-modern-business-1.0.3/services.html">Services</a>-->
-                <!--                </li>-->
-                <!--                <li>-->
-                <!--                    <a href="/startbootstrap-modern-business-1.0.3/contact.html">Contact</a>-->
-                <!--                </li>-->
-                <!--                <li class="dropdown">-->
-                <!--                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Portfolio <b class="caret"></b></a>-->
-                <!--                    <ul class="dropdown-menu">-->
-                <!--                        <li>-->
-                <!--                            <a href="/startbootstrap-modern-business-1.0.3/portfolio-1-col.html">1 Column Portfolio</a>-->
-                <!--                        </li>-->
-                <!--                        <li>-->
-                <!--                            <a href="/startbootstrap-modern-business-1.0.3/portfolio-2-col.html">2 Column Portfolio</a>-->
-                <!--                        </li>-->
-                <!--                        <li>-->
-                <!--                            <a href="/startbootstrap-modern-business-1.0.3/portfolio-3-col.html">3 Column Portfolio</a>-->
-                <!--                        </li>-->
-                <!--                        <li>-->
-                <!--                            <a href="/startbootstrap-modern-business-1.0.3/portfolio-4-col.html">4 Column Portfolio</a>-->
-                <!--                        </li>-->
-                <!--                        <li>-->
-                <!--                            <a href="portfolio-item.html">Single Portfolio Item</a>-->
-                <!--                        </li>-->
-                <!--                    </ul>-->
-                <!--                </li>-->
-                <!--                <li class="dropdown">-->
-                <!--                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Blog <b class="caret"></b></a>-->
-                <!--                    <ul class="dropdown-menu">-->
-                <!--                        <li>-->
-                <!--                            <a href="blog-home-1.html">Blog Home 1</a>-->
-                <!--                        </li>-->
-                <!--                        <li>-->
-                <!--                            <a href="blog-home-2.html">Blog Home 2</a>-->
-                <!--                        </li>-->
-                <!--                        <li>-->
-                <!--                            <a href="blog-post.html">Blog Post</a>-->
-                <!--                        </li>-->
-                <!--                    </ul>-->
-                <!--                </li>-->
-                <!--                <li class="dropdown">-->
-                <!--                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Other Pages <b class="caret"></b></a>-->
-                <!--                    <ul class="dropdown-menu">-->
-                <!--                        <li>-->
-                <!--                            <a href="/startbootstrap-modern-business-1.0.3/full-width.html">Full Width Page</a>-->
-                <!--                        </li>-->
-                <!--                        <li>-->
-                <!--                            <a href="/startbootstrap-modern-business-1.0.3/sidebar.html">Sidebar Page</a>-->
-                <!--                        </li>-->
-                <!--                        <li>-->
-                <!--                            <a href="/startbootstrap-modern-business-1.0.3/faq.html">FAQ</a>-->
-                <!--                        </li>-->
-                <!--                        <li>-->
-                <!--                            <a href="/startbootstrap-modern-business-1.0.3/404.html">404</a>-->
-                <!--                        </li>-->
-                <!--                        <li>-->
-                <!--                            <a href="/startbootstrap-modern-business-1.0.3/pricing.html">Pricing Table</a>-->
-                <!--                        </li>-->
-                <!--                    </ul>-->
-                <!--                </li>-->
+
                 <?php if (Yii::$app->user->isGuest) { ?>
                     <li>
                         <a href="<?= Url::to(['auth/registration']) ?>">Регистрация</a>
