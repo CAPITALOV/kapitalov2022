@@ -11,9 +11,7 @@ use yii\helpers\Html;
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
-            <a class="navbar-brand" href="/" style="padding: 5px 10px 5px 10px;"><img
-                    src="<?= Yii::$app->getAssetManager()->getBundle('app\assets\LayoutSite\Asset')->baseUrl ?>/images/capitalovlogo2.png"
-                    class="siteLayoutLogo"></a>
+            <a class="navbar-brand" href="/" style="padding: 5px 10px 5px 10px;">1</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
