@@ -25,7 +25,7 @@ use yii\helpers\Url;
     <div class="col-md-4">
         <div class="panel panel-default text-center">
             <div class="panel-heading">
-                <h3 class="panel-title">Базовый</h3>
+                <h3 class="panel-title">Демонстрационный</h3>
             </div>
             <div class="panel-body">
                 <span class="price"><sup>$</sup>0</span>
