@@ -8,6 +8,7 @@ namespace app\controllers;
 use app\models\ChatMessage;
 use app\models\Stock;
 use app\models\User;
+use cs\Application;
 use cs\services\VarDumper;
 use YandexMoney\API;
 use Yii;
@@ -47,10 +48,18 @@ class Cabinet_chatController extends CabinetBaseController
      */
     public function actionSend()
     {
+        $to = self::getParam('to');
         $message = ChatMessage::add([
             'message'    => self::getParam('text'),
-            'user_id_to' => self::getParam('to'),
+            'user_id_to' => $to,
         ]);
+        $cid = Yii::$app->params['chat']['consultant_id'];
+        if ($to == $cid) {
+            Application::mail(User::find($cid)->getEmail(), 'Новое сообщение', 'new_message', [
+                'message' => $message,
+                'user'    => Yii::$app->user->identity,
+            ]);
+        }
 
         return self::jsonSuccess(
             $this->renderFile('@app/views/cabinet_chat/send.php', [
