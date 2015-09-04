@@ -43,7 +43,7 @@ use yii\helpers\Url;
     <div class="col-md-4">
         <div class="panel panel-success text-center">
             <div class="panel-heading">
-                <h3 class="panel-title">Базовый <span class="label label-success">Подписка в месяц</span></h3>
+                <h3 class="panel-title">Базовый <span class="label label-success">Национальный рынок</span></h3>
             </div>
             <div class="panel-body">
                 <span class="price"><sup>$</sup>100</span>
