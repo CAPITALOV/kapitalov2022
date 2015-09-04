@@ -24,6 +24,11 @@ class Stock extends \cs\base\DbRecord
         return $this->getField('name', '');
     }
 
+    public function getImage()
+    {
+        return $this->getField('logo', '');
+    }
+
     /**
      * Возвращает акции которые оплаченые
      *

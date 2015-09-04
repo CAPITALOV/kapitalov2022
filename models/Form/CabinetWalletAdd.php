@@ -47,8 +47,8 @@ class CabinetWalletAdd extends \cs\base\BaseForm
             $request = Request::insert([
                 'stock_id' => $stock_id,
                 'month'    => $this->monthCounter,
-                'hash'     => Security::generateRandomString(60),
             ]);
+
             Application::mail(User::find(Yii::$app->params['chat']['consultant_id'])->getEmail(), 'Запрос на добавление услуги', 'request', [
                 'stock'    => $stock,
                 'user'     => \Yii::$app->user->identity,
