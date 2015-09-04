@@ -49,7 +49,7 @@ use yii\helpers\Html;
     <footer>
         <div class="row">
             <div class="col-lg-12">
-                <p>© 2007 &mdash; 2015 | www.capitalov.com | Эксклюзивные финансовые услуги</p>
+                <p>© 2007 &mdash; 2015 | www.capitalov.com | Эксклюзивные финансовые услуги | Национальное Агентство Капиталов</p>
             </div>
         </div>
     </footer>
