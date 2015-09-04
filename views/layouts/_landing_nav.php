@@ -60,6 +60,9 @@ use yii\helpers\Html;
                                 <li><a href="<?= Url::to(['cabinet/password_change']) ?>"><i
                                             class="glyphicon glyphicon-asterisk" style="padding-right: 5px;"></i>Сменить
                                         пароль</a></li>
+                                <li><a href="<?= Url::to(['cabinet/change_email']) ?>"><i
+                                            class="glyphicon glyphicon-asterisk" style="padding-right: 5px;"></i>Сменить
+                                        логин/email</a></li>
                                 <li class="divider"></li>
                                 <li><a href="<?= Url::to(['money/history']) ?>"><i
                                             class="glyphicon glyphicon-rub" style="padding-right: 5px;"></i>История

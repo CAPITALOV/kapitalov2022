@@ -37,6 +37,27 @@ class CabinetController extends CabinetBaseController
         }
     }
 
+    public function actionChange_email()
+    {
+        $model = new \app\models\Form\EmailNew();
+
+        if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
+            Yii::$app->response->format = Response::FORMAT_JSON;
+
+            return ActiveForm::validate($model);
+        }
+
+        if ($model->load(Yii::$app->request->post()) && $model->action()) {
+            Yii::$app->session->setFlash('contactFormSubmitted');
+
+            return $this->refresh();
+        } else {
+            return $this->render([
+                'model' => $model,
+            ]);
+        }
+    }
+
     /**
      * Выдает элементы поиска курсов для строки поиска Autocomplete
      */
