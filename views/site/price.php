@@ -41,7 +41,7 @@ use yii\helpers\Url;
         </div>
     </div>
     <div class="col-md-4">
-        <div class="panel panel-primary text-center">
+        <div class="panel panel-success text-center">
             <div class="panel-heading">
                 <h3 class="panel-title">Базовый <span class="label label-success">Подписка в месяц</span></h3>
             </div>
