@@ -6,7 +6,7 @@
  * Time: 1:41
  */
 
-$this->title = 'Цены';
+$this->title = 'Тарифы';
 
 use yii\helpers\Url;
 
@@ -15,8 +15,7 @@ use yii\helpers\Url;
 <!-- Page Heading/Breadcrumbs -->
 <div class="row">
     <div class="col-lg-12">
-        <h1 class="page-header">Наши цены</h1>
-
+        <h1 class="page-header"><?= \yii\helpers\Html::encode($this->title) ?></h1>
     </div>
 </div>
 <!-- /.row -->
@@ -26,7 +25,7 @@ use yii\helpers\Url;
     <div class="col-md-offset-2 col-md-4">
         <div class="panel panel-default text-center">
             <div class="panel-heading">
-                <h3 class="panel-title">Демо</h3>
+                <h3 class="panel-title">Базовый</h3>
             </div>
             <div class="panel-body">
                 <span class="price"><sup>$</sup>0</span>
@@ -44,7 +43,7 @@ use yii\helpers\Url;
     <div class="col-md-4">
         <div class="panel panel-primary text-center">
             <div class="panel-heading">
-                <h3 class="panel-title">Базовый <span class="label label-success">Оптимальный выбор</span></h3>
+                <h3 class="panel-title">Базовый <span class="label label-success">Подписка в месяц</span></h3>
             </div>
             <div class="panel-body">
                 <span class="price"><sup>$</sup>100</span>
