@@ -18,7 +18,7 @@ class DbRecord
 
     public function getId()
     {
-        return $this->fields['id'];
+        return (int)$this->fields['id'];
     }
 
     /**

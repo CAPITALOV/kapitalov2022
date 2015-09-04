@@ -74,6 +74,7 @@ return [
     'cabinet/profile/subscribe'             => 'cabinet/profile_subscribe',
 
     'cabinet/wallet/add/<id:\\d+>'          => 'cabinet_wallet/add',
+    'cabinet/wallet/add/step1'              => 'cabinet_wallet/add_step1',
 
     'money/history'                         => 'money/history',
 

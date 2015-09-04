@@ -32,7 +32,7 @@ AppAsset::register($this);
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
 </head>
-<body>
+<body class="fuelux">
     <?php $this->beginBody() ?>
     <?= $this->render('../blocks/topNavigation') ?>
     <div class="container-fluid">

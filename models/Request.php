@@ -5,6 +5,7 @@ namespace app\models;
 use app\models\NewsItem;
 use app\models\User;
 use app\services\GsssHtml;
+use cs\services\Security;
 use cs\services\Str;
 use cs\services\VarDumper;
 use cs\web\Exception;
@@ -36,6 +37,7 @@ class Request extends \cs\base\DbRecord
     {
         $fields['user_id'] = Yii::$app->user->id;
         $fields['datetime'] = time();
+        $fields['hash'] = Security::generateRandomString(60);
 
         return parent::insert($fields);
     }
