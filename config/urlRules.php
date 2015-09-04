@@ -30,6 +30,7 @@ return [
     'requests'                              => 'superadmin_requests/index',
     'requests/activate/<hash:\\w+>'         => 'superadmin_requests/activate',
     'requests/activate'                     => 'superadmin_requests/activate_ajax',
+    'requests/delete'                       => 'superadmin_requests/delete_ajax',
 
     // stock
     'stock'                                 => 'superadmin_stock/index',
