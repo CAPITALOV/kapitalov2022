@@ -43,6 +43,7 @@ JS
 <table class="table table-striped table-hover">
     <thead>
     <tr>
+        <th>id</th>
         <th>Акция</th>
         <th>Пользователь</th>
         <th>Время заявки</th>
@@ -54,6 +55,9 @@ JS
         $url = Url::to(['superadmin_chat/user', 'id' => $item['id']]);
         ?>
         <tr>
+            <td>
+                <?= $item['id'] ?>
+            </td>
             <td>
                 <?php if ($item['cap_stock_logo']) { ?>
                     <img src="<?= $item['cap_stock_logo'] ?>" width="40">
