@@ -17,21 +17,48 @@ use yii\helpers\Html;
  */
 
 $this->title = 'Заявки на услуги';
+\cs\assets\Confirm\Asset::register($this);
 
 $url = Url::to(['superadmin_requests/activate_ajax']);
+$urlDelete = Url::to(['superadmin_requests/delete_ajax']);
 $this->registerJs(<<<JS
-    $('.buttonActivate').click(function(){
-        var button = $(this);
-        ajaxJson({
-            url: '{$url}',
-            data: {
-                id: button.data('id')
-            },
-            success: function(ret) {
-                button.parent().parent().remove();
-                showInfo('Успешно');
-            }
-        })
+    $('.buttonActivate').confirmation({
+        btnOkLabel: 'Да',
+        btnCancelLabel: 'Нет',
+        title: 'Вы уверены',
+        popout: true,
+        onConfirm: function(){
+            var button = $(this);
+            ajaxJson({
+                url: '{$url}',
+                data: {
+                    id: button.data('id')
+                },
+                success: function(ret) {
+                    button.parent().parent().remove();
+                    showInfo('Успешно');
+                }
+            })
+        }
+    });
+    $('.buttonDelete').confirmation({
+        btnOkLabel: 'Да',
+        btnCancelLabel: 'Нет',
+        title: 'Вы уверены',
+        popout: true,
+        onConfirm: function() {
+            var button = $(this);
+            ajaxJson({
+                url: '{$urlDelete}',
+                data: {
+                    id: button.data('id')
+                },
+                success: function(ret) {
+                    button.parent().parent().remove();
+                    showInfo('Успешно');
+                }
+            })
+        }
     });
 JS
 );
@@ -49,6 +76,7 @@ JS
         <th>Время заявки</th>
         <th>Кол-во месяцев</th>
         <th>Активировать</th>
+        <th>Удалить</th>
     </tr>
     </thead>
     <?php foreach ($items as $item) {
@@ -78,6 +106,9 @@ JS
             </td>
             <td>
                 <button class="btn btn-primary buttonActivate" data-id="<?= $item['id'] ?>">Активировать</button>
+            </td>
+            <td>
+                <button class="btn btn-primary buttonDelete" data-id="<?= $item['id'] ?>">Удалить</button>
             </td>
         </tr>
     <?php } ?>

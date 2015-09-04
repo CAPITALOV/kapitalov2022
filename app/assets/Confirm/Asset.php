@@ -5,6 +5,7 @@ namespace cs\assets\Confirm;
 use yii\web\AssetBundle;
 
 /**
+ * http://mistic100.github.io/Bootstrap-Confirmation/
  */
 class Asset extends AssetBundle
 {
@@ -15,6 +16,7 @@ class Asset extends AssetBundle
         'bootstrap-confirmation.js',
     ];
     public $depends = [
+        'yii\web\JqueryAsset',
         'yii\bootstrap\BootstrapPluginAsset',
     ];
 }

@@ -24,6 +24,18 @@
         {
             "type": "package",
             "package": {
+                "name": "mistic100/Bootstrap-Confirmation",
+                "version": "1.0.1",
+                "source": {
+                    "url": "https://github.com/mistic100/Bootstrap-Confirmation",
+                    "type": "git",
+                    "reference": "master"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
                 "name": "vlucas/valitron",
                 "version": "1.0.1",
                 "source": {
@@ -93,6 +105,7 @@
         "yiisoft/yii2-swiftmailer": "*",
         "yiisoft/yii2-imagine": "~2.0.0",
         "yiisoft/yii2-smarty": "*",
+        "mistic100/Bootstrap-Confirmation": "*",
         "ExactTarget/fuelux": "*",
         "vlucas/valitron": "*",
         "Surzhikov/TelegramSiteHelper": "*",

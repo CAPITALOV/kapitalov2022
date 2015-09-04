@@ -54,15 +54,30 @@ class Superadmin_requestsController extends SuperadminBaseController
 
     /**
      * AJAX
-     * Активирует услугу
+     * Активирует запрос
      */
     public function actionActivate_ajax()
     {
         $request = Request::find(self::getParam('id'));
         if (is_null($request)) {
-            throw new Exception('Нет такого запроса');
+            return self::jsonError('Нет такого запроса');
         }
         $request->activate();
+
+        return self::jsonSuccess();
+    }
+
+    /**
+     * AJAX
+     * Удаляет запрос
+     */
+    public function actionDelete_ajax()
+    {
+        $request = Request::find(self::getParam('id'));
+        if (is_null($request)) {
+            return self::jsonError('Нет такого запроса');
+        }
+        $request->delete();
 
         return self::jsonSuccess();
     }

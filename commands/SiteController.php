@@ -36,4 +36,5 @@ class SiteController extends Controller
         \Yii::info('Очищена папка @web/assets', 'gs\\site\\clear_assets');
         \Yii::$app->end();
     }
+
 }
