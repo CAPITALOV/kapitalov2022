@@ -83,7 +83,7 @@ class EmailNew extends Model
             // добавляю в диспечер
             $fields = EmailChangeDispatcher::add($user->getId(), $this->email);
             // отправляю письмо
-            Application::mail($user->getEmail(), 'Заявка на смену Email/Логина', 'change_email', [
+            Application::mail($this->email, 'Заявка на смену Email/Логина', 'change_email', [
                 'url'  => Url::to(['auth/change_email_activate', 'code' => $fields->getField('code')], true),
                 'user' => $user
             ]);
