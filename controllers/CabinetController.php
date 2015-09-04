@@ -152,8 +152,9 @@ class CabinetController extends CabinetBaseController
             'pointHighlightStroke' => "rgba(220,220,220,1)",
         ];
         $defaultParams = [
-            'start' => new \DateTime($start),
-            'end'   => new \DateTime($end),
+            'start'   => $start,
+            'end'     => $end,
+            'formatX' => 'd.m',
         ];
         $colors = [
             $colorGreen, $colorRed, $colorBlue,
@@ -646,8 +647,9 @@ class CabinetController extends CabinetBaseController
         $end = (new \DateTime())->sub(new \DateInterval('P1D'));
         $isPaid = Yii::$app->user->identity->isPaid($id);
         $defaultParams = [
-            'start' => $start,
-            'end'   => $end,
+            'start'   => $start,
+            'end'     => $end,
+            'formatX' => 'd.m',
         ];
 
         // график с продажами
