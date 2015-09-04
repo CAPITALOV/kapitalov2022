@@ -95,7 +95,7 @@ class PasswordRecover extends \cs\base\BaseForm
             if (is_null($user)) {
                 throw new Exception('Пользователь не найден');
             }
-            $fields = \app\services\PasswordRecoverDispatcher::insert($user->getId());
+            $fields = \app\service\PasswordRecoverDispatcher::insert($user->getId());
             \cs\Application::mail($this->email, 'Восстановление пароля', 'password_recover', [
                 'user'     => $user,
                 'url'      => Url::to([
