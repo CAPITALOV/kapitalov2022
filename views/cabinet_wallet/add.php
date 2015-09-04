@@ -23,6 +23,42 @@ $this->title = 'Пополнение счета';
         Ваша заявка успешно отправлена.
     </div>
 
+    <form target="_blank" action="https://money.yandex.ru/eshop.xml" method="post">
+
+        <!-- ОБЯЗАТЕЛЬНАНЫЕ ПОЛЯ (все параметры яндекс.кассы регистрозависимые) -->
+        <input type="hidden" name="shopId" value="100142">
+        <input type="hidden" name="scid" value="34126">
+
+        Идентификатор клиента/Номер заказа:<br>
+        <input type=text name="customerNumber" size="43" placeholder=""><br><br>
+
+        Сумма:<br>
+        <input name="sum" value="" size="43" placeholder="введите сумму заказа в рублях"><br>
+
+        ФИО плательщика:<br>
+        <input name="custName" type="text" size="43" placeholder=""><br>
+
+        Email:<br>
+        <input name="custEmail" type="text" size="43" placeholder=""><br>
+
+        Адрес доставки:<br>
+        <input name="custAddr" type="text" size="43" placeholder="город, улица, номер дома, квартира"><br>
+
+        Телефон плательщика<br>
+        <input name="orderDetails" type="text" size="43" placeholder="пример +79031234567"><br>
+
+        Способ оплаты:<br><br>
+        <input name="paymentType" value="PC" type="radio">Оплата со счета в Яндекс.Деньгах<br>
+        <input name="paymentType" value="AC" type="radio">Оплата банковской картой<br>
+        <input name="paymentType" value="GP" type="radio">Оплата по коду через терминал<br>
+        <input name="paymentType" value="WM" type="radio">Оплата cо счета WebMoney<br>
+        <input name="paymentType" value="AB" type="radio">Оплата через Альфа-Клик<br>
+        <input name="paymentType" value="PB" type="radio">Оплата через Промсвязьбанк<br>
+        <input name="paymentType" value="MA" type="radio">Оплата через MasterPass<br>
+
+        <input type="submit" value="Заплатить"/>
+    </form>
+
 
     <p>Информация по заявке</p>
     <table class="table table-striped table-hover" style="width: auto;">

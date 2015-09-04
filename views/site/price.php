@@ -22,7 +22,7 @@ use yii\helpers\Url;
 
 <!-- Content Row -->
 <div class="row">
-    <div class="col-md-offset-2 col-md-4">
+    <div class="col-md-4">
         <div class="panel panel-default text-center">
             <div class="panel-heading">
                 <h3 class="panel-title">Базовый</h3>
@@ -47,6 +47,24 @@ use yii\helpers\Url;
             </div>
             <div class="panel-body">
                 <span class="price"><sup>$</sup>100</span>
+                <span class="period">за месяц</span>
+            </div>
+            <ul class="list-group">
+                <li class="list-group-item"><strong>1</strong> Акция</li>
+                <li class="list-group-item"><strong>Есть</strong> поддержка</li>
+                <li class="list-group-item"><a href="<?= Url::to(['auth/registration']) ?>" class="btn btn-primary"
+                                               style="width:100%;">Получить!</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="panel panel-primary text-center">
+            <div class="panel-heading">
+                <h3 class="panel-title">Индивидуальный</h3>
+            </div>
+            <div class="panel-body">
+                <span class="price"><sup>$</sup>300</span>
                 <span class="period">за месяц</span>
             </div>
             <ul class="list-group">
