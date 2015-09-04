@@ -7,12 +7,11 @@ return [
     'captcha'                               => 'site/captcha',
     'time'                                  => 'site/time',
 
-
     'about'                                 => 'site/about',
-
 
     'password/recover'                      => 'auth/password_recover',
     'password/recover/activate/<code:\\w+>' => 'auth/password_recover_activate',
+    'changeEmail/activate/<code:\\w+>'      => 'auth/change_email_activate',
 
     'registration'                          => 'auth/registration',
     'registrationActivate/<code:\\w+>'      => 'auth/registration_activate',
@@ -62,6 +61,7 @@ return [
     'stockList2/<id:\\d+>'                  => 'cabinet/stock_item2',
     'stockList3/<id:\\d+>'                  => 'cabinet/stock_item3',
     'stockList/graphAjax'                   => 'cabinet/graph_ajax',
+    'cabinet/changeEmail'                   => 'cabinet/change_email',
 
     'profile'                               => 'cabinet/profile',
     'passwordChange'                        => 'cabinet/profile_password_change',

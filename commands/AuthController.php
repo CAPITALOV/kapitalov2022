@@ -14,10 +14,17 @@ use yii\helpers\VarDumper;
 class AuthController extends Controller
 {
     /**
-     * Делает рассылку писем из списка рассылки
+     * Очищает старые заявки на регистрацию
      */
     public function actionClear_registration()
     {
         \app\service\RegistrationDispatcher::cron();
+    }
+    /**
+     * Очищает старые заявки на смену email
+     */
+    public function actionClear_change_email()
+    {
+        \app\service\EmailChangeDispatcher::cron();
     }
 }
