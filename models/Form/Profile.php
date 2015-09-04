@@ -56,7 +56,7 @@ class Profile extends BaseForm
             ]]],
             ['name_first', 'Имя', 1, 'string'],
             ['name_last', 'Фамилия', 0, 'string'],
-            ['avatar', 'Картинка', 0, 'string', 'widget' => [FileUpload::className(), ['options' => [
+            ['avatar', 'Картинка', 0, 'string', [], 'Можно загрузить JPG, PNG и не более 1 Мб','widget' => [FileUpload::className(), ['options' => [
                 'small' => [200,200]
             ]]]],
             ['birth_date', 'Дата рождения', 0, 'cs\Widget\DatePicker\Validator', 'widget' => [\cs\Widget\DatePicker\DatePicker::className(), ['dateFormat' => 'php:d.m.Y']]],
