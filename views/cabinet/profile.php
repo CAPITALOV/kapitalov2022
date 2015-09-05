@@ -24,7 +24,7 @@ $this->registerJs(<<<JS
             showInfo('Скопировано');
         }
     });
-    //$('#buttonCopyRefLink').tooltip();
+    $('#buttonCopyRefLink').tooltip();
 JS
 );
 ?>
@@ -49,7 +49,6 @@ JS
         <?= $model->field($form, 'name_first') ?>
         <?= $model->field($form, 'name_last') ?>
         <?= $model->field($form, 'avatar') ?>
-        <?= $model->field($form, 'birth_date') ?>
         <?= $model->field($form, 'phone') ?>
         <div class="form-group">
             <label class="control-label col-sm-3" for="profile-phone">Реферальная ссылка</label>
