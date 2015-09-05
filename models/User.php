@@ -43,7 +43,7 @@ class User extends DbRecord implements \yii\web\IdentityInterface
      */
     public function getReferalLink($isScheme = false)
     {
-        return Url::to(['auth/registration_referal', 'code' => $this->getField('referal_link')], $isScheme);
+        return Url::to(['auth/registration_referal', 'code' => $this->getField('referal_code')], $isScheme);
     }
 
     /**
