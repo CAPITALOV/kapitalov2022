@@ -10,11 +10,13 @@ namespace app\controllers;
 use app\models\Stock;
 use app\models\User;
 use app\models\UserStock;
+use cs\services\Security;
 use cs\services\VarDumper;
 use Yii;
 use yii\bootstrap\ActiveForm;
 use yii\filters\AccessControl;
 use yii\helpers\ArrayHelper;
+use yii\helpers\Url;
 use yii\web\Response;
 
 class CabinetController extends CabinetBaseController
@@ -31,8 +33,9 @@ class CabinetController extends CabinetBaseController
             return $this->refresh();
         } else {
             return $this->render([
-                'model' => $model,
-                'user'  => Yii::$app->user->identity
+                'model'   => $model,
+                'user'    => Yii::$app->user->identity,
+                'refLink' => Url::to(['auth/registration_referal', 'code' => Security::generateRandomString(20)], true),
             ]);
         }
     }
