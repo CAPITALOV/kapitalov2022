@@ -24,7 +24,6 @@ $this->registerJs(<<<JS
             showInfo('Скопировано');
         }
     });
-    $('#buttonCopyRefLink').tooltip();
 JS
 );
 ?>
