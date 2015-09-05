@@ -26,7 +26,7 @@ return [
     // superadmin
     'superAdmin'                            => 'superadmin/index',
     'admin/referal'                         => 'superadmin/referal',
-    'admin/referal/delete'                         => 'superadmin/referal_delete',
+    'admin/referal/delete'                  => 'superadmin/referal_delete',
 
     'requests'                              => 'superadmin_requests/index',
     'requests/activate/<hash:\\w+>'         => 'superadmin_requests/activate',
