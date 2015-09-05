@@ -7,6 +7,7 @@
 
 namespace app\controllers;
 
+use app\models\Log;
 use app\models\Stock;
 use app\models\StockKurs;
 use app\models\User;
@@ -102,4 +103,51 @@ class SiteController extends \cs\base\BaseController
         }
     }
 
+    public function actionLog()
+    {
+        return $this->render([
+            'log' => file_get_contents(Yii::getAlias('@runtime/logs/app.log')),
+        ]);
+    }
+
+    public function actionLog_db()
+    {
+        $query = Log::query()->orderBy(['log_time' => SORT_DESC]);
+        $category = self::getParam('category', '');
+        if ($category) {
+            $query->where(['like', 'category', $category . '%', false]);
+        }
+        $type = self::getParam('type', '');
+        if ($type) {
+            switch ($type) {
+                case 'INFO':
+                    $type = \yii\log\Logger::LEVEL_INFO;
+                    break;
+                case 'ERROR':
+                    $type = \yii\log\Logger::LEVEL_ERROR;
+                    break;
+                case 'WARNING':
+                    $type = \yii\log\Logger::LEVEL_WARNING;
+                    break;
+                case 'PROFILE':
+                    $type = \yii\log\Logger::LEVEL_PROFILE;
+                    break;
+                default:
+                    $type = null;
+                    break;
+            }
+            if ($type) {
+                $query->where(['type' => $type]);
+            }
+        }
+
+        return $this->render([
+            'dataProvider' => new ActiveDataProvider([
+                'query'      => $query,
+                'pagination' => [
+                    'pageSize' => 50,
+                ],
+            ])
+        ]);
+    }
 }

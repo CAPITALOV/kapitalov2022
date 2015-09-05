@@ -6,6 +6,8 @@ return [
     'price'                                 => 'site/price',
     'captcha'                               => 'site/captcha',
     'time'                                  => 'site/time',
+    'log'                                   => 'site/log',
+    'logDb'                                 => 'site/log_db',
 
     'about'                                 => 'site/about',
 
