@@ -53,7 +53,7 @@ class EmailChange extends DbRecord implements DispatcherInterface
      */
     public static function cron($isEcho = true)
     {
-        $count = (new Query())->createCommand()->delete(static::TABLE, ['<', 'date_finish', tme()])->execute();
+        $count = (new Query())->createCommand()->delete(static::TABLE, ['<', 'date_finish', time()])->execute();
         if ($isEcho) echo 'Удалено строк: ' . $count;
     }
 }

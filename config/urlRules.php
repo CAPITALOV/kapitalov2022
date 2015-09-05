@@ -14,6 +14,7 @@ return [
     'changeEmail/activate/<code:\\w+>'      => 'auth/change_email_activate',
 
     'registration'                          => 'auth/registration',
+    'registration/<code:\\w+>'              => 'auth/registration_referal',
     'registrationActivate/<code:\\w+>'      => 'auth/registration_activate',
     'login'                                 => 'auth/login',
     'loginAjax'                             => 'auth/login_ajax',

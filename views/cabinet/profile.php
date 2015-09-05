@@ -8,12 +8,25 @@ use app\models\UnionCategory;
 /* @var $this yii\web\View */
 /* @var $form yii\bootstrap\ActiveForm */
 /* @var $model cs\base\BaseForm */
+/* @var $refLink string реферальная ссылка */
 
 $this->title = 'Редактирование профиля';
-$this->params['breadcrumbs'][] = $this->title;
 
-
-
+\cs\assets\ZClip\Asset::register($this);
+$zPath = \Yii::$app->assetManager->getBundle('cs\assets\ZClip\Asset')->baseUrl;
+$this->registerJs(<<<JS
+    $("#buttonCopyRefLink").zclip({
+        path: '{$zPath}' + '/ZeroClipboard.swf',
+        copy: $('#profile-ref-link').val(),
+        beforeCopy: function () {
+        },
+        afterCopy: function () {
+            showInfo('Скопировано');
+        }
+    });
+    $('#buttonCopyRefLink').tooltip();
+JS
+);
 ?>
 
 <h1 class="page-header"><?= Html::encode($this->title) ?></h1>
@@ -38,13 +51,28 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= $model->field($form, 'avatar') ?>
         <?= $model->field($form, 'birth_date') ?>
         <?= $model->field($form, 'phone') ?>
+        <div class="form-group">
+            <label class="control-label col-sm-3" for="profile-phone">Реферальная ссылка</label>
 
+            <div class="col-sm-6">
+                <div class="input-group input-group">
+                    <input class="form-control" placeholder="" id="profile-ref-link" value="<?= $refLink ?>" style="font-family: 'courier new'">
+                            <span class="input-group-btn">
+                                <button class="btn btn-info" type="button" id="buttonCopyRefLink" style="width: 50px;" title="Скопировать в буфер">
+                                    <span class="glyphicon glyphicon-copyright-mark"></span>
+                                </button>
+                            </span>
+                </div>
+
+                <div class="help-block help-block-error "></div>
+            </div>
+        </div>
 
 
         <hr class="featurette-divider">
         <div class="form-group">
             <?= Html::submitButton('Обновить', [
-                'class' => 'btn btn-default',
+                'class' => 'btn btn-primary',
                 'name'  => 'contact-button',
                 'style' => 'width: 100%;',
             ]) ?>
