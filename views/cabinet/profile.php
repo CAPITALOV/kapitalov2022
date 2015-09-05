@@ -24,7 +24,7 @@ $this->registerJs(<<<JS
             showInfo('Скопировано');
         }
     });
-    $('#buttonCopyRefLink').tooltip();
+    //$('#buttonCopyRefLink').tooltip();
 JS
 );
 ?>
@@ -64,7 +64,7 @@ JS
                             </span>
                 </div>
 
-                <div class="help-block help-block-error "></div>
+                <div class="help-block help-block-error"></div>
             </div>
         </div>
 

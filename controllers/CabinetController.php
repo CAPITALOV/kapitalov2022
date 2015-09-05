@@ -35,7 +35,7 @@ class CabinetController extends CabinetBaseController
             return $this->render([
                 'model'   => $model,
                 'user'    => Yii::$app->user->identity,
-                'refLink' => Url::to(['auth/registration_referal', 'code' => Security::generateRandomString(20)], true),
+                'refLink' => Yii::$app->user->identity->getReferalLink(true),
             ]);
         }
     }

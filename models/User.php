@@ -4,6 +4,7 @@ namespace app\models;
 
 use app\service\RegistrationDispatcher;
 use cs\base\DbRecord;
+use cs\services\Security;
 use yii\db\Query;
 use yii\debug\models\search\Db;
 use yii\helpers\Url;
@@ -31,6 +32,18 @@ class User extends DbRecord implements \yii\web\IdentityInterface
         }
 
         return Url::to($avatar, $isFullPath);
+    }
+
+    /**
+     * Возвращает реферальную ссылку
+     *
+     * @param bool $isScheme
+     *
+     * @return string
+     */
+    public function getReferalLink($isScheme = false)
+    {
+        return Url::to(['auth/registration_referal', 'code' => $this->getField('referal_link')], $isScheme);
     }
 
     /**
@@ -107,6 +120,7 @@ class User extends DbRecord implements \yii\web\IdentityInterface
             'is_active'                => 0,
             'is_confirm'               => 0,
             'datetime_reg'             => gmdate('YmdHis'),
+            'referal_link'             => Security::generateRandomString(20),
         ];
         \Yii::info('REQUEST: ' . \yii\helpers\VarDumper::dumpAsString($_REQUEST), 'gs\\user_registration');
         \Yii::info('Поля для регистрации: ' . \yii\helpers\VarDumper::dumpAsString($fields), 'gs\\user_registration');

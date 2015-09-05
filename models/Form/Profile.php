@@ -40,6 +40,7 @@ class Profile extends BaseForm
     public $birth_date;
     public $last_action;
     public $name_org;
+    public $referal_link;
 
     public $subscribe_is_news;
     public $subscribe_is_site_update;
