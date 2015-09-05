@@ -78,7 +78,7 @@ JS
             'header'  => 'Время регистрации',
             'content' => function ($model, $key, $index, $column) {
                 return Html::tag('abbr', \cs\services\DatePeriod::back($model['datetime']), [
-                    'title' => Yii::$app->formatter->asDatetime($model['datetime']),
+                    'title' => Yii::$app->formatter->asDatetime($model['datetime'], 'php:d.m.Y в H:i (P)'),
                     'class' => 'dateTooltip'
                 ]);
             }
