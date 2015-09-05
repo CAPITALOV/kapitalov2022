@@ -25,10 +25,8 @@ return [
 
     // superadmin
     'superAdmin'                            => 'superadmin/index',
-    'adminUsers'                            => 'superadmin/users',
-    'adminUsers/add'                        => 'superadmin/users_add',
-    'adminUsers/<id:\\d+>/edit'             => 'superadmin/users_edit',
-    'adminUsers/<id:\\d+>/delete'           => 'superadmin/users_delete',
+    'admin/referal'                         => 'superadmin/referal',
+    'admin/referal/delete'                         => 'superadmin/referal_delete',
 
     'requests'                              => 'superadmin_requests/index',
     'requests/activate/<hash:\\w+>'         => 'superadmin_requests/activate',
