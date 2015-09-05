@@ -67,15 +67,9 @@ class PasswordRecover extends \cs\base\BaseForm
 
     public function validateEmail($attribute, $params)
     {
-        if (!User::query(['email' => $this->email])->exists()) {
+        $user = User::query(['email' => strtolower($this->email)]);
+        if (is_null($user)) {
             $this->addError($attribute, 'Такой пользователь не найден');
-        }
-        if (!User::query([
-            'email'     => $this->email,
-            'is_active' => 1,
-        ])->exists()
-        ) {
-            $this->addError($attribute, 'Пользователь заблокирован');
         }
     }
 
@@ -91,7 +85,7 @@ class PasswordRecover extends \cs\base\BaseForm
     public function send()
     {
         if ($this->validate()) {
-            $user = User::find(['email' => $this->email]);
+            $user = User::find(['email' => strtolower($this->email)]);
             if (is_null($user)) {
                 throw new Exception('Пользователь не найден');
             }
