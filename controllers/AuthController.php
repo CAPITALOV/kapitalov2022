@@ -206,6 +206,11 @@ class AuthController extends BaseController
         return $this->render();
     }
 
+    /**
+     * Вывдит и обрабатывает форму регистрации
+     *
+     * @return string|\yii\web\Response
+     */
     public function actionRegistration()
     {
         $model = new \app\models\Form\Registration();
@@ -221,6 +226,35 @@ class AuthController extends BaseController
         if ($model->load(Yii::$app->request->post()) && ($user = $model->register())) {
             Yii::$app->session->setFlash('contactFormSubmitted');
             Yii::$app->session->setFlash('user_id', $user->getId());
+
+            return $this->refresh();
+        }
+        else {
+            return $this->render([
+                'model' => $model,
+            ]);
+        }
+    }
+
+    public function actionRegistration_referal($code)
+    {
+        $model = new \app\models\Form\Registration();
+        $model->setScenario('insert');
+
+        if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
+            $model->setScenario('ajax');
+            Yii::$app->response->format = Response::FORMAT_JSON;
+
+            return ActiveForm::validate($model);
+        }
+
+        if ($model->load(Yii::$app->request->post()) && ($user = $model->register())) {
+            Yii::$app->session->setFlash('contactFormSubmitted');
+            Yii::$app->session->setFlash('user_id', $user->getId());
+            \app\models\Registration::insert([
+                'referal_code' => $code,
+                'user_id'      => $user->getId(),
+            ]);
 
             return $this->refresh();
         }

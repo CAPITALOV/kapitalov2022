@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\Registration;
 use app\models\Request;
 use app\models\Stock;
 use app\models\StockKurs;
@@ -61,6 +62,13 @@ class Superadmin_requestsController extends SuperadminBaseController
         $request = Request::find(self::getParam('id'));
         if (is_null($request)) {
             return self::jsonError('Нет такого запроса');
+        }
+        // ставлю флаг для пользователя если он регистрировался по реферальной ссылке
+        {
+            $r = Registration::find(['user_id' => $request->getField('user_id')]);
+            if (!is_null($r)) {
+                $r->update(['is_paid' => 1]);
+            }
         }
         $request->activate();
 

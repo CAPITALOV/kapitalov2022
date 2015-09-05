@@ -120,7 +120,7 @@ class User extends DbRecord implements \yii\web\IdentityInterface
             'is_active'                => 0,
             'is_confirm'               => 0,
             'datetime_reg'             => gmdate('YmdHis'),
-            'referal_link'             => Security::generateRandomString(20),
+            'referal_code'             => Security::generateRandomString(20),
         ];
         \Yii::info('REQUEST: ' . \yii\helpers\VarDumper::dumpAsString($_REQUEST), 'gs\\user_registration');
         \Yii::info('Поля для регистрации: ' . \yii\helpers\VarDumper::dumpAsString($fields), 'gs\\user_registration');
