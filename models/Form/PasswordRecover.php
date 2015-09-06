@@ -3,6 +3,7 @@
 namespace app\models\Form;
 
 use app\models\User;
+use cs\services\VarDumper;
 use cs\web\Exception;
 use Yii;
 use yii\base\Model;
@@ -67,7 +68,7 @@ class PasswordRecover extends \cs\base\BaseForm
 
     public function validateEmail($attribute, $params)
     {
-        $user = User::query(['email' => strtolower($this->email)]);
+        $user = User::find(['email' => strtolower($this->email)]);
         if (is_null($user)) {
             $this->addError($attribute, 'Такой пользователь не найден');
         }
