@@ -6,9 +6,12 @@
  * Time: 1:41
  */
 
+/** @var \yii\web\View $this */
+
 $this->title = 'Тарифы';
 
 use yii\helpers\Url;
+$this->registerJs("$('.payImage').tooltip()");
 
 ?>
 
@@ -34,7 +37,7 @@ use yii\helpers\Url;
             <ul class="list-group">
                 <li class="list-group-item"><strong>1</strong> Акция</li>
                 <li class="list-group-item"><strong>Нет</strong> поддержки</li>
-                <li class="list-group-item"><a href="<?= Url::to(['auth/registration']) ?>" class="btn btn-primary"
+                <li class="list-group-item"><a href="<?= Url::to(['auth/registration']) ?>" class="btn btn-default"
                                                style="width:100%;">Получить!</a>
                 </li>
             </ul>
@@ -46,13 +49,13 @@ use yii\helpers\Url;
                 <h3 class="panel-title">Базовый <span class="label label-success">Национальный рынок</span></h3>
             </div>
             <div class="panel-body">
-                <span class="price"><sup>$</sup>100</span>
+                <span class="price"><sup>$</sup>99</span>
                 <span class="period">за месяц</span>
             </div>
             <ul class="list-group">
                 <li class="list-group-item"><strong>1</strong> Акция</li>
                 <li class="list-group-item"><strong>Есть</strong> поддержка</li>
-                <li class="list-group-item"><a href="<?= Url::to(['auth/registration']) ?>" class="btn btn-primary"
+                <li class="list-group-item"><a href="<?= Url::to(['auth/registration']) ?>" class="btn btn-success"
                                                style="width:100%;">Получить!</a>
                 </li>
             </ul>
@@ -64,7 +67,7 @@ use yii\helpers\Url;
                 <h3 class="panel-title">Индивидуальный</h3>
             </div>
             <div class="panel-body">
-                <span class="price"><sup>$</sup>300</span>
+                <span class="price"><sup>$</sup>249</span>
                 <span class="period">за месяц</span>
             </div>
             <ul class="list-group">
@@ -76,8 +79,33 @@ use yii\helpers\Url;
             </ul>
         </div>
     </div>
-    <div class="col-md-offset-2 col-md-8">
-        <p>Телефон для обратной связи: +7-499-394-27-43</p>
+    <div class="col-md-12">
+        <p>Телефон для обратной связи: +7 499 394-27-43<br>National Agency of the Capitals</p>
+    </div>
+    <h2 class="page-header col-lg-12">Мы принимаем к оплате</h2>
+    <div class="col-md-3">
+        <img src="/images/site/price/yandex_money.jpg" width="200" class="thumbnail payImage" alt="Яндекс Деньги" title="Яндекс Деньги">
+    </div>
+    <div class="col-md-3">
+        <img src="/images/site/price/mastercard.png" width="200" class="thumbnail payImage" alt="Банковские карты Master Card" title="Банковские карты Master Card">
+    </div>
+    <div class="col-md-3">
+        <img src="/images/site/price/visa.png" width="200" class="thumbnail payImage" alt="Банковские карты Visa" title="Банковские карты Visa">
+    </div>
+    <div class="col-md-3">
+        <img src="/images/site/price/terminal.jpg" width="200" class="thumbnail payImage" alt="Платежи через термиалы" title="Платежи через термиалы">
+    </div>
+    <div class="col-md-3">
+        <img src="/images/site/price/webmoney.jpg" width="200" class="thumbnail payImage" alt="WebMoney" title="WebMoney">
+    </div>
+    <div class="col-md-3">
+        <img src="/images/site/price/masterpass.png" width="200" class="thumbnail payImage" alt="MasterPass" title="MasterPass">
+    </div>
+    <div class="col-md-3">
+        <img src="/images/site/price/alfa-click.jpg" width="200" class="thumbnail payImage" alt="Альфа-Клик" title="Альфа-Клик">
+    </div>
+    <div class="col-md-3">
+        <img src="/images/site/price/psb.jpg" width="200" class="thumbnail payImage" alt="Промсвязьбанк" title="Промсвязьбанк">
     </div>
 </div>
 <!-- /.row -->
