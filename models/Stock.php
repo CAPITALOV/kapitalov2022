@@ -55,6 +55,8 @@ class Stock extends \cs\base\DbRecord
             ->select([
                 'cap_stock.id',
                 'cap_stock.name',
+                'cap_stock.logo',
+                'cap_stock.description',
             ])
             ->innerJoin('cap_users_stock_buy', 'cap_users_stock_buy.stock_id = cap_stock.id and cap_users_stock_buy.user_id = :uid', [':uid' => Yii::$app->user->id])
             ->orderBy(['cap_stock.name' => SORT_ASC])
@@ -71,6 +73,8 @@ class Stock extends \cs\base\DbRecord
             ->select([
                 'cap_stock.id',
                 'cap_stock.name',
+                'cap_stock.logo',
+                'cap_stock.description',
             ])
             ->leftJoin('cap_users_stock_buy', 'cap_users_stock_buy.stock_id = cap_stock.id and cap_users_stock_buy.user_id = :uid', [':uid' => Yii::$app->user->id])
             ->orderBy(['cap_stock.name' => SORT_ASC])
