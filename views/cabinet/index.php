@@ -23,7 +23,7 @@ $this->registerJs("$('.labelPaid').tooltip()");
 
         $class = new \app\models\Stock($item);
         ?>
-        <div class="col-sm-3" style="margin-bottom: 30px;">
+        <div class="col-sm-4" style="margin-bottom: 30px;">
             <?php
             if (!is_null($item['logo'])) {
                 echo Html::a(Html::img($item['logo'], [
