@@ -64,8 +64,8 @@ AppAsset::register($this);
     <footer class="footer">
         <div class="container">
             <div class="row">
-                <div class="col-lg-4">
-                    <p>&copy; 2015 Capitalov</p>
+                <div class="col-lg-12">
+                    <p>© 2007 — 2015 | www.capitalov.com | Эксклюзивные финансовые услуги | Национальное Агентство Капиталов</p>
                 </div>
 
             </div>
