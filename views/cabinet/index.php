@@ -4,51 +4,102 @@ use yii\helpers\Url;
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
+/* @var $paid array */
+/* @var $notPaid array */
 
 $this->title = 'Котировки';
 $this->registerJs("$('.labelPaid').tooltip()");
+
+//\cs\services\VarDumper::dump($notPaid);
 ?>
 
 <h1 class="page-header"><?= Html::encode($this->title) ?></h1>
 
-<?php
-foreach ($items as $item) {
 
-    $class = new \app\models\Stock($item);
-    $isPaid = $class->isPaid();
-    ?>
-    <div class="col-sm-3" style="margin-bottom: 30px;">
-        <?php
-        if (!is_null($item['logo'])) {
-            echo Html::a(Html::img($item['logo'], [
-                'class' => 'thumbnail',
-                'style' => 'opacity: ' . (($isPaid) ? '1' : '0.2'),
-            ]), [
-                'cabinet/stock_item3',
-                'id' => $item['id']
-            ]);
-        }
+<h2 class="page-header">Оплаченные котировки</h2>
+<div class="row col-sm-12" style="margin-bottom: 40px;">
+    <?php
+    foreach ($paid as $item) {
+
+        $class = new \app\models\Stock($item);
         ?>
-        <p><?= $item['name'] ?></p>
-        <?php if ($isPaid) { ?>
-            <span
-                href="<?= Url::to(['cabinet_wallet/add', 'id' => $item['id']]) ?>"
-                class="label label-success labelPaid"
-                style="width: 100%"
-                title="<?= 'до ' . \Yii::$app->formatter->asDate($item['date_finish']) ?> осталось <?= \cs\services\DatePeriod::diff($item['date_finish']) ?>"
+        <div class="col-sm-3" style="margin-bottom: 30px;">
+            <?php
+            if (!is_null($item['logo'])) {
+                echo Html::a(Html::img($item['logo'], [
+                    'class' => 'thumbnail',
+                    'style' => 'opacity: 1;',
+                ]), [
+                    'cabinet/stock_item3',
+                    'id' => $item['id']
+                ]);
+            }
+            ?>
+            <p><?= $item['name'] ?></p>
+        <span
+            href="<?= Url::to(['cabinet_wallet/add', 'id' => $item['id']]) ?>"
+            class="label label-success labelPaid"
+            style="width: 100%"
+            title="<?= 'до ' . \Yii::$app->formatter->asDate($item['date_finish']) ?> осталось <?= \cs\services\DatePeriod::diff($item['date_finish']) ?>"
 
-                >Оплачено</span>
-        <?php } else { ?>
+            >Оплачено</span>
+        </div>
+    <?php
+    }?>
+</div>
+
+
+<h2 class="page-header">Не оплаченые котировки</h2>
+<div class="row col-sm-12">
+    <?php
+    foreach ($notPaid as $item) {
+
+        $class = new \app\models\Stock($item);
+        ?>
+        <div class="col-sm-3" style="margin-bottom: 30px;">
+            <?php
+            if (!is_null($item['logo'])) {
+                echo Html::a(Html::img($item['logo'], [
+                    'class' => 'thumbnail',
+                    'style' => 'opacity: 0.2',
+                    'width' => 200
+                ]), [
+                    'cabinet/stock_item3',
+                    'id' => $item['id']
+                ]);
+            }
+            ?>
+            <p><?= $item['name'] ?></p>
             <a
                 href="<?= Url::to(['cabinet_wallet/add', 'id' => $item['id']]) ?>"
                 class="btn btn-default"
                 style="width: 100%"
 
                 >Оплатить</a>
-        <?php } ?>
+        </div>
 
+
+    <?php
+    }?>
+    <div class="col-sm-3" style="margin-bottom: 30px;">
+        <center>
+            <?php
+            echo Html::a(Html::img('/images/cabinet/index/all-stok.png', [
+                'class' => 'thumbnail',
+                'width' => 200,
+            ]), [
+                'cabinet/stock_item3',
+                'id' => $item['id']
+            ]);
+            ?>
+            <p>Индивидуальный заказ</p>
+        </center>
+        <a
+            href="<?= Url::to(['cabinet_wallet/add', 'id' => $item['id']]) ?>"
+            class="btn btn-primary"
+            style="width: 100%"
+
+            >Выбрать</a>
     </div>
-<?php
-}?>
 
-
+</div>

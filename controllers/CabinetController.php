@@ -93,7 +93,17 @@ class CabinetController extends CabinetBaseController
         }
 
         return $this->render([
-            'items' => $items,
+            'items'   => $items,
+            'paid'    => Stock::getPaid()
+                ->select([
+                    'cap_stock.id',
+                    'cap_stock.name',
+                    'cap_stock.logo',
+                    'cap_stock.description',
+                    'cap_users_stock_buy.date_finish'
+                ])
+                ->all(),
+            'notPaid' => Stock::getNotPaid()->all(),
         ]);
     }
 
