@@ -80,9 +80,9 @@ class CabinetController extends CabinetBaseController
             'stock_id',
             'date_finish',
         ])->all();
-        for($i=0;$i<count($items);$i++) {
-            $item = &$items[$i];
-            foreach($dateFinishList as $row) {
+        for ($i = 0; $i < count($items); $i++) {
+            $item = &$items[ $i ];
+            foreach ($dateFinishList as $row) {
                 if ($row['stock_id'] == $item['id']) {
                     $item['date_finish'] = $row['date_finish'];
                 }

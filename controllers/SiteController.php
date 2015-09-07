@@ -76,6 +76,15 @@ class SiteController extends \cs\base\BaseController
 
     public function actionTime()
     {
+
+        $string = 'sdfsdf0_-.';
+        $pattern = '#^[a-z\d_-]+$#';
+        if (!preg_match($pattern, $string)) {
+            echo 'Имеются запрещенные символы';
+        } else {
+            echo 'ok';
+        }
+        exit;
         \cs\services\VarDumper::dump(Yii::$app->formatter->asDatetime(time()));
     }
 
