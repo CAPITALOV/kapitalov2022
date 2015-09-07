@@ -37,7 +37,7 @@ class Registration extends \cs\base\BaseForm
     public function scenarios()
     {
         return [
-            'insert' => ['email', 'password1', 'password2', 'verifyCode'],
+            'insert' => ['email', 'password1', 'password2'],
             'ajax'   => ['email', 'password1', 'password2'],
         ];
     }

@@ -32,13 +32,6 @@ $this->title = 'Регистрация';
             ?>
             <?= $form->field($model, 'password1', ['inputOptions' => ['placeholder' => 'Пароль']])->passwordInput()->label('Пароль', ['class' => 'hide']) ?>
             <?= $form->field($model, 'password2', ['inputOptions' => ['placeholder' => 'Повторите пароль еще раз']])->passwordInput()->label('Пароль повтор', ['class' => 'hide']) ?>
-            <?php
-            $field = $form->field($model, 'verifyCode')->widget(Captcha::className(), [
-                'template' => '<div class="row"><div class="col-lg-12">{image}</div></div><div class="row"><div class="col-lg-12">{input}</div></div>',
-            ]);
-            $field->enableAjaxValidation = false;
-            echo $field;
-            ?>
             <hr>
             <div class="form-group">
                 <?= Html::submitButton('Зарегистрироваться', [
