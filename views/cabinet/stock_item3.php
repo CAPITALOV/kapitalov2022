@@ -149,43 +149,46 @@ JS
 
 <h2 class="page-header">Предыстория торгов</h2>
 
-<?php
-$model = new \app\models\Form\StockItem3();
-$form = ActiveForm::begin([
-    'id' => 'contact-form2',
-]);
-?>
-<div class="col-sm-2">
-    Прогноз <a href="javascript:void(0);" id="linkInfoRed"><span class="glyphicon glyphicon-info-sign"></span></a>
+<div class="col-lg-12 row">
     <?php
-    $this->registerJs(<<<JS
-$('#linkInfoRed').click(function(){
-    $('#myModalRed').modal('show');
-});
+    $model = new \app\models\Form\StockItem3();
+    $form = ActiveForm::begin([
+        'id' => 'contact-form2',
+    ]);
+    ?>
+    <div class="col-sm-2">
+        Прогноз <a href="javascript:void(0);" id="linkInfoRed"><span class="glyphicon glyphicon-info-sign"></span></a>
+        <?php
+        $this->registerJs(<<<JS
+    $('#linkInfoRed').click(function(){
+        $('#myModalRed').modal('show');
+    });
+JS
+        );
+        ?>
+        <?= $form->field($model, 'isRed')->widget('cs\Widget\CheckBox2\CheckBox', ['options' => ['data-onstyle' => 'danger']])->label('', ['class' => 'hide'])?>
+    </div>
+    <div class="col-sm-2">
+        Прогноз <a href="javascript:void(0);" id="linkInfoBlue"><span class="glyphicon glyphicon-info-sign"></span></a>
+        <?php
+        $this->registerJs(<<<JS
+    $('#linkInfoBlue').click(function(){
+        $('#myModalBlue').modal('show');
+    });
 JS
     );
-    ?>
-    <?= $form->field($model, 'isRed')->widget('cs\Widget\CheckBox2\CheckBox', ['options' => ['data-onstyle' => 'danger']])->label('', ['class' => 'hide'])?>
-</div>
-<div class="col-sm-2">
-    Прогноз <a href="javascript:void(0);" id="linkInfoBlue"><span class="glyphicon glyphicon-info-sign"></span></a>
-    <?php
-    $this->registerJs(<<<JS
-$('#linkInfoBlue').click(function(){
-    $('#myModalBlue').modal('show');
-});
-JS
-);
-    ?>
-    <?= $form->field($model, 'isBlue')->widget('cs\Widget\CheckBox2\CheckBox', ['options' => ['data-onstyle' => 'primary']])->label('', ['class' => 'hide']) ?>
-</div>
-<div class="col-sm-2">
-    Курс
-    <?= $form->field($model, 'isKurs')->widget('cs\Widget\CheckBox2\CheckBox', ['options' => ['data-onstyle' => 'success']])->label('', ['class' => 'hide']) ?>
-</div>
-<?php ActiveForm::end() ?>
+        ?>
+        <?= $form->field($model, 'isBlue')->widget('cs\Widget\CheckBox2\CheckBox', ['options' => ['data-onstyle' => 'primary']])->label('', ['class' => 'hide']) ?>
+    </div>
+    <div class="col-sm-2">
+        Курс
+        <?= $form->field($model, 'isKurs')->widget('cs\Widget\CheckBox2\CheckBox', ['options' => ['data-onstyle' => 'success']])->label('', ['class' => 'hide']) ?>
+    </div>
 
-<div class="row col-lg-12" style="margin-top: 100px;">
+    <?php ActiveForm::end() ?>
+</div>
+
+<div class="row col-lg-12">
     <?php
     $graph3 = new \cs\Widget\ChartJs\Line([
         'width'     => 800,
