@@ -6,7 +6,7 @@ use yii\bootstrap\ActiveForm;
 /* @var $form yii\bootstrap\ActiveForm */
 /* @var $model cs\base\BaseForm */
 
-$this->title = 'Вход в личный кабинет';
+$this->title = 'Вход в систему капиталов';
 ?>
 
 

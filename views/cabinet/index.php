@@ -49,38 +49,9 @@ $this->registerJs("$('.labelPaid').tooltip()");
 </div>
 
 
-<h2 class="page-header">Не оплаченые котировки</h2>
+<h2 class="page-header">Заказать</h2>
 <div class="row col-sm-12">
-    <?php
-    foreach ($notPaid as $item) {
 
-        $class = new \app\models\Stock($item);
-        ?>
-        <div class="col-sm-3" style="margin-bottom: 30px;">
-            <?php
-            if (!is_null($item['logo'])) {
-                echo Html::a(Html::img($item['logo'], [
-                    'class' => 'thumbnail',
-                    'style' => 'opacity: 0.2',
-                    'width' => 200
-                ]), [
-                    'cabinet/stock_item3',
-                    'id' => $item['id']
-                ]);
-            }
-            ?>
-            <p><?= $item['name'] ?></p>
-            <a
-                href="<?= Url::to(['cabinet_wallet/add', 'id' => $item['id']]) ?>"
-                class="btn btn-default"
-                style="width: 100%"
-
-                >Оплатить</a>
-        </div>
-
-
-    <?php
-    }?>
     <div class="col-sm-3" style="margin-bottom: 30px;">
         <center>
             <?php
@@ -92,7 +63,27 @@ $this->registerJs("$('.labelPaid').tooltip()");
                 'id' => $item['id']
             ]);
             ?>
-            <p>Индивидуальный заказ</p>
+            <p>Национальный рынок</p>
+        </center>
+        <a
+            href="<?= Url::to(['cabinet_wallet/add', 'id' => $item['id']]) ?>"
+            class="btn btn-primary"
+            style="width: 100%"
+
+            >Выбрать</a>
+    </div>
+    <div class="col-sm-3" style="margin-bottom: 30px;">
+        <center>
+            <?php
+            echo Html::a(Html::img('/images/cabinet/index/all-stok.png', [
+                'class' => 'thumbnail',
+                'width' => 200,
+            ]), [
+                'cabinet/stock_item3',
+                'id' => $item['id']
+            ]);
+            ?>
+            <p>Зарубежный рынок</p>
         </center>
         <a
             href="<?= Url::to(['cabinet_wallet/add', 'id' => $item['id']]) ?>"

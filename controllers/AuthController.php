@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\Form\Registration;
 use app\models\User;
 use app\service\EmailChangeDispatcher;
 use cs\base\BaseController;

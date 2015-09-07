@@ -155,7 +155,7 @@ $form = ActiveForm::begin([
     'id' => 'contact-form2',
 ]);
 ?>
-<div class="col-sm-1">
+<div class="col-sm-2">
     Прогноз <a href="javascript:void(0);" id="linkInfoRed"><span class="glyphicon glyphicon-info-sign"></span></a>
     <?php
     $this->registerJs(<<<JS
@@ -167,7 +167,7 @@ JS
     ?>
     <?= $form->field($model, 'isRed')->widget('cs\Widget\CheckBox2\CheckBox', ['options' => ['data-onstyle' => 'danger']])->label('', ['class' => 'hide'])?>
 </div>
-<div class="col-sm-1">
+<div class="col-sm-2">
     Прогноз <a href="javascript:void(0);" id="linkInfoBlue"><span class="glyphicon glyphicon-info-sign"></span></a>
     <?php
     $this->registerJs(<<<JS
@@ -179,7 +179,7 @@ JS
     ?>
     <?= $form->field($model, 'isBlue')->widget('cs\Widget\CheckBox2\CheckBox', ['options' => ['data-onstyle' => 'primary']])->label('', ['class' => 'hide']) ?>
 </div>
-<div class="col-sm-1">
+<div class="col-sm-2">
     Курс
     <?= $form->field($model, 'isKurs')->widget('cs\Widget\CheckBox2\CheckBox', ['options' => ['data-onstyle' => 'success']])->label('', ['class' => 'hide']) ?>
 </div>
@@ -277,8 +277,6 @@ JS
 
 
 
-
-
 <div class="modal fade" id="myModalBlue" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -287,10 +285,7 @@ JS
                 <h4 class="modal-title" id="myModalLabel">Относительный ценовой генератор</h4>
             </div>
             <div class="modal-body">
-                <p>
-                    Ценовой осциллятор – это индикатор, основанный на разнице между двумя Скользящими средними, и выражаемый в процентах или в абсолютных значениях. Ценовой Осциллятор, выраженный в процентах, соответственно называется Процентный Ценовой осциллятор (PPO - Percentage Price Oscillator), а Ценовой Осциллятор, выраженный в абсолютных значениях, называется Абсолютный Ценовой осциллятор (ACO - Absolute Price Oscillator). Число временных периодов может изменяться в зависимости от предпочтений пользователя. Для дневных графиков, могут быть предпочтены более длинные Скользящие средние, чтобы отфильтровывать часть «рыночного шума», связанного с ежедневными движениями цены. Для недельных графиков, которые уже отфильтровывают, часть «рыночного шума», более соответствующими можно считать более короткие Скользящие средние. Кроме того, может быть наложена последующая Скользящая средняя для использования ее в качестве  импульсной линии, подобно тому, как это происходит в индикаторе MACD.
-                </p>
-                <p><a href="http://www.fxmag.ru/pub/20/tsenovoj_ostsilljator/" target="_blank">Подробнее</a></p>
+
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
