@@ -47,7 +47,7 @@ JS
                         <ul class="dropdown-menu" role="menu">
                             <li><a href="<?= Url::to(['superadmin_requests/index']) ?>">Заявки на оплату</a></li>
                             <li><a href="<?= Url::to(['superadmin/referal']) ?>">Пирамида изобилия</a></li>
-                            <li><a href="<?= Url::to(['superadmin_stock/index']) ?>">Акции</a></li>
+                            <li><a href="<?= Url::to(['superadmin_stock/index']) ?>">Котировки</a></li>
                         </ul>
                     </li>
                 <?php } ?>
@@ -77,7 +77,7 @@ JS
                         aria-expanded="false"
                         role="button"
                         >
-                        Акции
+                        Котировки
                         <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu" role="menu">

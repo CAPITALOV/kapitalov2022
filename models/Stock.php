@@ -30,6 +30,21 @@ class Stock extends \cs\base\DbRecord
     }
 
     /**
+     * Оплачена ли котировка?
+     *
+     * @return bool
+     */
+    public function isPaid()
+    {
+        return UserStock::query([
+            'stock_id' => $this->getId(),
+            'user_id'  => \Yii::$app->user->id,
+        ])
+            ->andWhere(['>', 'date_finish', date('Y-m-d')])
+            ->exists();
+    }
+
+    /**
      * Возвращает акции которые оплаченые
      *
      * @return \yii\db\Query
