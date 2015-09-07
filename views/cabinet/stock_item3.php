@@ -274,7 +274,7 @@ JS
     ?>
 </div>
 
-<div class="row col-lg-12 text-center">
+<div class="row col-lg-12">
     <center>
         <div class="row col-lg-8">
             <div style="margin: 10px 0px 20px 0px;width: 800px;" class="text-center">
