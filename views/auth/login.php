@@ -15,13 +15,13 @@ $this->title = 'Вход в систему капиталов';
     <p>Пожалуйста заполните следующие поля для входа:</p>
 
 <?php $form = ActiveForm::begin([
-    'id'          => 'login-form',
-    'layout'      => 'horizontal',
+    'id'     => 'login-form',
+    'layout' => 'horizontal',
 ]); ?>
 
 <?= $model->field($form, 'username') ?>
 <?= $model->field($form, 'password', [
-    'template' => '{label}{beginWrapper}{input}<div style="margin-top: 5px;"><b>Забыли пароль?</b><span style="margin-left: 20px;"><a href='. \yii\helpers\Url::to(['auth/password_recover']) .'>Восстановить</a></span></div>{hint}{error}{endWrapper}',
+    'template' => '{label}{beginWrapper}{input}<div style="margin-top: 5px;"><b>Забыли пароль?</b><span style="margin-left: 20px;"><a href=' . \yii\helpers\Url::to(['auth/password_recover']) . '>Восстановить</a></span></div>{hint}{error}{endWrapper}',
 ])->passwordInput() ?>
 
 <?= $model->field($form, 'rememberMe') ?>

@@ -185,7 +185,7 @@ JS
 </div>
 <?php ActiveForm::end() ?>
 
-<div class="row col-lg-12">
+<div class="row col-lg-12" style="margin-top: 100px;">
     <?php
     $graph3 = new \cs\Widget\ChartJs\Line([
         'width'     => 800,
