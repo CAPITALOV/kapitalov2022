@@ -52,7 +52,7 @@ $url = Url::to(['cabinet/graph_ajax']);
     $logo = $item->getField('logo', '');
     if ($logo) {
         ?>
-            <img src="<?= $logo ?>" width="50">
+        <img src="<?= $logo ?>" width="50">
     <?php
     }
     ?><?= $this->title ?></h1>
@@ -168,7 +168,7 @@ JS
 JS
         );
         ?>
-        <?= $form->field($model, 'isRed')->widget('cs\Widget\CheckBox2\CheckBox', ['options' => ['data-onstyle' => 'danger']])->label('', ['class' => 'hide'])?>
+        <?= $form->field($model, 'isRed')->widget('cs\Widget\CheckBox2\CheckBox', ['options' => ['data-onstyle' => 'danger']])->label('', ['class' => 'hide']) ?>
     </div>
 
 
@@ -183,7 +183,7 @@ JS
         $('#myModalBlue').modal('show');
     });
 JS
-    );
+        );
         ?>
         <?= $form->field($model, 'isBlue')->widget('cs\Widget\CheckBox2\CheckBox', ['options' => ['data-onstyle' => 'primary']])->label('', ['class' => 'hide']) ?>
     </div>
@@ -197,7 +197,7 @@ JS
     <?php ActiveForm::end() ?>
 </div>
 
-<div class="row col-lg-12">
+<div class="row col-lg-12 text-center">
     <?php
     $graph3 = new \cs\Widget\ChartJs\Line([
         'width'     => 800,
@@ -274,26 +274,23 @@ JS
     ?>
 </div>
 
-<div class="row col-lg-12">
-    <div class="row col-lg-8">
-        <div style="margin: 10px 0px 20px 0px;width: 800px;">
-            <div id="slider" style=""></div>
+<div class="row col-lg-12 text-center">
+    <center>
+        <div class="row col-lg-8">
+            <div style="margin: 10px 0px 20px 0px;width: 800px;" class="text-center">
+                <div id="slider" style=""></div>
+            </div>
         </div>
-    </div>
+    </center>
 </div>
-
-
-
-
-
-
 
 
 <div class="modal fade" id="myModalBlue" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title" id="myModalLabel">Относительный ценовой генератор</h4>
             </div>
             <div class="modal-body">
@@ -310,7 +307,8 @@ JS
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title" id="myModalLabel">Цена по закрытию торгов</h4>
             </div>
             <div class="modal-body">
