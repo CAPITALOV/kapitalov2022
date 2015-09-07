@@ -38,7 +38,9 @@ class Line extends Object
     public $lineArray;
 
     public $chartOptions = [];
-    public $globalOptions = [];
+    public $globalOptions = [
+//        'animation' => false,
+    ];
 
     public $colors = [
         [
@@ -105,6 +107,7 @@ class Line extends Object
         if (count($this->globalOptions) > 0){
             $js[] = "Chart.defaults.global = {$optionsJson};";
         }
+        $js[] = "Chart.defaults.global.animation = false;";
         $optionsJson = Json::encode($this->chartOptions);
         $dataJson = Json::encode($this->getData());
         $js[] = <<<JS
