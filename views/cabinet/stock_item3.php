@@ -157,7 +157,9 @@ JS
     ]);
     ?>
     <div class="col-sm-2">
-        Прогноз <a href="javascript:void(0);" id="linkInfoRed"><span class="glyphicon glyphicon-info-sign"></span></a>
+        Красная линия закрытия торгов
+    </div>
+    <div class="col-sm-2">
         <?php
         $this->registerJs(<<<JS
     $('#linkInfoRed').click(function(){
@@ -168,8 +170,13 @@ JS
         ?>
         <?= $form->field($model, 'isRed')->widget('cs\Widget\CheckBox2\CheckBox', ['options' => ['data-onstyle' => 'danger']])->label('', ['class' => 'hide'])?>
     </div>
+
+
     <div class="col-sm-2">
-        Прогноз <a href="javascript:void(0);" id="linkInfoBlue"><span class="glyphicon glyphicon-info-sign"></span></a>
+        Синяя линия взвешенной цены
+    </div>
+
+    <div class="col-sm-2">
         <?php
         $this->registerJs(<<<JS
     $('#linkInfoBlue').click(function(){
@@ -181,7 +188,9 @@ JS
         <?= $form->field($model, 'isBlue')->widget('cs\Widget\CheckBox2\CheckBox', ['options' => ['data-onstyle' => 'primary']])->label('', ['class' => 'hide']) ?>
     </div>
     <div class="col-sm-2">
-        Курс
+        Зеленая линия прошедших торгов
+    </div>
+    <div class="col-sm-2">
         <?= $form->field($model, 'isKurs')->widget('cs\Widget\CheckBox2\CheckBox', ['options' => ['data-onstyle' => 'success']])->label('', ['class' => 'hide']) ?>
     </div>
 
