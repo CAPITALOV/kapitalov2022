@@ -12,6 +12,7 @@ use app\models\Stock;
 use app\models\User;
 use cs\Application;
 use cs\services\VarDumper;
+use cs\web\Exception;
 use YandexMoney\API;
 use Yii;
 use yii\bootstrap\ActiveForm;
@@ -26,14 +27,52 @@ class Cabinet_walletController extends CabinetBaseController
      * @param int $id идентификатор акции
      *
      * @return string|\yii\web\Response
+     *
+     * @throws \cs\web\Exception
      */
     public function actionAdd($id)
     {
         $model = new \app\models\Form\CabinetWalletAdd();
+        $stock = Stock::find($id);
+        if (is_null($stock)) {
+            throw new Exception('Нет такой катировки');
+        }
 
         return $this->render([
             'model' => $model,
-            'stock' => Stock::find($id),
+            'stock' => $stock,
+        ]);
+    }
+
+    /**
+     * Форма покупки месяцев Национальный рынок
+     *
+     * @param int $id идентификатор акции
+     *
+     * @return string|\yii\web\Response
+     */
+    public function actionAdd1()
+    {
+        $model = new \app\models\Form\CabinetWalletAdd1();
+
+        return $this->render([
+            'model' => $model,
+        ]);
+    }
+
+    /**
+     * Форма покупки месяцев Зарубежный рынок
+     *
+     * @param int $id идентификатор акции
+     *
+     * @return string|\yii\web\Response
+     */
+    public function actionAdd2()
+    {
+        $model = new \app\models\Form\CabinetWalletAdd1();
+
+        return $this->render([
+            'model' => $model,
         ]);
     }
 

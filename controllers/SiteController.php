@@ -11,6 +11,7 @@ use app\models\Log;
 use app\models\Stock;
 use app\models\StockKurs;
 use app\models\User;
+use cs\services\Security;
 use cs\services\Url;
 use Yii;
 use yii\db\Query;
@@ -74,18 +75,57 @@ class SiteController extends \cs\base\BaseController
         return $this->render('index');
     }
 
+    public static function sendRequest($url, $options = [], $access_token = null)
+    {
+        $curl = curl_init($url);
+
+        curl_setopt($curl, CURLOPT_USERAGENT, 'Yandex.Money.SDK/PHP');
+        curl_setopt($curl, CURLOPT_POST, 1);
+        $query = http_build_query($options);
+        curl_setopt($curl, CURLOPT_POSTFIELDS, $query);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($curl, CURLOPT_HEADER, 0);
+        //curl_setopt($curl, CURLOPT_VERBOSE, 1);
+//        curl_setopt ($curl, CURLOPT_SSL_VERIFYPEER, true);
+//        curl_setopt ($curl, CURLOPT_SSL_VERIFYHOST, 2);
+//        curl_setopt($curl, CURLOPT_CAINFO, __DIR__ . "/cacert.pem");
+        $body = curl_exec($curl);
+
+        $result = new \StdClass();
+        $result->status_code = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+        $result->body = $body;
+        curl_close($curl);
+
+        \cs\services\VarDumper::dump($result) ;
+    }
+
+    protected static function processResult($result)
+    {
+        switch ($result->status_code) {
+            case 400:
+                break;
+            case 401:
+                break;
+            case 403:
+                break;
+            default:
+                if($result->status_code >= 500) {
+                }
+                else {
+                    return json_decode($result->body);
+                }
+        }
+    }
+
+
     public function actionTime()
     {
+        self::sendRequest('http://staging.capitalov.com/registration', [
+            'Registration[email]' => Security::generateRandomString(10) . '@gmail.com',
+            'Registration[password1]' => '123',
+            'Registration[password2]' => '123',
+        ]);
 
-        $string = 'sdfsdf0_-.';
-        $pattern = '#^[a-z\d_-]+$#';
-        if (!preg_match($pattern, $string)) {
-            echo 'Имеются запрещенные символы';
-        } else {
-            echo 'ok';
-        }
-        exit;
-        \cs\services\VarDumper::dump(Yii::$app->formatter->asDatetime(time()));
     }
 
     public function actionAbout()

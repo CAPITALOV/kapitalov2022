@@ -40,7 +40,7 @@ $this->registerJs("$('.labelPaid').tooltip()");
             href="<?= Url::to(['cabinet_wallet/add', 'id' => $item['id']]) ?>"
             class="label label-success labelPaid"
             style="width: 100%"
-            title="<?= 'до ' . \Yii::$app->formatter->asDate($item['date_finish']) ?> осталось <?= \cs\services\DatePeriod::diff($item['date_finish']) ?>"
+            title="<?= 'до ' . \Yii::$app->formatter->asDate($item['date_finish']) ?>, осталось <?= \cs\services\DatePeriod::diff($item['date_finish']) ?>"
 
             >Оплачено</span>
         </div>
@@ -52,41 +52,35 @@ $this->registerJs("$('.labelPaid').tooltip()");
 <h2 class="page-header">Заказать</h2>
 <div class="row col-sm-12">
 
-    <div class="col-sm-3" style="margin-bottom: 30px;">
+    <div class="col-sm-4" style="margin-bottom: 30px;">
         <center>
             <?php
             echo Html::a(Html::img('/images/cabinet/index/all-stok.png', [
                 'class' => 'thumbnail',
                 'width' => 200,
-            ]), [
-                'cabinet/stock_item3',
-                'id' => $item['id']
-            ]);
+            ]), ['cabinet_wallet/add1']);
             ?>
             <p>Национальный рынок</p>
         </center>
         <a
-            href="<?= Url::to(['cabinet_wallet/add', 'id' => $item['id']]) ?>"
+            href="<?= Url::to(['cabinet_wallet/add1']) ?>"
             class="btn btn-primary"
             style="width: 100%"
 
             >Выбрать</a>
     </div>
-    <div class="col-sm-3" style="margin-bottom: 30px;">
+    <div class="col-sm-4" style="margin-bottom: 30px;">
         <center>
             <?php
             echo Html::a(Html::img('/images/cabinet/index/all-stok.png', [
                 'class' => 'thumbnail',
                 'width' => 200,
-            ]), [
-                'cabinet/stock_item3',
-                'id' => $item['id']
-            ]);
+            ]), ['cabinet_wallet/add2']);
             ?>
             <p>Зарубежный рынок</p>
         </center>
         <a
-            href="<?= Url::to(['cabinet_wallet/add', 'id' => $item['id']]) ?>"
+            href="<?= Url::to(['cabinet_wallet/add2']) ?>"
             class="btn btn-primary"
             style="width: 100%"
 
