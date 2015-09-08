@@ -21,8 +21,6 @@ use yii\web\Response;
 
 class CabinetController extends CabinetBaseController
 {
-
-
     public function actionProfile()
     {
         $model = \app\models\Form\Profile::find(Yii::$app->user->getId());
