@@ -120,8 +120,8 @@ class SiteController extends \cs\base\BaseController
 
     public function actionTime()
     {
-        self::sendRequest('http://staging.capitalov.com/registration', [
-            'Registration[email]' => Security::generateRandomString(10) . '@gmail.com',
+        self::sendRequest('http://capitalov.com/registration', [
+            'Registration[email]'     => Security::generateRandomString(10) . '@gmail.com',
             'Registration[password1]' => '123',
             'Registration[password2]' => '123',
         ]);
