@@ -72,6 +72,7 @@ class SiteController extends \cs\base\BaseController
 
     public function actionIndex()
     {
+
         return $this->render('index');
     }
 
