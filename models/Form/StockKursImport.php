@@ -80,7 +80,7 @@ class StockKursImport extends \cs\base\BaseForm
     public function import($stock_id)
     {
         if ($this->validate()) {
-            self::importData($stock_id, $this->dateStart->format('Y-m-d'), $this->dateEnd->format('Y-m-d'), $this->isReplaceExisting);
+            self::importCandels($stock_id, $this->dateStart->format('Y-m-d'), $this->dateEnd->format('Y-m-d'), $this->isReplaceExisting);
 
             return true;
         } else {
@@ -111,7 +111,8 @@ class StockKursImport extends \cs\base\BaseForm
             ],
         ];
         $importer = new \app\service\DadaImporter\Finam($data);
-        $data = $importer->import($start, $end);
+        $data = $importer->importCandels($start, $end);
+        VarDumper::dump($data);
         $dateArrayRows = StockKurs::query(['between', 'date', $start, $end])->select(['date'])->andWhere(['stock_id' => $stock_id])->column();
         $insert = [];
         $update = [];
@@ -130,6 +131,69 @@ class StockKursImport extends \cs\base\BaseForm
         if ($isReplaceExisting) {
             foreach ($update as $date => $kurs) {
                 (new Query())->createCommand()->update(StockKurs::TABLE, ['kurs' => $kurs], ['date' => $date, 'stock_id' => $stock_id])->execute();
+            }
+        }
+    }
+
+    /**
+     * Импортирует данные с Finam в таблицу курсов
+     *
+     * @param int    $stock_id
+     * @param string $start             дата 'yyyy-mm-dd'
+     * @param string $end               дата 'yyyy-mm-dd'
+     * @param bool   $isReplaceExisting Заменять уже имеющиеся данные
+     *                                  true - если в таблице уже есть курс на эту дату то он будет перезатерт
+     *                                  false - если в таблице уже есть курс на эту дату то он сохранится
+     *
+     * @throws \yii\base\InvalidConfigException
+     */
+    public static function importCandels($stock_id, $start, $end, $isReplaceExisting = false)
+    {
+        $row = Stock::find($stock_id)->getFields();
+        $data = [
+            'params'   => [
+                'market'    => $row['finam_market'],
+                'em'        => $row['finam_em'],
+                'code'      => $row['finam_code'],       // кодовый шифр продукта
+            ],
+        ];
+        $importer = new \app\service\DadaImporter\Finam($data);
+        $data = $importer->importCandels($start, $end);
+        $dateArrayRows = StockKurs::query(['between', 'date', $start, $end])->select(['date'])->andWhere(['stock_id' => $stock_id])->column();
+        $insert = [];
+        $update = [];
+        foreach ($data as $row) {
+            if (in_array($row['date'], $dateArrayRows)) {
+                $date = $row['date'];
+                $row['kurs'] = $row['close'];
+                unset($row['date']);
+                $update[ $date ] = $row;
+            } else {
+                $insert[] = [
+                    $stock_id,
+                    $row['date'],
+                    $row['open'],
+                    $row['high'],
+                    $row['low'],
+                    $row['close'],
+                    $row['volume'],
+                    $row['close'],
+                ];
+            }
+        }
+        StockKurs::batchInsert([
+            'stock_id',
+            'date',
+            'open',
+            'high',
+            'low',
+            'close',
+            'volume',
+            'kurs',
+        ], $insert);
+        if ($isReplaceExisting) {
+            foreach ($update as $date => $fields) {
+                (new Query())->createCommand()->update(StockKurs::TABLE, $fields, ['date' => $date, 'stock_id' => $stock_id])->execute();
             }
         }
     }
