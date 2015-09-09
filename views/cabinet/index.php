@@ -51,40 +51,65 @@ $this->registerJs("$('.labelPaid').tooltip()");
 
 <h2 class="page-header">Заказать</h2>
 <div class="row col-sm-12">
-
-    <div class="col-sm-4" style="margin-bottom: 30px;">
-        <center>
+    <?php
+    foreach ($notPaid as $item) {
+        $class = new \app\models\Stock($item);
+        ?>
+        <div class="col-sm-4" style="margin-bottom: 30px;">
             <?php
-            echo Html::a(Html::img('/images/cabinet/index/all-stok.png', [
-                'class' => 'thumbnail',
-                'width' => 200,
-            ]), ['cabinet_wallet/add1']);
+            if (!is_null($item['logo'])) {
+                echo Html::a(Html::img($item['logo'], [
+                    'class' => 'thumbnail',
+                    'style' => 'opacity: 0.5;',
+                ]), [
+                    'cabinet_wallet/add',
+                    'id' => $item['id']
+                ]);
+            }
             ?>
-            <p>Национальный рынок</p>
-        </center>
+            <p><?= $item['name'] ?></p>
         <a
-            href="<?= Url::to(['cabinet_wallet/add1']) ?>"
+            href="<?= Url::to(['cabinet_wallet/add', 'id' => $item['id']]) ?>"
             class="btn btn-primary"
             style="width: 100%"
 
-            >Выбрать</a>
-    </div>
-    <div class="col-sm-4" style="margin-bottom: 30px;">
-        <center>
-            <?php
-            echo Html::a(Html::img('/images/cabinet/index/all-stok.png', [
-                'class' => 'thumbnail',
-                'width' => 200,
-            ]), ['cabinet_wallet/add2']);
-            ?>
-            <p>Зарубежный рынок</p>
-        </center>
-        <a
-            href="<?= Url::to(['cabinet_wallet/add2']) ?>"
-            class="btn btn-primary"
-            style="width: 100%"
-
-            >Выбрать</a>
-    </div>
+            >Оплатить</a>
+        </div>
+    <?php
+    }?>
+<!--    <div class="col-sm-4" style="margin-bottom: 30px;">-->
+<!--        <center>-->
+<!--            --><?php
+//            echo Html::a(Html::img('/images/cabinet/index/all-stok.png', [
+//                'class' => 'thumbnail',
+//                'width' => 200,
+//            ]), ['cabinet_wallet/add1']);
+//            ?>
+<!--            <p>Национальный рынок</p>-->
+<!--        </center>-->
+<!--        <a-->
+<!--            href="--><?//= Url::to(['cabinet_wallet/add1']) ?><!--"-->
+<!--            class="btn btn-primary"-->
+<!--            style="width: 100%"-->
+<!---->
+<!--            >Выбрать</a>-->
+<!--    </div>-->
+<!--    <div class="col-sm-4" style="margin-bottom: 30px;">-->
+<!--        <center>-->
+<!--            --><?php
+//            echo Html::a(Html::img('/images/cabinet/index/all-stok.png', [
+//                'class' => 'thumbnail',
+//                'width' => 200,
+//            ]), ['cabinet_wallet/add2']);
+//            ?>
+<!--            <p>Зарубежный рынок</p>-->
+<!--        </center>-->
+<!--        <a-->
+<!--            href="--><?//= Url::to(['cabinet_wallet/add2']) ?><!--"-->
+<!--            class="btn btn-primary"-->
+<!--            style="width: 100%"-->
+<!---->
+<!--            >Выбрать</a>-->
+<!--    </div>-->
 
 </div>

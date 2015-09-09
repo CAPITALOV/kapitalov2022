@@ -81,6 +81,40 @@ class Cabinet_walletController extends CabinetBaseController
      *
      * REQUEST:
      * - monthcounter - int - количество покупамых месяцев
+     * - stock_em     - int - идентификатор котировки
+     */
+    public function actionAdd_step1_1()
+    {
+        $monthCounter = self::getParam('monthcounter');
+        $stock_em = self::getParam('stock_em');
+
+        $request = Request::insert([
+            'stock_id' => $stockId,
+            'month'    => $monthCounter,
+        ]);
+        Application::mail(User::find(Yii::$app->params['chat']['consultant_id'])->getEmail(), 'Запрос на добавление услуги', 'request', [
+            'stock'    => Stock::find($stockId),
+            'user'     => \Yii::$app->user->identity,
+            'request'  => $request,
+        ]);
+
+        return self::jsonSuccess([
+            'user'    => [
+                'email' => Yii::$app->user->identity->getEmail(),
+                'fio'   => Yii::$app->user->identity->getNameFull(),
+            ],
+            'request' => [
+                'id'  => $request->getId(),
+                'sum' => $monthCounter * 100 * 65,
+            ],
+        ]);
+    }
+
+    /**
+     * AJAX
+     *
+     * REQUEST:
+     * - monthcounter - int - количество покупамых месяцев
      * - stock_id - int - идентификатор акции
      */
     public function actionAdd_step1()

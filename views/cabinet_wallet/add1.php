@@ -13,7 +13,7 @@ use yii\bootstrap\ActiveForm;
 $this->title = 'Оплата прогноза';
 \app\assets\FuelUX\Asset::register($this);
 
-$url = \yii\helpers\Url::to(['cabinet_wallet/add_step1']);
+$url = \yii\helpers\Url::to(['cabinet_wallet/add_step1_1']);
 $this->registerJs(<<<JS
     $('#myWizard').wizard({
         disablePreviousStep: false
@@ -24,7 +24,7 @@ $this->registerJs(<<<JS
             url: '{$url}',
             data: {
                 monthcounter: $('#cabinetwalletadd-monthcounter').val(),
-                stock_id: $('#stock_id').html()
+                stock_em: $('input[name="{$model->formName()}[finam_em]"]').val()
             },
             success: function(ret) {
                 $('#customerNumber').val(ret.request.id);
@@ -62,7 +62,7 @@ JS
     'id' => 'contact-form',
 ]); ?>
 <?= $model->field($form, 'monthCounter')->label('Выберите сколько месяцев вы хотите оплатить') ?>
-
+<input type="hidden" name="<?= $model->formName() ?>[finam_em]">
 
 
 <?= $model->field($form, 'stockId')
@@ -1361,7 +1361,7 @@ JS
             ],
             'select' => new \yii\web\JsExpression(<<<JS
     function(event, ui) {
-        console.log(ui);
+        $('input[name="{$model->formName()}[finam_em]"]').val(ui.item.id);
     }
 JS
             ),
