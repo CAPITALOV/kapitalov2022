@@ -73,6 +73,9 @@ class CabinetController extends CabinetBaseController
 
     public function actionIndex()
     {
+        Yii::$app->session->open();
+        \cs\services\VarDumper::dump($_SESSION);
+
         $items = Stock::query()->orderBy(['name' => SORT_ASC])->all();
         $dateFinishList = UserStock::query(['user_id' => \Yii::$app->user->getId()])->select([
             'stock_id',
