@@ -8,6 +8,8 @@ use yii\captcha\Captcha;
 /* @var $model \app\models\Form\Registration */
 
 $this->title = 'Регистрация';
+
+\cs\services\VarDumper::dump(Yii::$app->session->hasFlash('contactFormSubmitted'),3,false);
 ?>
 
     <h1 class="page-header"><?= Html::encode($this->title) ?></h1>
