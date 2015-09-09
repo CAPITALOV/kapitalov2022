@@ -21,6 +21,9 @@ $config = [
             'class'   => 'yii\authclient\Collection',
             'clients' => require(__DIR__ . '/authClientCollection.php'),
         ],
+        'session'              => [
+            'class' => 'yii\web\CacheSession',
+        ],
         'request'              => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'enableCookieValidation' => false,
