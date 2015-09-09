@@ -8,7 +8,6 @@ class m150905_221418_users extends Migration
     public function up()
     {
         $this->execute('ALTER TABLE galaxysss_4.cap_users CHANGE email email VARCHAR(50) COLLATE latin1_general_ci;');
-
     }
 
     public function down()

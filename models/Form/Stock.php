@@ -24,6 +24,9 @@ class Stock extends \cs\base\BaseForm
     public $name;
     public $logo;
     public $description;
+    public $finam_em;
+    public $finam_market;
+    public $finam_code;
 
     function __construct($fields = [])
     {

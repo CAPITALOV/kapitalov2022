@@ -3,6 +3,7 @@
 namespace app\models;
 
 use cs\base\BaseForm;
+use cs\services\VarDumper;
 use Yii;
 use yii\base\Model;
 
@@ -61,17 +62,18 @@ class LoginForm extends BaseForm
                 $this->addError($attribute, 'Пользователь не найден');
                 return;
             }
-            if ($user->getField('is_confirm', 0) != 1) {
-                $this->addError($attribute, 'Пользователь не активирован');
-                return;
-            }
-            if ($user->getField('is_active', 0) != 1) {
-                $this->addError($attribute, 'Пользователь заблокирован');
-                return;
-            }
-            if ($user->getField('password', '') == '') {
-                $this->addError($attribute, 'Вы  не завели себе пароль для аккаунта. Зайдите в восстановление пароля');
-                return;
+            // если клиент оплатил хотя бы одну котировку
+            if (UserStock::query([
+                'user_id' => $user->getId(),
+            ])->andWhere(['>', 'date_finish', date('Y-m-d')])->exists()) {
+                if ($user->getField('is_confirm', 0) != 1) {
+                    $this->addError($attribute, 'Пользователь не активирован');
+                    return;
+                }
+                if ($user->getField('is_active', 0) != 1) {
+                    $this->addError($attribute, 'Пользователь заблокирован');
+                    return;
+                }
             }
             if (!$user->validatePassword($this->password)) {
                 $this->addError($attribute, 'Не правильное имя или пароль');

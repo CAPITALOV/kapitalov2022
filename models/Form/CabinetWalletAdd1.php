@@ -30,6 +30,8 @@ class CabinetWalletAdd1 extends \cs\base\BaseForm
     /** @var  int идентификатор катировки */
     public $stockId;
 
+    public $finam_em;
+
     function __construct($fields = [])
     {
         static::$fields = [
@@ -45,28 +47,13 @@ class CabinetWalletAdd1 extends \cs\base\BaseForm
                 0,
                 'string',
             ],
+            [
+                'finam_em',
+                'Идентификатор котировки',
+                0,
+                'integer',
+            ],
         ];
         parent::__construct($fields);
-    }
-
-    public function add($stock_id)
-    {
-        if ($this->validate()) {
-            $stock = Stock::find($stock_id);
-            $request = Request::insert([
-                'stock_id' => $stock_id,
-                'month'    => $this->monthCounter,
-            ]);
-
-            Application::mail(User::find(Yii::$app->params['chat']['consultant_id'])->getEmail(), 'Запрос на добавление услуги', 'request', [
-                'stock'    => $stock,
-                'user'     => \Yii::$app->user->identity,
-                'request'  => $request,
-            ]);
-
-            return true;
-        } else {
-            return false;
-        }
     }
 }
