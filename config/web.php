@@ -105,18 +105,7 @@ $config = [
             'rules'               => require(__DIR__ . '/urlRules.php'),
         ],
         'db'                   => require(__DIR__ . '/db.php'),
-        'i18n'                 => [
-            'translations' => [
-                'app*' => [
-                    'class'          => 'yii\i18n\PhpMessageSource',
-                    'basePath'       => '@app/translations',
-                    'sourceLanguage' => 'en',
-                    'fileMap'        => [
-                        'app' => 'messages.php'
-                    ]
-                ],
-            ],
-        ],
+
         'formatter'            => [
             'dateFormat'        => 'dd.MM.yyyy',
             'timeFormat'        => 'php:H:i:s',
