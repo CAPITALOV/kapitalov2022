@@ -258,6 +258,8 @@ class AuthController extends BaseController
                 'referal_code' => $code,
                 'user_id'      => $user->getId(),
             ]);
+            $user->activate();
+            Yii::$app->user->login($user);
 
             return $this->refresh();
         }

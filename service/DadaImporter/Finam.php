@@ -27,7 +27,7 @@ class Finam extends Object implements DadaImporterInterface
         'mstimever' => 0,
         'sep'       => 1,
         'sep2'      => 1,
-        'datf'      => 4,
+        'datf'      => 4,                     // формат выводимых данных 'TICKER, PER, DATE, TIME, OPEN, HIGH, LOW, CLOSE, VOL', ...
         'at'        => 0,                     // использовать заголовок в генерируемом документе? 1 - да, 0 - нет
     ];
 
@@ -75,4 +75,54 @@ class Finam extends Object implements DadaImporterInterface
 
         return $ret;
     }
-} 
+
+    /**
+     * @inheritdoc
+     */
+    public function importCandels($start, $end = null)
+    {
+        if (is_null($end)) {
+            $end = gmdate('Y-m-d');
+        }
+        $start = new \DateTime($start);
+        $end = new \DateTime($end);
+        $params = ArrayHelper::merge($this->default, $this->params);
+        $params['from'] = $start->format('d.m.Y');
+        $params['df'] = (int)$start->format('j');
+        $params['mf'] = (int)$start->format('n') - 1;
+        $params['yf'] = (int)$start->format('Y');
+        $params['to'] = $end->format('d.m.Y');
+        $params['dt'] = (int)$end->format('j');
+        $params['mt'] = (int)$end->format('n') - 1;
+        $params['yt'] = $end->format('Y');
+        $params['cn'] = $params['code'];
+        $params['datf'] = 5;
+
+        $u = new Url($this->url . $this->path, $params);
+        $url = (string) $u;
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_HEADER, 0);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $out = curl_exec($ch);
+        curl_close($ch);
+
+        $arr = explode("\n", $out);
+        $ret = [];
+        foreach ($arr as $row) {
+            if (trim($row) != '') {
+                $items = explode(',', $row);
+                $ret[] = [
+                    'date'   => substr($items[0], 0, 4) . '-' . substr($items[0], 4, 2) . '-' . substr($items[0], 6, 2),
+                    'open'   => (float)trim($items[2]),
+                    'high'   => (float)trim($items[3]),
+                    'low'    => (float)trim($items[4]),
+                    'close'  => (float)trim($items[5]),
+                    'volume' => (float)trim($items[6]),
+                ];
+            }
+        }
+
+        return $ret;
+    }
+}
