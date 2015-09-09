@@ -2,6 +2,7 @@
 
 namespace app\models\Form;
 
+use app\models\Stock;
 use app\models\StockKurs;
 use app\models\StockPrognosis;
 use app\models\StockPrognosisBlue;
@@ -101,8 +102,15 @@ class StockKursImport extends \cs\base\BaseForm
      */
     public static function importData($stock_id, $start, $end, $isReplaceExisting = false)
     {
-        $data = \app\service\DadaImporter\Data::getFirst($stock_id);
-        $importer = Yii::createObject($data);
+        $row = Stock::find($stock_id)->getFields();
+        $data = [
+            'params'   => [
+                'market'    => $row['finam_market'],
+                'em'        => $row['finam_em'],
+                'code'      => $row['finam_code'],       // кодовый шифр продукта
+            ],
+        ];
+        $importer = new \app\service\DadaImporter\Finam($data);
         $data = $importer->import($start, $end);
         $dateArrayRows = StockKurs::query(['between', 'date', $start, $end])->select(['date'])->andWhere(['stock_id' => $stock_id])->column();
         $insert = [];
