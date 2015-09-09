@@ -69,7 +69,7 @@ if ($d) {
 ?>
 
 
-<h2 class="page-header row">Индексы капиталов</h2>
+<h2 class="page-header">Индексы капиталов</h2>
 <?php if ($isPaid) { ?>
     <?php
 
