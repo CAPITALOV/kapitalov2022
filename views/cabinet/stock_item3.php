@@ -69,7 +69,7 @@ if ($d) {
 ?>
 
 
-<h2 class="page-header row col-lg-122 text-center">Индексы капиталов</h2>
+<h2 class="page-header row">Индексы капиталов</h2>
 <?php if ($isPaid) { ?>
     <?php
 
@@ -134,8 +134,10 @@ JS
         </div>
     </div>
 <?php } else { ?>
-    <div class="form-group">
-        <p><span class="label label-danger">График не оплачен</span></p>
+    <div class="row col-lg-12">
+        <div class="form-group">
+            <p><span class="label label-danger">График не оплачен</span></p>
+        </div>
     </div>
     <a
         href="<?= Url::to(['cabinet_wallet/add', 'id' => $item->getId()]) ?>"
@@ -196,7 +198,7 @@ JS
     <?php ActiveForm::end() ?>
 </div>
 
-<div class="row col-lg-12 text-center">
+<div class="row col-lg-12">
     <?php
     $graph3 = new \cs\Widget\ChartJs\Line([
         'width'     => 800,
