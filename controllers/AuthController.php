@@ -217,7 +217,6 @@ class AuthController extends BaseController
         $model = new \app\models\Form\Registration();
         $model->setScenario('insert');
 
-
         if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
             $model->setScenario('ajax');
             Yii::$app->response->format = Response::FORMAT_JSON;
@@ -227,7 +226,6 @@ class AuthController extends BaseController
 
         if ($model->load(Yii::$app->request->post()) && ($user = $model->register())) {
             Yii::$app->session->setFlash('contactFormSubmitted');
-\cs\services\VarDumper::dump($_SESSION);
             Yii::$app->session->setFlash('user_id', $user->getId());
             $user->activate();
             Yii::$app->user->login($user);
