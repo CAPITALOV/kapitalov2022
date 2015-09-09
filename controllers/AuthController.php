@@ -226,7 +226,6 @@ class AuthController extends BaseController
 
         if ($model->load(Yii::$app->request->post()) && ($user = $model->register())) {
             Yii::$app->session->setFlash('contactFormSubmitted');
-            \cs\services\VarDumper::dump(Yii::$app->session->hasFlash('contactFormSubmitted'),3,false);
             Yii::$app->session->setFlash('user_id', $user->getId());
             $user->activate();
             Yii::$app->user->login($user);
