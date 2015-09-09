@@ -91,6 +91,7 @@ class PasswordRecover extends \cs\base\BaseForm
                 throw new Exception('Пользователь не найден');
             }
             $fields = \app\service\PasswordRecoverDispatcher::insert($user->getId());
+            Yii::info($fields, 'cap\\recover');
             \cs\Application::mail($this->email, 'Восстановление пароля', 'password_recover', [
                 'user'     => $user,
                 'url'      => Url::to([
