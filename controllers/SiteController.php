@@ -76,6 +76,12 @@ class SiteController extends \cs\base\BaseController
         return $this->render('index');
     }
 
+    public function actionReferal()
+    {
+
+        return $this->render();
+    }
+
     public static function sendRequest($url, $options = [], $access_token = null)
     {
         $curl = curl_init($url);
