@@ -7,6 +7,11 @@ use yii\helpers\Html;
 
 /** @var $this \yii\web\View */
 
+$this->registerMetaTag(['name' => 'og:image', 'content' => Url::to('/images/share.png', true)]);
+$this->registerMetaTag(['name' => 'og:url', 'content' => Url::current()]);
+$this->registerMetaTag(['name' => 'og:title', 'content' => $this->title]);
+$this->registerMetaTag(['name' => 'og:description', 'content' => 'Эксклюзивные финансовые услуги анализа движения капиталов']);
+
 ?>
 
 

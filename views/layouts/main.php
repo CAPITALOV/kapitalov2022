@@ -5,12 +5,20 @@ use yii\bootstrap\Progress;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
+use yii\helpers\Url;
 
 /* @var $this \yii\web\View */
 /* @var $content string */
 
 AppAsset::register($this);
 \app\assets\Layout\Asset::register($this);
+
+$this->registerMetaTag(['name' => 'og:image', 'content' => Url::to('/images/share.png', true)]);
+$this->registerMetaTag(['name' => 'og:url', 'content' => Url::current()]);
+$this->registerMetaTag(['name' => 'og:title', 'content' => $this->title]);
+$this->registerMetaTag(['name' => 'og:description', 'content' => 'Эксклюзивные финансовые услуги анализа движения капиталов']);
+
+
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>

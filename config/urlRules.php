@@ -8,6 +8,7 @@ return [
     'time'                                  => 'site/time',
     'log'                                   => 'site/log',
     'logDb'                                 => 'site/log_db',
+    'referal'                               => 'site/referal',
 
     'about'                                 => 'site/about',
 
