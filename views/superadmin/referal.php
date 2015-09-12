@@ -101,7 +101,7 @@ JS
         [
             'header'  => 'Кто зарегистрировался?',
             'content' => function ($model, $key, $index, $column) {
-                $user = \app\models\User::find($model['user_id']);
+                $user = \app\models\User::find($model['user_id'])->getFields();
                 $arr = [];
                 if ($user['avatar']) {
                     $arr[] = Html::img($user['avatar'], [
