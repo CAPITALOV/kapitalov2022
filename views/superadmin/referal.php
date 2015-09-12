@@ -101,7 +101,17 @@ JS
         [
             'header'  => 'Кто зарегистрировался?',
             'content' => function ($model, $key, $index, $column) {
-                return $model['user_id'];
+                $user = \app\models\User::find($model['user_id']);
+                $arr = [];
+                if ($user['avatar']) {
+                    $arr[] = Html::img($user['avatar'], [
+                        'width' => 40,
+                        'style' => 'padding-right: 5px;',
+                    ]);
+                }
+                $arr[] = $user['name_first'] . ' ' . $user['name_last'] . ' (' . $user['email'] . ')';
+
+                return join('', $arr);
             }
         ],
         [
