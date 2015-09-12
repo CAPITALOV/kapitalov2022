@@ -46,6 +46,24 @@ class Stock extends \cs\base\BaseForm
                 'до 255 символов'
             ],
             [
+                'finam_em',
+                'Идентификатор котировки по Finam',
+                0,
+                'integer',
+            ],
+            [
+                'finam_code',
+                'CODE по Finam',
+                0,
+                'string',
+            ],
+            [
+                'finam_market',
+                'Идентификатор рынка по Finam',
+                0,
+                'integer',
+            ],
+            [
                 'logo',
                 'Картинка',
                 0,

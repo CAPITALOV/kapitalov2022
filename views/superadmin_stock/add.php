@@ -32,6 +32,9 @@ $this->params['breadcrumbs'][] = $this->title;
             <?= $model->field($form, 'name') ?>
             <?= $model->field($form, 'description') ?>
             <?= $model->field($form, 'logo') ?>
+            <?= $model->field($form, 'finam_em') ?>
+            <?= $model->field($form, 'finam_market') ?>
+            <?= $model->field($form, 'finam_code') ?>
 
             <div class="form-group">
                 <hr>

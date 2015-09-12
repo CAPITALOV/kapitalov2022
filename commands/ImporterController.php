@@ -23,7 +23,10 @@ class ImporterController extends Controller
      */
     public function actionIndex()
     {
-        $rows = Stock::query()->all();
+        $rows = Stock::query(['not', [
+            'finam_code' => null,
+        ]
+        ])->all();
 
         foreach($rows as $row) {
             $stock_id = $row['id'];
@@ -70,7 +73,10 @@ class ImporterController extends Controller
      */
     public function actionCandels()
     {
-        $rows = Stock::query()->all();
+        $rows = Stock::query(['not', [
+            'finam_code' => null,
+        ]
+        ])->all();
 
         foreach($rows as $row) {
             $stock_id = $row['id'];
