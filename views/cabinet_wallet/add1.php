@@ -10,10 +10,10 @@ use yii\bootstrap\ActiveForm;
 /* @var $model cs\base\BaseForm */
 /* @var $stock \app\models\Stock */
 
-$this->title = 'Оплата прогноза';
+$this->title = 'Оплата прогноза Национальный рынок';
 \app\assets\FuelUX\Asset::register($this);
 
-$url = \yii\helpers\Url::to(['cabinet_wallet/add_step1_1']);
+$url = \yii\helpers\Url::to(['cabinet_wallet/add_national_step1']);
 $this->registerJs(<<<JS
     $('#myWizard').wizard({
         disablePreviousStep: false
@@ -23,8 +23,8 @@ $this->registerJs(<<<JS
         ajaxJson({
             url: '{$url}',
             data: {
-                monthcounter: $('#cabinetwalletadd-monthcounter').val(),
-                stock_em: $('input[name="{$model->formName()}[finam_em]"]').val()
+                monthcounter: $('#cabinetwalletadd1-monthcounter').val(),
+                stock_id: $('input[name="{$model->formName()}[stock_id]"]').val()
             },
             success: function(ret) {
                 $('#customerNumber').val(ret.request.id);
@@ -62,7 +62,7 @@ JS
     'id' => 'contact-form',
 ]); ?>
 <?= $model->field($form, 'monthCounter')->label('Выберите сколько месяцев вы хотите оплатить') ?>
-<input type="hidden" name="<?= $model->formName() ?>[finam_em]">
+<input type="hidden" name="<?= $model->formName() ?>[stock_id]">
 
 
 <?= $model->field($form, 'stockId')
@@ -72,13 +72,14 @@ JS
             'source' => \app\models\Stock::query(['finam_market' => 1])->select(['id','name as value'])->orderBy(['name' => SORT_ASC])->all(),
             'select' => new \yii\web\JsExpression(<<<JS
     function(event, ui) {
-        $('input[name="{$model->formName()}[finam_em]"]').val(ui.item.id);
+        $('input[name="{$model->formName()}[stock_id]"]').val(ui.item.id);
     }
 JS
             ),
         ],
         'options'       => [
-            'class' => 'form-control'
+            'class' => 'form-control',
+            'placeholder' => 'Найти...',
         ]
     ])
 ?>
