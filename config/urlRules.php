@@ -80,9 +80,11 @@ return [
     'cabinet/wallet/add/<id:\\d+>'          => 'cabinet_wallet/add',
 
     'cabinet/wallet/add1'                   => 'cabinet_wallet/add1',
-    'cabinet/wallet/add/step1_1'            => 'cabinet_wallet/add_step1_1',
+    'cabinet/wallet/add/add_national_step1' => 'cabinet_wallet/add_national_step1',
 
     'cabinet/wallet/add2'                   => 'cabinet_wallet/add2',
+    'cabinet/wallet/add/add_world_step1'    => 'cabinet_wallet/add_world_step1',
+
     'cabinet/wallet/add/step1'              => 'cabinet_wallet/add_step1',
 
     'money/history'                         => 'money/history',

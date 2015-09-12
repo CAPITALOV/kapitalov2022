@@ -5,7 +5,6 @@ use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $paid array */
-/* @var $notPaid array */
 
 $this->title = 'Котировки';
 $this->registerJs("$('.labelPaid').tooltip()");
@@ -51,65 +50,39 @@ $this->registerJs("$('.labelPaid').tooltip()");
 
 <h2 class="page-header">Заказать</h2>
 <div class="row col-sm-12">
-    <?php
-    foreach ($notPaid as $item) {
-        $class = new \app\models\Stock($item);
-        ?>
-        <div class="col-sm-4" style="margin-bottom: 30px;">
+    <div class="col-sm-4" style="margin-bottom: 30px;">
+        <center>
             <?php
-            if (!is_null($item['logo'])) {
-                echo Html::a(Html::img($item['logo'], [
-                    'class' => 'thumbnail',
-                    'style' => 'opacity: 0.5;',
-                ]), [
-                    'cabinet_wallet/add',
-                    'id' => $item['id']
-                ]);
-            }
+            echo Html::a(Html::img('/images/cabinet/index/all-stok.png', [
+                'class' => 'thumbnail',
+                'width' => 200,
+            ]), ['cabinet_wallet/add1']);
             ?>
-            <p><?= $item['name'] ?></p>
+            <p>Национальный рынок</p>
+        </center>
         <a
-            href="<?= Url::to(['cabinet_wallet/add', 'id' => $item['id']]) ?>"
+            href="<?= Url::to(['cabinet_wallet/add1']) ?>"
             class="btn btn-primary"
             style="width: 100%"
 
-            >Оплатить</a>
-        </div>
-    <?php
-    }?>
-<!--    <div class="col-sm-4" style="margin-bottom: 30px;">-->
-<!--        <center>-->
-<!--            --><?php
-//            echo Html::a(Html::img('/images/cabinet/index/all-stok.png', [
-//                'class' => 'thumbnail',
-//                'width' => 200,
-//            ]), ['cabinet_wallet/add1']);
-//            ?>
-<!--            <p>Национальный рынок</p>-->
-<!--        </center>-->
-<!--        <a-->
-<!--            href="--><?//= Url::to(['cabinet_wallet/add1']) ?><!--"-->
-<!--            class="btn btn-primary"-->
-<!--            style="width: 100%"-->
-<!---->
-<!--            >Выбрать</a>-->
-<!--    </div>-->
-<!--    <div class="col-sm-4" style="margin-bottom: 30px;">-->
-<!--        <center>-->
-<!--            --><?php
-//            echo Html::a(Html::img('/images/cabinet/index/all-stok.png', [
-//                'class' => 'thumbnail',
-//                'width' => 200,
-//            ]), ['cabinet_wallet/add2']);
-//            ?>
-<!--            <p>Зарубежный рынок</p>-->
-<!--        </center>-->
-<!--        <a-->
-<!--            href="--><?//= Url::to(['cabinet_wallet/add2']) ?><!--"-->
-<!--            class="btn btn-primary"-->
-<!--            style="width: 100%"-->
-<!---->
-<!--            >Выбрать</a>-->
-<!--    </div>-->
+            >Выбрать</a>
+    </div>
+    <div class="col-sm-4" style="margin-bottom: 30px;">
+        <center>
+            <?php
+            echo Html::a(Html::img('/images/cabinet/index/all-stok.png', [
+                'class' => 'thumbnail',
+                'width' => 200,
+            ]), ['cabinet_wallet/add2']);
+            ?>
+            <p>Зарубежный рынок</p>
+        </center>
+        <a
+            href="<?= Url::to(['cabinet_wallet/add2']) ?>"
+            class="btn btn-primary"
+            style="width: 100%"
+
+            >Выбрать</a>
+    </div>
 
 </div>

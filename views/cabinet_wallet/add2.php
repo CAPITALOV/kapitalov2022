@@ -10,10 +10,10 @@ use yii\bootstrap\ActiveForm;
 /* @var $model cs\base\BaseForm */
 /* @var $stock \app\models\Stock */
 
-$this->title = 'Оплата прогноза';
+$this->title = 'Оплата прогноза Международный рынок';
 \app\assets\FuelUX\Asset::register($this);
 
-$url = \yii\helpers\Url::to(['cabinet_wallet/add_step1']);
+$url = \yii\helpers\Url::to(['cabinet_wallet/add_world_step1']);
 $this->registerJs(<<<JS
     $('#myWizard').wizard({
         disablePreviousStep: false
@@ -23,8 +23,8 @@ $this->registerJs(<<<JS
         ajaxJson({
             url: '{$url}',
             data: {
-                monthcounter: $('#cabinetwalletadd-monthcounter').val(),
-                stock_id: $('#stock_id').html()
+                monthcounter: $('#cabinetwalletadd1-monthcounter').val(),
+                stock_id: $('input[name="{$model->formName()}[stock_id]"]').val()
             },
             success: function(ret) {
                 $('#customerNumber').val(ret.request.id);
@@ -43,8 +43,6 @@ JS
 <h1 class="page-header"><?= Html::encode($this->title) ?></h1>
 
 
-
-<div class="hide" id="stock_id"><?= $stock->getId() ?></div>
 <div class="wizard" data-initialize="wizard" id="myWizard">
     <div class="steps-container">
         <ul class="steps">
@@ -65,6 +63,28 @@ JS
                 ]); ?>
                 <?= $model->field($form, 'monthCounter')->label('Выберите сколько месяцев вы хотите оплатить') ?>
 
+
+                <input type="hidden" name="<?= $model->formName() ?>[stock_id]">
+
+
+                <?= $model->field($form, 'stockId')
+                    ->label('Котировка')
+                    ->widget('yii\jui\AutoComplete', [
+                        'clientOptions' => [
+                            'source' => \app\models\Stock::query(['not', ['finam_market' => 1]])->select(['id', 'name as value'])->orderBy(['name' => SORT_ASC])->all(),
+                            'select' => new \yii\web\JsExpression(<<<JS
+    function(event, ui) {
+        $('input[name="{$model->formName()}[stock_id]"]').val(ui.item.id);
+    }
+JS
+                            ),
+                        ],
+                        'options'       => [
+                            'class'       => 'form-control',
+                            'placeholder' => 'Найти...',
+                        ]
+                    ])
+                ?>
                 <div class="form-group">
                     <hr>
                     <?= Html::button('Далее', [
@@ -105,54 +125,52 @@ JS
                 <input name="orderDetails" type="hidden" size="43" placeholder="пример +79031234567">
 
                 <div class="radio">
-                        <label class="radio-custom radioList" data-initialize="radio">
+                    <label class="radio-custom radioList" data-initialize="radio">
                         <input class="sr-only" name="paymentType" type="radio" value="PC">
-                            Оплата со счета в Яндекс.Деньгах
+                        Оплата со счета в Яндекс.Деньгах
                     </label>
                 </div>
                 <div class="radio">
-                        <label class="radio-custom radioList" data-initialize="radio">
+                    <label class="radio-custom radioList" data-initialize="radio">
                         <input class="sr-only" name="paymentType" type="radio" value="AC">
-                            Оплата банковской картой
+                        Оплата банковской картой
                     </label>
                 </div>
                 <div class="radio">
-                        <label class="radio-custom radioList" data-initialize="radio">
+                    <label class="radio-custom radioList" data-initialize="radio">
                         <input class="sr-only" name="paymentType" type="radio" value="GP">
-                            Оплата по коду через терминал
+                        Оплата по коду через терминал
                     </label>
                 </div>
                 <div class="radio">
-                        <label class="radio-custom radioList" data-initialize="radio">
+                    <label class="radio-custom radioList" data-initialize="radio">
                         <input class="sr-only" name="paymentType" type="radio" value="WM">
-                            Оплата cо счета WebMoney
+                        Оплата cо счета WebMoney
                     </label>
                 </div>
                 <div class="radio">
-                        <label class="radio-custom radioList" data-initialize="radio">
+                    <label class="radio-custom radioList" data-initialize="radio">
                         <input class="sr-only" name="paymentType" type="radio" value="AB">
-                            Оплата через Альфа-Клик
+                        Оплата через Альфа-Клик
                     </label>
                 </div>
                 <div class="radio">
-                        <label class="radio-custom radioList" data-initialize="radio">
+                    <label class="radio-custom radioList" data-initialize="radio">
                         <input class="sr-only" name="paymentType" type="radio" value="PB">
-                            Оплата через Промсвязьбанк
+                        Оплата через Промсвязьбанк
                     </label>
                 </div>
                 <div class="radio">
-                        <label class="radio-custom radioList" data-initialize="radio">
+                    <label class="radio-custom radioList" data-initialize="radio">
                         <input class="sr-only" name="paymentType" type="radio" value="MA">
-                            Оплата через MasterPass
+                        Оплата через MasterPass
                     </label>
                 </div>
 
-                <input type="submit" value="Заплатить" class="btn btn-default" style="width: 100%; max-width: 400px;  "/>
+                <input type="submit" value="Заплатить" class="btn btn-default"
+                       style="width: 100%; max-width: 400px;  "/>
             </form>
 
         </div>
     </div>
 </div>
-
-<p style="margin-top: 20px;">Оплачиваемая акция: <?= $stock->getName() ?></p>
-<p><img src="<?= $stock->getImage() ?>" class="thumbnail" width="200"></p>

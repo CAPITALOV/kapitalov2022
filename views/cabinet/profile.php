@@ -49,6 +49,7 @@ JS
         <?= $model->field($form, 'name_last') ?>
         <?= $model->field($form, 'avatar') ?>
         <?= $model->field($form, 'phone') ?>
+
         <div class="form-group">
             <label class="control-label col-sm-3" for="profile-phone">Реферальная ссылка</label>
 

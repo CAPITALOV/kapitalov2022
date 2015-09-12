@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Дмитрий
- * Date: 29.08.2015
- * Time: 1:41
- */
 
 /** @var \yii\web\View $this */
 
@@ -107,5 +101,30 @@ $this->registerJs("$('.payImage').tooltip()");
     <div class="col-md-3">
         <img src="/images/site/price/psb.jpg" width="200" class="thumbnail payImage" alt="Промсвязьбанк" title="Промсвязьбанк">
     </div>
+
+
+    <h2 class="page-header col-lg-12">Что мы можем предсказать</h2>
+    <table class="table table-striped table-hover" style="width:auto;">
+        <thead>
+        <tr>
+            <th>Биржа</th>
+            <th>Котировка</th>
+            <th>Цена</th>
+        </tr>
+        </thead>
+        <?php foreach($items as $item) { ?>
+        <tr>
+            <td>
+                <?= $item['market'] ?>
+            </td>
+            <td>
+                <?= $item['name'] ?>
+            </td>
+            <td>
+                <?= ($item['finam_market'] == 1) ? 99 : 249 ?> уе
+            </td>
+        </tr>
+        <?php } ?>
+    </table>
 </div>
 <!-- /.row -->

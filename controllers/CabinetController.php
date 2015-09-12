@@ -101,7 +101,6 @@ class CabinetController extends CabinetBaseController
                     'cap_users_stock_buy.date_finish'
                 ])
                 ->all(),
-            'notPaid' => Stock::getNotPaid()->all(),
         ]);
     }
 

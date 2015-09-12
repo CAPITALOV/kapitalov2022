@@ -30,8 +30,6 @@ class CabinetWalletAdd1 extends \cs\base\BaseForm
     /** @var  int идентификатор катировки */
     public $stockId;
 
-    public $finam_em;
-
     function __construct($fields = [])
     {
         static::$fields = [
@@ -46,12 +44,6 @@ class CabinetWalletAdd1 extends \cs\base\BaseForm
                 'Котировка',
                 0,
                 'string',
-            ],
-            [
-                'finam_em',
-                'Идентификатор котировки',
-                0,
-                'integer',
             ],
         ];
         parent::__construct($fields);

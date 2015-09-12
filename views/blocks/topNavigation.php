@@ -88,12 +88,9 @@ JS
                             <li><a href="<?= Url::to(['cabinet/stock_item3', 'id' => $item['id']]) ?>"><?= $item['name'] ?></a></li>
                         <?php } ?>
                         <li class="divider"></li>
-                        <li role="presentation" class="dropdown-header">Не оплаченные</li>
-                        <?php
-
-                        foreach(\app\models\Stock::getNotPaid()->all() as $item) { ?>
-                            <li><a href="<?= Url::to(['cabinet/stock_item3', 'id' => $item['id']]) ?>"><?= $item['name'] ?></a></li>
-                        <?php } ?>
+                        <li role="presentation" class="dropdown-header">Заказать</li>
+                        <li><a href="<?= Url::to(['cabinet_wallet/add1']) ?>">Национальный рынок</a></li>
+                        <li><a href="<?= Url::to(['cabinet_wallet/add2']) ?>">Зарубежный рынок</a></li>
                     </ul>
                 </li>
             </ul>
