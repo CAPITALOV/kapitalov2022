@@ -24,6 +24,18 @@
         {
             "type": "package",
             "package": {
+                "name": "minhur/bootstrap-toggle",
+                "version": "1.0.1",
+                "source": {
+                    "url": "https://github.com/minhur/bootstrap-toggle",
+                    "type": "git",
+                    "reference": "master"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
                 "name": "amcharts/amstock3",
                 "version": "1.0.1",
                 "source": {
@@ -137,7 +149,8 @@
         "nnnick/Chart.js": "1.0.1",
         "isocra/TableDnD": "*",
         "amcharts/amstock3": "*",
-        "ecomfe/echarts": "*"
+        "ecomfe/echarts": "*",
+        "minhur/bootstrap-toggle":"*"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",
