@@ -48,6 +48,7 @@ $url = Url::to(['cabinet/graph_ajax']);
 
 ?>
 
+
 <h1 class="page-header"><?php
     $logo = $item->getField('logo', '');
     if ($logo) {
@@ -66,8 +67,32 @@ if ($d) {
     </div>
 <?php
 }
+
 ?>
 
+
+<h2 class="page-header">Свечи</h2>
+<?php
+$today = new DateTime();
+$end = $today->format('Y-m-d');
+$start = $today->sub(new DateInterval('P1Y'))->format('Y-m-d');
+
+echo \cs\Widget\ECharts\CandleStick1::widget([
+    'width' => 860,
+    'name' => $item->getField('name', ''),
+    'data'  => \app\models\StockKurs::query(['stock_id' => 1])
+        ->select([
+            'date',
+            'open',
+            'close',
+            'low',
+            'high',
+            'volume',
+        ])
+        ->andWhere(['between', 'date', $start, $end])
+        ->orderBy(['date' => SORT_ASC])
+        ->all()
+]) ?>
 
 <h2 class="page-header">Индексы капиталов</h2>
 <?php if ($isPaid) { ?>
