@@ -15,7 +15,7 @@ use Yii;
  */
 class Asset extends AssetBundle
 {
-    public $sourcePath = '@app/assets/ECharts/source/echarts-2.2.7';
+    public $sourcePath = '@vendor/ecomfe/echarts';
     public $css      = [
     ];
     public $js       = [

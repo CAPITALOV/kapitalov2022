@@ -115,7 +115,7 @@ class CandleStick1 extends Object
 
         return Html::tag('div', null, [
             'id'    => $this->id,
-            'style' => "height:{$this->height}px; width: 100%;"
+            'style' => "height:{$this->height}px; width: {$this->width}px;"
         ]);
     }
 
