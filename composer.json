@@ -24,6 +24,42 @@
         {
             "type": "package",
             "package": {
+                "name": "minhur/bootstrap-toggle",
+                "version": "1.0.1",
+                "source": {
+                    "url": "https://github.com/minhur/bootstrap-toggle",
+                    "type": "git",
+                    "reference": "master"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "amcharts/amstock3",
+                "version": "1.0.1",
+                "source": {
+                    "url": "https://github.com/amcharts/amstock3",
+                    "type": "git",
+                    "reference": "master"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "ecomfe/echarts",
+                "version": "1.0.1",
+                "source": {
+                    "url": "https://github.com/ecomfe/echarts",
+                    "type": "git",
+                    "reference": "master"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
                 "name": "mistic100/Bootstrap-Confirmation",
                 "version": "1.0.1",
                 "source": {
@@ -111,7 +147,10 @@
         "Surzhikov/TelegramSiteHelper": "*",
         "yandex-money/yandex-money-sdk-php": "3.0.*",
         "nnnick/Chart.js": "1.0.1",
-        "isocra/TableDnD": "*"
+        "isocra/TableDnD": "*",
+        "amcharts/amstock3": "*",
+        "ecomfe/echarts": "*",
+        "minhur/bootstrap-toggle":"*"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",

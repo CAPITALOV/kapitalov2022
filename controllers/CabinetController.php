@@ -161,6 +161,16 @@ class CabinetController extends CabinetBaseController
             'pointHighlightFill'   => "#fff",
             'pointHighlightStroke' => "rgba(220,220,220,1)",
         ];
+        $colorViolet = [
+            'label'                => "Прогноз",
+            'fillColor'            => "rgba(220,220,220,0)",
+            'strokeColor'          => "rgba(120,255,255,1)",
+            'pointColor'           => "rgba(70,255,255,1)",
+            'pointStrokeColor'     => "#fff",
+            'pointHighlightFill'   => "#fff",
+            'pointHighlightStroke' => "rgba(220,220,220,1)",
+        ];
+
         $defaultParams = [
             'start'   => $start,
             'end'     => $end,
@@ -205,6 +215,22 @@ class CabinetController extends CabinetBaseController
                     ->all(),
             ],
         ]));
+
+        // график с объем сделок
+        {
+            $params = ArrayHelper::merge($defaultParams, [
+                'rows'  => [
+                    \app\models\StockKurs::query(['stock_id' => $id])
+                        ->andWhere(['between', 'date', $start, $end])
+                        ->select([
+                            'date',
+                            'volume as kurs',
+                        ])
+                        ->all(),
+                ],
+            ]);
+            $lineArrayVolume = \app\service\GraphExporter::convert($params);
+        }
 
         // Объединение
         {
@@ -372,7 +398,7 @@ class CabinetController extends CabinetBaseController
                             ]
                         ]);
                         $colors = [
-                            $colorBlue, $colorRed, $colorGreen,
+                            $colorBlue, $colorRed, $colorGreen, $colorViolet,
                         ];
                         break;
                 }
@@ -706,6 +732,22 @@ class CabinetController extends CabinetBaseController
             $lineArrayBlue = \app\service\GraphExporter::convert($params);
         }
 
+        // график с объем сделок
+        {
+            $params = ArrayHelper::merge($defaultParams, [
+                'rows'  => [
+                    \app\models\StockKurs::query(['stock_id' => $id])
+                        ->andWhere(['between', 'date', $start->format('Y-m-d'), $end->format('Y-m-d')])
+                        ->select([
+                            'date',
+                            'volume as kurs',
+                        ])
+                        ->all(),
+                ],
+            ]);
+            $lineArrayVolume = \app\service\GraphExporter::convert($params);
+        }
+
         // union
         {
             $lineArrayPast = \app\service\GraphUnion::convert([
@@ -714,6 +756,7 @@ class CabinetController extends CabinetBaseController
                     $lineArrayKurs['y'][0],
                     $lineArrayRed['y'][0],
                     $lineArrayBlue['y'][0],
+//                    $lineArrayVolume['y'][0],
                 ]
             ]);
         }

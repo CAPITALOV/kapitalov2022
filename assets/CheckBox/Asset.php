@@ -17,7 +17,7 @@ use Yii;
  */
 class Asset extends AssetBundle
 {
-    public $sourcePath = '@app/assets/CheckBox/source';
+    public $sourcePath = '@vendor/minhur/bootstrap-toggle';
     public $css      = [
         'css/bootstrap-toggle.min.css',
     ];

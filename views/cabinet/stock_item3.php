@@ -39,6 +39,15 @@ $colorBlue = [
     'pointHighlightFill'   => "#fff",
     'pointHighlightStroke' => "rgba(220,220,220,1)",
 ];
+$colorViolet = [
+    'label'                => "Прогноз",
+    'fillColor'            => "rgba(220,220,220,0)",
+    'strokeColor'          => "rgba(120,255,255,1)",
+    'pointColor'           => "rgba(70,255,255,1)",
+    'pointStrokeColor'     => "#fff",
+    'pointHighlightFill'   => "#fff",
+    'pointHighlightStroke' => "rgba(220,220,220,1)",
+];
 
 \app\assets\Slider\Asset::register($this);
 
@@ -79,7 +88,7 @@ $start = $today->sub(new DateInterval('P1Y'))->format('Y-m-d');
 
 echo \cs\Widget\ECharts\CandleStick1::widget([
     'width' => 860,
-    'name' => $item->getField('name', ''),
+    'name'  => $item->getField('name', ''),
     'data'  => \app\models\StockKurs::query(['stock_id' => 1])
         ->select([
             'date',
@@ -232,6 +241,7 @@ JS
             $colorGreen,
             $colorRed,
             $colorBlue,
+            $colorViolet,
         ],
     ]);
     echo $graph3->run();

@@ -196,5 +196,10 @@ class StockKursImport extends \cs\base\BaseForm
                 (new Query())->createCommand()->update(StockKurs::TABLE, $fields, ['date' => $date, 'stock_id' => $stock_id])->execute();
             }
         }
+
+        return [
+            'insert' => $insert,
+            'update' => $update
+        ];
     }
 }
