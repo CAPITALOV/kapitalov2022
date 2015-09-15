@@ -221,12 +221,10 @@ JS
         }
     },
     legend: {
-        show: false,
         data:['{$this->name}']
     },
     toolbox: {
         show : true,
-        x: 'center',
         feature : {
             mark : {show: false},
             dataZoom : {show: true,
