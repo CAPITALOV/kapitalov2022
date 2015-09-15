@@ -89,7 +89,7 @@ $start = $today->sub(new DateInterval('P1Y'))->format('Y-m-d');
 echo \cs\Widget\ECharts\CandleStick1::widget([
     'width' => 860,
     'name'  => $item->getField('name', ''),
-    'data'  => \app\models\StockKurs::query(['stock_id' => 1])
+    'data'  => \app\models\StockKurs::query(['stock_id' => $item->getId()])
         ->select([
             'date',
             'open',
