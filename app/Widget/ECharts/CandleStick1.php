@@ -147,7 +147,21 @@ class CandleStick1 extends Object
     public function registerClientScript()
     {
         \app\assets\ECharts\Asset::register(Yii::$app->view);
+        $options = $this->getClientOptions();
+        Yii::$app->view->registerJs(<<<JS
+            var myChart = echarts.init(document.getElementById('{$this->id}'));
+            var options = {$options}
+            myChart.setOption(options);
+JS
+        );
 
+    }
+
+    /**
+     * @return array the options
+     */
+    protected function getClientOptions()
+    {
         $x = Json::encode($this->lineArray['x']);
         $y = [];
         foreach($this->lineArray['y'] as $i) {
@@ -158,9 +172,8 @@ class CandleStick1 extends Object
             ];
         }
         $y = Json::encode($y);
-        Yii::$app->view->registerJs(<<<JS
-            var myChart = echarts.init(document.getElementById('{$this->id}'));
-            var options = {
+        $options = <<<JS
+            {
     title : {
         text: ''
     },
@@ -218,9 +231,9 @@ class CandleStick1 extends Object
             mark : {show: false},
             dataZoom : {show: true,
             title : {
-            dataZoom : 'Увеличить',
-            dataZoomReset : 'Сбросить'
-        }
+                dataZoom : 'Увеличить',
+                dataZoomReset : 'Сбросить'
+            }
         },
             dataView : {show: false, readOnly: false},
             magicType: {show: false, type: ['line', 'bar']},
@@ -256,20 +269,12 @@ class CandleStick1 extends Object
         }
     ],
     series : {$y}
-};
+}
 
-            myChart.setOption(options);
 JS
-        );
+        ;
 
-    }
-
-    /**
-     * @return array the options
-     */
-    protected function getClientOptions()
-    {
-        return [];
+        return $options;
     }
 
 }
