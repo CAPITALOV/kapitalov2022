@@ -80,7 +80,7 @@ if ($d) {
 ?>
 
 
-<h2 class="page-header" style="font-family: 'courier new'">Свечи</h2>
+<h2 class="page-header">Свечи</h2>
 <?php
 $today = new DateTime();
 $end = $today->format('Y-m-d');
