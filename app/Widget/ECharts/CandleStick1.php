@@ -3,6 +3,7 @@
 namespace cs\Widget\ECharts;
 
 use cs\services\Security;
+use cs\services\Str;
 use Yii;
 use yii\base\Object;
 use yii\helpers\ArrayHelper;
@@ -92,10 +93,10 @@ class CandleStick1 extends Object
                     unset($item['date']);
                     unset($item['volume']);
                     $y[] = [
-                        $item['open'],
-                        $item['high'],
-                        $item['low'],
-                        $item['close'],
+                        $this->formatFloat($item['open']),
+                        $this->formatFloat($item['high']),
+                        $this->formatFloat($item['low']),
+                        $this->formatFloat($item['close']),
                     ];
                 }
             }
@@ -107,6 +108,20 @@ class CandleStick1 extends Object
             ];
         }
 
+    }
+
+    public function formatFloat($str)
+    {
+        if (Str::isContain($str, '.')) {
+            $arr = explode('.', $str);
+            if (strlen($arr[1]) == 1) {
+                return $arr[0] . '.' . $arr[1] . '0';
+            } else {
+                return $arr[0] . '.' . substr($arr[1],0,2);
+            }
+        } else {
+            return $str . '.00';
+        }
     }
 
     public function run()
@@ -132,20 +147,33 @@ class CandleStick1 extends Object
     public function registerClientScript()
     {
         \app\assets\ECharts\Asset::register(Yii::$app->view);
+        $options = $this->getClientOptions();
+        Yii::$app->view->registerJs(<<<JS
+            var myChart = echarts.init(document.getElementById('{$this->id}'));
+            var options = {$options}
+            myChart.setOption(options);
+JS
+        );
 
+    }
+
+    /**
+     * @return array the options
+     */
+    protected function getClientOptions()
+    {
         $x = Json::encode($this->lineArray['x']);
         $y = [];
         foreach($this->lineArray['y'] as $i) {
             $y[] = [
-                'name' => 'Дата',
+                'name' => 'дата',
                 'type' => 'k',
                 'data' => $i,
             ];
         }
         $y = Json::encode($y);
-        Yii::$app->view->registerJs(<<<JS
-            var myChart = echarts.init(document.getElementById('{$this->id}'));
-            var options = {
+        $options = <<<JS
+            {
     title : {
         text: ''
     },
@@ -153,38 +181,38 @@ class CandleStick1 extends Object
         trigger: 'axis',
         formatter: function (params) {
             var res = [];
-            res.push(params[0].seriesName + ': ' + params[0].name);
+            res.push(params[0].seriesName + ': <span style="font-family:\'courier new\'">' + params[0].name + '</span>');
             res.push('<table style="margin-top:10px;">');
             res.push('<tr>');
                 res.push('<td style="padding-right:10px;">');
                     res.push('открытие:');
                 res.push('</td>');
-                res.push('<td>');
+                res.push('<td align="right" style="font-family:\'courier new\'">');
                     res.push(params[0].value[0]);
-                res.push('</td>');
-            res.push('</tr>');
-            res.push('<tr>');
-                res.push('<td style="padding-right:10px;">');
-                    res.push('закрытие:');
-                res.push('</td>');
-                res.push('<td>');
-                    res.push(params[0].value[3]);
-                res.push('</td>');
-            res.push('</tr>');
-            res.push('<tr>');
-                res.push('<td style="padding-right:10px;">');
-                    res.push('max:');
-                res.push('</td>');
-                res.push('<td>');
-                    res.push(params[0].value[1]);
                 res.push('</td>');
             res.push('</tr>');
             res.push('<tr>');
                 res.push('<td style="padding-right:10px;">');
                     res.push('min:');
                 res.push('</td>');
-                res.push('<td>');
+                res.push('<td align="right" style="font-family:\'courier new\'">');
                     res.push(params[0].value[2]);
+                res.push('</td>');
+            res.push('</tr>');
+            res.push('<tr>');
+                res.push('<td style="padding-right:10px;">');
+                    res.push('max:');
+                res.push('</td>');
+                res.push('<td align="right" style="font-family:\'courier new\'">');
+                    res.push(params[0].value[1]);
+                res.push('</td>');
+            res.push('</tr>');
+            res.push('<tr>');
+                res.push('<td style="padding-right:10px;">');
+                    res.push('закрытие:');
+                res.push('</td>');
+                res.push('<td align="right" style="font-family:\'courier new\'">');
+                    res.push(params[0].value[3]);
                 res.push('</td>');
             res.push('</tr>');
             res.push('</table>');
@@ -193,17 +221,19 @@ class CandleStick1 extends Object
         }
     },
     legend: {
+        show: false,
         data:['{$this->name}']
     },
     toolbox: {
         show : true,
+        x: 'center',
         feature : {
             mark : {show: false},
             dataZoom : {show: true,
             title : {
-            dataZoom : 'Увеличить',
-            dataZoomReset : 'Сбросить'
-        }
+                dataZoom : 'Увеличить',
+                dataZoomReset : 'Сбросить'
+            }
         },
             dataView : {show: false, readOnly: false},
             magicType: {show: false, type: ['line', 'bar']},
@@ -239,20 +269,12 @@ class CandleStick1 extends Object
         }
     ],
     series : {$y}
-};
+}
 
-            myChart.setOption(options);
 JS
-        );
+        ;
 
-    }
-
-    /**
-     * @return array the options
-     */
-    protected function getClientOptions()
-    {
-        return [];
+        return $options;
     }
 
 }
