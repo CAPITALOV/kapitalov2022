@@ -153,13 +153,43 @@ class CandleStick1 extends Object
         trigger: 'axis',
         formatter: function (params) {
             var res = [];
-            res.push(params[0].seriesName + ' ' + params[0].name);
-            res.push('открытие : ' + params[0].value[0]);
-            res.push('закрытие : ' + params[0].value[3]);
-            res.push('max : ' + params[0].value[1]);
-            res.push('min : ' + params[0].value[2]);
+            res.push(params[0].seriesName + ': ' + params[0].name);
+            res.push('<table style="margin-top:10px;">');
+            res.push('<tr>');
+                res.push('<td style="padding-right:10px;">');
+                    res.push('открытие:');
+                res.push('</td>');
+                res.push('<td>');
+                    res.push(params[0].value[0]);
+                res.push('</td>');
+            res.push('</tr>');
+            res.push('<tr>');
+                res.push('<td style="padding-right:10px;">');
+                    res.push('закрытие:');
+                res.push('</td>');
+                res.push('<td>');
+                    res.push(params[0].value[3]);
+                res.push('</td>');
+            res.push('</tr>');
+            res.push('<tr>');
+                res.push('<td style="padding-right:10px;">');
+                    res.push('max:');
+                res.push('</td>');
+                res.push('<td>');
+                    res.push(params[0].value[1]);
+                res.push('</td>');
+            res.push('</tr>');
+            res.push('<tr>');
+                res.push('<td style="padding-right:10px;">');
+                    res.push('min:');
+                res.push('</td>');
+                res.push('<td>');
+                    res.push(params[0].value[2]);
+                res.push('</td>');
+            res.push('</tr>');
+            res.push('</table>');
 
-            return res.join('<br/>');
+            return res.join('');
         }
     },
     legend: {
