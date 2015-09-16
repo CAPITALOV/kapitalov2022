@@ -15,7 +15,28 @@ use yii\helpers\Html;
 </head>
 <body>
     <?php $this->beginBody() ?>
-    <?= $content ?>
+    <table border="0" cellpadding="0" cellpadding="0" width="600" align="center" style="
+    border: 1px solid #cccccc;
+">
+        <tr>
+            <td>
+                <img src="<?= \yii\helpers\Url::to('/images/share.png', true) ?>" width="600">
+            </td>
+        <tr>
+        </tr>
+        <td style="padding: 20px;">
+            <p>Здравствуйте!</p>
+
+            <?= $content ?>
+
+        </td>
+        <tr>
+        </tr>
+        <td style="padding: 20px;">
+            <p>С уважением Команда CAPITALOV.com</p>
+        </td>
+        </tr>
+    </table>
     <?php $this->endBody() ?>
 </body>
 </html>
