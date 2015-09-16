@@ -4,15 +4,21 @@ use yii\helpers\Url;
 use yii\helpers\Html;
 
 /** @var $query \yii\db\Query */
+/** @var $this \yii\web\View */
 
 $this->title = 'Пользователи';
+$this->registerJs(<<<JS
+$('.dateRegistration').tooltip();
+JS
+);
+
 ?>
 
 <h1 class="page-header"><?= $this->title ?></h1>
 
 <?= \yii\grid\GridView::widget([
     'dataProvider' => new \yii\data\ActiveDataProvider([
-        'query'      => $query,
+        'query'      => $query->orderBy(['datetime_reg' => SORT_DESC]),
         'pagination' => [
             'pageSize' => 50,
         ],
@@ -47,6 +53,15 @@ $this->title = 'Пользователи';
         [
             'header'    => 'телефон',
             'attribute' => 'phone',
+        ],
+        [
+            'header'    => 'регистрация',
+            'content' => function ($model, $key, $index, $column) {
+                return Html::tag('abbr', \cs\services\DatePeriod::back($model['datetime_reg']), [
+                    'title' => Yii::$app->formatter->asDatetime($model['datetime_reg']),
+                    'class' => 'dateRegistration',
+                ]);
+            },
         ],
         [
             'header'    => 'организация',
