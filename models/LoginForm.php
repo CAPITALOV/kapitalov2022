@@ -63,9 +63,13 @@ class LoginForm extends BaseForm
                 return;
             }
             // если клиент оплатил хотя бы одну котировку
-            if (UserStock::query([
+            $isExistMoreThenOneBuyStock = UserStock::query([
                 'user_id' => $user->getId(),
-            ])->andWhere(['>', 'date_finish', date('Y-m-d')])->exists()) {
+            ])
+                ->andWhere(['>', 'date_finish', date('Y-m-d')])
+                ->andWhere(['not', ['stock_id' => 1]])
+                ->exists();
+            if ($isExistMoreThenOneBuyStock) {
                 if ($user->getField('is_confirm', 0) != 1) {
                     $this->addError($attribute, 'Пользователь не активирован');
                     return;
