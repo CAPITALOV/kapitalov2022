@@ -53,7 +53,7 @@ $colorViolet = [
 
 $url = Url::to(['cabinet/graph_ajax']);
 
-
+$this->registerJsFile('/js', ['depends' => ['yii\web\JqueryAsset',]]);
 
 ?>
 

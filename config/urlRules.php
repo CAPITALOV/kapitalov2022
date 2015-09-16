@@ -35,6 +35,8 @@ return [
     'requests/activate'                     => 'superadmin_requests/activate_ajax',
     'requests/delete'                       => 'superadmin_requests/delete_ajax',
 
+    'userStocks'                            => 'superadmin_userstock/index',
+
     // stock
     'stock'                                 => 'superadmin_stock/index',
     'stock/add'                             => 'superadmin_stock/add',
