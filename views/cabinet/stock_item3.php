@@ -57,55 +57,6 @@ $this->registerJsFile('/js', ['depends' => ['yii\web\JqueryAsset',]]);
 
 ?>
 
-
-<h1 class="page-header"><?php
-    $logo = $item->getField('logo', '');
-    if ($logo) {
-        ?>
-        <img src="<?= $logo ?>" width="50">
-    <?php
-    }
-    ?><?= $this->title ?></h1>
-
-<?php
-$d = $item->getField('description', '');
-if ($d) {
-    ?>
-    <div class="row col-lg-12">
-        <p><?= $d ?></p>
-    </div>
-<?php
-}
-
-?>
-
-
-<h2 class="page-header">Свечи</h2>
-<div class="center-block" style="width:860px">
-<?php
-$today = new DateTime();
-$end = $today->format('Y-m-d');
-$start = $today->sub(new DateInterval('P1Y'))->format('Y-m-d');
-
-echo \cs\Widget\ECharts\CandleStick1::widget([
-    'width' => 860,
-    'name'  => $item->getField('name', ''),
-    'data'  => \app\models\StockKurs::query(['stock_id' => $item->getId()])
-        ->select([
-            'date',
-            'open',
-            'close',
-            'low',
-            'high',
-            'volume',
-        ])
-        ->andWhere(['between', 'date', $start, $end])
-        ->orderBy(['date' => SORT_ASC])
-        ->all()
-]) ?>
-
-</div>
-
 <br/><br/><br/>
     <div class="container">
         <div class="col-md-auto" style="float:left; ">
@@ -338,6 +289,9 @@ JS
     </div>
 
 
+
+
+
 <div class="row">
     <center>
         <div class="row col-lg-8">
@@ -348,6 +302,35 @@ JS
     </center>
 </div>
 </div>
+
+
+
+<h2 class="page-header">Свечи</h2>
+<div class="center-block" style="width:860px">
+<?php
+$today = new DateTime();
+$end = $today->format('Y-m-d');
+$start = $today->sub(new DateInterval('P1Y'))->format('Y-m-d');
+
+echo \cs\Widget\ECharts\CandleStick1::widget([
+    'width' => 860,
+    'name'  => $item->getField('name', ''),
+    'data'  => \app\models\StockKurs::query(['stock_id' => $item->getId()])
+        ->select([
+            'date',
+            'open',
+            'close',
+            'low',
+            'high',
+            'volume',
+        ])
+        ->andWhere(['between', 'date', $start, $end])
+        ->orderBy(['date' => SORT_ASC])
+        ->all()
+]) ?>
+
+</div>
+
 
 
 <div class="modal fade" id="myModalBlue" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
