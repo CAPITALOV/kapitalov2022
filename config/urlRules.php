@@ -29,13 +29,14 @@ return [
     'admin/referal'                         => 'superadmin/referal',
     'admin/referal/delete'                  => 'superadmin/referal_delete',
     'admin/calc'                            => 'superadmin/calc',
+    'admin/userStocks'                      => 'superadmin/users_stock',
+    'admin/users'                           => 'superadmin/users',
 
     'requests'                              => 'superadmin_requests/index',
     'requests/activate/<hash:\\w+>'         => 'superadmin_requests/activate',
     'requests/activate'                     => 'superadmin_requests/activate_ajax',
     'requests/delete'                       => 'superadmin_requests/delete_ajax',
 
-    'userStocks'                            => 'superadmin_userstock/index',
 
     // stock
     'stock'                                 => 'superadmin_stock/index',
@@ -44,9 +45,7 @@ return [
     'stock/<id:\\d+>/import'                => 'superadmin_stock/import',
     'stock/<id:\\d+>/importKurs'            => 'superadmin_stock/import_kurs',
     'stock/<id:\\d+>/delete'                => 'superadmin_stock/delete',
-
     'stock/<id:\\d+>/show/<color:\\w+>'     => 'superadmin_stock/show',
-
     'stock/<id:\\d+>/deletePrognosisRed'    => 'superadmin_stock/prognosis_delete_red',
     'stock/<id:\\d+>/deletePrognosisBlue'   => 'superadmin_stock/prognosis_delete_blue',
     'stock/<id:\\d+>/kurs/add'              => 'superadmin_stock/kurs_add',

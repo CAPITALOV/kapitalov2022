@@ -88,7 +88,7 @@ JS
                 ?>
 
                 <?php if (Yii::$app->user->identity->isAdmin()) { ?>
-                    <li class="dropdown<?php if (Yii::$app->controller->id == 'superadmin_stock') { echo(' active');} ?>">
+                    <li class="dropdown<?php if (\cs\services\Str::isContain(Yii::$app->controller->id, 'superadmin')) { echo(' active');} ?>">
                         <a
                             href="#"
                             class="dropdown-toggle"
@@ -103,7 +103,8 @@ JS
                             <li><a href="<?= Url::to(['superadmin_requests/index']) ?>">Заявки на оплату</a></li>
                             <li><a href="<?= Url::to(['superadmin/referal']) ?>">Пирамида изобилия</a></li>
                             <li><a href="<?= Url::to(['superadmin_stock/index']) ?>">Котировки</a></li>
-                            <li><a href="<?= Url::to(['superadmin_userstock/index']) ?>">Текущие заказы пользователей</a></li>
+                            <li><a href="<?= Url::to(['superadmin/users_stock']) ?>">Текущие заказы пользователей</a></li>
+                            <li><a href="<?= Url::to(['superadmin/users']) ?>">Пользователи</a></li>
                         </ul>
                     </li>
                 <?php } ?>
