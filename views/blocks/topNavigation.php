@@ -1,11 +1,21 @@
 <?php
 
 /** @var $this \yii\web\View */
+/** @var $item \app\models\Stock */
 
 use app\models\Translator as T;
 use yii\helpers\Url;
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
+
+if (Yii::$app->requestedRoute == 'cabinet/stock_item3') {
+    $item = \app\models\Stock::find($_GET['id']);
+    /**
+     * var $userStock
+     */
+    $userStock = \app\models\UserStock::find(['stock_id' => $item->getId(), 'user_id' => Yii::$app->user->id]);
+    $date = Yii::$app->formatter->asDate($userStock->getField('date_finish'));
+}
 
 $this->registerJs(<<<JS
     $('#layoutCabinetLinkBack').tooltip({
