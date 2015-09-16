@@ -139,8 +139,9 @@ $this->title = 'Текущие заказы пользователей';
             <tr>
                 <?php if ($с == 1) { ?>
                     <td rowspan="<?= count($item['stockList']) ?>">
-
-                        <img src="<?= $item['avatar'] ?>" width="100" class="thumbnail" style="margin-bottom: 0px;"><br/>
+                        <?php if ( ($item['avatar'] . '') != '' ) { ?>
+                            <img src="<?= $item['avatar'] ?>" width="100" class="thumbnail" style="margin-bottom: 0px;"><br/>
+                        <?php } ?>
                         <?= $item['name_first'] ?><br/>
                         <?= $item['name_last'] ?><br/>
                         <span style="font-family: 'courier new';font-size: 80%"><?= $item['email'] ?></span>
