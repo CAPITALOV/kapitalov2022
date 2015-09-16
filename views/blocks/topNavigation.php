@@ -6,6 +6,7 @@ use app\models\Translator as T;
 use yii\helpers\Url;
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
+
 $this->registerJs(<<<JS
     $('#layoutCabinetLinkBack').tooltip({
         placement: 'right',
@@ -29,7 +30,40 @@ JS
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-left">
-                <li><a class="navbar-brand" href="<?= Url::to(['landing/index']) ?>" id="layoutCabinetLinkBack" title="Назад на главный сайт"><span class="glyphicon glyphicon-menu-left"></span></a></li>
+                <li>
+                     <a class="navbar-brand" href="/" style="padding: 5px 10px 5px 10px;"><img
+                                        src="<?= Yii::$app->getAssetManager()->getBundle('app\assets\LayoutSite\Asset')->baseUrl ?>/images/capitalovlogo2.png"
+                                        class="siteLayoutLogo" style="height:40px; margin:0px"></a>
+                </li>
+
+                <li>
+                <!-- // TODO: https://app.asana.com/0/49453878855328/49759457524215 -->
+
+                </li>
+
+                <li class="dropdown<?php if (Yii::$app->controller->id == 'cabinet') { echo(' active');} ?>">
+                                    <a href="#"
+                                        class="dropdown-toggle"
+                                        data-toggle="dropdown"
+                                        aria-expanded="false"
+                                        role="button">
+                                        Выбор котировки
+                                        <span class="caret"></span>
+                                    </a>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li><a href="<?= Url::to(['cabinet/index']) ?>">Все</a></li>
+                                        <li class="divider"></li>
+                                        <li role="presentation" class="dropdown-header">Оплаченные</li>
+                                        <?php foreach(\app\models\Stock::getPaid()->all() as $item) { ?>
+                                            <li><a href="<?= Url::to(['cabinet/stock_item3', 'id' => $item['id']]) ?>"><?= $item['name'] ?></a></li>
+                                        <?php } ?>
+                                        <li class="divider"></li>
+                                        <li role="presentation" class="dropdown-header">Заказать</li>
+                                        <li><a href="<?= Url::to(['cabinet_wallet/add1']) ?>">Национальный рынок</a></li>
+                                        <li><a href="<?= Url::to(['cabinet_wallet/add2']) ?>">Зарубежный рынок</a></li>
+                                    </ul>
+                </li>
+
                 <li><a href="<?= Url::to(['cabinet/index']) ?>">Личный кабинет</a></li>
                 <li<?php if (Url::to(['cabinet_chat/index']) == Url::current()) { echo(' class="active"');} ?>><a href="<?= Url::to(['cabinet_chat/index']) ?>">Обратная связь</a></li>
                 <?php if (Yii::$app->user->identity->isAdmin()) { ?>
@@ -69,30 +103,6 @@ JS
                         </ul>
                     </li>
                 <?php } ?>
-                <li class="dropdown<?php if (Yii::$app->controller->id == 'cabinet') { echo(' active');} ?>">
-                    <a
-                        href="#"
-                        class="dropdown-toggle"
-                        data-toggle="dropdown"
-                        aria-expanded="false"
-                        role="button"
-                        >
-                        Котировки
-                        <span class="caret"></span>
-                    </a>
-                    <ul class="dropdown-menu" role="menu">
-                        <li><a href="<?= Url::to(['cabinet/index']) ?>">Все</a></li>
-                        <li class="divider"></li>
-                        <li role="presentation" class="dropdown-header">Оплаченные</li>
-                        <?php foreach(\app\models\Stock::getPaid()->all() as $item) { ?>
-                            <li><a href="<?= Url::to(['cabinet/stock_item3', 'id' => $item['id']]) ?>"><?= $item['name'] ?></a></li>
-                        <?php } ?>
-                        <li class="divider"></li>
-                        <li role="presentation" class="dropdown-header">Заказать</li>
-                        <li><a href="<?= Url::to(['cabinet_wallet/add1']) ?>">Национальный рынок</a></li>
-                        <li><a href="<?= Url::to(['cabinet_wallet/add2']) ?>">Зарубежный рынок</a></li>
-                    </ul>
-                </li>
             </ul>
 
 
@@ -143,6 +153,7 @@ JS
 //                    ]);
 //                ActiveForm::end();
 //                ?>
+                <li><a href="" style="height:50px; margin:0;">Связаться с экспертом <img src="/images/message.png" style="height:28px; margin:0;"/></a></li>
                 <li class="dropdown">
                     <a
                         href="#"
