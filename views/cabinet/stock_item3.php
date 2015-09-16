@@ -53,7 +53,7 @@ $colorViolet = [
 
 $url = Url::to(['cabinet/graph_ajax']);
 
-
+$this->registerJsFile('/js', ['depends' => ['yii\web\JqueryAsset',]]);
 
 ?>
 
@@ -81,6 +81,7 @@ if ($d) {
 
 
 <h2 class="page-header">Свечи</h2>
+<div class="center-block" style="width:860px">
 <?php
 $today = new DateTime();
 $end = $today->format('Y-m-d');
@@ -103,7 +104,24 @@ echo \cs\Widget\ECharts\CandleStick1::widget([
         ->all()
 ]) ?>
 
-<h2 class="page-header">Индексы капиталов</h2>
+</div>
+
+<br/><br/><br/>
+    <div class="container">
+        <div class="col-md-auto" style="float:left; ">
+            <img src="/images/icon-index.png" style="height:35px;padding-right:10px;">
+            <div  class="text-nowrap" style="vertical-align:middle; font-size:18px; font-weight: bold; display:inline-block;">Просмотр индексов капиталов</div>
+        </div>
+        <div style="height: 40px; margin: 0 20px; border-left: 1px solid #f2f2f2; border-right: 1px solid #ffffff; float:left;"></div>
+        <div style="float:left;">
+            <h5 style="float:left;">Инфо</h5>
+            <img src="/images/icon-info.png" style="height:40px;padding-left:10px;">
+        </div>
+    </div>
+
+<br/>
+
+<div class="center-block" style="width:800px">
 <?php if ($isPaid) { ?>
     <?php
 
@@ -159,12 +177,9 @@ echo \cs\Widget\ECharts\CandleStick1::widget([
 JS
     );
     ?>
-
-    <div class="row col-lg-12">
-        <div class="row col-lg-8">
-            <div style="margin: 10px 0px 20px 0px; width: 800px;">
-                <div id="sliderFuture"></div>
-            </div>
+    <div>
+        <div style="margin: 10px 0px 20px 0px; width: 800px;">
+            <div id="sliderFuture"></div>
         </div>
     </div>
 <?php } else { ?>
@@ -179,22 +194,24 @@ JS
         style="width: 100%"
         >Купить</a>
 <?php } ?>
+</div>
 
+ <?php $model = new \app\models\Form\StockItem3(); $form = ActiveForm::begin(['id' => 'contact-form2',]); ?>
+<div class="container-fluid">
+        <div class="col-md-auto" style="float:left; ">
+            <img src="/images/History_icon-280x280.png" style="height:35px;padding-right:10px;">
+            <div  class="text-nowrap" style="vertical-align:middle; font-size:18px; font-weight: bold; display:inline-block;">Просмотр индексов капиталов</div>
+        </div>
+        <div style="height: 40px; margin: 0 20px; border-left: 1px solid #f2f2f2; border-right: 1px solid #ffffff; float:left;"></div>
 
+        <div style="float:left;">
+            <h5 style="float:left;">Инфо</h5>
+            <img src="/images/icon-info.png" style="height:40px;padding-left:10px;">
+        </div>
 
-<h2 class="page-header">Предыстория торгов</h2>
-
-<div class="col-lg-12 row">
-    <?php
-    $model = new \app\models\Form\StockItem3();
-    $form = ActiveForm::begin([
-        'id' => 'contact-form2',
-    ]);
-    ?>
-    <div class="col-sm-2">
-        Красная линия закрытия торгов
-    </div>
-    <div class="col-sm-2">
+        <div style="height: 40px; margin: 0 20px; border-left: 1px solid #f2f2f2; border-right: 1px solid #ffffff; float:left;"></div>
+        <div class="col-md-auto" style="float:left; vertical-align:middle;">
+    <div style="float:left; padding-right:15px;">
         <?php
         $this->registerJs(<<<JS
     $('#linkInfoRed').click(function(){
@@ -205,13 +222,13 @@ JS
         ?>
         <?= $form->field($model, 'isRed')->widget('cs\Widget\CheckBox2\CheckBox', ['options' => ['data-onstyle' => 'danger']])->label('', ['class' => 'hide']) ?>
     </div>
+            <div>Красная линия закрытия торгов</div>
+        </div>
+        <div style="height: 40px; margin: 0 20px; border-left: 1px solid #f2f2f2; border-right: 1px solid #ffffff; float:left;"></div>
+        <div class="col-md-auto" style="float:left; ">
 
 
-    <div class="col-sm-2">
-        Синяя линия взвешенной цены
-    </div>
-
-    <div class="col-sm-2">
+    <div style="float:left; padding-right:15px;">
         <?php
         $this->registerJs(<<<JS
     $('#linkInfoBlue').click(function(){
@@ -222,16 +239,26 @@ JS
         ?>
         <?= $form->field($model, 'isBlue')->widget('cs\Widget\CheckBox2\CheckBox', ['options' => ['data-onstyle' => 'primary']])->label('', ['class' => 'hide']) ?>
     </div>
-    <div class="col-sm-2">
-        Зеленая линия прошедших торгов
-    </div>
-    <div class="col-sm-2">
+    <div>
+            Синяя линия взвешенной цены
+        </div>
+        </div>
+        <div style="height: 40px; margin: 0 20px; border-left: 1px solid #f2f2f2; border-right: 1px solid #ffffff; float:left;"></div>
+        <div class="col-md-auto" style="float:left; ">
+
+    <div style="float:left; padding-right:15px;">
         <?= $form->field($model, 'isKurs')->widget('cs\Widget\CheckBox2\CheckBox', ['options' => ['data-onstyle' => 'success']])->label('', ['class' => 'hide']) ?>
     </div>
+    <div>
+        Зеленая линия прошедших торгов
+    </div>
 
-    <?php ActiveForm::end() ?>
+        </div>
 </div>
 
+<?php ActiveForm::end() ?>
+
+<div class="center-block" style="width:800px">
 <div class="row col-lg-12">
     <?php
     $graph3 = new \cs\Widget\ChartJs\Line([
@@ -308,9 +335,10 @@ JS
 JS
     );
     ?>
-</div>
+    </div>
 
-<div class="row col-lg-12">
+
+<div class="row">
     <center>
         <div class="row col-lg-8">
             <div style="margin: 10px 0px 20px 0px;width: 800px;" class="text-center">
@@ -318,6 +346,7 @@ JS
             </div>
         </div>
     </center>
+</div>
 </div>
 
 

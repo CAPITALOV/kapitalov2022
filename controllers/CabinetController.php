@@ -73,25 +73,7 @@ class CabinetController extends CabinetBaseController
 
     public function actionIndex()
     {
-        $items = Stock::query()->orderBy(['name' => SORT_ASC])->all();
-        $dateFinishList = UserStock::query(['user_id' => \Yii::$app->user->getId()])->select([
-            'stock_id',
-            'date_finish',
-        ])->all();
-        for ($i = 0; $i < count($items); $i++) {
-            $item = &$items[ $i ];
-            foreach ($dateFinishList as $row) {
-                if ($row['stock_id'] == $item['id']) {
-                    $item['date_finish'] = $row['date_finish'];
-                }
-            }
-            if (!isset($item['date_finish'])) {
-                $item['date_finish'] = null;
-            }
-        }
-
         return $this->render([
-            'items'   => $items,
             'paid'    => Stock::getPaid()
                 ->select([
                     'cap_stock.id',

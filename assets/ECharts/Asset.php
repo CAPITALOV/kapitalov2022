@@ -23,4 +23,8 @@ class Asset extends AssetBundle
     ];
     public $depends  = [
     ];
+
+    public function init(){
+
+    }
 }

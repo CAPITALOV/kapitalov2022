@@ -67,6 +67,7 @@ class StockPrognosisImport extends BaseForm
             // выбираю уже имеющиеся данные
             $dataArray = StockPrognosisRed::query(['stock_id' => $stock_id])->select('date')->column();
             $rows = $this->get('fileRed', $stock_id, $dataArray);
+            VarDumper::dump($rows);
             if (count($rows['insert']) > 0) {
                 StockPrognosisRed::batchInsert(['stock_id', 'date', 'delta'], $rows['insert']);
             }
