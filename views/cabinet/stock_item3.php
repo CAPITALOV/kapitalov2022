@@ -57,18 +57,18 @@ $this->registerJsFile('/js', ['depends' => ['yii\web\JqueryAsset',]]);
 
 ?>
 
-<br/><br/><br/>
-    <div class="container">
-        <div class="col-md-auto" style="float:left; ">
-            <img src="/images/icon-index.png" style="height:35px;padding-right:10px;">
-            <div  class="text-nowrap" style="vertical-align:middle; font-size:18px; font-weight: bold; display:inline-block;">Просмотр индексов капиталов</div>
-        </div>
-        <div style="height: 40px; margin: 0 20px; border-left: 1px solid #f2f2f2; border-right: 1px solid #ffffff; float:left;"></div>
-        <div style="float:left;">
-            <h5 style="float:left;">Инфо</h5>
-            <img src="/images/icon-info.png" style="height:40px;padding-left:10px;">
-        </div>
+
+<div class="container">
+    <div class="col-md-auto" style="float:left; ">
+        <img src="/images/icon-index.png" style="height:35px;padding-right:10px;">
+        <div  class="text-nowrap" style="vertical-align:middle; font-size:18px; font-weight: bold; display:inline-block;">Просмотр индексов капиталов</div>
     </div>
+    <div style="height: 40px; margin: 0 20px; border-left: 1px solid #f2f2f2; border-right: 1px solid #ffffff; float:left;"></div>
+    <div style="float:left;">
+        <h5 style="float:left;">Инфо</h5>
+        <img src="/images/icon-info.png" style="height:40px;padding-left:10px;">
+    </div>
+</div>
 
 <br/>
 
@@ -147,11 +147,13 @@ JS
 <?php } ?>
 </div>
 
+<br><hr><br>
+
  <?php $model = new \app\models\Form\StockItem3(); $form = ActiveForm::begin(['id' => 'contact-form2',]); ?>
-<div class="container-fluid">
-        <div class="col-md-auto" style="float:left; ">
+<div class="container">
+        <div  style="float:left; ">
             <img src="/images/History_icon-280x280.png" style="height:35px;padding-right:10px;">
-            <div  class="text-nowrap" style="vertical-align:middle; font-size:18px; font-weight: bold; display:inline-block;">Просмотр индексов капиталов</div>
+            <div style="vertical-align:middle; font-size:18px; font-weight: bold; display:inline-block;">Просмотр истории индексов</div>
         </div>
         <div style="height: 40px; margin: 0 20px; border-left: 1px solid #f2f2f2; border-right: 1px solid #ffffff; float:left;"></div>
 
@@ -161,6 +163,7 @@ JS
         </div>
 
         <div style="height: 40px; margin: 0 20px; border-left: 1px solid #f2f2f2; border-right: 1px solid #ffffff; float:left;"></div>
+
         <div class="col-md-auto" style="float:left; vertical-align:middle;">
     <div style="float:left; padding-right:15px;">
         <?php
@@ -288,10 +291,6 @@ JS
     ?>
     </div>
 
-
-
-
-
 <div class="row">
     <center>
         <div class="row col-lg-8">
@@ -303,9 +302,10 @@ JS
 </div>
 </div>
 
+<br><hr><br>
 
 
-<h2 class="page-header">Свечи</h2>
+<h2>Свечи</h2>
 <div class="center-block" style="width:860px">
 <?php
 $today = new DateTime();
