@@ -8,14 +8,6 @@ use yii\helpers\Url;
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 
-if (Yii::$app->requestedRoute == 'cabinet/stock_item3') {
-    $item = \app\models\Stock::find($_GET['id']);
-    /**
-     * var $userStock
-     */
-    $userStock = \app\models\UserStock::find(['stock_id' => $item->getId(), 'user_id' => Yii::$app->user->id]);
-    $date = Yii::$app->formatter->asDate($userStock->getField('date_finish'));
-}
 
 $this->registerJs(<<<JS
     $('#layoutCabinetLinkBack').tooltip({
@@ -41,17 +33,11 @@ JS
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-left">
                 <li>
-                     <a class="navbar-brand" href="/" style="padding: 5px 10px 5px 10px;"><img
-                                        src="<?= Yii::$app->getAssetManager()->getBundle('app\assets\LayoutSite\Asset')->baseUrl ?>/images/capitalovlogo2.png"
+                     <a class="navbar-brand" href="/" style="padding: 5px 10px 5px 10px;">
+                     <img src="<?= Yii::$app->getAssetManager()->getBundle('app\assets\LayoutSite\Asset')->baseUrl ?>/images/capitalovlogo2.png"
                                         class="siteLayoutLogo" style="height:40px; margin:0px"></a>
                 </li>
-
-                <li>
-                <!-- // TODO: https://app.asana.com/0/49453878855328/49759457524215 -->
-
-                </li>
-
-                <li class="dropdown<?php if (Yii::$app->controller->id == 'cabinet') { echo(' active');} ?>">
+                <li class="dropdown <?php if (Yii::$app->controller->id == 'cabinet') { echo(' active');} ?>">
                                     <a href="#"
                                         class="dropdown-toggle"
                                         data-toggle="dropdown"
@@ -74,8 +60,33 @@ JS
                                     </ul>
                 </li>
 
-                <li><a href="<?= Url::to(['cabinet/index']) ?>">Личный кабинет</a></li>
-                <li<?php if (Url::to(['cabinet_chat/index']) == Url::current()) { echo(' class="active"');} ?>><a href="<?= Url::to(['cabinet_chat/index']) ?>">Обратная связь</a></li>
+                <li style="display: flex; align-items: center;">
+                <?php
+                    if (Yii::$app->requestedRoute == 'cabinet/stock_item3') {
+                        $item = \app\models\Stock::find($_GET['id']);
+
+                        $userStock = \app\models\UserStock::find(['stock_id' => $item->getId(), 'user_id' => Yii::$app->user->id]);
+                        $date = Yii::$app->formatter->asDate($userStock->getField('date_finish'));
+
+                        $logo = $item->getField('logo', '');
+                        if ($logo) {
+                            echo(' <img src="');
+                            echo($logo);
+                            echo('" width="50" style="float:left; margin:0 10px;">');
+                        }
+
+
+                        echo('<div style="display: table-cell; font-weight:bold; float:left;">');
+                        echo($item->getField('finam_code'));
+                        echo(' – </div><div style="float:left; margin-left:5px;"> ');
+                        echo($item->getField('name'));
+                        echo('</div><img src="/images/payd.png" style="margin-left:10px; height:17px"/><div style="margin-left:5px; color:#58b724">');
+                        echo('Оплачено до ');
+                        echo($date);
+                        echo('</div></li>');
+                    }
+                ?>
+
                 <?php if (Yii::$app->user->identity->isAdmin()) { ?>
                     <li class="dropdown<?php if (Yii::$app->controller->id == 'superadmin_stock') { echo(' active');} ?>">
                         <a
@@ -163,7 +174,7 @@ JS
 //                    ]);
 //                ActiveForm::end();
 //                ?>
-                <li><a href="" style="height:50px; margin:0;">Связаться с экспертом <img src="/images/message.png" style="height:28px; margin:0;"/></a></li>
+                <li style="height:50px; margin:0;"><?php if (Url::to(['cabinet_chat/index']) == Url::current()) { echo(' class="active"');} ?><a href="<?= Url::to(['cabinet_chat/index']) ?>">Связаться с экспертом <img src="/images/message.png" style="height:28px; margin:0;"/></a></li>
                 <li class="dropdown">
                     <a
                         href="#"
@@ -180,6 +191,7 @@ JS
                         <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu" role="menu">
+                        <li><a href="<?= Url::to(['cabinet/index']) ?>">Личный кабинет</a></li>
                         <li><a href="<?= Url::to(['cabinet/profile']) ?>"><i class="glyphicon glyphicon-cog"
                                                                           style="padding-right: 5px;"></i>Мой
                                 профиль</a></li>

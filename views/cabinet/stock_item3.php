@@ -58,28 +58,6 @@ $this->registerJsFile('/js', ['depends' => ['yii\web\JqueryAsset',]]);
 ?>
 
 
-<h1 class="page-header"><?php
-    $logo = $item->getField('logo', '');
-    if ($logo) {
-        ?>
-        <img src="<?= $logo ?>" width="50">
-    <?php
-    }
-    ?><?= $this->title ?></h1>
-
-<?php
-$d = $item->getField('description', '');
-if ($d) {
-    ?>
-    <div class="row col-lg-12">
-        <p><?= $d ?></p>
-    </div>
-<?php
-}
-
-?>
-
-
 <h2 class="page-header">Свечи</h2>
 <div class="center-block" style="width:860px">
 <?php
