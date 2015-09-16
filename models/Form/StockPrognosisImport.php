@@ -12,6 +12,7 @@ use cs\services\VarDumper;
 use Yii;
 use yii\base\Model;
 use yii\db\Query;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Url;
 use yii\web\UploadedFile;
 
@@ -27,6 +28,21 @@ class StockPrognosisImport extends BaseForm
      *                                  false - если в таблице уже есть курс на эту дату то он сохранится
      */
     public $isReplaceExisting;
+    /** @var  array массив строк для полей fileRed и fileBlue
+     * [
+     *     'fileRed' => [],
+     *     'fileBlue' => [],
+     * ]
+     */
+    public $lines;
+
+    public function rules()
+    {
+
+        return ArrayHelper::merge([
+            [['fileRed', 'fileBlue'], 'validateFile']
+        ], $this->rulesAdd());
+    }
 
     public function __construct($fields = []){
         self::$fields = [
@@ -57,9 +73,75 @@ class StockPrognosisImport extends BaseForm
     }
 
     /**
+     * @param string $attribute  идентификатор поля, например fileBlue
+     *
+     * @return array|null массив строк
+     *                    null если не загружен
+     */
+    private function getLinesFromFile($attribute)
+    {
+        $isset = false;
+        if (isset($this->lines)){
+            if (isset($this->lines[$attribute])) {
+                $isset = true;
+            }
+        }
+        if (!$isset) {
+            $fileModel = UploadedFile::getInstance($this, $attribute);
+            if ($fileModel) {
+                $data = file_get_contents($fileModel->tempName);
+                $rows = explode("\n", $data);
+                $this->lines[$attribute] = $rows;
+            } else {
+                return null;
+            }
+        }
+
+        return $this->lines[$attribute];
+    }
+
+    public function validateFile($attribute, $params)
+    {
+        $rows = $this->getLinesFromFile($attribute);
+        if ($rows) {
+            foreach($rows as $row) {
+                $items = explode(' ', $row);
+                $c = 1;
+                foreach ($items as $i) {
+                    if (trim($i) != '') {
+                        if ($c == 1) {
+                            $data = trim($i);
+                            $y = substr($data, 6, 4);
+                            $m = substr($data, 0, 2);
+                            $d = substr($data, 3, 2);
+                            if ($y < 1900 or $m < 1 or $m > 12 or $d < 1 or $d > 31){
+                                $this->addError($attribute, "Ошибочные данные в файле. Строка ='{$row}'");
+                                return;
+                            }
+                            $c++;
+                        } else {
+                            $delta = trim($i);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    /**
      * Импортирует данные
      *
-     * @return boolean
+     * @return array Возвращает отчет об импорте
+     * [
+     *    'red' => [
+     *                'errorStrings' => [
+     *                                      '12/12/0000  0.333',
+     *                                      '12/12/0000  -0.333',
+     *                                  ]
+     *             ]
+     * ]
+     *
+     *
      */
     public function import($stock_id)
     {
@@ -67,7 +149,6 @@ class StockPrognosisImport extends BaseForm
             // выбираю уже имеющиеся данные
             $dataArray = StockPrognosisRed::query(['stock_id' => $stock_id])->select('date')->column();
             $rows = $this->get('fileRed', $stock_id, $dataArray);
-            VarDumper::dump($rows);
             if (count($rows['insert']) > 0) {
                 StockPrognosisRed::batchInsert(['stock_id', 'date', 'delta'], $rows['insert']);
             }
@@ -110,10 +191,8 @@ class StockPrognosisImport extends BaseForm
      */
     public function get($fieldName, $stock_id, $dataArray)
     {
-        $fileModel = UploadedFile::getInstance($this, $fieldName);
-        if ($fileModel) {
-            $data = file_get_contents($fileModel->tempName);
-            $rows = explode("\n", $data);
+        $rows = $this->getLinesFromFile($fieldName);
+        if ($rows) {
             $new = [];
             $update = [];
             foreach ($rows as $row) {
@@ -122,20 +201,20 @@ class StockPrognosisImport extends BaseForm
                 foreach ($items as $i) {
                     if (trim($i) != '') {
                         if ($c == 1) {
-                            $data = trim($i);
-                            $data = substr($data, 6, 4) . '-' . substr($data, 0, 2) . '-' . substr($data, 3, 2);
+                            $date = trim($i);
+                            $date = substr($date, 6, 4) . '-' . substr($date, 0, 2) . '-' . substr($date, 3, 2);
                             $c++;
                         } else {
                             $delta = trim($i);
                         }
                     }
                 }
-                if (in_array($data, $dataArray)) {
-                    $update[ $data ] = $delta;
+                if (in_array($date, $dataArray)) {
+                    $update[ $date ] = $delta;
                 } else {
                     $new[] = [
                         $stock_id,
-                        $data,
+                        $date,
                         $delta,
                     ];
                 }
