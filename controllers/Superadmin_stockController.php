@@ -83,6 +83,34 @@ class Superadmin_stockController extends SuperadminBaseController
     }
 
     /**
+     * Показывает прогнозы
+     *
+     * @param int $id иднтификатор котировки
+     * @param int $color цвет прогноза 'red', 'blue'
+     *
+     * @return string
+     * @throws \cs\web\Exception
+     */
+    public function actionShow($id, $color)
+    {
+        switch($color) {
+            case 'red':
+                $query = StockPrognosisRed::query();
+                break;
+            case 'blue':
+                $query = StockPrognosisBlue::query();
+                break;
+            default:
+                throw new Exception('Не верный запрос');
+        }
+        $query->andWhere(['stock_id' => $id]);
+
+        return $this->render([
+            'query' => $query,
+        ]);
+    }
+
+    /**
      * Импортирует курсы с finam
      *
      * @param $id

@@ -79,10 +79,18 @@ class User extends DbRecord implements \yii\web\IdentityInterface
     public function activate()
     {
         $this->update([
-//            'is_active'         => 1,
-//            'is_confirm'        => 1,
+            'is_active'         => 1,
+            'is_confirm'        => 1,
             'datetime_activate' => gmdate('YmdHis'),
         ]);
+    }
+
+    /**
+     * Активирует сбербанк при вход в систему
+     * Вызывается первый раз после регистрации и автовходе в систему
+     */
+    public function firstEnter()
+    {
         UserStock::add($this->getId(), 1, 0);
     }
 
