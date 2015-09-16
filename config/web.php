@@ -61,6 +61,11 @@ $config = [
                     ],
                 ],
             ],
+            'on ' . \yii\web\View::EVENT_END_BODY => function () {
+                if (YII_ENV_PROD) {
+                    echo \app\service\Counters::get();
+                }
+            }
         ],
         'errorHandler'         => [
             'errorAction' => 'site/error',

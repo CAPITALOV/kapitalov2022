@@ -6,7 +6,7 @@
  * Time: 23:57
  */
 
-namespace app\services;
+namespace app\service;
 
 
 use yii\base\Object;

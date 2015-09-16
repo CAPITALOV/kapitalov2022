@@ -146,6 +146,7 @@ class StockKursImport extends \cs\base\BaseForm
      *                                  false - если в таблице уже есть курс на эту дату то он сохранится
      *
      * @throws \yii\base\InvalidConfigException
+     * @return array
      */
     public static function importCandels($stock_id, $start, $end, $isReplaceExisting = false)
     {
@@ -196,5 +197,10 @@ class StockKursImport extends \cs\base\BaseForm
                 (new Query())->createCommand()->update(StockKurs::TABLE, $fields, ['date' => $date, 'stock_id' => $stock_id])->execute();
             }
         }
+
+        return [
+            'insert' => $insert,
+            'update' => $update
+        ];
     }
 }
