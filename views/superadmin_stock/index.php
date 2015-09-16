@@ -55,7 +55,7 @@ $this->title = 'Курсы';
                     if ($row['stock_id'] == $item['id']) {
                         $min = (new DateTime($row['min']))->format('d.m.Y');
                         $max = (new DateTime($row['max']))->format('d.m.Y');
-                        echo "{$min} ... {$max}";
+                        echo Html::a("{$min} ... {$max}",['superadmin_stock/show', 'id' => $item['id'], 'color'=>'red']);
                     }
                 }
                 ?>
@@ -80,7 +80,7 @@ $this->title = 'Курсы';
                     if ($row['stock_id'] == $item['id']) {
                         $min = (new DateTime($row['min']))->format('d.m.Y');
                         $max = (new DateTime($row['max']))->format('d.m.Y');
-                        echo "{$min} ... {$max}";
+                        echo Html::a("{$min} ... {$max}",['superadmin_stock/show', 'id' => $item['id'], 'color'=>'blue']);
                     }
                 }
                 ?>
