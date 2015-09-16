@@ -8,7 +8,7 @@ use yii\web\Response;
 
 class VarDumper
 {
-    public static function dump($value, $depth = 10, $highlight = true)
+    public static function dump($value, $highlight = true, $depth = 10)
     {
         Yii::$app->response->charset = 'utf-8';
         Yii::$app->response->send();

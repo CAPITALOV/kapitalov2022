@@ -42,6 +42,11 @@ class Request extends \cs\base\DbRecord
         return parent::insert($fields);
     }
 
+    public function getUserId()
+    {
+        return $this->getField('user_id');
+    }
+
     /**
      * Актвирует услугу
      *
@@ -56,7 +61,7 @@ class Request extends \cs\base\DbRecord
         $stock_id = $this->getField('stock_id');
         $stock = Stock::find($stock_id);
         $monthCounter = $this->getField('month');
-        $dateFinish = \app\models\UserStock::add(\Yii::$app->user->getId(), $stock_id, $monthCounter, $this->getField('datetime'));
+        $dateFinish = \app\models\UserStock::add($this->getUserId(), $stock_id, $monthCounter, $this->getField('datetime'));
         $dateFinishStr = Yii::$app->formatter->asDate($dateFinish);
         WalletHistory::insert("Услуга включена, акция: {$stock->getName()}, месяцев: {$monthCounter}, до: {$dateFinishStr}");
         self::delete();

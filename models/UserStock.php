@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use cs\services\VarDumper;
 use Yii;
 
 /**
