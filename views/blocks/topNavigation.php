@@ -92,6 +92,7 @@ JS
                             <li><a href="<?= Url::to(['superadmin_requests/index']) ?>">Заявки на оплату</a></li>
                             <li><a href="<?= Url::to(['superadmin/referal']) ?>">Пирамида изобилия</a></li>
                             <li><a href="<?= Url::to(['superadmin_stock/index']) ?>">Котировки</a></li>
+                            <li><a href="<?= Url::to(['superadmin_userstock/index']) ?>">Текущие заказы пользователей</a></li>
                         </ul>
                     </li>
                 <?php } ?>
