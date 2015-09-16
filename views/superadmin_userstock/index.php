@@ -167,7 +167,7 @@ $this->title = 'Текущие заказы пользователей';
                 </td>
                 <td>
                     <?php if ($d['isMore']) { ?>
-                        <button class="btn btn-primary btn-xs">еще</button>
+                        <span class="label label-primary">еще</span>
                     <?php } ?>
                 </td>
             </tr>
