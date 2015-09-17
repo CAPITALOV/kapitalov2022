@@ -329,14 +329,14 @@ echo \cs\Widget\ECharts\CandleStick1::widget([
 
 </div>
 
-<h2 class="page-header">AmCharts</h2>
+<!--<h2 class="page-header">AmCharts</h2>-->
 <div class="center-block" style="width:860px">
 <?php
 $today = new DateTime();
 $end = $today->format('Y-m-d');
 $start = $today->sub(new DateInterval('P1Y'))->format('Y-m-d');
 
-echo \cs\Widget\AmCharts\Graph1::widget([
+ \cs\Widget\AmCharts\Graph1::widget([
     'width' => 860,
     'data'  => \app\models\StockKurs::query(['stock_id' => $item->getId()])
         ->select([
