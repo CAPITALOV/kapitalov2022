@@ -53,8 +53,6 @@ $colorViolet = [
 
 $url = Url::to(['cabinet/graph_ajax']);
 
-$this->registerJsFile('/js', ['depends' => ['yii\web\JqueryAsset',]]);
-
 ?>
 
 <br/><br/><br/>
@@ -315,6 +313,31 @@ $start = $today->sub(new DateInterval('P1Y'))->format('Y-m-d');
 echo \cs\Widget\ECharts\CandleStick1::widget([
     'width' => 860,
     'name'  => $item->getField('name', ''),
+    'data'  => \app\models\StockKurs::query(['stock_id' => $item->getId()])
+        ->select([
+            'date',
+            'open',
+            'close',
+            'low',
+            'high',
+            'volume',
+        ])
+        ->andWhere(['between', 'date', $start, $end])
+        ->orderBy(['date' => SORT_ASC])
+        ->all()
+]) ?>
+
+</div>
+
+<h2 class="page-header">AmCharts</h2>
+<div class="center-block" style="width:860px">
+<?php
+$today = new DateTime();
+$end = $today->format('Y-m-d');
+$start = $today->sub(new DateInterval('P1Y'))->format('Y-m-d');
+
+echo \cs\Widget\AmCharts\Graph1::widget([
+    'width' => 860,
     'data'  => \app\models\StockKurs::query(['stock_id' => $item->getId()])
         ->select([
             'date',
