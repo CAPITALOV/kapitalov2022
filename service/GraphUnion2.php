@@ -140,8 +140,7 @@ class GraphUnion2 extends Object
                     $min = $line[0]['date'];
                     $max = $line[count($line)-1]['date'];
                 } else {
-                    $min = '0000-00-00';
-                    $max = '9999-99-99';
+                    return null;
                 }
             } else {
                 if (count($line) > 0) {
@@ -149,6 +148,8 @@ class GraphUnion2 extends Object
                     $thisMax = $line[count($line)-1]['date'];
                     if ($thisMin < $min) $min = $thisMin;
                     if ($thisMax > $max) $max = $thisMax;
+                } else {
+                    return null;
                 }
             }
         }
