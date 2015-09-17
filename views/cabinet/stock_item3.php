@@ -441,21 +441,21 @@ echo \cs\Widget\AmCharts\CandleStick::widget([
         ],
         "valueAxes"      => [[
             "id"            => "v1",
-            "axisColor"     => "#FF6600",
+            "axisColor"     => "#FF0000",
             "axisThickness" => 2,
             "gridAlpha"     => 0,
             "axisAlpha"     => 1,
             "position"      => "left"
         ], [
             "id"            => "v2",
-            "axisColor"     => "#FCD202",
+            "axisColor"     => "#0000ff",
             "axisThickness" => 2,
             "gridAlpha"     => 0,
             "axisAlpha"     => 1,
             "position"      => "right"
         ], [
             "id"            => "v3",
-            "axisColor"     => "#B0DE09",
+            "axisColor"     => "#00ff00",
             "axisThickness" => 2,
             "gridAlpha"     => 0,
             "offset"        => 50,
@@ -548,7 +548,7 @@ echo \cs\Widget\AmCharts\CandleStick::widget([
         "valueAxes"      => [
             [
                 "id"            => "v1",
-                "axisColor"     => "#FF6600",
+                "axisColor"     => "#FF0000",
                 "axisThickness" => 2,
                 "gridAlpha"     => 0,
                 "axisAlpha"     => 1,
@@ -556,7 +556,7 @@ echo \cs\Widget\AmCharts\CandleStick::widget([
             ],
             [
                 "id"            => "v2",
-                "axisColor"     => "#FCD202",
+                "axisColor"     => "#0000ff",
                 "axisThickness" => 2,
                 "gridAlpha"     => 0,
                 "axisAlpha"     => 1,
