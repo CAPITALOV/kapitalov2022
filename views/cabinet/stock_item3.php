@@ -329,27 +329,277 @@ echo \cs\Widget\ECharts\CandleStick1::widget([
 
 </div>
 
-<!--<h2 class="page-header">AmCharts</h2>-->
+<h2 class="page-header">Свечи</h2>
 <div class="center-block" style="width:860px">
 <?php
 $today = new DateTime();
 $end = $today->format('Y-m-d');
 $start = $today->sub(new DateInterval('P1Y'))->format('Y-m-d');
 
- \cs\Widget\AmCharts\Graph1::widget([
-    'width' => 860,
-    'data'  => \app\models\StockKurs::query(['stock_id' => $item->getId()])
+echo \cs\Widget\AmCharts\CandleStick::widget([
+    'height'       => 200,
+    'lineArray'    => \app\models\StockKurs::query(['stock_id' => $item->getId()])
         ->select([
             'date',
             'open',
             'close',
             'low',
             'high',
-            'volume',
         ])
         ->andWhere(['between', 'date', $start, $end])
         ->orderBy(['date' => SORT_ASC])
-        ->all()
+        ->all(),
+    'chartOptions' => [
+        "type"           => "serial",
+        "theme"          => "light",
+        "dataDateFormat" => 'YYYY-MM-DD',
+        "valueAxes"      => [[
+            "position" => "left"
+        ]],
+        "graphs"         => [[
+            "id"                 => "g1",
+            "balloonText"        => "Открытие:<b>[[open]]</b><br>min:<b>[[low]]</b><br>max:<b>[[high]]</b><br>Закрытие:<b>[[close]]</b><br>",
+            "closeField"         => "close",
+            "fillColors"         => "#7f8da9",
+            "highField"          => "high",
+            "lineColor"          => "#7f8da9",
+            "lineAlpha"          => 1,
+            "lowField"           => "low",
+            "fillAlphas"         => 0.9,
+            "negativeFillColors" => "#db4c3c",
+            "negativeLineColor"  => "#db4c3c",
+            "openField"          => "open",
+            "title"              => "Price:",
+            "type"               => "candlestick",
+            "valueField"         => "close"
+        ]],
+        "chartScrollbar" => [
+            "graph"           => "g1",
+            "graphType"       => "line",
+            "scrollbarHeight" => 30
+        ],
+        "chartCursor"    => [
+            "valueLineEnabled"        => true,
+            "valueLineBalloonEnabled" => true
+        ],
+        "categoryField"  => "date",
+        "categoryAxis"   => [
+            "parseDates" => true
+        ],
+        "export"         => [
+            "enabled"  => true,
+            "position" => "bottom-right"
+        ]
+    ]
+]) ?>
+
+</div>
+
+
+<h2 class="page-header">Три графика (Прошлое)</h2>
+<div class="center-block" style="width:860px">
+<?php
+$today = new DateTime();
+$end = $today->format('Y-m-d');
+$start = $today->sub(new DateInterval('P6M'))->format('Y-m-d');
+
+echo \cs\Widget\AmCharts\CandleStick::widget([
+    'height'       => 200,
+    'lineArray'    => \app\service\GraphUnion2::convert([
+        'lines' => [
+            \app\models\StockKurs::query(['stock_id' => $item->getId()])
+                ->select([
+                    'date',
+                    'kurs',
+                ])
+                ->andWhere(['between', 'date', $start, $end])
+                ->orderBy(['date' => SORT_ASC])
+                ->all(),
+            \app\models\StockPrognosisRed::query(['stock_id' => $item->getId()])
+                ->select([
+                    'date',
+                    'delta as red',
+                ])
+                ->andWhere(['between', 'date', $start, $end])
+                ->orderBy(['date' => SORT_ASC])
+                ->all(),
+            \app\models\StockPrognosisBlue::query(['stock_id' => $item->getId()])
+                ->select([
+                    'date',
+                    'delta as blue',
+                ])
+                ->andWhere(['between', 'date', $start, $end])
+                ->orderBy(['date' => SORT_ASC])
+                ->all(),
+        ]
+    ]),
+    'chartOptions' => [
+        "type"           => "serial",
+        "theme"          => "light",
+        "legend"         => [
+            "useGraphSettings" => true
+        ],
+        "valueAxes"      => [[
+            "id"            => "v1",
+            "axisColor"     => "#FF6600",
+            "axisThickness" => 2,
+            "gridAlpha"     => 0,
+            "axisAlpha"     => 1,
+            "position"      => "left"
+        ], [
+            "id"            => "v2",
+            "axisColor"     => "#FCD202",
+            "axisThickness" => 2,
+            "gridAlpha"     => 0,
+            "axisAlpha"     => 1,
+            "position"      => "right"
+        ], [
+            "id"            => "v3",
+            "axisColor"     => "#B0DE09",
+            "axisThickness" => 2,
+            "gridAlpha"     => 0,
+            "offset"        => 50,
+            "axisAlpha"     => 1,
+            "position"      => "left"
+        ]],
+        "graphs"         => [[
+            "valueAxis"             => "v1",
+            "lineColor"             => "#FF0000",
+            "bullet"                => "round",
+            "bulletBorderThickness" => 1,
+            "hideBulletsCount"      => 30,
+            "title"                 => "красный",
+            "valueField"            => "red",
+            "fillAlphas"            => 0
+        ], [
+            "valueAxis"             => "v2",
+            "lineColor"             => "#0000ff",
+            "bullet"                => "round",
+            "bulletBorderThickness" => 1,
+            "hideBulletsCount"      => 30,
+            "title"                 => "синий",
+            "valueField"            => "blue",
+            "fillAlphas"            => 0
+        ], [
+            "valueAxis"             => "v3",
+            "lineColor"             => "#00ff00",
+            "bullet"                => "round",
+            "bulletBorderThickness" => 1,
+            "hideBulletsCount"      => 30,
+            "title"                 => "зеленый",
+            "valueField"            => "kurs",
+            "fillAlphas"            => 0
+        ]],
+        "chartScrollbar" => [],
+        "chartCursor"    => [
+            "cursorPosition" => "mouse"
+        ],
+        "categoryField"  => "date",
+        "categoryAxis"   => [
+            "parseDates"       => true,
+            "axisColor"        => "#DADADA",
+            "minorGridEnabled" => true
+        ],
+        "export"         => [
+            "enabled"  => true,
+            "position" => "bottom-right"
+        ]
+    ],
+]) ?>
+
+</div>
+
+
+<h2 class="page-header">Два графика (Будущее)</h2>
+<div class="center-block" style="width:860px">
+<?php
+$today = new DateTime();
+$start = $today->format('Y-m-d');
+$end = $today->add(new DateInterval('P1M'))->format('Y-m-d');
+
+echo \cs\Widget\AmCharts\CandleStick::widget([
+    'height'       => 200,
+    'lineArray'    => \app\service\GraphUnion2::convert([
+        'lines' => [
+            \app\models\StockPrognosisRed::query(['stock_id' => $item->getId()])
+                ->select([
+                    'date',
+                    'delta as red',
+                ])
+                ->andWhere(['between', 'date', $start, $end])
+                ->orderBy(['date' => SORT_ASC])
+                ->all(),
+            \app\models\StockPrognosisBlue::query(['stock_id' => $item->getId()])
+                ->select([
+                    'date',
+                    'delta as blue',
+                ])
+                ->andWhere(['between', 'date', $start, $end])
+                ->orderBy(['date' => SORT_ASC])
+                ->all(),
+        ]
+    ]),
+    'chartOptions' => [
+        "type"           => "serial",
+        "theme"          => "light",
+        "legend"         => [
+            "useGraphSettings" => true
+        ],
+        "valueAxes"      => [
+            [
+                "id"            => "v1",
+                "axisColor"     => "#FF6600",
+                "axisThickness" => 2,
+                "gridAlpha"     => 0,
+                "axisAlpha"     => 1,
+                "position"      => "left"
+            ],
+            [
+                "id"            => "v2",
+                "axisColor"     => "#FCD202",
+                "axisThickness" => 2,
+                "gridAlpha"     => 0,
+                "axisAlpha"     => 1,
+                "position"      => "right"
+            ],
+        ],
+        "graphs"         => [
+            [
+                "valueAxis"             => "v1",
+                "lineColor"             => "#FF0000",
+                "bullet"                => "round",
+                "bulletBorderThickness" => 1,
+                "hideBulletsCount"      => 30,
+                "title"                 => "красный",
+                "valueField"            => "red",
+                "fillAlphas"            => 0
+            ],
+            [
+                "valueAxis"             => "v2",
+                "lineColor"             => "#0000ff",
+                "bullet"                => "round",
+                "bulletBorderThickness" => 1,
+                "hideBulletsCount"      => 30,
+                "title"                 => "синий",
+                "valueField"            => "blue",
+                "fillAlphas"            => 0
+            ],
+        ],
+        "chartScrollbar" => [],
+        "chartCursor"    => [
+            "cursorPosition" => "mouse"
+        ],
+        "categoryField"  => "date",
+        "categoryAxis"   => [
+            "parseDates"       => true,
+            "axisColor"        => "#DADADA",
+            "minorGridEnabled" => true
+        ],
+        "export"         => [
+            "enabled"  => true,
+            "position" => "bottom-right"
+        ]
+    ],
 ]) ?>
 
 </div>
