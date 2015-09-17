@@ -37,73 +37,73 @@ $this->title = $item->getField('name');
 
 <div class="center-block" style="width:800px">
     <?php if ($isPaid) { ?>
-        <?php if (!is_null($lineArrayFuture)) {?>
         <div class="center-block" style="width:860px">
-            <?= \cs\Widget\AmCharts\CandleStick::widget([
-                'height'       => 200,
-                'lineArray'    => $lineArrayFuture,
-                'chartOptions' => [
-                    "type"           => "serial",
-                    "theme"          => "light",
-                    "legend"         => [
-                        "useGraphSettings" => true
-                    ],
-                    "valueAxes"      => [
-                        [
-                            "id"            => "v1",
-                            "axisColor"     => "#FF0000",
-                            "axisThickness" => 2,
-                            "gridAlpha"     => 0,
-                            "axisAlpha"     => 1,
-                            "position"      => "left"
+            <?php if (!is_null($lineArrayFuture)) { ?>
+                <?= \cs\Widget\AmCharts\CandleStick::widget([
+                    'height'       => 200,
+                    'lineArray'    => $lineArrayFuture,
+                    'chartOptions' => [
+                        "type"           => "serial",
+                        "theme"          => "light",
+                        "legend"         => [
+                            "useGraphSettings" => true
                         ],
-                        [
-                            "id"            => "v2",
-                            "axisColor"     => "#0000ff",
-                            "axisThickness" => 2,
-                            "gridAlpha"     => 0,
-                            "axisAlpha"     => 1,
-                            "position"      => "right"
+                        "valueAxes"      => [
+                            [
+                                "id"            => "v1",
+                                "axisColor"     => "#FF0000",
+                                "axisThickness" => 2,
+                                "gridAlpha"     => 0,
+                                "axisAlpha"     => 1,
+                                "position"      => "left"
+                            ],
+                            [
+                                "id"            => "v2",
+                                "axisColor"     => "#0000ff",
+                                "axisThickness" => 2,
+                                "gridAlpha"     => 0,
+                                "axisAlpha"     => 1,
+                                "position"      => "right"
+                            ],
                         ],
-                    ],
-                    "graphs"         => [
-                        [
-                            "valueAxis"             => "v1",
-                            "lineColor"             => "#FF0000",
-                            "bullet"                => "round",
-                            "bulletBorderThickness" => 1,
-                            "hideBulletsCount"      => 30,
-                            "title"                 => "красный",
-                            "valueField"            => "red",
-                            "fillAlphas"            => 0
+                        "graphs"         => [
+                            [
+                                "valueAxis"             => "v1",
+                                "lineColor"             => "#FF0000",
+                                "bullet"                => "round",
+                                "bulletBorderThickness" => 1,
+                                "hideBulletsCount"      => 30,
+                                "title"                 => "красный",
+                                "valueField"            => "red",
+                                "fillAlphas"            => 0
+                            ],
+                            [
+                                "valueAxis"             => "v2",
+                                "lineColor"             => "#0000ff",
+                                "bullet"                => "round",
+                                "bulletBorderThickness" => 1,
+                                "hideBulletsCount"      => 30,
+                                "title"                 => "синий",
+                                "valueField"            => "blue",
+                                "fillAlphas"            => 0
+                            ],
                         ],
-                        [
-                            "valueAxis"             => "v2",
-                            "lineColor"             => "#0000ff",
-                            "bullet"                => "round",
-                            "bulletBorderThickness" => 1,
-                            "hideBulletsCount"      => 30,
-                            "title"                 => "синий",
-                            "valueField"            => "blue",
-                            "fillAlphas"            => 0
+                        "chartScrollbar" => [],
+                        "chartCursor"    => [
+                            "cursorPosition" => "mouse"
                         ],
+                        "categoryField"  => "date",
+                        "categoryAxis"   => [
+                            "parseDates"       => true,
+                            "axisColor"        => "#DADADA",
+                            "minorGridEnabled" => true
+                        ],
+                        "export"         => [
+                            "enabled"  => true,
+                            "position" => "bottom-right"
+                        ]
                     ],
-                    "chartScrollbar" => [],
-                    "chartCursor"    => [
-                        "cursorPosition" => "mouse"
-                    ],
-                    "categoryField"  => "date",
-                    "categoryAxis"   => [
-                        "parseDates"       => true,
-                        "axisColor"        => "#DADADA",
-                        "minorGridEnabled" => true
-                    ],
-                    "export"         => [
-                        "enabled"  => true,
-                        "position" => "bottom-right"
-                    ]
-                ],
-            ]) ?>
+                ]) ?>
             <?php } else { ?>
                 <div class="alert alert-danger">
                     Нет данных
@@ -149,96 +149,96 @@ $this->title = $item->getField('name');
 
 <div class="center-block" style="width:800px">
     <div class="center-block" style="width:860px">
-       <?php if (!is_null($lineArrayPast)) {?>
-        <?= \cs\Widget\AmCharts\CandleStick::widget([
-            'height'       => 200,
-            'lineArray'    => $lineArrayPast,
-            'chartOptions' => [
-                "type"           => "serial",
-                "theme"          => "light",
-                "legend"         => [
-                    "useGraphSettings" => true
-                ],
-                "valueAxes"      => [
-                    [
-                        "id"            => "v1",
-                        "axisColor"     => "#FF0000",
-                        "axisThickness" => 2,
-                        "gridAlpha"     => 0,
-                        "axisAlpha"     => 1,
-                        "position"      => "left"
+        <?php if (!is_null($lineArrayPast)) { ?>
+            <?= \cs\Widget\AmCharts\CandleStick::widget([
+                'height'       => 200,
+                'lineArray'    => $lineArrayPast,
+                'chartOptions' => [
+                    "type"           => "serial",
+                    "theme"          => "light",
+                    "legend"         => [
+                        "useGraphSettings" => true
                     ],
-                    [
-                        "id"            => "v2",
-                        "axisColor"     => "#0000ff",
-                        "axisThickness" => 2,
-                        "gridAlpha"     => 0,
-                        "axisAlpha"     => 1,
-                        "position"      => "right"
+                    "valueAxes"      => [
+                        [
+                            "id"            => "v1",
+                            "axisColor"     => "#FF0000",
+                            "axisThickness" => 2,
+                            "gridAlpha"     => 0,
+                            "axisAlpha"     => 1,
+                            "position"      => "left"
+                        ],
+                        [
+                            "id"            => "v2",
+                            "axisColor"     => "#0000ff",
+                            "axisThickness" => 2,
+                            "gridAlpha"     => 0,
+                            "axisAlpha"     => 1,
+                            "position"      => "right"
+                        ],
+                        [
+                            "id"            => "v3",
+                            "axisColor"     => "#00ff00",
+                            "axisThickness" => 2,
+                            "gridAlpha"     => 0,
+                            "offset"        => 50,
+                            "axisAlpha"     => 1,
+                            "position"      => "left"
+                        ]
                     ],
-                    [
-                        "id"            => "v3",
-                        "axisColor"     => "#00ff00",
-                        "axisThickness" => 2,
-                        "gridAlpha"     => 0,
-                        "offset"        => 50,
-                        "axisAlpha"     => 1,
-                        "position"      => "left"
+                    "graphs"         => [
+                        [
+                            "valueAxis"             => "v1",
+                            "lineColor"             => "#FF0000",
+                            "bullet"                => "round",
+                            "bulletBorderThickness" => 1,
+                            "hideBulletsCount"      => 30,
+                            "title"                 => "красный",
+                            "valueField"            => "red",
+                            "fillAlphas"            => 0
+                        ],
+                        [
+                            "valueAxis"             => "v2",
+                            "lineColor"             => "#0000ff",
+                            "bullet"                => "round",
+                            "bulletBorderThickness" => 1,
+                            "hideBulletsCount"      => 30,
+                            "title"                 => "синий",
+                            "valueField"            => "blue",
+                            "fillAlphas"            => 0
+                        ],
+                        [
+                            "valueAxis"             => "v3",
+                            "lineColor"             => "#00ff00",
+                            "bullet"                => "round",
+                            "bulletBorderThickness" => 1,
+                            "hideBulletsCount"      => 30,
+                            "title"                 => "зеленый",
+                            "valueField"            => "kurs",
+                            "fillAlphas"            => 0
+                        ]
+                    ],
+                    "chartScrollbar" => [],
+                    "chartCursor"    => [
+                        "cursorPosition" => "mouse"
+                    ],
+                    "categoryField"  => "date",
+                    "categoryAxis"   => [
+                        "parseDates"       => true,
+                        "axisColor"        => "#DADADA",
+                        "minorGridEnabled" => true
+                    ],
+                    "export"         => [
+                        "enabled"  => true,
+                        "position" => "bottom-right"
                     ]
                 ],
-                "graphs"         => [
-                    [
-                        "valueAxis"             => "v1",
-                        "lineColor"             => "#FF0000",
-                        "bullet"                => "round",
-                        "bulletBorderThickness" => 1,
-                        "hideBulletsCount"      => 30,
-                        "title"                 => "красный",
-                        "valueField"            => "red",
-                        "fillAlphas"            => 0
-                    ],
-                    [
-                        "valueAxis"             => "v2",
-                        "lineColor"             => "#0000ff",
-                        "bullet"                => "round",
-                        "bulletBorderThickness" => 1,
-                        "hideBulletsCount"      => 30,
-                        "title"                 => "синий",
-                        "valueField"            => "blue",
-                        "fillAlphas"            => 0
-                    ],
-                    [
-                        "valueAxis"             => "v3",
-                        "lineColor"             => "#00ff00",
-                        "bullet"                => "round",
-                        "bulletBorderThickness" => 1,
-                        "hideBulletsCount"      => 30,
-                        "title"                 => "зеленый",
-                        "valueField"            => "kurs",
-                        "fillAlphas"            => 0
-                    ]
-                ],
-                "chartScrollbar" => [],
-                "chartCursor"    => [
-                    "cursorPosition" => "mouse"
-                ],
-                "categoryField"  => "date",
-                "categoryAxis"   => [
-                    "parseDates"       => true,
-                    "axisColor"        => "#DADADA",
-                    "minorGridEnabled" => true
-                ],
-                "export"         => [
-                    "enabled"  => true,
-                    "position" => "bottom-right"
-                ]
-            ],
-        ]) ?>
-       <?php } else { ?>
-           <div class="alert alert-danger">
-               Нет данных
-           </div>
-       <?php } ?>
+            ]) ?>
+        <?php } else { ?>
+            <div class="alert alert-danger">
+                Нет данных
+            </div>
+        <?php } ?>
     </div>
 
 
