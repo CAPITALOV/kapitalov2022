@@ -31,9 +31,9 @@ JS
             </button>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
-            <ul class="nav navbar-nav navbar-left">
+            <ul class="nav navbar-nav navbar-left" >
                 <li>
-                     <a class="navbar-brand" href="/" style="padding: 5px 10px 5px 10px;">
+                     <a class="navbar-brand" href="/" style="margin-top:-10px;">
                      <img src="<?= Yii::$app->getAssetManager()->getBundle('app\assets\LayoutSite\Asset')->baseUrl ?>/images/capitalovlogo2.png"
                                         class="siteLayoutLogo" style="height:40px; margin:0px"></a>
                 </li>
@@ -60,7 +60,7 @@ JS
                                     </ul>
                 </li>
 
-                <li style="display: flex; align-items: center;">
+                <li style="margin-top:11px; display: -webkit-box; display: -moz-box; display: -ms-flexbox; display: -webkit-flex; display: flex;align-items: center; -webkit-align-items: center; ">
                 <?php
                     if (Yii::$app->requestedRoute == 'cabinet/stock_item3') {
                         $item = \app\models\Stock::find($_GET['id']);
@@ -176,7 +176,8 @@ JS
 //                    ]);
 //                ActiveForm::end();
 //                ?>
-                <li style="height:50px; margin:0;"><?php if (Url::to(['cabinet_chat/index']) == Url::current()) { echo(' class="active"');} ?><a href="<?= Url::to(['cabinet_chat/index']) ?>">Связаться с экспертом <img src="/images/message.png" style="height:28px; margin:0;"/></a></li>
+                <li style="height:50px; margin:0;">
+                    <?php if (Url::to(['cabinet_chat/index']) == Url::current()) { } ?><a style="margin-top: -2px;" href="<?= Url::to(['cabinet_chat/index']) ?>">Связаться с экспертом <img src="/images/message.png" style="height:28px; margin:0;"/></a></li>
                 <li class="dropdown">
                     <a
                         href="#"
@@ -184,7 +185,7 @@ JS
                         data-toggle="dropdown"
                         aria-expanded="false"
                         role="button"
-                        style="padding: 5px 10px 5px 10px;"
+                        style="margin-top:-10px;"
                         >
                         <?= Html::img(Yii::$app->user->identity->getAvatar(), [
                             'height' => '40px',
