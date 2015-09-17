@@ -49,6 +49,7 @@ class GraphUnion2 extends Object
     {
         // получаю минимальное значение из первого графика и максимальное значение
         $x = $this->getMinMax();
+        if (is_null($x)) return null;
         $new = [];
         $newlines = $this->transform();
         for($i = new \DateTime($x['min']); $i->format('Y-m-d') < $x['max']; $i->add(new \DateInterval('P1D'))) {
@@ -122,11 +123,12 @@ class GraphUnion2 extends Object
     /**
      * Получает минимальное и максимальое значение даты всех графиков $this->lines
      *
-     * @return array
+     * @return array|null
      * [
      *    'min' => 'yyyy-mm-dd'
      *    'max' => 'yyyy-mm-dd'
      * ]
+     * Если все графики будут пустыми то будет возвращего null
      */
     public function getMinMax()
     {
@@ -134,19 +136,29 @@ class GraphUnion2 extends Object
         $max = null;
         foreach($this->lines as $line) {
             if (is_null($min)) {
-                $min = $line[0]['date'];
-                $max = $line[count($line)-1]['date'];
+                if (count($line) > 0) {
+                    $min = $line[0]['date'];
+                    $max = $line[count($line)-1]['date'];
+                } else {
+                    return null;
+                }
             } else {
-                $thisMin = $line[0]['date'];
-                $thisMax = $line[count($line)-1]['date'];
-                if ($thisMin < $min) $min = $thisMin;
-                if ($thisMax > $max) $max = $thisMax;
+                if (count($line) > 0) {
+                    $thisMin = $line[0]['date'];
+                    $thisMax = $line[count($line)-1]['date'];
+                    if ($thisMin < $min) $min = $thisMin;
+                    if ($thisMax > $max) $max = $thisMax;
+                } else {
+                    return null;
+                }
             }
         }
 
+        if (is_null($min)) return null;
+
         return [
-            'min'=> $min,
-            'max'=> $max,
+            'min' => $min,
+            'max' => $max,
         ];
     }
 }

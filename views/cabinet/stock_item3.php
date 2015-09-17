@@ -8,50 +8,10 @@ use yii\bootstrap\ActiveForm;
 /* @var $item  \app\models\Stock */
 /* @var $lineArrayPast  array */
 /* @var $lineArrayFuture  array */
-/* @var $isPaid  bool опачена ли эта акция? */
+/* @var $lineArrayCandels  array */
+/* @var $isPaid  bool опачена ли эта котировка? */
 
 $this->title = $item->getField('name');
-
-$colorGreen = [
-    'label'                => "Курс",
-    'fillColor'            => "rgba(220,220,220,0.2)",
-    'strokeColor'          => "rgba(120,255,120,1)",
-    'pointColor'           => "rgba(70,255,70,1)",
-    'pointStrokeColor'     => "#fff",
-    'pointHighlightFill'   => "#fff",
-    'pointHighlightStroke' => "rgba(220,220,220,1)",
-];
-$colorRed = [
-    'label'                => "Прогноз",
-    'fillColor'            => "rgba(220,220,220,0)",
-    'strokeColor'          => "rgba(255,120,120,1)",
-    'pointColor'           => "rgba(255,70,70,1)",
-    'pointStrokeColor'     => "#fff",
-    'pointHighlightFill'   => "#fff",
-    'pointHighlightStroke' => "rgba(220,220,220,1)",
-];
-$colorBlue = [
-    'label'                => "Прогноз",
-    'fillColor'            => "rgba(220,220,220,0)",
-    'strokeColor'          => "rgba(120,120,255,1)",
-    'pointColor'           => "rgba(70,70,255,1)",
-    'pointStrokeColor'     => "#fff",
-    'pointHighlightFill'   => "#fff",
-    'pointHighlightStroke' => "rgba(220,220,220,1)",
-];
-$colorViolet = [
-    'label'                => "Прогноз",
-    'fillColor'            => "rgba(220,220,220,0)",
-    'strokeColor'          => "rgba(120,255,255,1)",
-    'pointColor'           => "rgba(70,255,255,1)",
-    'pointStrokeColor'     => "#fff",
-    'pointHighlightFill'   => "#fff",
-    'pointHighlightStroke' => "rgba(220,220,220,1)",
-];
-
-\app\assets\Slider\Asset::register($this);
-
-$url = Url::to(['cabinet/graph_ajax']);
 
 ?>
 
@@ -77,35 +37,123 @@ $url = Url::to(['cabinet/graph_ajax']);
 
 <div class="center-block" style="width:800px">
     <?php if ($isPaid) { ?>
-
         <div class="center-block" style="width:860px">
-            <?php
-            $today = new DateTime();
-            $start = $today->format('Y-m-d');
-            $end = $today->add(new DateInterval('P1M'))->format('Y-m-d');
+            <?php if (!is_null($lineArrayFuture)) { ?>
+                <?= \cs\Widget\AmCharts\CandleStick::widget([
+                    'height'       => 200,
+                    'lineArray'    => $lineArrayFuture,
+                    'chartOptions' => [
+                        "type"           => "serial",
+                        "theme"          => "light",
+                        "legend"         => [
+                            "useGraphSettings" => true
+                        ],
+                        "valueAxes"      => [
+                            [
+                                "id"            => "v1",
+                                "axisColor"     => "#FF0000",
+                                "axisThickness" => 2,
+                                "gridAlpha"     => 0,
+                                "axisAlpha"     => 1,
+                                "position"      => "left"
+                            ],
+                            [
+                                "id"            => "v2",
+                                "axisColor"     => "#0000ff",
+                                "axisThickness" => 2,
+                                "gridAlpha"     => 0,
+                                "axisAlpha"     => 1,
+                                "position"      => "right"
+                            ],
+                        ],
+                        "graphs"         => [
+                            [
+                                "valueAxis"             => "v1",
+                                "lineColor"             => "#FF0000",
+                                "bullet"                => "round",
+                                "bulletBorderThickness" => 1,
+                                "hideBulletsCount"      => 30,
+                                "title"                 => "красный",
+                                "valueField"            => "red",
+                                "fillAlphas"            => 0
+                            ],
+                            [
+                                "valueAxis"             => "v2",
+                                "lineColor"             => "#0000ff",
+                                "bullet"                => "round",
+                                "bulletBorderThickness" => 1,
+                                "hideBulletsCount"      => 30,
+                                "title"                 => "синий",
+                                "valueField"            => "blue",
+                                "fillAlphas"            => 0
+                            ],
+                        ],
+                        "chartScrollbar" => [],
+                        "chartCursor"    => [
+                            "cursorPosition" => "mouse"
+                        ],
+                        "categoryField"  => "date",
+                        "categoryAxis"   => [
+                            "parseDates"       => true,
+                            "axisColor"        => "#DADADA",
+                            "minorGridEnabled" => true
+                        ],
+                        "export"         => [
+                            "enabled"  => true,
+                            "position" => "bottom-right"
+                        ]
+                    ],
+                ]) ?>
+            <?php } else { ?>
+                <div class="alert alert-danger">
+                    Нет данных
+                </div>
+            <?php } ?>
 
-            echo \cs\Widget\AmCharts\CandleStick::widget([
+        </div>
+
+    <?php } else { ?>
+        <div class="row col-lg-12">
+            <div class="form-group">
+                <p><span class="label label-danger">График не оплачен</span></p>
+            </div>
+        </div>
+        <a
+            href="<?= Url::to(['cabinet_wallet/add', 'id' => $item->getId()]) ?>"
+            class="btn btn-default"
+            style="width: 100%"
+            >Купить</a>
+    <?php } ?>
+</div>
+
+<br>
+<hr><br>
+
+<div class="container">
+    <div style="float:left; ">
+        <img src="/images/History_icon-280x280.png" style="height:35px;padding-right:10px;">
+
+        <div style="vertical-align:middle; font-size:18px; font-weight: bold; display:inline-block;">Просмотр истории
+            индексов
+        </div>
+    </div>
+    <div
+        style="height: 40px; margin: 0 20px; border-left: 1px solid #f2f2f2; border-right: 1px solid #ffffff; float:left;"></div>
+
+    <div style="float:left;">
+        <h5 style="float:left;">Инфо</h5>
+        <img src="/images/icon-info.png" style="height:40px;padding-left:10px;">
+    </div>
+</div>
+
+<br/>
+
+<div class="center-block" style="width:800px">
+    <div class="center-block" style="width:860px">
+        <?php if (!is_null($lineArrayPast)) { ?>
+            <?= \cs\Widget\AmCharts\CandleStick::widget([
                 'height'       => 200,
-                'lineArray'    => \app\service\GraphUnion2::convert([
-                    'lines' => [
-                        \app\models\StockPrognosisRed::query(['stock_id' => $item->getId()])
-                            ->select([
-                                'date',
-                                'delta as red',
-                            ])
-                            ->andWhere(['between', 'date', $start, $end])
-                            ->orderBy(['date' => SORT_ASC])
-                            ->all(),
-                        \app\models\StockPrognosisBlue::query(['stock_id' => $item->getId()])
-                            ->select([
-                                'date',
-                                'delta as blue',
-                            ])
-                            ->andWhere(['between', 'date', $start, $end])
-                            ->orderBy(['date' => SORT_ASC])
-                            ->all(),
-                    ]
-                ]),
+                'lineArray'    => $lineArrayPast,
                 'chartOptions' => [
                     "type"           => "serial",
                     "theme"          => "light",
@@ -129,6 +177,15 @@ $url = Url::to(['cabinet/graph_ajax']);
                             "axisAlpha"     => 1,
                             "position"      => "right"
                         ],
+                        [
+                            "id"            => "v3",
+                            "axisColor"     => "#00ff00",
+                            "axisThickness" => 2,
+                            "gridAlpha"     => 0,
+                            "offset"        => 50,
+                            "axisAlpha"     => 1,
+                            "position"      => "left"
+                        ]
                     ],
                     "graphs"         => [
                         [
@@ -151,6 +208,16 @@ $url = Url::to(['cabinet/graph_ajax']);
                             "valueField"            => "blue",
                             "fillAlphas"            => 0
                         ],
+                        [
+                            "valueAxis"             => "v3",
+                            "lineColor"             => "#00ff00",
+                            "bullet"                => "round",
+                            "bulletBorderThickness" => 1,
+                            "hideBulletsCount"      => 30,
+                            "title"                 => "зеленый",
+                            "valueField"            => "kurs",
+                            "fillAlphas"            => 0
+                        ]
                     ],
                     "chartScrollbar" => [],
                     "chartCursor"    => [
@@ -168,158 +235,11 @@ $url = Url::to(['cabinet/graph_ajax']);
                     ]
                 ],
             ]) ?>
-
-        </div>
-
-    <?php } else { ?>
-        <div class="row col-lg-12">
-            <div class="form-group">
-                <p><span class="label label-danger">График не оплачен</span></p>
+        <?php } else { ?>
+            <div class="alert alert-danger">
+                Нет данных
             </div>
-        </div>
-        <a
-            href="<?= Url::to(['cabinet_wallet/add', 'id' => $item->getId()]) ?>"
-            class="btn btn-default"
-            style="width: 100%"
-            >Купить</a>
-    <?php } ?>
-</div>
-
-<br>
-<hr><br>
-
-<?php $model = new \app\models\Form\StockItem3();
-$form = ActiveForm::begin(['id' => 'contact-form2',]); ?>
-<div class="container">
-    <div style="float:left; ">
-        <img src="/images/History_icon-280x280.png" style="height:35px;padding-right:10px;">
-
-        <div style="vertical-align:middle; font-size:18px; font-weight: bold; display:inline-block;">Просмотр истории
-            индексов
-        </div>
-    </div>
-    <div
-        style="height: 40px; margin: 0 20px; border-left: 1px solid #f2f2f2; border-right: 1px solid #ffffff; float:left;"></div>
-
-    <div style="float:left;">
-        <h5 style="float:left;">Инфо</h5>
-        <img src="/images/icon-info.png" style="height:40px;padding-left:10px;">
-    </div>
-</div>
-
-<?php ActiveForm::end() ?>
-
-<div class="center-block" style="width:800px">
-    <div class="center-block" style="width:860px">
-        <?php
-        $today = new DateTime();
-        $end = $today->format('Y-m-d');
-        $start = $today->sub(new DateInterval('P6M'))->format('Y-m-d');
-
-        echo \cs\Widget\AmCharts\CandleStick::widget([
-            'height'       => 200,
-            'lineArray'    => \app\service\GraphUnion2::convert([
-                'lines' => [
-                    \app\models\StockKurs::query(['stock_id' => $item->getId()])
-                        ->select([
-                            'date',
-                            'kurs',
-                        ])
-                        ->andWhere(['between', 'date', $start, $end])
-                        ->orderBy(['date' => SORT_ASC])
-                        ->all(),
-                    \app\models\StockPrognosisRed::query(['stock_id' => $item->getId()])
-                        ->select([
-                            'date',
-                            'delta as red',
-                        ])
-                        ->andWhere(['between', 'date', $start, $end])
-                        ->orderBy(['date' => SORT_ASC])
-                        ->all(),
-                    \app\models\StockPrognosisBlue::query(['stock_id' => $item->getId()])
-                        ->select([
-                            'date',
-                            'delta as blue',
-                        ])
-                        ->andWhere(['between', 'date', $start, $end])
-                        ->orderBy(['date' => SORT_ASC])
-                        ->all(),
-                ]
-            ]),
-            'chartOptions' => [
-                "type"           => "serial",
-                "theme"          => "light",
-                "legend"         => [
-                    "useGraphSettings" => true
-                ],
-                "valueAxes"      => [[
-                    "id"            => "v1",
-                    "axisColor"     => "#FF0000",
-                    "axisThickness" => 2,
-                    "gridAlpha"     => 0,
-                    "axisAlpha"     => 1,
-                    "position"      => "left"
-                ], [
-                    "id"            => "v2",
-                    "axisColor"     => "#0000ff",
-                    "axisThickness" => 2,
-                    "gridAlpha"     => 0,
-                    "axisAlpha"     => 1,
-                    "position"      => "right"
-                ], [
-                    "id"            => "v3",
-                    "axisColor"     => "#00ff00",
-                    "axisThickness" => 2,
-                    "gridAlpha"     => 0,
-                    "offset"        => 50,
-                    "axisAlpha"     => 1,
-                    "position"      => "left"
-                ]],
-                "graphs"         => [[
-                    "valueAxis"             => "v1",
-                    "lineColor"             => "#FF0000",
-                    "bullet"                => "round",
-                    "bulletBorderThickness" => 1,
-                    "hideBulletsCount"      => 30,
-                    "title"                 => "красный",
-                    "valueField"            => "red",
-                    "fillAlphas"            => 0
-                ], [
-                    "valueAxis"             => "v2",
-                    "lineColor"             => "#0000ff",
-                    "bullet"                => "round",
-                    "bulletBorderThickness" => 1,
-                    "hideBulletsCount"      => 30,
-                    "title"                 => "синий",
-                    "valueField"            => "blue",
-                    "fillAlphas"            => 0
-                ], [
-                    "valueAxis"             => "v3",
-                    "lineColor"             => "#00ff00",
-                    "bullet"                => "round",
-                    "bulletBorderThickness" => 1,
-                    "hideBulletsCount"      => 30,
-                    "title"                 => "зеленый",
-                    "valueField"            => "kurs",
-                    "fillAlphas"            => 0
-                ]],
-                "chartScrollbar" => [],
-                "chartCursor"    => [
-                    "cursorPosition" => "mouse"
-                ],
-                "categoryField"  => "date",
-                "categoryAxis"   => [
-                    "parseDates"       => true,
-                    "axisColor"        => "#DADADA",
-                    "minorGridEnabled" => true
-                ],
-                "export"         => [
-                    "enabled"  => true,
-                    "position" => "bottom-right"
-                ]
-            ],
-        ]) ?>
-
+        <?php } ?>
     </div>
 
 
@@ -331,24 +251,9 @@ $form = ActiveForm::begin(['id' => 'contact-form2',]); ?>
 
 <h2 class="page-header">Свечи</h2>
 <div class="center-block" style="width:860px">
-    <?php
-    $today = new DateTime();
-    $end = $today->format('Y-m-d');
-    $start = $today->sub(new DateInterval('P1Y'))->format('Y-m-d');
-
-    echo \cs\Widget\AmCharts\CandleStick::widget([
+    <?= \cs\Widget\AmCharts\CandleStick::widget([
         'height'       => 200,
-        'lineArray'    => \app\models\StockKurs::query(['stock_id' => $item->getId()])
-            ->select([
-                'date',
-                'open',
-                'close',
-                'low',
-                'high',
-            ])
-            ->andWhere(['between', 'date', $start, $end])
-            ->orderBy(['date' => SORT_ASC])
-            ->all(),
+        'lineArray'    => $lineArrayCandels,
         'chartOptions' => [
             "type"           => "serial",
             "theme"          => "light",
@@ -356,23 +261,25 @@ $form = ActiveForm::begin(['id' => 'contact-form2',]); ?>
             "valueAxes"      => [[
                 "position" => "left"
             ]],
-            "graphs"         => [[
-                "id"                 => "g1",
-                "balloonText"        => "Открытие:<b>[[open]]</b><br>min:<b>[[low]]</b><br>max:<b>[[high]]</b><br>Закрытие:<b>[[close]]</b><br>",
-                "closeField"         => "close",
-                "fillColors"         => "#7f8da9",
-                "highField"          => "high",
-                "lineColor"          => "#7f8da9",
-                "lineAlpha"          => 1,
-                "lowField"           => "low",
-                "fillAlphas"         => 0.9,
-                "negativeFillColors" => "#db4c3c",
-                "negativeLineColor"  => "#db4c3c",
-                "openField"          => "open",
-                "title"              => "Price:",
-                "type"               => "candlestick",
-                "valueField"         => "close"
-            ]],
+            "graphs"         => [
+                [
+                    "id"                 => "g1",
+                    "balloonText"        => "Открытие:<b>[[open]]</b><br>min:<b>[[low]]</b><br>max:<b>[[high]]</b><br>Закрытие:<b>[[close]]</b><br>",
+                    "closeField"         => "close",
+                    "fillColors"         => "#7f8da9",
+                    "highField"          => "high",
+                    "lineColor"          => "#7f8da9",
+                    "lineAlpha"          => 1,
+                    "lowField"           => "low",
+                    "fillAlphas"         => 0.9,
+                    "negativeFillColors" => "#db4c3c",
+                    "negativeLineColor"  => "#db4c3c",
+                    "openField"          => "open",
+                    "title"              => "Price:",
+                    "type"               => "candlestick",
+                    "valueField"         => "close"
+                ]
+            ],
             "chartScrollbar" => [
                 "graph"           => "g1",
                 "graphType"       => "line",
