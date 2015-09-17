@@ -748,9 +748,9 @@ class CabinetController extends CabinetBaseController
         ]);
 
         // свечи
-        $today = new DateTime();
+        $today = new \DateTime();
         $end = $today->format('Y-m-d');
-        $start = $today->sub(new DateInterval('P1Y'))->format('Y-m-d');
+        $start = $today->sub(new \DateInterval('P1Y'))->format('Y-m-d');
         $lineArrayCandels = \app\models\StockKurs::query(['stock_id' => $item->getId()])
             ->select([
                 'date',
