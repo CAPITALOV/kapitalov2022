@@ -17,7 +17,7 @@ use Yii;
  */
 class Asset extends AssetBundle
 {
-    public $sourcePath = '@vendor/amcharts/amstock3';
+    public $sourcePath = '@vendor/amcharts/amstock3/amcharts';
     public $css      = [
         'default.css',
     ];
