@@ -664,9 +664,9 @@ class CabinetController extends CabinetBaseController
         $isPaid = Yii::$app->user->identity->isPaid($id);
 
         // будущее
-        $today = new DateTime();
+        $today = new \DateTime();
         $start = $today->format('Y-m-d');
-        $end = $today->add(new DateInterval('P1M'))->format('Y-m-d');
+        $end = $today->add(new \DateInterval('P1M'))->format('Y-m-d');
         $lineArrayFuture = \app\service\GraphUnion2::convert([
             'lines' => [
                 \app\models\StockPrognosisRed::query(['stock_id' => $item->getId()])
@@ -690,9 +690,9 @@ class CabinetController extends CabinetBaseController
 
 
         // будущее
-        $today = new DateTime();
+        $today = new \DateTime();
         $start = $today->format('Y-m-d');
-        $end = $today->add(new DateInterval('P1M'))->format('Y-m-d');
+        $end = $today->add(new \DateInterval('P1M'))->format('Y-m-d');
         $lineArrayFuture = \app\service\GraphUnion2::convert([
             'lines' => [
                 \app\models\StockPrognosisRed::query(['stock_id' => $item->getId()])
@@ -715,9 +715,9 @@ class CabinetController extends CabinetBaseController
         ]);
 
         // Прошлое
-        $today = new DateTime();
+        $today = new \DateTime();
         $end = $today->format('Y-m-d');
-        $start = $today->sub(new DateInterval('P6M'))->format('Y-m-d');
+        $start = $today->sub(new \DateInterval('P6M'))->format('Y-m-d');
         $lineArrayPast = \app\service\GraphUnion2::convert([
             'lines' => [
                 \app\models\StockKurs::query(['stock_id' => $item->getId()])
