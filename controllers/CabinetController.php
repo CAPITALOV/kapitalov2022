@@ -661,10 +661,114 @@ class CabinetController extends CabinetBaseController
     public function actionStock_item3($id)
     {
         $item = \app\models\Stock::find($id);
+        $isPaid = Yii::$app->user->identity->isPaid($id);
 
+        // будущее
+        $today = new DateTime();
+        $start = $today->format('Y-m-d');
+        $end = $today->add(new DateInterval('P1M'))->format('Y-m-d');
+        $lineArrayFuture = \app\service\GraphUnion2::convert([
+            'lines' => [
+                \app\models\StockPrognosisRed::query(['stock_id' => $item->getId()])
+                    ->select([
+                        'date',
+                        'delta as red',
+                    ])
+                    ->andWhere(['between', 'date', $start, $end])
+                    ->orderBy(['date' => SORT_ASC])
+                    ->all(),
+                \app\models\StockPrognosisBlue::query(['stock_id' => $item->getId()])
+                    ->select([
+                        'date',
+                        'delta as blue',
+                    ])
+                    ->andWhere(['between', 'date', $start, $end])
+                    ->orderBy(['date' => SORT_ASC])
+                    ->all(),
+            ]
+        ]);
+
+
+        // будущее
+        $today = new DateTime();
+        $start = $today->format('Y-m-d');
+        $end = $today->add(new DateInterval('P1M'))->format('Y-m-d');
+        $lineArrayFuture = \app\service\GraphUnion2::convert([
+            'lines' => [
+                \app\models\StockPrognosisRed::query(['stock_id' => $item->getId()])
+                    ->select([
+                        'date',
+                        'delta as red',
+                    ])
+                    ->andWhere(['between', 'date', $start, $end])
+                    ->orderBy(['date' => SORT_ASC])
+                    ->all(),
+                \app\models\StockPrognosisBlue::query(['stock_id' => $item->getId()])
+                    ->select([
+                        'date',
+                        'delta as blue',
+                    ])
+                    ->andWhere(['between', 'date', $start, $end])
+                    ->orderBy(['date' => SORT_ASC])
+                    ->all(),
+            ]
+        ]);
+
+        // Прошлое
+        $today = new DateTime();
+        $end = $today->format('Y-m-d');
+        $start = $today->sub(new DateInterval('P6M'))->format('Y-m-d');
+        $lineArrayPast = \app\service\GraphUnion2::convert([
+            'lines' => [
+                \app\models\StockKurs::query(['stock_id' => $item->getId()])
+                    ->select([
+                        'date',
+                        'kurs',
+                    ])
+                    ->andWhere(['between', 'date', $start, $end])
+                    ->orderBy(['date' => SORT_ASC])
+                    ->all(),
+                \app\models\StockPrognosisRed::query(['stock_id' => $item->getId()])
+                    ->select([
+                        'date',
+                        'delta as red',
+                    ])
+                    ->andWhere(['between', 'date', $start, $end])
+                    ->orderBy(['date' => SORT_ASC])
+                    ->all(),
+                \app\models\StockPrognosisBlue::query(['stock_id' => $item->getId()])
+                    ->select([
+                        'date',
+                        'delta as blue',
+                    ])
+                    ->andWhere(['between', 'date', $start, $end])
+                    ->orderBy(['date' => SORT_ASC])
+                    ->all(),
+            ]
+        ]);
+
+        // свечи
+        $today = new DateTime();
+        $end = $today->format('Y-m-d');
+        $start = $today->sub(new DateInterval('P1Y'))->format('Y-m-d');
+        $lineArrayCandels = \app\models\StockKurs::query(['stock_id' => $item->getId()])
+            ->select([
+                'date',
+                'open',
+                'close',
+                'low',
+                'high',
+            ])
+            ->andWhere(['between', 'date', $start, $end])
+            ->orderBy(['date' => SORT_ASC])
+            ->all();
 
         return $this->render([
-            'item'            => $item,
+            'item'             => $item,
+            'isPaid'           => $isPaid,
+            'lineArrayFuture'  => $lineArrayFuture,
+            'lineArrayPast'    => $lineArrayPast,
+            'lineArrayCandels' => $lineArrayCandels,
         ]);
     }
 
