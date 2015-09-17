@@ -148,8 +148,8 @@ $this->title = $item->getField('name');
 
 
 <div class="center-block" style="width:800px">
-    <div class="center-block" style="width:860px">
-        <?php if (!is_null($lineArrayPast)) { ?>
+    <?php if (!is_null($lineArrayPast)) { ?>
+        <div class="center-block" style="width:860px">
             <?= \cs\Widget\AmCharts\CandleStick::widget([
                 'height'       => 200,
                 'lineArray'    => $lineArrayPast,
@@ -234,12 +234,12 @@ $this->title = $item->getField('name');
                     ]
                 ],
             ]) ?>
-        <?php } else { ?>
-            <div class="alert alert-danger">
-                Нет данных
-            </div>
-        <?php } ?>
-    </div>
+        </div>
+    <?php } else { ?>
+        <div class="alert alert-danger">
+            Нет данных
+        </div>
+    <?php } ?>
 
 
 </div>
