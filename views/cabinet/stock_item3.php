@@ -30,13 +30,13 @@ $this->registerJsFile("/js/actions.js", ['depends' => ['yii\web\JqueryAsset']]);
 
 
 <?php if ($isPaid) { ?>
-<div id="chart1" class="center-block" style="margin-top:50px; margin-left:100px; margin-right:100px;">
+<div id="chart1" class="center-block" style="margin-top:25px; margin-left:75px; margin-right:75px;">
     <?php if (!is_null($lineArrayFuture)) { ?>
         <?= \cs\Widget\AmCharts\CandleStick::widget([
             'lineArray'    => $lineArrayFuture,
+            'height' => 600,
             'chartOptions' => [
                 "type"           => "serial",
-                'height' => 800,
                 "theme"          => "light",
                 "legend"         => [
                     "useGraphSettings" => true
@@ -129,7 +129,7 @@ $this->registerJsFile("/js/actions.js", ['depends' => ['yii\web\JqueryAsset']]);
     </div>
 </div>
 
-<div class="center-block" style="margin-top:50px; margin-left:100px; margin-right:100px;">
+<div class="center-block" style="margin-top:25px; margin-left:75px; margin-right:75px;">
         <?php if (!is_null($lineArrayPast)) { ?>
             <?= \cs\Widget\AmCharts\CandleStick::widget([
                 'height'       => 600,
@@ -234,9 +234,9 @@ $this->registerJsFile("/js/actions.js", ['depends' => ['yii\web\JqueryAsset']]);
     </div>
 </div>
 
-<div class="center-block" style="margin-top:50px; margin-left:100px; margin-right:100px;">
+<div class="center-block" style="margin-top:25px; margin-left:75px; margin-right:75px;">
     <?= \cs\Widget\AmCharts\CandleStick::widget([
-        'height'       => 400,
+        'height'       => 600,
         'lineArray'    => $lineArrayCandels,
         'chartOptions' => [
             "type"           => "serial",
