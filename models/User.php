@@ -91,7 +91,10 @@ class User extends DbRecord implements \yii\web\IdentityInterface
      */
     public function firstEnter()
     {
+        // Сбербанк п
         UserStock::add($this->getId(), 1, 0);
+        // Eur/Usd
+        UserStock::add($this->getId(), 628, 0);
     }
 
     /**
