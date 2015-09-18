@@ -94,7 +94,7 @@ JS
         \Yii::$app->view->registerCss(<<<CSS
 #{$this->id} {
 	width	: 100%;
-	height	: {$this->width}px;
+	height	: {$this->height}px;
 }
 CSS
 );
