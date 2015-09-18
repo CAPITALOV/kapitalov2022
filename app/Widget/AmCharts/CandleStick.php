@@ -19,6 +19,8 @@ class CandleStick extends Object
     public $width  = 400;
     public $height = 200;
 
+    public $enableExport;
+
     /** @var  string название переменной JS */
     public $varName;
     /**
@@ -72,12 +74,16 @@ class CandleStick extends Object
      */
     public function registerClientScript()
     {
-        Asset::register(\Yii::$app->view);
+        $am = Asset::register(\Yii::$app->view);
         if ($this->js) {
             \Yii::$app->view->registerJs($this->js);
         }
+        if ($this->enableExport) {
+            \Yii::$app->view->registerJsFile($am->baseUrl . '/plugins/export/export.js', ['position' => \yii\web\View::POS_HEAD]);
+            \Yii::$app->view->registerCssFile($am->baseUrl . '/plugins/export/export.css');
+        }
 
-        $optionsJson = $this->getClientOptions();
+        $optionsJson = $this->getClientOptions($am);
         \Yii::$app->view->registerJs(<<<JS
 var {$this->varName} = AmCharts.makeChart( "{$this->id}", {$optionsJson} );
 
@@ -101,11 +107,21 @@ CSS
     }
 
     /**
+     * @param \yii\web\AssetBundle $am
+     *
      * @return string json
      */
-    protected function getClientOptions()
+    protected function getClientOptions($am)
     {
         $options = $this->chartOptions;
+        if ($this->enableExport) {
+            $options['export'] = [
+                'enabled' => true,
+                'libs' => [
+                    'path' => $am->baseUrl . '/plugins/export/libs',
+                ]
+            ];
+        }
         if (!isset($options['dataProvider'])) {
             $options['dataProvider'] = $this->lineArray;
         }

@@ -12,8 +12,7 @@ use yii\bootstrap\ActiveForm;
 /* @var $isPaid  bool опачена ли эта котировка? */
 
 $this->title = $item->getField('name');
-
-//registerJsFile("/js/actions.js")
+$this->registerJsFile("/js/actions.js", ['depends' => ['yii\web\JqueryAsset']]);
 ?>
 
 

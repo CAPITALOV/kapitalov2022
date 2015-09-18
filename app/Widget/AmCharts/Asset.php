@@ -24,6 +24,7 @@ class Asset extends AssetBundle
     public $js       = [
         'amcharts.js',
         'serial.js',
+        'lang/ru.js',
         'themes/light.js',
         'amstock.js',
     ];
@@ -32,6 +33,5 @@ class Asset extends AssetBundle
 
     public function init()
     {
-
     }
 }
