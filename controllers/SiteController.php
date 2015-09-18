@@ -162,21 +162,22 @@ class SiteController extends \cs\base\BaseController
 
     public function actionPrice()
     {
-        return $this->render([
-            'items' => Stock::query([])
-                ->select([
-                    'cap_stock.id',
-                    'cap_stock.name',
-                    'cap_stock_market.name as market',
-                    'cap_stock.finam_market',
-                ])
-                ->innerJoin('cap_stock_market','cap_stock_market.id = cap_stock.finam_market')
+        $market = \app\models\StockMarket::query()
+            ->orderBy([
+                'if (id = 1, 0,1)' => SORT_ASC,
+                'name'                => SORT_ASC,
+            ])
+            ->all();
+        for ($i = 0; $i < count($market); $i++) {
+            $item = &$market[ $i ];
+            $item['stockList'] = Stock::query([])
                 ->orderBy([
-                    'if (cap_stock.finam_market = 1, 0,1)' => SORT_ASC,
-                    'cap_stock_market.name'                => SORT_ASC,
-                    'cap_stock.name'                       => SORT_ASC,
+                    'name' => SORT_ASC,
                 ])
-                ->all()
+                ->all();
+        }
+        return $this->render([
+            'items' => $market,
         ]);
     }
 
