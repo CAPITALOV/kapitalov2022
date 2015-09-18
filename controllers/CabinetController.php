@@ -661,144 +661,114 @@ class CabinetController extends CabinetBaseController
     public function actionStock_item3($id)
     {
         $item = \app\models\Stock::find($id);
-        $start = (new \DateTime())->sub(new \DateInterval('P31D'));
-        $end = (new \DateTime())->sub(new \DateInterval('P1D'));
         $isPaid = Yii::$app->user->identity->isPaid($id);
-        $defaultParams = [
-            'start'   => $start,
-            'end'     => $end,
-            'formatX' => 'd.m',
-        ];
 
-        // график с продажами
-        {
-            $params = ArrayHelper::merge($defaultParams, [
-                'rows'  => [
-                    \app\models\StockKurs::query(['stock_id' => $id])
-                        ->andWhere(['between', 'date', $start->format('Y-m-d'), $end->format('Y-m-d')])
-                        ->all(),
-                ],
-            ]);
-            $lineArrayKurs = \app\service\GraphExporter::convert($params);
-        }
+        // будущее
+        $today = new \DateTime();
+        $start = $today->format('Y-m-d');
+        $end = $today->add(new \DateInterval('P1M'))->format('Y-m-d');
+        $lineArrayFuture = \app\service\GraphUnion2::convert([
+            'lines' => [
+                \app\models\StockPrognosisRed::query(['stock_id' => $item->getId()])
+                    ->select([
+                        'date',
+                        'delta as red',
+                    ])
+                    ->andWhere(['between', 'date', $start, $end])
+                    ->orderBy(['date' => SORT_ASC])
+                    ->all(),
+                \app\models\StockPrognosisBlue::query(['stock_id' => $item->getId()])
+                    ->select([
+                        'date',
+                        'delta as blue',
+                    ])
+                    ->andWhere(['between', 'date', $start, $end])
+                    ->orderBy(['date' => SORT_ASC])
+                    ->all(),
+            ]
+        ]);
 
-        // график с прогнозом (красная линия)
-        {
-            $params = ArrayHelper::merge($defaultParams, [
-                'rows'  => [
-                    \app\models\StockPrognosisRed::query(['stock_id' => $id])
-                        ->andWhere(['between', 'date', $start->format('Y-m-d'), $end->format('Y-m-d')])
-                        ->select([
-                            'date',
-                            'delta as kurs',
-                        ])
-                        ->all(),
-                ],
-            ]);
-            $lineArrayRed = \app\service\GraphExporter::convert($params);
-        }
 
-        // график с прогнозом (синяя линия)
-        {
-            $params = ArrayHelper::merge($defaultParams, [
-                'rows'  => [
-                    \app\models\StockPrognosisBlue::query(['stock_id' => $id])
-                        ->andWhere(['between', 'date', $start->format('Y-m-d'), $end->format('Y-m-d')])
-                        ->select([
-                            'date',
-                            'delta as kurs',
-                        ])
-                        ->all(),
-                ],
-            ]);
-            $lineArrayBlue = \app\service\GraphExporter::convert($params);
-        }
+        // будущее
+        $today = new \DateTime();
+        $start = $today->format('Y-m-d');
+        $end = $today->add(new \DateInterval('P1M'))->format('Y-m-d');
+        $lineArrayFuture = \app\service\GraphUnion2::convert([
+            'lines' => [
+                \app\models\StockPrognosisRed::query(['stock_id' => $item->getId()])
+                    ->select([
+                        'date',
+                        'delta as red',
+                    ])
+                    ->andWhere(['between', 'date', $start, $end])
+                    ->orderBy(['date' => SORT_ASC])
+                    ->all(),
+                \app\models\StockPrognosisBlue::query(['stock_id' => $item->getId()])
+                    ->select([
+                        'date',
+                        'delta as blue',
+                    ])
+                    ->andWhere(['between', 'date', $start, $end])
+                    ->orderBy(['date' => SORT_ASC])
+                    ->all(),
+            ]
+        ]);
 
-        // график с объем сделок
-        {
-            $params = ArrayHelper::merge($defaultParams, [
-                'rows'  => [
-                    \app\models\StockKurs::query(['stock_id' => $id])
-                        ->andWhere(['between', 'date', $start->format('Y-m-d'), $end->format('Y-m-d')])
-                        ->select([
-                            'date',
-                            'volume as kurs',
-                        ])
-                        ->all(),
-                ],
-            ]);
-            $lineArrayVolume = \app\service\GraphExporter::convert($params);
-        }
+        // Прошлое
+        $today = new \DateTime();
+        $end = $today->format('Y-m-d');
+        $start = $today->sub(new \DateInterval('P6M'))->format('Y-m-d');
+        $lineArrayPast = \app\service\GraphUnion2::convert([
+            'lines' => [
+                \app\models\StockKurs::query(['stock_id' => $item->getId()])
+                    ->select([
+                        'date',
+                        'kurs',
+                    ])
+                    ->andWhere(['between', 'date', $start, $end])
+                    ->orderBy(['date' => SORT_ASC])
+                    ->all(),
+                \app\models\StockPrognosisRed::query(['stock_id' => $item->getId()])
+                    ->select([
+                        'date',
+                        'delta as red',
+                    ])
+                    ->andWhere(['between', 'date', $start, $end])
+                    ->orderBy(['date' => SORT_ASC])
+                    ->all(),
+                \app\models\StockPrognosisBlue::query(['stock_id' => $item->getId()])
+                    ->select([
+                        'date',
+                        'delta as blue',
+                    ])
+                    ->andWhere(['between', 'date', $start, $end])
+                    ->orderBy(['date' => SORT_ASC])
+                    ->all(),
+            ]
+        ]);
 
-        // union
-        {
-            $lineArrayPast = \app\service\GraphUnion::convert([
-                'x' => $lineArrayRed['x'],
-                'y' => [
-                    $lineArrayKurs['y'][0],
-                    $lineArrayRed['y'][0],
-                    $lineArrayBlue['y'][0],
-//                    $lineArrayVolume['y'][0],
-                ]
-            ]);
-        }
-
-        if ($isPaid) {
-            $start = (new \DateTime());
-            $end = (new \DateTime())->add(new \DateInterval('P30D'));
-            $defaultParams = [
-                'start' => $start,
-                'end'   => $end,
-            ];
-
-            // график с прогнозом (красная линия)
-            {
-                $params = ArrayHelper::merge($defaultParams, [
-                    'rows'  => [
-                        \app\models\StockPrognosisRed::query(['stock_id' => $id])
-                            ->andWhere(['between', 'date', $start->format('Y-m-d'), $end->format('Y-m-d')])
-                            ->select([
-                                'date',
-                                'delta as kurs',
-                            ])
-                            ->all(),
-                    ],
-                ]);
-                $lineArrayRed = \app\service\GraphExporter::convert($params);
-            }
-
-            // график с прогнозом (синяя линия)
-            {
-                $params = ArrayHelper::merge($defaultParams, [
-                    'rows'  => [
-                        \app\models\StockPrognosisBlue::query(['stock_id' => $id])
-                            ->andWhere(['between', 'date', $start->format('Y-m-d'), $end->format('Y-m-d')])
-                            ->select([
-                                'date',
-                                'delta as kurs',
-                            ])
-                            ->all(),
-                    ],
-                ]);
-                $lineArrayBlue = \app\service\GraphExporter::convert($params);
-            }
-
-            $lineArrayFuture = \app\service\GraphUnion::convert([
-                'x' => $lineArrayRed['x'],
-                'y' => [
-                    $lineArrayRed['y'][0],
-                    $lineArrayBlue['y'][0],
-                ]
-            ]);
-        } else {
-            $lineArrayFuture = null;
-        }
+        // свечи
+        $today = new \DateTime();
+        $end = $today->format('Y-m-d');
+        $start = $today->sub(new \DateInterval('P1Y'))->format('Y-m-d');
+        $lineArrayCandels = \app\models\StockKurs::query(['stock_id' => $item->getId()])
+            ->select([
+                'date',
+                'open',
+                'close',
+                'low',
+                'high',
+            ])
+            ->andWhere(['between', 'date', $start, $end])
+            ->orderBy(['date' => SORT_ASC])
+            ->all();
 
         return $this->render([
-            'item'            => $item,
-            'lineArrayPast'   => $lineArrayPast,
-            'lineArrayFuture' => $lineArrayFuture,
-            'isPaid'          => $isPaid,
+            'item'             => $item,
+            'isPaid'           => $isPaid,
+            'lineArrayFuture'  => $lineArrayFuture,
+            'lineArrayPast'    => $lineArrayPast,
+            'lineArrayCandels' => $lineArrayCandels,
         ]);
     }
 
