@@ -3,14 +3,10 @@
  */
 
 
-function showChart(chartItemId){
-    "use strict";
-
-$(chartItemId).addClass()
-}
-
-function hideChart(chartItemId){
-    "use strict";
-
-    $(chartItemId).addClass()
+function toggleChart(chartItemId){
+    if ($("#"+chartItemId).hasClass('hide')) {
+        $("#"+chartItemId).removeClass("hide");
+    } else {
+        $("#"+chartItemId).addClass("hide");
+    }
 }
