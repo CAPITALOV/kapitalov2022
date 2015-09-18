@@ -126,6 +126,15 @@ CSS
                 ]
             ]]);
         }
+        if (\yii\helpers\ArrayHelper::getValue($this->chartOptions, 'language', '') == 'ru') {
+            $options = \yii\helpers\ArrayHelper::merge($options, [
+                'menu' => [
+                    'label' => [
+                        'print' => 'Печать'
+                    ]
+                ]
+            ]);
+        }
         if (!isset($options['dataProvider'])) {
             $options['dataProvider'] = $this->lineArray;
         }
