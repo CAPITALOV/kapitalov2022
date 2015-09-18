@@ -177,7 +177,7 @@ JS
 //                ActiveForm::end();
 //                ?>
                 <li style="height:50px; margin:0;">
-                    <?php if (Url::to(['cabinet_chat/index']) == Url::current()) { } ?><a style="margin-top: -2px;" href="<?= Url::to(['cabinet_chat/index']) ?>">Связаться с экспертом <img src="/images/message.png" style="height:28px; margin:0;"/></a></li>
+                    <?php if (Url::to(['cabinet_chat/index']) == Url::current()) { } ?><a style="margin-top: -2px;" href="<?= Url::to(['cabinet_chat/index']) ?>"><span class="hidden-sm hidden-md">Связаться с экспертом </span><img src="/images/message.png" style="height:28px; margin:0;"/></a></li>
                 <li class="dropdown">
                     <a
                         href="#"

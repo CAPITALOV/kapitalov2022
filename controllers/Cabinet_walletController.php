@@ -61,6 +61,34 @@ class Cabinet_walletController extends CabinetBaseController
     }
 
     /**
+     * Посылает еще раз письмо с для подтверждения email
+     *
+     * @return string|\yii\web\Response
+     */
+    public function actionSend_mail()
+    {
+        /** @var \app\models\User $user */
+        $user = \Yii::$app->user->identity;
+
+        $fields =  \app\service\RegistrationDispatcher::query(['parent_id' => $user->getId()])->one();
+        if ($fields === false) {
+            $fields = \app\service\RegistrationDispatcher::add($user->getId());
+        }
+        \cs\Application::mail($user->getEmail(), 'Подтверждение регистрации', 'registration', [
+            'url'      => \yii\helpers\Url::to([
+                'auth/registration_activate',
+                'code' => $fields['code']
+            ], true),
+            'user'     => $user,
+            'datetime' => \Yii::$app->formatter->asDatetime($fields['date_finish'])
+        ]);
+
+        return self::jsonSuccess();
+    }
+
+
+
+    /**
      * Форма покупки месяцев Зарубежный рынок
      *
      * @param int $id идентификатор акции

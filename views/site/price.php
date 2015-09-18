@@ -112,10 +112,16 @@ $this->registerJs("$('.payImage').tooltip()");
             <th>Цена</th>
         </tr>
         </thead>
-        <?php foreach($items as $item) { ?>
+        <?php foreach($items as $market) { ?>
+            <tr>
+                <td colspan="3">
+                    <h2><?= $market['name'] ?></h2>
+                </td>
+            </tr>
+        <?php foreach($market['stockList'] as $item) { ?>
         <tr>
             <td>
-                <?= $item['market'] ?>
+                <?= $market['name'] ?>
             </td>
             <td>
                 <?= $item['name'] ?>
@@ -124,6 +130,7 @@ $this->registerJs("$('.payImage').tooltip()");
                 <?= ($item['finam_market'] == 1) ? 99 : 249 ?> уе
             </td>
         </tr>
+        <?php } ?>
         <?php } ?>
     </table>
 </div>

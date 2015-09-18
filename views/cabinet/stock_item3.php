@@ -13,6 +13,27 @@ use yii\bootstrap\ActiveForm;
 
 $this->title = $item->getField('name');
 $this->registerJsFile("/js/actions.js", ['depends' => ['yii\web\JqueryAsset']]);
+
+$monthList = [
+    'янв',
+    'фев',
+    'мар',
+    'апр',
+    'май',
+    'июн',
+    'июл',
+    'авг',
+    'сен',
+    'окт',
+    'ноя',
+    'дек',
+];
+$dateMin = $lineArrayFuture[0]['date'];
+$dateMax = $lineArrayFuture[count($lineArrayFuture)-1]['date'];
+$dateMin = new \DateTime($dateMin);
+$dateMax = new \DateTime($dateMax);
+$dateMin = $dateMin->format('j') . ' ' . $monthList[$dateMin->format('n')-1];
+$dateMax = $dateMax->format('j') . ' ' . $monthList[$dateMax->format('n')-1];
 ?>
 
 
@@ -31,6 +52,7 @@ $this->registerJsFile("/js/actions.js", ['depends' => ['yii\web\JqueryAsset']]);
              style="vertical-align:middle; font-size:18px; font-weight: bold; display:inline-block;">Просмотр будущих
             индексов капиталов
         </div>
+        <div>с <?= $dateMin ?> по <?= $dateMax ?></div>
     </div>
 </div>
 
@@ -74,6 +96,7 @@ $this->registerJsFile("/js/actions.js", ['depends' => ['yii\web\JqueryAsset']]);
                             "bulletBorderThickness" => 1,
                             "hideBulletsCount"      => 30,
                             "title"                 => "красный",
+                            "type"                  => "smoothedLine",
                             "valueField"            => "red"
                         ],
                         [
@@ -83,6 +106,7 @@ $this->registerJsFile("/js/actions.js", ['depends' => ['yii\web\JqueryAsset']]);
                             "bulletBorderThickness" => 1,
                             "hideBulletsCount"      => 30,
                             "title"                 => "синий",
+                            "type"                  => "smoothedLine",
                             "valueField"            => "blue"
                         ],
                     ],
@@ -189,6 +213,7 @@ $this->registerJsFile("/js/actions.js", ['depends' => ['yii\web\JqueryAsset']]);
                         "hideBulletsCount"      => 30,
                         "title"                 => "красный",
                         "valueField"            => "red",
+                        "type"                  => "smoothedLine",
                         "fillAlphas"            => 0
                     ],
                     [
@@ -199,6 +224,7 @@ $this->registerJsFile("/js/actions.js", ['depends' => ['yii\web\JqueryAsset']]);
                         "hideBulletsCount"      => 30,
                         "title"                 => "синий",
                         "valueField"            => "blue",
+                        "type"                  => "smoothedLine",
                         "fillAlphas"            => 0
                     ],
                     [
@@ -209,6 +235,7 @@ $this->registerJsFile("/js/actions.js", ['depends' => ['yii\web\JqueryAsset']]);
                         "hideBulletsCount"      => 30,
                         "title"                 => "зеленый",
                         "valueField"            => "kurs",
+                        "type"                  => "smoothedLine",
                         "fillAlphas"            => 0
                     ]
                 ],
