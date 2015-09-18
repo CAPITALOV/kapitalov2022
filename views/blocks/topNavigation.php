@@ -19,7 +19,7 @@ JS
 );
 ?>
 
-<nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="border:0px;">
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="border:0px; background-color:#ffffff;">
     <div class="container-fluid">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
