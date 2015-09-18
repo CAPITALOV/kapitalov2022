@@ -128,7 +128,7 @@ $this->registerJsFile("/js/actions.js", ['depends' => ['yii\web\JqueryAsset']]);
     </div>
 </div>
 
-<div id="chart2" class="center-block" style="margin-top:25px; margin-left:75px; margin-right:75px;">
+<div id="chart2" class="center-block" style=" margin-left:75px; margin-right:75px;">
         <?php if (!is_null($lineArrayPast)) { ?>
             <?= \cs\Widget\AmCharts\CandleStick::widget([
                 'height'       => 600,
@@ -221,8 +221,8 @@ $this->registerJsFile("/js/actions.js", ['depends' => ['yii\web\JqueryAsset']]);
         <?php } ?>
 </div>
 
-<hr class="clearfix" style="color:#489F46; background-color:#489F46; height:3px; margin-top: 0px;margin-bottom: 0px;">
-<div class="container-fluid flexcontainer" style="margin-bottom:0px;background-color:#ededed; height:90px;">
+<hr class="clearfix" style="color:#489F46; background-color:#489F46; height:3px; margin-top: 0px; margin-bottom: 0px;">
+<div class="container-fluid flexcontainer" style="margin-bottom:20px; background-color:#ededed; height:90px;">
     <div onclick="javascript:toggleChart('chart3')"><img src="/images/collapseIcon.png" style="height:35px;padding-right:35px;padding-left:10px;"></div>
     <div style="float:left;">
             <img src="/images/icon-info.png" style="height:30px;padding-right:35px;">
@@ -233,7 +233,7 @@ $this->registerJsFile("/js/actions.js", ['depends' => ['yii\web\JqueryAsset']]);
     </div>
 </div>
 
-<div id="chart3" class="center-block" style="margin-top:25px; margin-left:75px; margin-right:75px; margin-bottom:75px">
+<div id="chart3" class="center-block" style="margin-left:75px; margin-right:75px; margin-bottom:75px">
     <?= \cs\Widget\AmCharts\CandleStick::widget([
         'height'       => 600,
         'lineArray'    => $lineArrayCandels,
