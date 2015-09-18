@@ -13,7 +13,7 @@ use yii\bootstrap\ActiveForm;
 
 $this->title = $item->getField('name');
 
-//registerJsFile("/js/actions.js")
+//registerJsFile("/js/actions.js");
 ?>
 
 
@@ -35,9 +35,9 @@ $this->title = $item->getField('name');
     <?php if (!is_null($lineArrayFuture)) { ?>
         <?= \cs\Widget\AmCharts\CandleStick::widget([
             'lineArray'    => $lineArrayFuture,
+            'height' => 600,
             'chartOptions' => [
                 "type"           => "serial",
-                'height' => 600,
                 "theme"          => "light",
                 "legend"         => [
                     "useGraphSettings" => true
