@@ -17,19 +17,19 @@ $this->registerJsFile("/js/actions.js", ['depends' => ['yii\web\JqueryAsset']]);
 
 
 <hr class="clearfix" style="color:#489F46; background-color:#489F46; height:3px; margin-top: 0px;margin-bottom: 0px;">
-<div class="container-fluid" style="background-color:#ededed; height:90px; display: -webkit-box; display: -moz-box; display: -ms-flexbox; display: -webkit-flex; display: flex;align-items: center;">
+<div class="container-fluid flexcontainer" style="background-color:#ededed; height:90px;">
     <div onclick="javascript:toggleChart('chart1')"><img src="/images/collapseIcon.png" style="height:35px;padding-right:35px;padding-left:10px;"></div>
-    <div style="float:left;">
+    <div>
             <img src="/images/icon-info.png" style="height:30px;padding-right:35px;">
      </div>
-    <div class="col-md-auto" style="float:right; ">
+    <div class="col-md-auto">
         <img src="/images/icon-index-capitalov.png" style="height:35px;padding-right:15px;">
         <div  class="text-nowrap" style="vertical-align:middle; font-size:18px; font-weight: bold; display:inline-block;">Просмотр будущих индексов капиталов</div>
     </div>
 </div>
 
 <?php if ($isPaid) { ?>
-<div id="chart1" class="center-block" style="margin-top:25px; margin-left:75px; margin-right:75px;">
+<div id="chart1" class="center-block" style="margin:25px 75px;">
     <?php if (!is_null($lineArrayFuture)) { ?>
         <?= \cs\Widget\AmCharts\CandleStick::widget([
             'enableExport' => true,
@@ -116,9 +116,8 @@ $this->registerJsFile("/js/actions.js", ['depends' => ['yii\web\JqueryAsset']]);
         >Купить</a>
 <?php } ?>
 
-
 <hr class="clearfix" style="color:#489F46; background-color:#489F46; height:3px; margin-top: 0px;margin-bottom: 0px;">
-<div class="container-fluid" style="margin-bottom:0px;background-color:#ededed; height:90px; display: -webkit-box; display: -moz-box; display: -ms-flexbox; display: -webkit-flex; display: flex;align-items: center;">
+<div class="container-fluid flexcontainer" style="margin-bottom:0px;background-color:#ededed; height:90px;">
     <div onclick="javascript:toggleChart('chart2')"><img src="/images/collapseIcon.png" style="height:35px;padding-right:35px;padding-left:10px;"></div>
     <div style="float:left;">
             <img src="/images/icon-info.png" style="height:30px;padding-right:35px;">
@@ -223,7 +222,7 @@ $this->registerJsFile("/js/actions.js", ['depends' => ['yii\web\JqueryAsset']]);
 </div>
 
 <hr class="clearfix" style="color:#489F46; background-color:#489F46; height:3px; margin-top: 0px;margin-bottom: 0px;">
-<div class="container-fluid" style="background-color:#ededed; height:90px; display: -webkit-box; display: -moz-box; display: -ms-flexbox; display: -webkit-flex; display: flex;align-items: center;">
+<div class="container-fluid flexcontainer" style="margin-bottom:0px;background-color:#ededed; height:90px;">
     <div onclick="javascript:toggleChart('chart3')"><img src="/images/collapseIcon.png" style="height:35px;padding-right:35px;padding-left:10px;"></div>
     <div style="float:left;">
             <img src="/images/icon-info.png" style="height:30px;padding-right:35px;">

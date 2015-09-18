@@ -69,7 +69,7 @@ $this->registerMetaTag(['name' => 'og:description', 'content' => 'Эксклюз
     <?php if (\Yii::$app->user->isGuest) : ?>
         <?= $this->render('_modalLogin') ?>
     <?php endif; ?>
-    <footer class="footer">
+    <footer class="footer navbar-fixed-bottom">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
