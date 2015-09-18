@@ -18,7 +18,7 @@ $this->registerJsFile("/js/actions.js", ['depends' => ['yii\web\JqueryAsset']]);
 
 <hr class="clearfix" style="color:#489F46; background-color:#489F46; height:3px; margin-top: 0px;margin-bottom: 0px;">
 <div class="container-fluid" style="background-color:#ededed; height:90px; display: -webkit-box; display: -moz-box; display: -ms-flexbox; display: -webkit-flex; display: flex;align-items: center;">
-    <div><img src="/images/collapseIcon.png" style="height:35px;padding-right:35px;padding-left:10px;" onclick="javascript:hideChart('chart1')></div>
+    <div onclick="javascript:toggleChart('chart1')"><img src="/images/collapseIcon.png" style="height:35px;padding-right:35px;padding-left:10px;"></div>
     <div style="float:left;">
             <img src="/images/icon-info.png" style="height:30px;padding-right:35px;">
      </div>
@@ -27,7 +27,6 @@ $this->registerJsFile("/js/actions.js", ['depends' => ['yii\web\JqueryAsset']]);
         <div  class="text-nowrap" style="vertical-align:middle; font-size:18px; font-weight: bold; display:inline-block;">Просмотр будущих индексов капиталов</div>
     </div>
 </div>
-
 
 <?php if ($isPaid) { ?>
 <div id="chart1" class="center-block" style="margin-top:25px; margin-left:75px; margin-right:75px;">
@@ -119,7 +118,7 @@ $this->registerJsFile("/js/actions.js", ['depends' => ['yii\web\JqueryAsset']]);
 
 <hr class="clearfix" style="color:#489F46; background-color:#489F46; height:3px; margin-top: 0px;margin-bottom: 0px;">
 <div class="container-fluid" style="margin-bottom:0px;background-color:#ededed; height:90px; display: -webkit-box; display: -moz-box; display: -ms-flexbox; display: -webkit-flex; display: flex;align-items: center;">
-    <div><img src="/images/collapseIcon.png" style="height:35px;padding-right:35px;padding-left:10px;"></div>
+    <div onclick="javascript:toggleChart('chart2')"><img src="/images/collapseIcon.png" style="height:35px;padding-right:35px;padding-left:10px;"></div>
     <div style="float:left;">
             <img src="/images/icon-info.png" style="height:30px;padding-right:35px;">
      </div>
@@ -129,7 +128,7 @@ $this->registerJsFile("/js/actions.js", ['depends' => ['yii\web\JqueryAsset']]);
     </div>
 </div>
 
-<div class="center-block" style="margin-top:25px; margin-left:75px; margin-right:75px;">
+<div id="chart2" class="center-block" style="margin-top:25px; margin-left:75px; margin-right:75px;">
         <?php if (!is_null($lineArrayPast)) { ?>
             <?= \cs\Widget\AmCharts\CandleStick::widget([
                 'height'       => 600,
@@ -224,7 +223,7 @@ $this->registerJsFile("/js/actions.js", ['depends' => ['yii\web\JqueryAsset']]);
 
 <hr class="clearfix" style="color:#489F46; background-color:#489F46; height:3px; margin-top: 0px;margin-bottom: 0px;">
 <div class="container-fluid" style="background-color:#ededed; height:90px; display: -webkit-box; display: -moz-box; display: -ms-flexbox; display: -webkit-flex; display: flex;align-items: center;">
-    <div><img src="/images/collapseIcon.png" style="height:35px;padding-right:35px;padding-left:10px;"></div>
+    <div onclick="javascript:toggleChart('chart3')"><img src="/images/collapseIcon.png" style="height:35px;padding-right:35px;padding-left:10px;"></div>
     <div style="float:left;">
             <img src="/images/icon-info.png" style="height:30px;padding-right:35px;">
      </div>
@@ -234,7 +233,7 @@ $this->registerJsFile("/js/actions.js", ['depends' => ['yii\web\JqueryAsset']]);
     </div>
 </div>
 
-<div class="center-block" style="margin-top:25px; margin-left:75px; margin-right:75px;">
+<div id="chart3" class="center-block" style="margin-top:25px; margin-left:75px; margin-right:75px;">
     <?= \cs\Widget\AmCharts\CandleStick::widget([
         'height'       => 600,
         'lineArray'    => $lineArrayCandels,
