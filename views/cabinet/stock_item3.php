@@ -24,7 +24,7 @@ $this->title = $item->getField('name');
             <img src="/images/icon-info.png" style="height:30px;padding-right:35px;">
      </div>
     <div class="col-md-auto" style="float:right; ">
-        <img src="/images/icon-index-history.png" style="height:35px;padding-right:15px;">
+        <img src="/images/icon-index-capitalov.png" style="height:35px;padding-right:15px;">
         <div  class="text-nowrap" style="vertical-align:middle; font-size:18px; font-weight: bold; display:inline-block;">Просмотр будущих индексов капиталов</div>
     </div>
 </div>
