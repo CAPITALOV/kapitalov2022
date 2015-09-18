@@ -1,4 +1,8 @@
-html,
+html {
+    font-family: "Open Sans", "Helvetica Neue", sans-serif;
+    height: 100%;
+}
+
 body {
     height: 100%;
 }
@@ -106,6 +110,6 @@ a.desc:after {
 .navbar {
     position: relative;
     min-height: 70px;
-    margin-bottom: 10px;
+    margin-bottom: 0;
     border: 1px solid transparent;
 }

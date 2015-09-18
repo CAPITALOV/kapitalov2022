@@ -57,17 +57,22 @@ $this->registerJsFile('/js', ['depends' => ['yii\web\JqueryAsset',]]);
 
 ?>
 
+<hr class="clearfix" style="color:#489F46; background-color:#489F46; height:3px; margin-top: 0px;margin-bottom: 0px;">
 
-<div class="container">
-    <div class="col-md-auto" style="float:left; ">
+<div class="container-fluid" style="background-color:#ededed; height:90px; display: -webkit-box; display: -moz-box; display: -ms-flexbox; display: -webkit-flex; display: flex;align-items: center;">
+    <div>
+        <img src="/images/collapseIcon.png" style="height:35px;padding-right:35px;padding-left:10px;">
+    </div>
+    <div style="float:left;">
+            <img src="/images/icon-info.png" style="height:30px;padding-right:35px;">
+     </div>
+
+    <div class="col-md-auto" style="float:right; ">
         <img src="/images/icon-index.png" style="height:35px;padding-right:10px;">
-        <div  class="text-nowrap" style="vertical-align:middle; font-size:18px; font-weight: bold; display:inline-block;">Просмотр индексов капиталов</div>
+        <div  class="text-nowrap" style="vertical-align:middle; font-size:16px; font-weight: bold; display:inline-block;">Просмотр индексов капиталов</div>
     </div>
     <div style="height: 40px; margin: 0 20px; border-left: 1px solid #f2f2f2; border-right: 1px solid #ffffff; float:left;"></div>
-    <div style="float:left;">
-        <h5 style="float:left;">Инфо</h5>
-        <img src="/images/icon-info.png" style="height:40px;padding-left:10px;">
-    </div>
+    
 </div>
 
 <br/>

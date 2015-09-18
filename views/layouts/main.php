@@ -41,10 +41,10 @@ $this->registerMetaTag(['name' => 'og:description', 'content' => 'Эксклюз
     <?php $this->head() ?>
 </head>
 <body class="fuelux">
-    <?php $this->beginBody() ?>
+    <?php $this->beginBody()?>
     <?= $this->render('../blocks/topNavigation') ?>
-    <div class="container-fluid">
-        <div class="row col-lg-12" style="padding-top: 80px; padding-bottom: 40px;">
+    <div class="container-fluid" style="padding-right:0px; padding-left:0px;">
+        <div class="col-lg-12" style="padding-top: 0; padding-bottom: 40px; padding-right:0; padding-left:0px;">
             <?= $content ?>
         </div>
     </div>
