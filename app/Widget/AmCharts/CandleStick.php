@@ -51,6 +51,7 @@ class CandleStick extends Object
             $this->id = 'w_' . Security::generateRandomString();
         }
         $this->varName = 'graph_' . Security::generateRandomString();
+        $this->enableExport = \yii\helpers\ArrayHelper::getValue($this->chartOptions, 'export.enabled', false);
     }
 
     public function run()
@@ -118,12 +119,12 @@ CSS
     {
         $options = $this->chartOptions;
         if ($this->enableExport) {
-            $options['export'] = [
+            $options = \yii\helpers\ArrayHelper::merge($options, ['export' => [
                 'enabled' => true,
                 'libs' => [
                     'path' => $am->baseUrl . '/plugins/export/libs/',
                 ]
-            ];
+            ]]);
         }
         if (!isset($options['dataProvider'])) {
             $options['dataProvider'] = $this->lineArray;
