@@ -16,7 +16,7 @@ $this->registerJs("$('.labelPaid').tooltip()");
 
 
 <h2 class="page-header">Оплаченные котировки</h2>
-<div class="row col-sm-12" style="margin-bottom: 40px;">
+<div class="row col-sm-12" style="margin-bottom: 40px; margin-top: 0;">
     <?php
     foreach ($paid as $item) {
 

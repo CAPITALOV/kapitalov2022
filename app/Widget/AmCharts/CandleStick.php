@@ -19,6 +19,8 @@ class CandleStick extends Object
     public $width  = 400;
     public $height = 200;
 
+    public $enableExport;
+
     /** @var  string название переменной JS */
     public $varName;
     /**
@@ -49,6 +51,7 @@ class CandleStick extends Object
             $this->id = 'w_' . Security::generateRandomString();
         }
         $this->varName = 'graph_' . Security::generateRandomString();
+        $this->enableExport = \yii\helpers\ArrayHelper::getValue($this->chartOptions, 'export.enabled', false);
     }
 
     public function run()
@@ -72,12 +75,18 @@ class CandleStick extends Object
      */
     public function registerClientScript()
     {
-        Asset::register(\Yii::$app->view);
+        $am = Asset::register(\Yii::$app->view);
         if ($this->js) {
             \Yii::$app->view->registerJs($this->js);
         }
+        if ($this->enableExport) {
+            \Yii::$app->view->registerJsFile($am->baseUrl . '/plugins/export/export.js', [
+                'depends' => ['cs\Widget\AmCharts\Asset'],
+            ]);
+            \Yii::$app->view->registerCssFile($am->baseUrl . '/plugins/export/export.css');
+        }
 
-        $optionsJson = $this->getClientOptions();
+        $optionsJson = $this->getClientOptions($am);
         \Yii::$app->view->registerJs(<<<JS
 var {$this->varName} = AmCharts.makeChart( "{$this->id}", {$optionsJson} );
 
@@ -91,21 +100,41 @@ function zoomChart_{$this->varName}() {
 }
 JS
 );
+//, ($this->enableExport)? \yii\web\View::POS_HEAD : \yii\web\View::POS_READY);
         \Yii::$app->view->registerCss(<<<CSS
 #{$this->id} {
 	width	: 100%;
-	height	: {$this->width}px;
+	height	: {$this->height}px;
 }
 CSS
 );
     }
 
     /**
+     * @param \yii\web\AssetBundle $am
+     *
      * @return string json
      */
-    protected function getClientOptions()
+    protected function getClientOptions($am)
     {
         $options = $this->chartOptions;
+        if ($this->enableExport) {
+            $options = \yii\helpers\ArrayHelper::merge($options, ['export' => [
+                'enabled' => true,
+                'libs' => [
+                    'path' => $am->baseUrl . '/plugins/export/libs/',
+                ]
+            ]]);
+        }
+        if (\yii\helpers\ArrayHelper::getValue($this->chartOptions, 'language', '') == 'ru') {
+            $options = \yii\helpers\ArrayHelper::merge($options, [
+                'menu' => [
+                    'label' => [
+                        'print' => 'Печать'
+                    ]
+                ]
+            ]);
+        }
         if (!isset($options['dataProvider'])) {
             $options['dataProvider'] = $this->lineArray;
         }

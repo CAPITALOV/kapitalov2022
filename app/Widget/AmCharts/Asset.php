@@ -18,20 +18,26 @@ use Yii;
 class Asset extends AssetBundle
 {
     public $sourcePath = '@vendor/amcharts/amstock3/amcharts';
+
     public $css      = [
         'default.css',
     ];
+
     public $js       = [
         'amcharts.js',
         'serial.js',
+        'lang/ru.js',
         'themes/light.js',
         'amstock.js',
     ];
+
     public $depends  = [
+    ];
+
+    public $jsOptions = [
     ];
 
     public function init()
     {
-
     }
 }
