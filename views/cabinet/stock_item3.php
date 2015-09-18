@@ -233,7 +233,7 @@ $this->registerJsFile("/js/actions.js", ['depends' => ['yii\web\JqueryAsset']]);
     </div>
 </div>
 
-<div id="chart3" class="center-block" style="margin-top:25px; margin-left:75px; margin-right:75px;">
+<div id="chart3" class="center-block" style="margin-top:25px; margin-left:75px; margin-right:75px; margin-bottom:75px">
     <?= \cs\Widget\AmCharts\CandleStick::widget([
         'height'       => 600,
         'lineArray'    => $lineArrayCandels,
