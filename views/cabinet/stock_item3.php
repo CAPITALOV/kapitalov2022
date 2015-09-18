@@ -13,36 +13,31 @@ use yii\bootstrap\ActiveForm;
 
 $this->title = $item->getField('name');
 
+//registerJsFile("/js/actions.js")
 ?>
+
 
 <hr class="clearfix" style="color:#489F46; background-color:#489F46; height:3px; margin-top: 0px;margin-bottom: 0px;">
 <div class="container-fluid" style="background-color:#ededed; height:90px; display: -webkit-box; display: -moz-box; display: -ms-flexbox; display: -webkit-flex; display: flex;align-items: center;">
-    <div><img src="/images/collapseIcon.png" style="height:35px;padding-right:35px;padding-left:10px;"></div>
+    <div><img src="/images/collapseIcon.png" style="height:35px;padding-right:35px;padding-left:10px;" onclick="javascript:hideChart('chart1')></div>
     <div style="float:left;">
             <img src="/images/icon-info.png" style="height:30px;padding-right:35px;">
      </div>
     <div class="col-md-auto" style="float:right; ">
-        <img src="/images/icon-index.png" style="height:35px;padding-right:15px;">
+        <img src="/images/icon-index-history.png" style="height:35px;padding-right:15px;">
         <div  class="text-nowrap" style="vertical-align:middle; font-size:18px; font-weight: bold; display:inline-block;">Просмотр будущих индексов капиталов</div>
     </div>
 </div>
 
 
 <?php if ($isPaid) { ?>
-<div class="center-block" style="margin-top:50px; margin-left:100px; margin-right:100px; height:800px;">
+<div id="chart1" class="center-block" style="margin-top:50px; margin-left:100px; margin-right:100px;">
     <?php if (!is_null($lineArrayFuture)) { ?>
         <?= \cs\Widget\AmCharts\CandleStick::widget([
-            'height' => "100%",
-            'labelsEnabled' => false,
-            'autoMargins' => false,
-            'marginTop' => 0,
-            'marginBottom' => 0,
-            'marginLeft' => 0,
-            'marginRight' => 0,
-            'pullOutRadius' => 0,
             'lineArray'    => $lineArrayFuture,
             'chartOptions' => [
                 "type"           => "serial",
+                'height' => 800,
                 "theme"          => "light",
                 "legend"         => [
                     "useGraphSettings" => true
@@ -70,23 +65,19 @@ $this->title = $item->getField('name');
                         "valueAxis"             => "v1",
                         "lineColor"             => "#FF1000",
                         "bullet"                => "round",
-                        "bulletBorderThickness" => 2,
+                        "bulletBorderThickness" => 1,
                         "hideBulletsCount"      => 30,
                         "title"                 => "красный",
-                        "valueField"            => "red",
-                        "lineAlpha"             => 0.2,
-                        "fillAlphas"            => 0.8
+                        "valueField"            => "red"
                     ],
                     [
                         "valueAxis"             => "v2",
                         "lineColor"             => "#0010ff",
                         "bullet"                => "round",
-                        "bulletBorderThickness" => 2,
+                        "bulletBorderThickness" => 1,
                         "hideBulletsCount"      => 30,
                         "title"                 => "синий",
-                        "valueField"            => "blue",
-                        "lineAlpha"             => 0.2,
-                        "fillAlphas"            => 0.8
+                        "valueField"            => "blue"
                     ],
                 ],
                 "chartScrollbar" => [],
@@ -134,8 +125,8 @@ $this->title = $item->getField('name');
             <img src="/images/icon-info.png" style="height:30px;padding-right:35px;">
      </div>
     <div class="col-md-auto" style="float:right; ">
-        <img src="/images/History_icon-280x280.png" style="height:35px;padding-right:15px;">
-        <div  class="text-nowrap" style="vertical-align:middle; font-size:18px; font-weight: bold; display:inline-block;">Просмотр истории индексов прошедших торгов</div>
+        <img src="/images/icon-index-history.png" style="height:35px;padding-right:15px;">
+        <div  class="text-nowrap" style="vertical-align:middle; font-size:20px; font-weight: bold; display:inline-block;">Просмотр истории индексов прошедших торгов</div>
     </div>
 </div>
 
@@ -239,7 +230,7 @@ $this->title = $item->getField('name');
             <img src="/images/icon-info.png" style="height:30px;padding-right:35px;">
      </div>
     <div class="col-md-auto" style="float:right; ">
-        <img src="/images/svecha-icon.gif" style="height:35px;padding-right:15px;">
+        <img src="/images/icon-history.png" style="height:35px;padding-right:15px;">
         <div  class="text-nowrap" style="vertical-align:middle; font-size:18px; font-weight: bold; display:inline-block;">Просмотр архивных котировок</div>
     </div>
 </div>
