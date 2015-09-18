@@ -33,6 +33,7 @@ $this->registerJsFile("/js/actions.js", ['depends' => ['yii\web\JqueryAsset']]);
 <div id="chart1" class="center-block" style="margin-top:25px; margin-left:75px; margin-right:75px;">
     <?php if (!is_null($lineArrayFuture)) { ?>
         <?= \cs\Widget\AmCharts\CandleStick::widget([
+            'enableExport' => true,
             'lineArray'    => $lineArrayFuture,
             'height' => 600,
             'chartOptions' => [

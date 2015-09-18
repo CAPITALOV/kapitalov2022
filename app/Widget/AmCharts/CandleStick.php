@@ -79,7 +79,9 @@ class CandleStick extends Object
             \Yii::$app->view->registerJs($this->js);
         }
         if ($this->enableExport) {
-            \Yii::$app->view->registerJsFile($am->baseUrl . '/plugins/export/export.js', ['position' => \yii\web\View::POS_HEAD]);
+            \Yii::$app->view->registerJsFile($am->baseUrl . '/plugins/export/export.js', [
+                'depends' => ['cs\Widget\AmCharts\Asset'],
+            ]);
             \Yii::$app->view->registerCssFile($am->baseUrl . '/plugins/export/export.css');
         }
 
@@ -97,6 +99,7 @@ function zoomChart_{$this->varName}() {
 }
 JS
 );
+//, ($this->enableExport)? \yii\web\View::POS_HEAD : \yii\web\View::POS_READY);
         \Yii::$app->view->registerCss(<<<CSS
 #{$this->id} {
 	width	: 100%;
@@ -118,7 +121,7 @@ CSS
             $options['export'] = [
                 'enabled' => true,
                 'libs' => [
-                    'path' => $am->baseUrl . '/plugins/export/libs',
+                    'path' => $am->baseUrl . '/plugins/export/libs/',
                 ]
             ];
         }
