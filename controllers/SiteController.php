@@ -66,7 +66,6 @@ class SiteController extends \cs\base\BaseController
                 'class' => 'yii\captcha\CaptchaAction',
                 'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
             ],
-            'usersBlock' => 'app\controllers\Users\Block'
         ];
     }
 

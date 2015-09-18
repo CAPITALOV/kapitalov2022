@@ -83,6 +83,7 @@ return [
 
     'cabinet/wallet/add/<id:\\d+>'          => 'cabinet_wallet/add',
 
+    'cabinet/wallet/sendMail'                   => 'cabinet_wallet/send_mail',
     'cabinet/wallet/add1'                   => 'cabinet_wallet/add1',
     'cabinet/wallet/add/add_national_step1' => 'cabinet_wallet/add_national_step1',
 
