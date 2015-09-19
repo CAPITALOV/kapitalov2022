@@ -15,18 +15,18 @@ $this->title = $item->getField('name');
 $this->registerJsFile("/js/actions.js", ['depends' => ['yii\web\JqueryAsset']]);
 
 $monthList = [
-    'янв',
-    'фев',
-    'мар',
-    'апр',
-    'май',
-    'июн',
-    'июл',
-    'авг',
-    'сен',
-    'окт',
-    'ноя',
-    'дек',
+    'января',
+    'февраля',
+    'марта',
+    'апреля',
+    'мая',
+    'июня',
+    'июля',
+    'августа',
+    'сентября',
+    'октября',
+    'ноября',
+    'декабря',
 ];
 $dateMin = $lineArrayFuture[0]['date'];
 $dateMax = $lineArrayFuture[count($lineArrayFuture)-1]['date'];
