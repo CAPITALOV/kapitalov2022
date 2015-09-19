@@ -108,7 +108,6 @@ a.desc:after {
     height: 70px;
 }
 .navbar {
-    position: relative;
     min-height: 70px;
     margin-bottom: 0;
     border: 1px solid transparent;
