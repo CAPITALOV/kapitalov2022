@@ -19,7 +19,7 @@ JS
 );
 ?>
 
-<nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="border:0px; background-color:#ffffff;">
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="border:0px; background-color:#ffffff; margin-bottom:-1px;">
     <div class="container-fluid">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
@@ -215,4 +215,5 @@ JS
             </ul>
         </div>
     </div>
+    <hr class="clearfix" style="color:#ededed; background-color:#ededed; margin-top: 0px;margin-bottom: 0px;">
 </nav>
