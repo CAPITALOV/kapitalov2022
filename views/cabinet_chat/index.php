@@ -60,7 +60,7 @@ JS
     }
 
 </style>
-<div class="chat-panel panel panel-default">
+<div class="chat-panel panel panel-default" style="margin-top: 20px;">
 <div class="panel-heading">
     <i class="glyphicon glyphicon-comment"></i>
     Переписка
