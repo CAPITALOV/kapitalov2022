@@ -52,7 +52,7 @@ $this->registerMetaTag(['name' => 'og:description', 'content' => 'Эксклюз
         }
        ?> ">
 
-        <div class="col-lg-12" style="padding-top: 0; padding-bottom: 40px; padding-right:0; padding-left:0px;">
+        <div class="col-lg-12" style="margin-top:70px; padding-top: 0; padding-bottom: 40px; padding-right:0; padding-left:0px;">
             <?= $content ?>
         </div>
     </div>

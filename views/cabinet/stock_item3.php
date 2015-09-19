@@ -37,7 +37,7 @@ $dateMax = $dateMax->format('j') . ' ' . $monthList[$dateMax->format('n')-1];
 ?>
 
 
-<hr class="clearfix" style="color:#489F46; background-color:#489F46; height:3px; margin-top: 70px; margin-bottom: 0px;">
+<hr class="clearfix" style="color:#489F46; background-color:#489F46; height:3px; margin-top: 0px; margin-bottom: 0px;">
 <div class="container-fluid flexcontainer" style="background-color:#ededed; height:90px;">
     <div onclick="javascript:toggleChart('chart1')"><img src="/images/collapseIcon.png"
                                                          style="height:35px;padding-right:35px;padding-left:10px;">
@@ -49,8 +49,7 @@ $dateMax = $dateMax->format('j') . ' ' . $monthList[$dateMax->format('n')-1];
         <img src="/images/icon-index-capitalov.png" style="height:35px;padding-right:15px;">
 
         <div class="text-nowrap"
-             style="vertical-align:middle; font-size:18px; font-weight: bold; display:inline-block;">Просмотр будущих
-            индексов капиталов
+             style="vertical-align:middle; font-size:18px; font-weight: bold; display:inline-block;">Просмотр будущих индексов капиталов
         </div>
     </div>
     <div style="color: #58b724; margin-left: 20px; margin-top: 1px;">с <?= $dateMin ?> по <?= $dateMax ?></div>
