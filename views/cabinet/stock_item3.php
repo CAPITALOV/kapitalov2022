@@ -96,7 +96,6 @@ $dateMax = $dateMax->format('j') . ' ' . $monthList[$dateMax->format('n')-1];
                             "bulletBorderThickness" => 1,
                             "hideBulletsCount"      => 30,
                             "title"                 => "красный",
-                            "type"                  => "smoothedLine",
                             "valueField"            => "red"
                         ],
                         [
@@ -106,7 +105,6 @@ $dateMax = $dateMax->format('j') . ' ' . $monthList[$dateMax->format('n')-1];
                             "bulletBorderThickness" => 1,
                             "hideBulletsCount"      => 30,
                             "title"                 => "синий",
-                            "type"                  => "smoothedLine",
                             "valueField"            => "blue"
                         ],
                     ],
@@ -213,7 +211,6 @@ $dateMax = $dateMax->format('j') . ' ' . $monthList[$dateMax->format('n')-1];
                         "hideBulletsCount"      => 30,
                         "title"                 => "красный",
                         "valueField"            => "red",
-                        "type"                  => "smoothedLine",
                         "fillAlphas"            => 0
                     ],
                     [
@@ -224,7 +221,6 @@ $dateMax = $dateMax->format('j') . ' ' . $monthList[$dateMax->format('n')-1];
                         "hideBulletsCount"      => 30,
                         "title"                 => "синий",
                         "valueField"            => "blue",
-                        "type"                  => "smoothedLine",
                         "fillAlphas"            => 0
                     ],
                     [
@@ -235,7 +231,6 @@ $dateMax = $dateMax->format('j') . ' ' . $monthList[$dateMax->format('n')-1];
                         "hideBulletsCount"      => 30,
                         "title"                 => "зеленый",
                         "valueField"            => "kurs",
-                        "type"                  => "smoothedLine",
                         "fillAlphas"            => 0
                     ]
                 ],

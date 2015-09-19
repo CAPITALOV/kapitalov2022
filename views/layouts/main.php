@@ -43,7 +43,15 @@ $this->registerMetaTag(['name' => 'og:description', 'content' => 'Эксклюз
 <body class="fuelux">
     <?php $this->beginBody()?>
     <?= $this->render('../blocks/topNavigation') ?>
-    <div class="container-fluid" style="padding-right:0px; padding-left:0px;">
+    <div class="container-fluid" style="
+    <?php
+        if (Yii::$app->requestedRoute != 'cabinet/stock_item3') {
+            echo('padding-right:30px; padding-left:30px');
+        }else{
+            echo('padding-right:0px; padding-left:0px');
+        }
+       ?> ">
+
         <div class="col-lg-12" style="padding-top: 0; padding-bottom: 40px; padding-right:0; padding-left:0px;">
             <?= $content ?>
         </div>
