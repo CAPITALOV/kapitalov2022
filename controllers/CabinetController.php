@@ -751,7 +751,7 @@ class CabinetController extends CabinetBaseController
                 'date',
                 'kurs',
             ])
-            ->andWhere(['=', 'date', $end])
+            ->andWhere(['between', 'date', $start, $end])
             ->orderBy(['date' => SORT_ASC])
             ->one(), $lineArrayPast]);
 
