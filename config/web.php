@@ -110,6 +110,10 @@ $config = [
             'rules'               => require(__DIR__ . '/urlRules.php'),
         ],
         'db'                   => require(__DIR__ . '/db.php'),
+        'deviceDetect'         => [
+            'class'     => 'app\service\DeviceDetect',
+            'setParams' => 'false',
+        ],
 
         'formatter'            => [
             'dateFormat'        => 'dd.MM.yyyy',

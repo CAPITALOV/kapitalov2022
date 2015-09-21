@@ -80,6 +80,81 @@ class SiteController extends \cs\base\BaseController
         return $this->render();
     }
 
+    /**
+     * @param int $id идентификатор котировки
+     *
+     * @return mixed
+     */
+    public function actionStock($id)
+    {
+        $item = \app\models\Stock::find($id);
+        $isPaid = Yii::$app->user->identity->isPaid($id);
+
+        // Прошлое
+        $today = new \DateTime();
+        $end = $today->format('Y-m-d');
+        $start = $today->sub(new \DateInterval('P6M'))->format('Y-m-d');
+        $lineArrayPast = \app\service\GraphUnion2::convert([
+            'lines' => [
+                \app\models\StockKurs::query(['stock_id' => $item->getId()])
+                    ->select([
+                        'date',
+                        'kurs',
+                    ])
+                    ->andWhere(['between', 'date', $start, $end])
+                    ->orderBy(['date' => SORT_ASC])
+                    ->all(),
+                \app\models\StockPrognosisRed::query(['stock_id' => $item->getId()])
+                    ->select([
+                        'date',
+                        'delta as red',
+                    ])
+                    ->andWhere(['between', 'date', $start, $end])
+                    ->orderBy(['date' => SORT_ASC])
+                    ->all(),
+                \app\models\StockPrognosisBlue::query(['stock_id' => $item->getId()])
+                    ->select([
+                        'date',
+                        'delta as blue',
+                    ])
+                    ->andWhere(['between', 'date', $start, $end])
+                    ->orderBy(['date' => SORT_ASC])
+                    ->all(),
+            ]
+        ]);
+
+        // свечи
+        $today = new \DateTime();
+        $end = $today->format('Y-m-d');
+        $start = $today->sub(new \DateInterval('P1Y'))->format('Y-m-d');
+        $lineArrayCandels = \app\models\StockKurs::query(['stock_id' => $item->getId()])
+            ->select([
+                'date',
+                'open',
+                'close',
+                'low',
+                'high',
+            ])
+            ->andWhere(['between', 'date', $start, $end])
+            ->orderBy(['date' => SORT_ASC])
+            ->all();
+
+        $template = 'stock';
+        if (\Yii::$app->deviceDetect->isMobile()) {
+            $template = 'stock_mobile';
+        }
+
+        return $this->render($template, [
+            'item'             => $item,
+            'isPaid'           => $isPaid,
+            'lineArrayPast'    => $lineArrayPast,
+            'lineArrayCandels' => $lineArrayCandels,
+        ]);
+
+
+        return $this->render();
+    }
+
     public static function sendRequest($url, $options = [], $access_token = null)
     {
         $curl = curl_init($url);
