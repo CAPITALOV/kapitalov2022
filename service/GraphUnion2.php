@@ -52,7 +52,7 @@ class GraphUnion2 extends Object
         if (is_null($x)) return null;
         $new = [];
         $newlines = $this->transform();
-        for($i = new \DateTime($x['min']); $i->format('Y-m-d') < $x['max']; $i->add(new \DateInterval('P1D'))) {
+        for($i = new \DateTime($x['min']); $i->format('Y-m-d') <= $x['max']; $i->add(new \DateInterval('P1D'))) {
             $newItem = [
                 'date' => $i->format('Y-m-d'),
             ];
