@@ -753,7 +753,7 @@ class CabinetController extends CabinetBaseController
             ])
             ->andWhere(['between', 'date', $start, $end])
             ->orderBy(['date' => SORT_ASC])
-            ->one(), $lineArrayPast]);
+            ->all(), $lineArrayPast]);
 
         // свечи
         $today = new \DateTime();
