@@ -746,7 +746,14 @@ class CabinetController extends CabinetBaseController
                     ->all(),
             ]
         ]);
-        \cs\services\VarDumper::dump([$start,$end,$lineArrayPast]);
+        \cs\services\VarDumper::dump([$start,$end,\app\models\StockKurs::query(['stock_id' => $item->getId()])
+            ->select([
+                'date',
+                'kurs',
+            ])
+            ->andWhere(['=', 'date', $end])
+            ->orderBy(['date' => SORT_ASC])
+            ->one(), $lineArrayPast]);
 
         // свечи
         $today = new \DateTime();
