@@ -746,6 +746,7 @@ class CabinetController extends CabinetBaseController
                     ->all(),
             ]
         ]);
+        \cs\services\VarDumper::dump([$start,$end,$lineArrayPast]);
 
         // свечи
         $today = new \DateTime();
