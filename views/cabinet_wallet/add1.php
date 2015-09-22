@@ -65,6 +65,8 @@ JS
                 $('#custName').val(ret.user.fio);
                 $('#custEmail').val(ret.user.email);
                 $('#myWizard').wizard('next');
+                $('#shopSuccessURL').val(ret.request.shopSuccessURL);
+                $('#shopFailURL').val(ret.request.shopFailURL);
             }
         })
     })
@@ -131,22 +133,26 @@ JS
                     <input type="hidden" name="scid" value="34126">
 
                     <!--                Идентификатор клиента/Номер заказа:<br>-->
-                    <input type="hidden" name="customerNumber" size="43" placeholder="" value="" id="customerNumber">
+                    <input type="hidden" name="customerNumber" value="" id="customerNumber">
+
+
+                    <input type="hidden" name="shopSuccessURL" value="" id="shopSuccessURL">
+                    <input type="hidden" name="shopFailURL" value="" id="shopFailURL">
 
                     <!--                Сумма:<br>-->
-                    <input type="hidden" name="sum" value="" size="43" placeholder="введите сумму заказа в рублях" id="sum">
+                    <input type="hidden" name="sum" value="" >
 
                     <!--                ФИО плательщика:<br>-->
-                    <input name="custName" type="hidden" size="43" placeholder="" id="custName">
+                    <input name="custName" type="hidden" placeholder="" id="custName">
 
                     <!--                Email:<br>-->
-                    <input name="custEmail" type="hidden" size="43" placeholder="" value="" id="custEmail">
+                    <input name="custEmail" type="hidden" placeholder="" value="" id="custEmail">
 
                     <!--                Адрес доставки:<br>-->
-                    <input name="custAddr" type="hidden" size="43" placeholder="город, улица, номер дома, квартира">
+                    <input name="custAddr" type="hidden" placeholder="город, улица, номер дома, квартира">
 
                     <!--                Телефон плательщика<br>-->
-                    <input name="orderDetails" type="hidden" size="43" placeholder="пример +79031234567">
+                    <input name="orderDetails" type="hidden" placeholder="пример +79031234567">
 
                     <div class="radio">
                         <label class="radio-custom radioList" data-initialize="radio">

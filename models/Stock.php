@@ -23,6 +23,11 @@ class Stock extends \cs\base\DbRecord
     const STATUS_IN_PROGRESS = 1;
     const STATUS_READY       = 2;
 
+    public function getStatus()
+    {
+        return $this->getField('status', 0);
+    }
+
     public function getName()
     {
         return $this->getField('name', '');
@@ -31,6 +36,16 @@ class Stock extends \cs\base\DbRecord
     public function getImage()
     {
         return $this->getField('logo', '');
+    }
+
+    /**
+     * @param int $status \app\models\Stock::STATUS_*
+     *
+     * @return mixed
+     */
+    public function setStatus($status)
+    {
+        return $this->update(['status' => $status]);
     }
 
     /**

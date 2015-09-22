@@ -105,6 +105,20 @@ class Cabinet_walletController extends CabinetBaseController
     }
 
     /**
+     * Выводит сообщение об успешной покупке котировки
+     *
+     * @param int $id идентификатор заказа cap_requests.id
+     *
+     * @return string|\yii\web\Response
+     */
+    public function actionAdd1_success($id)
+    {
+        return $this->render([
+            'item' => \app\models\Request::find($id)
+        ]);
+    }
+
+    /**
      * AJAX
      *
      * REQUEST:
@@ -115,16 +129,33 @@ class Cabinet_walletController extends CabinetBaseController
     {
         $monthCounter = self::getParam('monthcounter');
         $stockId = self::getParam('stock_id');
+        $stock = \app\models\Stock::find($stockId);
 
         $request = Request::insert([
             'stock_id'     => $stockId,
             'month'        => $monthCounter,
         ]);
-        Application::mail(User::find(Yii::$app->params['chat']['consultant_id'])->getEmail(), 'Запрос на добавление услуги', 'request', [
-            'stock'    => Stock::find($stockId),
-            'user'     => \Yii::$app->user->identity,
-            'request'  => $request,
-        ]);
+
+        {
+            if ($stock->getStutus() == \app\models\Stock::STATUS_NO_CALC) {
+                $stock->setStutus(\app\models\Stock::STATUS_IN_PROGRESS);
+                Application::mail(User::find(\Yii::$app->params['chat']['consultant_id'])->getEmail(), 'Заказана котировка. Необходим расчет', 'new_request_need_calculate', [
+                    'stock'   => $stock,
+                    'request' => 1,
+                    'user'    => 1,
+                ]);
+                $stock->update(['is_send_letter' => 1]);
+            } else {
+                Application::mail(User::find(Yii::$app->params['chat']['consultant_id'])->getEmail(), 'Запрос на добавление услуги', 'request', [
+                    'stock'    => Stock::find($stockId),
+                    'user'     => \Yii::$app->user->identity,
+                    'request'  => $request,
+                ]);
+
+            }
+        }
+
+
 
         return self::jsonSuccess([
             'user'    => [
@@ -132,8 +163,10 @@ class Cabinet_walletController extends CabinetBaseController
                 'fio'   => Yii::$app->user->identity->getNameFull(),
             ],
             'request' => [
-                'id'  => $request->getId(),
-                'sum' => $monthCounter * 100 * 65,
+                'id'             => $request->getId(),
+                'sum'            => $monthCounter * 100 * 65,
+                'shopSuccessURL' => \yii\helpers\Url::to(['cabinet_wallet/add1_success', 'id' => $request->getId()]),
+                'shopFailURL'    => \yii\helpers\Url::to(['cabinet_wallet/add1_fail', 'id' => $request->getId()]),
             ],
         ]);
     }

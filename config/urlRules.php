@@ -87,6 +87,8 @@ return [
 
     'cabinet/wallet/sendMail'               => 'cabinet_wallet/send_mail',
     'cabinet/wallet/add1'                   => 'cabinet_wallet/add1',
+    'cabinet/wallet/add1/<id:\\d+>/success' => 'cabinet_wallet/add1_success',
+    'cabinet/wallet/add1/<id:\\d+>/fail'    => 'cabinet_wallet/add1_fail',
     'cabinet/wallet/add/add_national_step1' => 'cabinet_wallet/add_national_step1',
 
     'cabinet/wallet/add2'                   => 'cabinet_wallet/add2',
