@@ -42,24 +42,32 @@ class Facebook extends \yii\authclient\clients\Facebook implements authClientInt
 
     public function register($attributes)
     {
-
         $fields = [
             'fb_id'                    => $attributes['id'],
-            'fb_link'                  => $attributes['link'],
-            'name_first'               => $attributes['first_name'],
-            'name_last'                => $attributes['last_name'],
-            'gender'                   => ($attributes['gender'] == '') ? null : (($attributes['gender'] == 'male') ? 1 : 0),
             'datetime_reg'             => gmdate('YmdHis'),
             'datetime_activate'        => gmdate('YmdHis'),
             'is_active'                => 1,
-            'is_confirm'               => 1,
         ];
+        if (ArrayHelper::getValue($attributes, 'first_name', '') != '') {
+            $fields['name_first'] = ArrayHelper::getValue($attributes, 'first_name', '');
+            $fields['name_last'] = ArrayHelper::getValue($attributes, 'last_name', '');
+        } else {
+            $fields['name_first'] = $attributes['name'];
+        }
+        if (ArrayHelper::getValue($attributes, 'fb_link', '') != '') {
+            $fields['fb_link'] = $attributes['link'];
+        }
+        if (ArrayHelper::getValue($attributes, 'fb_link', '') != '') {
+            $fields['gender'] = (($attributes['gender'] == 'male') ? 1 : 0);
+        }
+
         // добавляю поля для подписки
         foreach(\app\services\Subscribe::$userFieldList as $field) {
             $fields[$field] = 1;
         }
         if (isset($attributes['email'])) {
             $fields['email'] = $attributes['email'];
+            $fields['is_confirm'] = 1;
         }
         \Yii::info('$fields: ' . \yii\helpers\VarDumper::dumpAsString($fields), 'gs\\fb_registration');
         $user = User::insert($fields);
