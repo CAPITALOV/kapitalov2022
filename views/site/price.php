@@ -110,11 +110,12 @@ $this->registerJs("$('.payImage').tooltip()");
             <th>Биржа</th>
             <th>Котировка</th>
             <th>Цена</th>
+            <th>Посмотреть</th>
         </tr>
         </thead>
         <?php foreach($items as $market) { ?>
             <tr>
-                <td colspan="3">
+                <td colspan="4">
                     <h2><?= $market['name'] ?></h2>
                 </td>
             </tr>
@@ -128,6 +129,15 @@ $this->registerJs("$('.payImage').tooltip()");
             </td>
             <td>
                 <?= ($item['finam_market'] == 1) ? 99 : 249 ?> уе
+            </td>
+            <td>
+                <?php if ($item['status'] == 0) { ?>
+                    <span class="label label-default">Не расчитано</span>
+                <?php } else if ($item['status'] == 1) { ?>
+                    <span class="label label-warning">Расчитывается</span>
+                <?php } else if ($item['status'] == 2) { ?>
+                    <a class="btn btn-primary" href="<?= \yii\helpers\Url::to(['site/stock', 'id' => $item['id']]) ?>">Посмотреть</a>
+                <?php } ?>
             </td>
         </tr>
         <?php } ?>

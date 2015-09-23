@@ -688,32 +688,6 @@ class CabinetController extends CabinetBaseController
             ]
         ]);
 
-
-        // будущее
-        $today = new \DateTime();
-        $start = $today->format('Y-m-d');
-        $end = $today->add(new \DateInterval('P1M'))->format('Y-m-d');
-        $lineArrayFuture = \app\service\GraphUnion2::convert([
-            'lines' => [
-                \app\models\StockPrognosisRed::query(['stock_id' => $item->getId()])
-                    ->select([
-                        'date',
-                        'delta as red',
-                    ])
-                    ->andWhere(['between', 'date', $start, $end])
-                    ->orderBy(['date' => SORT_ASC])
-                    ->all(),
-                \app\models\StockPrognosisBlue::query(['stock_id' => $item->getId()])
-                    ->select([
-                        'date',
-                        'delta as blue',
-                    ])
-                    ->andWhere(['between', 'date', $start, $end])
-                    ->orderBy(['date' => SORT_ASC])
-                    ->all(),
-            ]
-        ]);
-
         // Прошлое
         $today = new \DateTime();
         $end = $today->format('Y-m-d');
@@ -763,7 +737,12 @@ class CabinetController extends CabinetBaseController
             ->orderBy(['date' => SORT_ASC])
             ->all();
 
-        return $this->render([
+        $template = 'stock_item3';
+        if (\Yii::$app->deviceDetect->isMobile()) {
+            $template = 'stock_item3_mobile';
+        }
+
+        return $this->render($template, [
             'item'             => $item,
             'isPaid'           => $isPaid,
             'lineArrayFuture'  => $lineArrayFuture,

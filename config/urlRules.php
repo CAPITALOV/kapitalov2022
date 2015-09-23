@@ -31,12 +31,16 @@ return [
     'admin/calc'                            => 'superadmin/calc',
     'admin/userStocks'                      => 'superadmin/users_stock',
     'admin/users'                           => 'superadmin/users',
+    'admin/stock/calc'                      => 'superadmin/stock_calc',
+    'admin/stock/calc/activate'             => 'superadmin/stock_calc_activate',
 
     'requests'                              => 'superadmin_requests/index',
     'requests/activate/<hash:\\w+>'         => 'superadmin_requests/activate',
     'requests/activate'                     => 'superadmin_requests/activate_ajax',
     'requests/delete'                       => 'superadmin_requests/delete_ajax',
 
+
+    'stock/<id:\\d+>'                       => 'site/stock',
 
     // stock
     'stock'                                 => 'superadmin_stock/index',
@@ -83,8 +87,10 @@ return [
 
     'cabinet/wallet/add/<id:\\d+>'          => 'cabinet_wallet/add',
 
-    'cabinet/wallet/sendMail'                   => 'cabinet_wallet/send_mail',
+    'cabinet/wallet/sendMail'               => 'cabinet_wallet/send_mail',
     'cabinet/wallet/add1'                   => 'cabinet_wallet/add1',
+    'cabinet/wallet/add1/<id:\\d+>/success' => 'cabinet_wallet/add1_success',
+    'cabinet/wallet/add1/<id:\\d+>/fail'    => 'cabinet_wallet/add1_fail',
     'cabinet/wallet/add/add_national_step1' => 'cabinet_wallet/add_national_step1',
 
     'cabinet/wallet/add2'                   => 'cabinet_wallet/add2',

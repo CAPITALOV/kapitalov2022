@@ -19,6 +19,15 @@ class Stock extends \cs\base\DbRecord
 {
     const TABLE = 'cap_stock';
 
+    const STATUS_NO_CALC     = 0;
+    const STATUS_IN_PROGRESS = 1;
+    const STATUS_READY       = 2;
+
+    public function getStatus()
+    {
+        return $this->getField('status', 0);
+    }
+
     public function getName()
     {
         return $this->getField('name', '');
@@ -27,6 +36,16 @@ class Stock extends \cs\base\DbRecord
     public function getImage()
     {
         return $this->getField('logo', '');
+    }
+
+    /**
+     * @param int $status \app\models\Stock::STATUS_*
+     *
+     * @return mixed
+     */
+    public function setStatus($status)
+    {
+        return $this->update(['status' => $status]);
     }
 
     /**
@@ -60,12 +79,12 @@ class Stock extends \cs\base\DbRecord
             ])
             ->innerJoin('cap_users_stock_buy', 'cap_users_stock_buy.stock_id = cap_stock.id')
             ->andWhere(['cap_users_stock_buy.user_id' => Yii::$app->user->id])
-            ->orderBy(['cap_stock.name' => SORT_ASC])
-            ;
+            ->orderBy(['cap_stock.name' => SORT_ASC]);
     }
 
     /**
      * Возвращает акции которые оплачены
+     *
      * @return \yii\db\Query
      */
     public static function getNotPaid()
@@ -79,7 +98,6 @@ class Stock extends \cs\base\DbRecord
             ])
             ->leftJoin('cap_users_stock_buy', 'cap_users_stock_buy.stock_id = cap_stock.id and cap_users_stock_buy.user_id = :uid', [':uid' => Yii::$app->user->id])
             ->orderBy(['cap_stock.name' => SORT_ASC])
-            ->where(['cap_users_stock_buy.stock_id' => null])
-            ;
+            ->where(['cap_users_stock_buy.stock_id' => null]);
     }
 }

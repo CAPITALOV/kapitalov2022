@@ -8,6 +8,7 @@
 namespace app\controllers;
 
 use app\models\Registration;
+use app\models\Request;
 use app\models\Stock;
 use app\models\StockKurs;
 use app\models\StockPrognosisBlue;
@@ -28,6 +29,39 @@ class SuperadminController extends SuperadminBaseController
     public function actionReferal()
     {
         return $this->render();
+    }
+
+    public function actionStock_calc()
+    {
+        return $this->render([
+        ]);
+    }
+
+    /**
+     * Публикует котировку
+     * Все оплаченные заказы активируются
+     * AJAX
+     *
+     * REQUEST:
+     * - id - int -           идентификатор котировки
+     *
+     * @return string
+     */
+    public function actionStock_calc_activate()
+    {
+        $stock_id = self::getParam('id');
+        $stock = Stock::find($stock_id);
+        $requestList = Request::query([
+            'stock_id' => $stock->getId(),
+            'is_paid'  => 1,
+        ])->all();
+        foreach ($requestList as $request) {
+            $requestObject = new Request($request);
+            $requestObject->activate();
+        }
+        $stock->setStatus(Stock::STATUS_READY);
+
+        return self::jsonSuccess();
     }
 
     /**
