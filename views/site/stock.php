@@ -17,6 +17,79 @@ $this->registerJsFile("/js/actions.js", ['depends' => ['yii\web\JqueryAsset']]);
 ?>
 
 
+
+<hr class="clearfix" style="color:#489F46; background-color:#489F46; height:3px; margin-top: 0px; margin-bottom: 0px;">
+<div class="container-fluid flexcontainer" style="margin-bottom:20px; background-color:#ededed; height:90px;">
+    <div onclick="javascript:toggleChart('chart3')"><img src="/images/collapseIcon.png"
+                                                         style="height:35px;padding-right:35px;padding-left:10px;">
+    </div>
+    <div style="float:left;">
+        <img src="/images/icon-info.png" style="height:30px;padding-right:35px;">
+    </div>
+    <div class="col-md-auto" style="float:right; ">
+        <img src="/images/icon-history.png" style="height:35px;padding-right:15px;">
+
+        <div class="text-nowrap"
+             style="vertical-align:middle; font-size:18px; font-weight: bold; display:inline-block;">Просмотр архивных
+            котировок
+        </div>
+    </div>
+</div>
+
+<div id="chart3" class="center-block" style="margin-left:75px; margin-right:75px; margin-bottom:75px">
+    <?= \cs\Widget\AmCharts\CandleStick::widget([
+        'height'       => 600,
+        'lineArray'    => $lineArrayCandels,
+        'chartOptions' => [
+            'language'       => 'ru',
+            "type"           => "serial",
+            "theme"          => "light",
+            "dataDateFormat" => 'YYYY-MM-DD',
+            "valueAxes"      => [[
+                "position" => "left"
+            ]],
+            "graphs"         => [
+                [
+                    "id"                 => "g1",
+                    "balloonText"        => "Открытие:<b>[[open]]</b><br>min:<b>[[low]]</b><br>max:<b>[[high]]</b><br>Закрытие:<b>[[close]]</b><br>",
+                    "closeField"         => "close",
+                    "fillColors"         => "#7f8da9",
+                    "highField"          => "high",
+                    "lineColor"          => "#7f8da9",
+                    "lineAlpha"          => 1,
+                    "lowField"           => "low",
+                    "fillAlphas"         => 0.9,
+                    "negativeFillColors" => "#db4c3c",
+                    "negativeLineColor"  => "#db4c3c",
+                    "openField"          => "open",
+                    "title"              => "Price:",
+                    "type"               => "candlestick",
+                    "valueField"         => "close"
+                ]
+            ],
+            "chartScrollbar" => [
+                "graph"           => "g1",
+                "graphType"       => "line",
+                "scrollbarHeight" => 30
+            ],
+            "chartCursor"    => [
+                "valueLineEnabled"        => true,
+                "valueLineBalloonEnabled" => true
+            ],
+            "categoryField"  => "date",
+            "categoryAxis"   => [
+                "parseDates" => true
+            ],
+            "export"         => [
+                "enabled"  => true,
+                "position" => "bottom-right"
+            ]
+        ]
+    ]) ?>
+
+</div>
+
+
 <hr class="clearfix" style="color:#489F46; background-color:#489F46; height:3px; margin-top: 0px;margin-bottom: 0px;">
 <div class="container-fluid flexcontainer" style="margin-bottom:0px;background-color:#ededed; height:90px;">
     <div onclick="javascript:toggleChart('chart2')"><img src="/images/collapseIcon.png"
@@ -36,7 +109,7 @@ $this->registerJsFile("/js/actions.js", ['depends' => ['yii\web\JqueryAsset']]);
 </div>
 
 <div id="chart2" class="center-block" style=" margin-left:75px; margin-right:75px;">
-    <?php if (!is_null($lineArrayPast)) { ?>
+    <?php if ($lineArrayPast) { ?>
         <?= \cs\Widget\AmCharts\CandleStick::widget([
             'height'       => 600,
             'lineArray'    => $lineArrayPast,
@@ -127,77 +200,6 @@ $this->registerJsFile("/js/actions.js", ['depends' => ['yii\web\JqueryAsset']]);
             Нет данных
         </div>
     <?php } ?>
-</div>
-
-<hr class="clearfix" style="color:#489F46; background-color:#489F46; height:3px; margin-top: 0px; margin-bottom: 0px;">
-<div class="container-fluid flexcontainer" style="margin-bottom:20px; background-color:#ededed; height:90px;">
-    <div onclick="javascript:toggleChart('chart3')"><img src="/images/collapseIcon.png"
-                                                         style="height:35px;padding-right:35px;padding-left:10px;">
-    </div>
-    <div style="float:left;">
-        <img src="/images/icon-info.png" style="height:30px;padding-right:35px;">
-    </div>
-    <div class="col-md-auto" style="float:right; ">
-        <img src="/images/icon-history.png" style="height:35px;padding-right:15px;">
-
-        <div class="text-nowrap"
-             style="vertical-align:middle; font-size:18px; font-weight: bold; display:inline-block;">Просмотр архивных
-            котировок
-        </div>
-    </div>
-</div>
-
-<div id="chart3" class="center-block" style="margin-left:75px; margin-right:75px; margin-bottom:75px">
-    <?= \cs\Widget\AmCharts\CandleStick::widget([
-        'height'       => 600,
-        'lineArray'    => $lineArrayCandels,
-        'chartOptions' => [
-            'language'       => 'ru',
-            "type"           => "serial",
-            "theme"          => "light",
-            "dataDateFormat" => 'YYYY-MM-DD',
-            "valueAxes"      => [[
-                "position" => "left"
-            ]],
-            "graphs"         => [
-                [
-                    "id"                 => "g1",
-                    "balloonText"        => "Открытие:<b>[[open]]</b><br>min:<b>[[low]]</b><br>max:<b>[[high]]</b><br>Закрытие:<b>[[close]]</b><br>",
-                    "closeField"         => "close",
-                    "fillColors"         => "#7f8da9",
-                    "highField"          => "high",
-                    "lineColor"          => "#7f8da9",
-                    "lineAlpha"          => 1,
-                    "lowField"           => "low",
-                    "fillAlphas"         => 0.9,
-                    "negativeFillColors" => "#db4c3c",
-                    "negativeLineColor"  => "#db4c3c",
-                    "openField"          => "open",
-                    "title"              => "Price:",
-                    "type"               => "candlestick",
-                    "valueField"         => "close"
-                ]
-            ],
-            "chartScrollbar" => [
-                "graph"           => "g1",
-                "graphType"       => "line",
-                "scrollbarHeight" => 30
-            ],
-            "chartCursor"    => [
-                "valueLineEnabled"        => true,
-                "valueLineBalloonEnabled" => true
-            ],
-            "categoryField"  => "date",
-            "categoryAxis"   => [
-                "parseDates" => true
-            ],
-            "export"         => [
-                "enabled"  => true,
-                "position" => "bottom-right"
-            ]
-        ]
-    ]) ?>
-
 </div>
 
 
