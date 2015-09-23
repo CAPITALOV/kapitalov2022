@@ -82,7 +82,9 @@ class Facebook extends \yii\authclient\clients\Facebook implements authClientInt
             'fb_link' => $attributes['link'],
         ];
         if ($userIdentity->getEmail() == '') {
-            $fields['email'] = $attributes['email'];
+            if (ArrayHelper::getValue($attributes, 'email', '') != '') {
+                $fields['email'] = $attributes['email'];
+            }
             $fields['is_confirm'] = 1;
         }
         $userIdentity->update($fields);
