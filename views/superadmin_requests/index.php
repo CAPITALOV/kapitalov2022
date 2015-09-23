@@ -105,7 +105,11 @@ JS
                 <?= $item['month'] ?>
             </td>
             <td>
-                <button class="btn btn-primary buttonActivate" data-id="<?= $item['id'] ?>">Подтвердить оплату</button>
+                <?php if (\yii\helpers\ArrayHelper::getValue($item, 'is_paid', 0) == 0) { ?>
+                    <button class="btn btn-primary buttonActivate" data-id="<?= $item['id'] ?>">Подтвердить оплату</button>
+                <?php } else { ?>
+                    <span class="label label-success">Оплачено, ожидает расчета</span>
+                <?php } ?>
             </td>
             <td>
                 <button class="btn btn-primary buttonDelete" data-id="<?= $item['id'] ?>">Удалить</button>
