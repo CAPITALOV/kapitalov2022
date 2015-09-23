@@ -57,21 +57,16 @@ class Facebook extends \yii\authclient\clients\Facebook implements authClientInt
         if (ArrayHelper::getValue($attributes, 'fb_link', '') != '') {
             $fields['fb_link'] = $attributes['link'];
         }
-        if (ArrayHelper::getValue($attributes, 'fb_link', '') != '') {
+        if (ArrayHelper::getValue($attributes, 'gender', '') != '') {
             $fields['gender'] = (($attributes['gender'] == 'male') ? 1 : 0);
-        }
-
-        // добавляю поля для подписки
-        foreach(\app\services\Subscribe::$userFieldList as $field) {
-            $fields[$field] = 1;
         }
         if (isset($attributes['email'])) {
             $fields['email'] = $attributes['email'];
             $fields['is_confirm'] = 1;
         }
-        \Yii::info('$fields: ' . \yii\helpers\VarDumper::dumpAsString($fields), 'gs\\fb_registration');
+        \Yii::info('$fields: ' . \yii\helpers\VarDumper::dumpAsString($fields), 'cap\\fb_registration');
         $user = User::insert($fields);
-        $user->setAvatarFromUrl('https://graph.facebook.com/'.$attributes['id'].'/picture?type=large');
+        $user->setAvatarFromUrl('https://graph.facebook.com/'.$attributes['id'].'/picture?type=large', 'jpg');
 
         return $user;
     }
