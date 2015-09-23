@@ -65,6 +65,7 @@ class AuthController extends BaseController
     public function successCallback($client)
     {
         $attributes = $client->getUserAttributes();
+        VarDumper::dump($attributes);
         /** @var \app\service\authclient\authClientInterface $client */
         $client->saveToken();
         if (Yii::$app->user->isGuest) {
