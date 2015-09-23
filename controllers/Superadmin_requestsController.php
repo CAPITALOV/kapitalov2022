@@ -22,12 +22,12 @@ class Superadmin_requestsController extends SuperadminBaseController
         $items = Request::query()
             ->select([
                 'cap_requests.*',
-                'cap_users.avatar as cap_users_avatar',
-                'cap_users.name_first as cap_users_name_first',
-                'cap_users.name_last as cap_users_name_last',
-                'cap_users.email as cap_users_email',
-                'cap_stock.name as cap_stock_name',
-                'cap_stock.logo as cap_stock_logo',
+                'cap_users.avatar      as cap_users_avatar',
+                'cap_users.name_first  as cap_users_name_first',
+                'cap_users.name_last   as cap_users_name_last',
+                'cap_users.email       as cap_users_email',
+                'cap_stock.name        as cap_stock_name',
+                'cap_stock.logo        as cap_stock_logo',
             ])
             ->innerJoin('cap_users', 'cap_users.id = cap_requests.user_id')
             ->innerJoin('cap_stock', 'cap_stock.id = cap_requests.stock_id')
@@ -48,14 +48,48 @@ class Superadmin_requestsController extends SuperadminBaseController
         if (is_null($request)) {
             throw new Exception('Нет такого кода или заявка уже активирована');
         }
-        $return = $request->activate();
+
+        $return = $this->activate($request);
 
         return $this->render($return);
     }
 
     /**
+     * @param \app\models\Request $request
+     *
+     * @return null|array
+     * [
+     *   'stock'      => \app\models\Stock
+     *   'dateFinish' => string - дата до которого оплачена услуга в формате 'yyyy-mm-dd'
+     * ]
+     */
+    private function activate($request)
+    {
+        $stock = Stock::find($request->getField('stock_id'));
+        // ставлю флаг что заказ оплачен
+        $request->update(['is_paid' => 1]);
+
+        // ставлю флаг для пользователя если он регистрировался по реферальной ссылке
+        {
+            $r = Registration::find(['user_id' => $request->getField('user_id')]);
+            if ($r) {
+                $r->update(['is_paid' => 1]);
+            }
+        }
+
+        if ($stock->getStatus() == Stock::STATUS_READY) {
+            return $request->activate();
+        }
+
+        return null;
+    }
+
+    /**
      * AJAX
      * Активирует запрос
+     *
+     * REQUEST:
+     * - id - int - идентификатор заказа
      */
     public function actionActivate_ajax()
     {
@@ -63,14 +97,7 @@ class Superadmin_requestsController extends SuperadminBaseController
         if (is_null($request)) {
             return self::jsonError('Нет такого запроса');
         }
-        // ставлю флаг для пользователя если он регистрировался по реферальной ссылке
-        {
-            $r = Registration::find(['user_id' => $request->getField('user_id')]);
-            if (!is_null($r)) {
-                $r->update(['is_paid' => 1]);
-            }
-        }
-        $request->activate();
+        $this->activate($request);
 
         return self::jsonSuccess();
     }

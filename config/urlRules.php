@@ -31,6 +31,8 @@ return [
     'admin/calc'                            => 'superadmin/calc',
     'admin/userStocks'                      => 'superadmin/users_stock',
     'admin/users'                           => 'superadmin/users',
+    'admin/stock/calc'                      => 'superadmin/stock_calc',
+    'admin/stock/calc/activate'             => 'superadmin/stock_calc_activate',
 
     'requests'                              => 'superadmin_requests/index',
     'requests/activate/<hash:\\w+>'         => 'superadmin_requests/activate',

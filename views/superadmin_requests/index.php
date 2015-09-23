@@ -75,7 +75,7 @@ JS
         <th>Пользователь</th>
         <th>Время заявки</th>
         <th>Кол-во месяцев</th>
-        <th>Активировать</th>
+        <th>Подтвердить оплату</th>
         <th>Удалить</th>
     </tr>
     </thead>
@@ -105,7 +105,7 @@ JS
                 <?= $item['month'] ?>
             </td>
             <td>
-                <button class="btn btn-primary buttonActivate" data-id="<?= $item['id'] ?>">Активировать</button>
+                <button class="btn btn-primary buttonActivate" data-id="<?= $item['id'] ?>">Подтвердить оплату</button>
             </td>
             <td>
                 <button class="btn btn-primary buttonDelete" data-id="<?= $item['id'] ?>">Удалить</button>

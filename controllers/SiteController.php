@@ -245,6 +245,7 @@ class SiteController extends \cs\base\BaseController
         for ($i = 0; $i < count($market); $i++) {
             $item = &$market[ $i ];
             $item['stockList'] = Stock::query([])
+                ->where(['finam_market' => $item['id']])
                 ->orderBy([
                     'name' => SORT_ASC,
                 ])

@@ -129,7 +129,7 @@ class Cabinet_walletController extends CabinetBaseController
     {
         $monthCounter = self::getParam('monthcounter');
         $stockId = self::getParam('stock_id');
-        $stock = \app\models\Stock::find($stockId);
+        $stock = Stock::find($stockId);
 
         $request = Request::insert([
             'stock_id'     => $stockId,
@@ -137,25 +137,21 @@ class Cabinet_walletController extends CabinetBaseController
         ]);
 
         {
-            if ($stock->getStutus() == \app\models\Stock::STATUS_NO_CALC) {
-                $stock->setStutus(\app\models\Stock::STATUS_IN_PROGRESS);
+            if ($stock->getStatus() == \app\models\Stock::STATUS_NO_CALC) {
+                $stock->setStatus(\app\models\Stock::STATUS_IN_PROGRESS);
                 Application::mail(User::find(\Yii::$app->params['chat']['consultant_id'])->getEmail(), 'Заказана котировка. Необходим расчет', 'new_request_need_calculate', [
                     'stock'   => $stock,
-                    'request' => 1,
-                    'user'    => 1,
+                    'user'    => \Yii::$app->user->identity,
+                    'request' => $request,
                 ]);
-                $stock->update(['is_send_letter' => 1]);
             } else {
                 Application::mail(User::find(Yii::$app->params['chat']['consultant_id'])->getEmail(), 'Запрос на добавление услуги', 'request', [
-                    'stock'    => Stock::find($stockId),
+                    'stock'    => $stock,
                     'user'     => \Yii::$app->user->identity,
                     'request'  => $request,
                 ]);
-
             }
         }
-
-
 
         return self::jsonSuccess([
             'user'    => [
