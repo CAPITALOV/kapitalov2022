@@ -57,13 +57,8 @@ class Facebook extends \yii\authclient\clients\Facebook implements authClientInt
         if (ArrayHelper::getValue($attributes, 'fb_link', '') != '') {
             $fields['fb_link'] = $attributes['link'];
         }
-        if (ArrayHelper::getValue($attributes, 'fb_link', '') != '') {
+        if (ArrayHelper::getValue($attributes, 'gender', '') != '') {
             $fields['gender'] = (($attributes['gender'] == 'male') ? 1 : 0);
-        }
-
-        // добавляю поля для подписки
-        foreach(\app\services\Subscribe::$userFieldList as $field) {
-            $fields[$field] = 1;
         }
         if (isset($attributes['email'])) {
             $fields['email'] = $attributes['email'];
