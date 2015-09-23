@@ -35,8 +35,8 @@ $this->registerJsFile("/js/actions.js", ['depends' => ['yii\web\JqueryAsset']]);
     </div>
 </div>
 
-<div id="chart2" class="center-block" style=" margin-left:75px; margin-right:75px;">
-    <?php if (!is_null($lineArrayPast)) { ?>
+<?php if ($lineArrayPast) { ?>
+    <div id="chart2" class="center-block" style=" margin-left:75px; margin-right:75px;">
         <?= \cs\Widget\AmCharts\CandleStick::widget([
             'height'       => 600,
             'lineArray'    => $lineArrayPast,
@@ -122,12 +122,8 @@ $this->registerJsFile("/js/actions.js", ['depends' => ['yii\web\JqueryAsset']]);
                 ]
             ],
         ]) ?>
-    <?php } else { ?>
-        <div class="alert alert-danger">
-            Нет данных
-        </div>
-    <?php } ?>
-</div>
+    </div>
+<?php } ?>
 
 <hr class="clearfix" style="color:#489F46; background-color:#489F46; height:3px; margin-top: 0px; margin-bottom: 0px;">
 <div class="container-fluid flexcontainer" style="margin-bottom:20px; background-color:#ededed; height:90px;">
