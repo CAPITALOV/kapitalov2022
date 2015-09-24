@@ -150,9 +150,6 @@ class SiteController extends \cs\base\BaseController
             'lineArrayPast'    => $lineArrayPast,
             'lineArrayCandels' => $lineArrayCandels,
         ]);
-
-
-        return $this->render();
     }
 
     public static function sendRequest($url, $options = [], $access_token = null)
