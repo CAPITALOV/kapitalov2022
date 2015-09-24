@@ -45,7 +45,8 @@ $this->registerMetaTag(['name' => 'og:description', 'content' => 'Эксклюз
 
 
 <!-- Page Content -->
-<div class="container">
+<?php if (Yii::$app->requestedRoute == 'site/stock') { echo('<div>');} else {echo('<div class="container">');}?>
+
 
     <?= $content ?>
 

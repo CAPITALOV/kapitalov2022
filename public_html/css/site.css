@@ -123,3 +123,9 @@ a.desc:after {
     -webkit-justify-content: flex-start;
     justify-content: flex-start;
 }
+
+.container2 {
+     margin: 0 !important;
+     width: auto !important;
+     padding: 0 !important;
+ }

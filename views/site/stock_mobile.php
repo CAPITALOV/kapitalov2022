@@ -13,6 +13,8 @@ use yii\bootstrap\ActiveForm;
 
 $this->title = $item->getField('name');
 $this->registerJsFile("/js/actions.js", ['depends' => ['yii\web\JqueryAsset']]);
+//$this->registerCssFile("/css/site.css");
+
 
 ?>
 
