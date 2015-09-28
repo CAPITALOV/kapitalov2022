@@ -141,8 +141,7 @@ JS
                     <input type="hidden" name="customerNumber" value="" id="customerNumber">
 
                     <!--                Сумма:<br>-->
-                    <input type="hidden" name="sum" value=""
-                           id="sum">
+                    <input type="hidden" name="sum" value="" id="sum">
 
                     <!--                ФИО плательщика:<br>-->
                     <input name="custName" type="hidden"  id="custName">
@@ -151,7 +150,7 @@ JS
                     <input name="custEmail" type="hidden"  id="custEmail">
 
                     <!--                Адрес доставки:<br>-->
-                    <input name="custAddr" type="hidden" >
+                    <input name="custAddr" type="hidden">
 
                     <!--                Телефон плательщика<br>-->
                     <input name="orderDetails" type="hidden">
