@@ -13,13 +13,24 @@ use yii\bootstrap\ActiveForm;
 
 $this->title = $item->getField('name');
 $this->registerJsFile("/js/actions.js", ['depends' => ['yii\web\JqueryAsset']]);
-
+//$this->registerCssFile("/css/site.css");
+$this->registerCss("
+.flexcontainer {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: row /* works with row or column */
+    flex-direction: row;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-justify-content: flex-start;
+    justify-content: flex-start;
+}
+")
 ?>
 
 
-
 <hr class="clearfix" style="color:#489F46; background-color:#489F46; height:3px; margin-top: 0px; margin-bottom: 0px;">
-<div class="container-fluid flexcontainer" style="margin-bottom:20px; background-color:#ededed; height:90px;">
+<div class="container-fluid flexcontainer" style="margin-bottom:0; background-color:#ededed; height:90px;">
     <div onclick="javascript:toggleChart('chart3')"><img src="/images/collapseIcon.png"
                                                          style="height:35px;padding-right:35px;padding-left:10px;">
     </div>
@@ -36,7 +47,7 @@ $this->registerJsFile("/js/actions.js", ['depends' => ['yii\web\JqueryAsset']]);
     </div>
 </div>
 
-<div id="chart3" class="center-block" style="margin-left:75px; margin-right:75px; margin-bottom:75px">
+<div id="chart3" class="center-block" style="margin-left:75px; margin-right:75px; margin-bottom:0">
     <?= \cs\Widget\AmCharts\CandleStick::widget([
         'height'       => 600,
         'lineArray'    => $lineArrayCandels,
@@ -108,7 +119,7 @@ $this->registerJsFile("/js/actions.js", ['depends' => ['yii\web\JqueryAsset']]);
     </div>
 </div>
 
-<div id="chart2" class="center-block" style=" margin-left:75px; margin-right:75px;">
+<div id="chart2" class="center-block" style="margin-top:0px; margin-left:75px; margin-right:75px;">
     <?php if ($lineArrayPast) { ?>
         <?= \cs\Widget\AmCharts\CandleStick::widget([
             'height'       => 600,
@@ -202,7 +213,6 @@ $this->registerJsFile("/js/actions.js", ['depends' => ['yii\web\JqueryAsset']]);
     <?php } ?>
 </div>
 
-
 <div class="modal fade" id="myModalBlue" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -240,3 +250,4 @@ $this->registerJsFile("/js/actions.js", ['depends' => ['yii\web\JqueryAsset']]);
         </div>
     </div>
 </div>
+

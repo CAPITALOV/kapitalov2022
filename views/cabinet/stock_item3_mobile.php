@@ -56,7 +56,7 @@ $dateMax = $dateMax->format('j') . ' ' . $monthList[$dateMax->format('n')-1];
 </div>
 
 <?php if ($isPaid) { ?>
-    <div id="chart1" class="center-block" style="margin:25px 75px;">
+    <div id="chart1" class="center-block" style="margin:25px 5px;">
         <?php if (!is_null($lineArrayFuture)) { ?>
             <?= \cs\Widget\AmCharts\CandleStick::widget([
                 'enableExport' => true,
@@ -162,7 +162,7 @@ $dateMax = $dateMax->format('j') . ' ' . $monthList[$dateMax->format('n')-1];
     </div>
 </div>
 
-<div id="chart2" class="center-block" style=" margin-left:75px; margin-right:75px;">
+<div id="chart2" class="center-block" style="margin:0 5px;">
     <?php if (!is_null($lineArrayPast)) { ?>
         <?= \cs\Widget\AmCharts\CandleStick::widget([
             'height'       => 600,
@@ -274,7 +274,7 @@ $dateMax = $dateMax->format('j') . ' ' . $monthList[$dateMax->format('n')-1];
     </div>
 </div>
 
-<div id="chart3" class="center-block" style="margin-left:75px; margin-right:75px; margin-bottom:75px">
+<div id="chart3" class="center-block" style="margin-left:5px; margin-right:5px; margin-bottom:75px">
     <?= \cs\Widget\AmCharts\CandleStick::widget([
         'height'       => 600,
         'lineArray'    => $lineArrayCandels,
