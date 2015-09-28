@@ -140,7 +140,7 @@ JS
                     <input type="hidden" name="shopFailURL" value="" id="shopFailURL">
 
                     <!--                Сумма:<br>-->
-                    <input type="hidden" name="sum" value="" >
+                    <input type="hidden" name="sum" value="" id="sum">
 
                     <!--                ФИО плательщика:<br>-->
                     <input name="custName" type="hidden" placeholder="" id="custName">
