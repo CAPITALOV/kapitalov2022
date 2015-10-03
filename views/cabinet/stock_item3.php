@@ -160,7 +160,7 @@ $dateMax = $dateMax->format('j') . ' ' . $monthList[$dateMax->format('n')-1];
              style="vertical-align:middle; font-size:20px; font-weight: bold; display:inline-block;">Просмотр истории
             индексов прошедших торгов
         </div>
-        <div>[<?= round(($p1 = CalculatingProbability::initStock($item->getId(),1)->calc()) * 100) ?> / <?= $p2 = CalculatingProbability::initStock($item->getId(), 2)->calc() ?> = <?= ($p2+$p1)/2 ?>]</div>
+        <div>[<?= $p1 = round((CalculatingProbability::initStock($item->getId(),1)->calc()) * 100) ?> / <?= $p2 = round((CalculatingProbability::initStock($item->getId(), 2)->calc()) * 100) ?> = <?= ($p2+$p1)/2 ?>]</div>
     </div>
 </div>
 
