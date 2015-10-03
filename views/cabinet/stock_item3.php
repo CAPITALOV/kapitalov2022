@@ -3,6 +3,7 @@
 use yii\helpers\Url;
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
+use app\service\CalculatingProbability;
 
 /* @var $this \yii\web\View */
 /* @var $item  \app\models\Stock */
@@ -159,6 +160,7 @@ $dateMax = $dateMax->format('j') . ' ' . $monthList[$dateMax->format('n')-1];
              style="vertical-align:middle; font-size:20px; font-weight: bold; display:inline-block;">Просмотр истории
             индексов прошедших торгов
         </div>
+        <div>[<?= $p1 = round((CalculatingProbability::initStock($item->getId(),1)->calc()) * 100) ?> / <?= $p2 = round((CalculatingProbability::initStock($item->getId(), 2)->calc()) * 100) ?> = <?= ($p2+$p1)/2 ?>]</div>
     </div>
 </div>
 
