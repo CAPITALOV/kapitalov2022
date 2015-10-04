@@ -78,7 +78,7 @@ JS
                         <div style="float:left; margin-left:5px;"><?= $item->getField('name') ?></div>
                         <img src="/images/payd.png" style="margin-left:10px; height:17px"/>
 
-                        <div style="margin-left:5px; color:#58b724">Оплачено до<?= $date ?></div>
+                        <div style="margin-left:5px; color:#58b724">Оплачено до <?= $date ?></div>
                     </li>
                 <?php } ?>
 
