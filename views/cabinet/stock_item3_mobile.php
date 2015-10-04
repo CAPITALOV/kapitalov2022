@@ -36,9 +36,10 @@ $dateMin = $dateMin->format('j') . ' ' . $monthList[$dateMin->format('n')-1];
 $dateMax = $dateMax->format('j') . ' ' . $monthList[$dateMax->format('n')-1];
 ?>
 
-
-<h2 class="page-header col-lg-12">Просмотр будущих индексов капиталов</h2>
-<p>с <?= $dateMin ?> по <?= $dateMax ?></p>
+<div class="col-lg-12">
+    <h2 class="page-header ">Просмотр будущих индексов капиталов</h2>
+    <p>с <?= $dateMin ?> по <?= $dateMax ?></p>
+</div>
 
 <?php if ($isPaid) { ?>
     <div id="chart1" class="center-block" style="margin:25px 5px;">
