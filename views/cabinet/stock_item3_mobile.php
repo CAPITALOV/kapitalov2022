@@ -37,23 +37,8 @@ $dateMax = $dateMax->format('j') . ' ' . $monthList[$dateMax->format('n')-1];
 ?>
 
 
-<hr class="clearfix" style="color:#489F46; background-color:#489F46; height:3px; margin-top: 0px; margin-bottom: 0px;">
-<div class="container-fluid flexcontainer" style="background-color:#ededed; height:90px;">
-    <div onclick="javascript:toggleChart('chart1')"><img src="/images/collapseIcon.png"
-                                                         style="height:35px;padding-right:35px;padding-left:10px;">
-    </div>
-    <div>
-        <img src="/images/icon-info.png" style="height:30px;padding-right:35px;">
-    </div>
-    <div class="col-md-auto">
-        <img src="/images/icon-index-capitalov.png" style="height:35px;padding-right:15px;">
-
-        <div class="text-nowrap"
-             style="vertical-align:middle; font-size:18px; font-weight: bold; display:inline-block;">Просмотр будущих индексов капиталов
-        </div>
-    </div>
-    <div style="color: #58b724; margin-left: 20px; margin-top: 1px;">с <?= $dateMin ?> по <?= $dateMax ?></div>
-</div>
+<h2>Просмотр будущих индексов капиталов</h2>
+<p>с <?= $dateMin ?> по <?= $dateMax ?></p>
 
 <?php if ($isPaid) { ?>
     <div id="chart1" class="center-block" style="margin:25px 5px;">
@@ -144,23 +129,10 @@ $dateMax = $dateMax->format('j') . ' ' . $monthList[$dateMax->format('n')-1];
         >Купить</a>
 <?php } ?>
 
-<hr class="clearfix" style="color:#489F46; background-color:#489F46; height:3px; margin-top: 0px;margin-bottom: 0px;">
-<div class="container-fluid flexcontainer" style="margin-bottom:0px;background-color:#ededed; height:90px;">
-    <div onclick="javascript:toggleChart('chart2')"><img src="/images/collapseIcon.png"
-                                                         style="height:35px;padding-right:35px;padding-left:10px;">
-    </div>
-    <div style="float:left;">
-        <img src="/images/icon-info.png" style="height:30px;padding-right:35px;">
-    </div>
-    <div class="col-md-auto" style="float:right; ">
-        <img src="/images/icon-index-history.png" style="height:35px;padding-right:15px;">
 
-        <div class="text-nowrap"
-             style="vertical-align:middle; font-size:20px; font-weight: bold; display:inline-block;">Просмотр истории
-            индексов прошедших торгов
-        </div>
-    </div>
-</div>
+<h2>Просмотр истории
+    индексов прошедших торгов</h2>
+
 
 <div id="chart2" class="center-block" style="margin:0 5px;">
     <?php if (!is_null($lineArrayPast)) { ?>
@@ -256,23 +228,9 @@ $dateMax = $dateMax->format('j') . ' ' . $monthList[$dateMax->format('n')-1];
     <?php } ?>
 </div>
 
-<hr class="clearfix" style="color:#489F46; background-color:#489F46; height:3px; margin-top: 0px; margin-bottom: 0px;">
-<div class="container-fluid flexcontainer" style="margin-bottom:20px; background-color:#ededed; height:90px;">
-    <div onclick="javascript:toggleChart('chart3')"><img src="/images/collapseIcon.png"
-                                                         style="height:35px;padding-right:35px;padding-left:10px;">
-    </div>
-    <div style="float:left;">
-        <img src="/images/icon-info.png" style="height:30px;padding-right:35px;">
-    </div>
-    <div class="col-md-auto" style="float:right; ">
-        <img src="/images/icon-history.png" style="height:35px;padding-right:15px;">
+<h2>Просмотр архивных
+    котировок</h2>
 
-        <div class="text-nowrap"
-             style="vertical-align:middle; font-size:18px; font-weight: bold; display:inline-block;">Просмотр архивных
-            котировок
-        </div>
-    </div>
-</div>
 
 <div id="chart3" class="center-block" style="margin-left:5px; margin-right:5px; margin-bottom:75px">
     <?= \cs\Widget\AmCharts\CandleStick::widget([
