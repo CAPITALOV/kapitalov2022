@@ -150,7 +150,8 @@ class StockKursImport extends \cs\base\BaseForm
      */
     public static function importCandels($stock_id, $start, $end, $isReplaceExisting = false)
     {
-        $row = Stock::find($stock_id)->getFields();
+        $stock = Stock::find($stock_id);
+        $row = $stock->getFields();
         $data = [
             'params'   => [
                 'market'    => $row['finam_market'],
@@ -197,6 +198,7 @@ class StockKursImport extends \cs\base\BaseForm
                 (new Query())->createCommand()->update(StockKurs::TABLE, $fields, ['date' => $date, 'stock_id' => $stock_id])->execute();
             }
         }
+        $stock->update(['is_kurs' => 1]);
 
         return [
             'insert' => $insert,
