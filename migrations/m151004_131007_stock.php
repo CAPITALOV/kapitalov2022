@@ -7,9 +7,9 @@ class m151004_131007_stock extends Migration
 {
     public function up()
     {
-//        $this->execute('drop table tbChats');
-//        $this->execute('drop table tbManagers');
-//        $this->execute('drop table tbMessages');
+        $this->execute('drop table tbChats');
+        $this->execute('drop table tbManagers');
+        $this->execute('drop table tbMessages');
     }
 
     public function down()
