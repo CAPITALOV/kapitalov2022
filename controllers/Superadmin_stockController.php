@@ -17,7 +17,10 @@ class Superadmin_stockController extends SuperadminBaseController
 
     public function actionIndex()
     {
-        $items = Stock::query()->all();
+        $items = Stock::query()
+            ->orWhere(['is_enabled' => null])
+            ->orWhere(['is_enabled' => 0])
+            ->all();
         $red = StockPrognosisRed::query()
             ->select([
                 'stock_id',
@@ -49,6 +52,28 @@ class Superadmin_stockController extends SuperadminBaseController
             'blue'  => $blue,
             'kurs'  => $kurs,
         ]);
+    }
+
+    /**
+     * Устанавливает флаг is_enabled для котировки
+     * AJAX
+     *
+     * REQUEST:
+     * - id - int - идентификатор котировки
+     * - is_enabled - int - 0 - нет, 1 - да
+     */
+    public function actionToggle()
+    {
+        $id = self::getParam('id');
+        $is_enabled = self::getParam('is_enabled');
+
+        $stock = Stock::find($id);
+        if (is_null($stock)) {
+            return self::jsonErrorId(101, 'Не найдена котировка');
+        }
+        $stock->update(['is_enabled' => $is_enabled]);
+
+        return self::jsonSuccess();
     }
 
     public function actionAdd()

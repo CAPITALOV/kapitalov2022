@@ -2,13 +2,33 @@
 
 use yii\helpers\Url;
 use yii\helpers\Html;
-/** @var $items array cap_stok */
+/** @var $items array cap_stock */
 /** @var $red array  */
 /** @var $blue array  */
 /** @var $kurs array  */
+/** @var $this yii\web\View  */
 
 
-$this->title = 'Курсы';
+$this->title = 'Котировки';
+$model = new \app\models\Form\StockAll();
+$this->registerJs(<<<JS
+        $('input[name=\"StockAll[is_enabled]\"]').change(function() {
+            var t = $(this);
+            var id = t.data('id');
+            ajaxJson({
+                url: 'stock/toggle',
+                data:{
+                    id: id,
+                    is_enabled: t.is(':checked')? 1 : 0
+                },
+                success: function(ret) {
+                    alert('ok');
+                }
+            });
+        })
+JS
+);
+
 ?>
 
 <h1 class="page-header"><?= $this->title ?></h1>
@@ -20,6 +40,7 @@ $this->title = 'Курсы';
 <table class="table tableMy table-striped" style="width:100%;">
     <thead>
         <tr>
+            <th>Действует?</th>
             <th>Наименование</th>
             <th>График</th>
             <th>red</th>
@@ -29,10 +50,24 @@ $this->title = 'Курсы';
             <th>Импортировать</th>
         </tr>
     </thead>
-    <?php
-    foreach ($items as $item) {
-        ?>
+    <?php foreach ($items as $item) { ?>
         <tr>
+            <td>
+                <?php
+                if (\yii\helpers\ArrayHelper::getValue($item, 'is_enabled', 0) == 1) {
+                    $model->is_enabled = true;
+                } else {
+                    $model->is_enabled = false;
+                }
+                ?>
+                <?= \cs\Widget\CheckBox2\CheckBox::widget([
+                    'model'     => $model,
+                    'attribute' => 'is_enabled',
+                    'options' => ['data' => [
+                        'id' => $item['id']
+                    ]]
+                ]) ?>
+            </td>
             <td>
                 <a href="<?= Url::to([
                     'superadmin_stock/edit',

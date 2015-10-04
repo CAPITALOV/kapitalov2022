@@ -45,6 +45,7 @@ return [
     // stock
     'stock'                                 => 'superadmin_stock/index',
     'stock/add'                             => 'superadmin_stock/add',
+    'stock/toggle'                          => 'superadmin_stock/toggle',
     'stock/<id:\\d+>/edit'                  => 'superadmin_stock/edit',
     'stock/<id:\\d+>/import'                => 'superadmin_stock/import',
     'stock/<id:\\d+>/importKurs'            => 'superadmin_stock/import_kurs',

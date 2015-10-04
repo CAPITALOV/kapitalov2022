@@ -83,6 +83,19 @@ class Stock extends \cs\base\DbRecord
     }
 
     /**
+     * Возвращает заготовку Query для создания запросов
+     *
+     * @param $condition
+     * @param $params
+     *
+     * @return Query
+     */
+    public static function query($condition = null, $params = null)
+    {
+        return parent::query($condition, $params)->andWhere(['is_enabled' => 1]);
+    }
+
+    /**
      * Возвращает акции которые оплачены
      *
      * @return \yii\db\Query

@@ -80,29 +80,38 @@ $this->registerJs("$('.payImage').tooltip()");
         <p>Телефон для обратной связи: +7 499 394-27-43<br>National Agency of the Capitals</p>
     </div>
     <h2 class="page-header col-lg-12">Мы принимаем к оплате</h2>
+
     <div class="col-md-3">
-        <img src="/images/site/price/yandex_money.jpg" width="200" class="thumbnail payImage" alt="Яндекс Деньги" title="Яндекс Деньги">
+        <img src="/images/site/price/yandex_money.jpg" width="200" class="thumbnail payImage" alt="Яндекс Деньги"
+             title="Яндекс Деньги">
     </div>
     <div class="col-md-3">
-        <img src="/images/site/price/mastercard.png" width="200" class="thumbnail payImage" alt="Банковские карты Master Card" title="Банковские карты Master Card">
+        <img src="/images/site/price/mastercard.png" width="200" class="thumbnail payImage"
+             alt="Банковские карты Master Card" title="Банковские карты Master Card">
     </div>
     <div class="col-md-3">
-        <img src="/images/site/price/visa.png" width="200" class="thumbnail payImage" alt="Банковские карты Visa" title="Банковские карты Visa">
+        <img src="/images/site/price/visa.png" width="200" class="thumbnail payImage" alt="Банковские карты Visa"
+             title="Банковские карты Visa">
     </div>
     <div class="col-md-3">
-        <img src="/images/site/price/terminal.jpg" width="200" class="thumbnail payImage" alt="Платежи через термиалы" title="Платежи через термиалы">
+        <img src="/images/site/price/terminal.jpg" width="200" class="thumbnail payImage" alt="Платежи через термиалы"
+             title="Платежи через термиалы">
     </div>
     <div class="col-md-3">
-        <img src="/images/site/price/webmoney.jpg" width="200" class="thumbnail payImage" alt="WebMoney" title="WebMoney">
+        <img src="/images/site/price/webmoney.jpg" width="200" class="thumbnail payImage" alt="WebMoney"
+             title="WebMoney">
     </div>
     <div class="col-md-3">
-        <img src="/images/site/price/masterpass.png" width="200" class="thumbnail payImage" alt="MasterPass" title="MasterPass">
+        <img src="/images/site/price/masterpass.png" width="200" class="thumbnail payImage" alt="MasterPass"
+             title="MasterPass">
     </div>
     <div class="col-md-3">
-        <img src="/images/site/price/alfa-click.jpg" width="200" class="thumbnail payImage" alt="Альфа-Клик" title="Альфа-Клик">
+        <img src="/images/site/price/alfa-click.jpg" width="200" class="thumbnail payImage" alt="Альфа-Клик"
+             title="Альфа-Клик">
     </div>
     <div class="col-md-3">
-        <img src="/images/site/price/psb.jpg" width="200" class="thumbnail payImage" alt="Промсвязьбанк" title="Промсвязьбанк">
+        <img src="/images/site/price/psb.jpg" width="200" class="thumbnail payImage" alt="Промсвязьбанк"
+             title="Промсвязьбанк">
     </div>
 
 
@@ -118,42 +127,45 @@ $this->registerJs("$('.payImage').tooltip()");
             <th>Посмотреть</th>
         </tr>
         </thead>
-        <?php foreach($items as $market) { ?>
+        <?php foreach ($items as $market) { ?>
             <tr>
                 <td colspan="6">
                     <h2><?= $market['name'] ?></h2>
                 </td>
             </tr>
-        <?php foreach($market['stockList'] as $item) { ?>
-        <tr>
-            <td>
-                <?= $market['name'] ?>
-            </td>
-            <td>
-                <?= $item['name'] ?>
-            </td>
-            <td>
-                <?= ($item['finam_market'] == 1) ? 99 : 249 ?> уе
-            </td>
-            <td>
-                <?= (ArrayHelper::getValue($item, 'is_kurs', 0) == 1)? 'Да': '' ?>
-            </td>
-            <td>
-                <?php if ($item['status'] == 0) { ?>
-                    <span class="label label-default">Не расчитано</span>
-                <?php } else if ($item['status'] == 1) { ?>
-                    <span class="label label-warning">Расчитывается</span>
-                <?php } else if ($item['status'] == 2) { ?>
-                    <span class="label label-primary">Готов</span>
+            <?php if (count($market['stockList']) > 0) { ?>
+                <?php foreach ($market['stockList'] as $item) { ?>
+                    <tr>
+                        <td>
+                            <?= $market['name'] ?>
+                        </td>
+                        <td>
+                            <?= $item['name'] ?>
+                        </td>
+                        <td>
+                            <?= ($item['finam_market'] == 1) ? 99 : 249 ?> уе
+                        </td>
+                        <td>
+                            <?= (ArrayHelper::getValue($item, 'is_kurs', 0) == 1) ? 'Да' : '' ?>
+                        </td>
+                        <td>
+                            <?php if ($item['status'] == 0) { ?>
+                                <span class="label label-default">Не расчитано</span>
+                            <?php } else if ($item['status'] == 1) { ?>
+                                <span class="label label-warning">Расчитывается</span>
+                            <?php } else if ($item['status'] == 2) { ?>
+                                <span class="label label-primary">Готов</span>
+                            <?php } ?>
+                        </td>
+                        <td>
+                            <?php if ((ArrayHelper::getValue($item, 'is_kurs', 0) == 1) or ($item['status'] == 2)) { ?>
+                                <a href="<?= Url::to(['site/stock', 'id' => $item['id']]) ?>"
+                                   class="btn btn-primary btn-xs">Посмотеть</a>
+                            <?php } ?>
+                        </td>
+                    </tr>
                 <?php } ?>
-            </td>
-            <td>
-                <?php if ((ArrayHelper::getValue($item, 'is_kurs', 0) == 1) or ($item['status'] == 2)) { ?>
-                    <a href="<?= Url::to(['site/stock', 'id' => $item['id']])?>" class="btn btn-primary btn-xs">Посмотеть</a>
-                <?php }?>
-            </td>
-        </tr>
-        <?php } ?>
+            <?php } ?>
         <?php } ?>
     </table>
 </div>
