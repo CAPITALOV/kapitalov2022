@@ -128,12 +128,12 @@ $this->registerJs("$('.payImage').tooltip()");
         </tr>
         </thead>
         <?php foreach ($items as $market) { ?>
-            <tr>
-                <td colspan="6">
-                    <h2><?= $market['name'] ?></h2>
-                </td>
-            </tr>
             <?php if (count($market['stockList']) > 0) { ?>
+                <tr>
+                    <td colspan="6">
+                        <h2><?= $market['name'] ?></h2>
+                    </td>
+                </tr>
                 <?php foreach ($market['stockList'] as $item) { ?>
                     <tr>
                         <td>
