@@ -37,7 +37,7 @@ $dateMax = $dateMax->format('j') . ' ' . $monthList[$dateMax->format('n')-1];
 ?>
 
 
-<h2>Просмотр будущих индексов капиталов</h2>
+<h2 class="page-header col-lg-12">Просмотр будущих индексов капиталов</h2>
 <p>с <?= $dateMin ?> по <?= $dateMax ?></p>
 
 <?php if ($isPaid) { ?>
@@ -130,7 +130,7 @@ $dateMax = $dateMax->format('j') . ' ' . $monthList[$dateMax->format('n')-1];
 <?php } ?>
 
 
-<h2>Просмотр истории
+<h2 class="page-header col-lg-12">Просмотр истории
     индексов прошедших торгов</h2>
 
 
@@ -228,7 +228,7 @@ $dateMax = $dateMax->format('j') . ' ' . $monthList[$dateMax->format('n')-1];
     <?php } ?>
 </div>
 
-<h2>Просмотр архивных
+<h2 class="page-header col-lg-12">Просмотр архивных
     котировок</h2>
 
 
