@@ -59,7 +59,14 @@ class CheckBox extends InputWidget
         if ($this->textOn) $options['data-on'] = $this->textOn;
         if ($this->textOff) $options['data-off'] = $this->textOff;
 
-        return Html::tag('div', Html::input('checkbox', $this->attrName, 1, $options), ['style' => 'display:block;'] );
+        return Html::tag('div', Html::input('checkbox', $this->attrName, 1, $options), ['style' => 'display:block;']);
+    }
+
+    public static function widget($config = [])
+    {
+        $class = new self($config);
+
+        return $class->run();
     }
 
     /**

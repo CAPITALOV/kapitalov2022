@@ -35,6 +35,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= $model->field($form, 'finam_em') ?>
         <?= $model->field($form, 'finam_market') ?>
         <?= $model->field($form, 'finam_code') ?>
+        <?= $model->field($form, 'is_enabled') ?>
 
         <div class="form-group">
             <hr>

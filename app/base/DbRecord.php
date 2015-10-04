@@ -52,9 +52,12 @@ class DbRecord
      */
     public static function query($condition = null, $params = null)
     {
-        $query = (new Query())->select('*')->from(static::TABLE);
+        $query = (new Query())->select('*')
+            ->from(static::TABLE)
+
+        ;
         if (!is_null($condition)) {
-            $query->where($condition, $params);
+            $query->andWhere($condition, $params);
         }
 
         return $query;
