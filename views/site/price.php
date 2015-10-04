@@ -5,6 +5,9 @@
 $this->title = 'Тарифы';
 
 use yii\helpers\Url;
+use yii\helpers\ArrayHelper;
+
+
 $this->registerJs("$('.payImage').tooltip()");
 
 ?>
@@ -110,12 +113,14 @@ $this->registerJs("$('.payImage').tooltip()");
             <th>Биржа</th>
             <th>Котировка</th>
             <th>Цена</th>
+            <th>Курс</th>
+            <th>Статус</th>
             <th>Посмотреть</th>
         </tr>
         </thead>
         <?php foreach($items as $market) { ?>
             <tr>
-                <td colspan="4">
+                <td colspan="6">
                     <h2><?= $market['name'] ?></h2>
                 </td>
             </tr>
@@ -131,13 +136,21 @@ $this->registerJs("$('.payImage').tooltip()");
                 <?= ($item['finam_market'] == 1) ? 99 : 249 ?> уе
             </td>
             <td>
+                <?= (ArrayHelper::getValue($item, 'is_kurs', 0) == 1)? 'Да': '' ?>
+            </td>
+            <td>
                 <?php if ($item['status'] == 0) { ?>
                     <span class="label label-default">Не расчитано</span>
                 <?php } else if ($item['status'] == 1) { ?>
                     <span class="label label-warning">Расчитывается</span>
                 <?php } else if ($item['status'] == 2) { ?>
-                    <a class="btn btn-primary" href="<?= \yii\helpers\Url::to(['site/stock', 'id' => $item['id']]) ?>">Посмотреть</a>
+                    <span class="label label-primary">Готов</span>
                 <?php } ?>
+            </td>
+            <td>
+                <?php if ((ArrayHelper::getValue($item, 'is_kurs', 0) == 1) or ($item['status'] == 2)) { ?>
+                    <a href="<?= Url::to(['site/stock', 'id' => $item['id']])?>" class="btn btn-primary btn-xs">Посмотеть</a>
+                <?php }?>
             </td>
         </tr>
         <?php } ?>

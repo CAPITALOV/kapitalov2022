@@ -28,6 +28,7 @@ class Stock extends \cs\base\BaseForm
     public $finam_market;
     public $finam_code;
     public $status;
+    public $is_kurs;
 
     function __construct($fields = [])
     {
