@@ -146,7 +146,7 @@ $this->registerJs("$('.payImage').tooltip()");
                             <?= ($item['finam_market'] == 1) ? 99 : 249 ?> уе
                         </td>
                         <td>
-                            <?= (ArrayHelper::getValue($item, 'is_kurs', 0) == 1) ? 'Да' : '' ?>
+                            <?= (ArrayHelper::getValue($item, 'is_kurs', 0) == 1) ? \yii\helpers\Html::tag('span', 'Да', ['class' => 'label label-success']) : '' ?>
                         </td>
                         <td>
                             <?php if ($item['status'] == 0) { ?>
