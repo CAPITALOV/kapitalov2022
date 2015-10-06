@@ -13,11 +13,14 @@ use app\models\User;
 
 class SuperadminBaseController extends \cs\base\BaseController
 {
+    public $layout = 'admin';
+
     public function behaviors()
     {
         return [
             'access' => [
                 'class' => AccessControl::className(),
+                'except' => ['login'],
                 'rules' => [
                     [
                         'allow' => true,
