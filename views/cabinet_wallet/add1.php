@@ -52,7 +52,6 @@ JS
         disablePreviousStep: false
     });
     $('#buttonNext').click(function() {
-    console.log(1);
         ajaxJson({
             url: '{$url}',
             data: {
@@ -74,6 +73,16 @@ JS
 JS
     );
     ?>
+
+
+    <div class="panel panel-info">
+        <div class="panel-heading">Информация</div>
+        <div class="panel-body">
+            <p>Если клиент заказывает котировку и она не расчитана до 15 числа, то он получает ее после расчета до конца текущего месяца. Срок расчета котировки национального рынка от 3 до 7 дней. Срок расчета котировки международного рынка от 3 до 14 дней. Если клиент заказывает котировку и она не расчитана не ранее 15 числа, то он получает ее после расчета до конца следующего месяца.</p>
+
+        </div>
+    </div>
+
     <div class="wizard" data-initialize="wizard" id="myWizard">
         <div class="steps-container">
             <ul class="steps">
