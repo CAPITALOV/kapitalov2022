@@ -106,7 +106,7 @@ class SuperadminController extends SuperadminBaseController
     public function actionLogin()
     {
         if (!\Yii::$app->user->isGuest) {
-            return $this->goHome();
+            return $this->redirect(['superadmin/index']);
         }
 
         $model = new LoginForm();
