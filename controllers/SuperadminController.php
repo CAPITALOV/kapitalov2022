@@ -7,6 +7,7 @@
 
 namespace app\controllers;
 
+use app\models\LoginForm;
 use app\models\Registration;
 use app\models\Request;
 use app\models\Stock;
@@ -23,7 +24,7 @@ class SuperadminController extends SuperadminBaseController
 {
     public function actionIndex()
     {
-        return $this->render('index');
+        return $this->redirect(['superadmin_stock/index']);
     }
 
     public function actionReferal()
@@ -33,8 +34,7 @@ class SuperadminController extends SuperadminBaseController
 
     public function actionStock_calc()
     {
-        return $this->render([
-        ]);
+        return $this->render([]);
     }
 
     /**
@@ -102,6 +102,24 @@ class SuperadminController extends SuperadminBaseController
             'query' => User::query()
         ]);
     }
+
+    public function actionLogin()
+    {
+        if (!\Yii::$app->user->isGuest) {
+            return $this->goHome();
+        }
+
+        $model = new LoginForm();
+        if ($model->load(Yii::$app->request->post()) && $model->login()) {
+            return $this->redirect(['superadmin/index']);
+        }
+        else {
+            return $this->render([
+                'model' => $model,
+            ]);
+        }
+    }
+
 
     /**
      * Показывает "Текущие заказы пользователей"

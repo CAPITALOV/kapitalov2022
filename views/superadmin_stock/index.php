@@ -78,7 +78,7 @@ JS
             </td>
             <td>
                 <a href="<?= Url::to([
-                    'cabinet/stock_item',
+                    'superadmin_stock/graph2',
                     'id' => $item['id']
                 ]) ?>">
                     График

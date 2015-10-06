@@ -81,48 +81,6 @@ JS
                         <div style="margin-left:5px; color:#58b724">Оплачено до <?= $date ?></div>
                     </li>
                 <?php } ?>
-
-
-                <?php if (Yii::$app->user->identity->isAdmin()) { ?>
-                    <li class="dropdown<?php if (\cs\services\Str::isContain(Yii::$app->controller->id, 'superadmin')) { echo(' active');} ?>">
-                        <a
-                            href="#"
-                            class="dropdown-toggle"
-                            data-toggle="dropdown"
-                            aria-expanded="false"
-                            role="button"
-                            >
-                            Админ
-                            <span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li><a href="<?= Url::to(['superadmin_requests/index']) ?>">Заявки на оплату</a></li>
-                            <li><a href="<?= Url::to(['superadmin/referal']) ?>">Пирамида изобилия</a></li>
-                            <li><a href="<?= Url::to(['superadmin_stock/index']) ?>">Котировки</a></li>
-                            <li><a href="<?= Url::to(['superadmin/users_stock']) ?>">Текущие заказы пользователей</a></li>
-                            <li><a href="<?= Url::to(['superadmin/users']) ?>">Пользователи</a></li>
-                            <li><a href="<?= Url::to(['superadmin/stock_calc']) ?>">Расчитываемые котировки</a></li>
-                        </ul>
-                    </li>
-                <?php } ?>
-                <?php if (Yii::$app->user->identity->isRole(\app\models\UserRole::ROLE_DESIGNER)) { ?>
-                    <li class="dropdown<?php if (Yii::$app->controller->id == 'designer') { echo(' active');} ?>">
-                        <a
-                            href="#"
-                            class="dropdown-toggle"
-                            data-toggle="dropdown"
-                            aria-expanded="false"
-                            role="button"
-                            >
-                            Дизайн
-                            <span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li><a href="<?= Url::to(['designer/landing']) ?>">Главная страница</a></li>
-
-                        </ul>
-                    </li>
-                <?php } ?>
             </ul>
 
 

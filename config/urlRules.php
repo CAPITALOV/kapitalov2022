@@ -25,7 +25,8 @@ return [
     'auth'                                  => 'auth/auth',
 
     // superadmin
-    'superAdmin'                            => 'superadmin/index',
+    'admin'                                 => 'superadmin/index',
+    'admin/login'                           => 'superadmin/login',
     'admin/referal'                         => 'superadmin/referal',
     'admin/referal/delete'                  => 'superadmin/referal_delete',
     'admin/calc'                            => 'superadmin/calc',
@@ -61,6 +62,7 @@ return [
     'stock/<id:\\d+>/prognosis/edit'        => 'superadmin_stock/prognosis_edit',
     'stock/prognosis/update'                => 'superadmin_stock/prognosis_update',
     'stock/<id:\\d+>/graph'                 => 'superadmin_stock/graph',
+    'stock/<id:\\d+>/graph2'                => 'superadmin_stock/graph2',
 
     // designer
     'designer'                              => 'designer/index',
