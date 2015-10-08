@@ -30,18 +30,8 @@ $('.glyphicon').tooltip();
 JS
 );
 
-$url = new \cs\services\Url();
-$params = [];
-foreach ($url->params as $name => $value) {
-    if (\yii\helpers\StringHelper::startsWith($name, 'Stock')) {
-        $params[ substr($name, 6, strlen($name) - 6 - 1) ] = $value;
-    }
-}
-$query = \app\models\Stock::query();
-$v = \yii\helpers\ArrayHelper::getValue($params, 'name', '');
-if ($v != '') {
-    $query->andWhere(['like', 'name', $v]);
-}
+$searchModel = new \app\models\Form\StockSearch();
+$dataProvider = $searchModel->search(Yii::$app->request->get());
 ?>
 
 <h1 class="page-header"><?= $this->title ?></h1>
@@ -51,15 +41,11 @@ if ($v != '') {
     }
 </style>
 
-<?=
-\yii\grid\GridView::widget([
+<?= \yii\grid\GridView::widget([
     'dataProvider' => new \yii\data\ActiveDataProvider([
-        'query'      => $query,
-        'pagination' => [
-            'pageSize' => 20,
-        ],
+        'query' => \app\models\Stock::query()
     ]),
-    'filterModel'  => new \app\models\Form\Stock(),
+    'filterModel'  => $searchModel,
     'tableOptions' => [
         'class' => 'table tableMy table-striped table-hover',
     ],

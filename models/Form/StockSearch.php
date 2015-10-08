@@ -38,6 +38,9 @@ class StockSearch extends Stock
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'pagination' => [
+                'pageSize' => 20,
+            ],
         ]);
 
         // load the search form data and validate
