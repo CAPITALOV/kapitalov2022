@@ -26,7 +26,8 @@ class Url
      */
     public function __construct($url = '', $params = [])
     {
-        if ($url != '') {
+        if ($url == '') {
+            $url = \yii\helpers\Url::current([], true);
             $s = parse_url($url);
             $this->scheme = $s['scheme'];
             if (isset($s['query'])) {
