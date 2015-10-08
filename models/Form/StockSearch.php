@@ -18,18 +18,14 @@ use yii\helpers\Html;
  */
 class StockSearch extends Stock
 {
+
     public function rules()
     {
-        // only fields in rules() are searchable
         return [
-            [['name',], 'default'],
+            [
+                ['name'], 'default'
+            ]
         ];
-    }
-
-    public function scenarios()
-    {
-        // bypass scenarios() implementation in the parent class
-        return self::scenarios();
     }
 
     public function search($params)
@@ -37,7 +33,7 @@ class StockSearch extends Stock
         $query = \app\models\Stock::query();
 
         $dataProvider = new ActiveDataProvider([
-            'query' => $query,
+            'query'      => $query,
             'pagination' => [
                 'pageSize' => 20,
             ],

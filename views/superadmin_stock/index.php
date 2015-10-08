@@ -42,9 +42,7 @@ $dataProvider = $searchModel->search(Yii::$app->request->get());
 </style>
 
 <?= \yii\grid\GridView::widget([
-    'dataProvider' => new \yii\data\ActiveDataProvider([
-        'query' => \app\models\Stock::query()
-    ]),
+    'dataProvider' => $dataProvider,
     'filterModel'  => $searchModel,
     'tableOptions' => [
         'class' => 'table tableMy table-striped table-hover',
