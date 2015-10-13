@@ -129,7 +129,8 @@ $dateMax = $dateMax->format('j') . ' ' . $monthList[$dateMax->format('n')-1];
                 Нет данных
             </div>
         <?php } ?>
-
+        <p>Красная линия - закрытие торгов</p>
+        <p>Синяя линия - взвешенная цена</p>
     </div>
 
 <?php } else { ?>
@@ -256,6 +257,10 @@ $dateMax = $dateMax->format('j') . ' ' . $monthList[$dateMax->format('n')-1];
             Нет данных
         </div>
     <?php } ?>
+    <p>Красная линия - закрытие торгов</p>
+    <p>Синяя линия - взвешенная цена</p>
+    <p>Зеленая линия - биржевая цена</p>
+
 </div>
 
 <hr class="clearfix" style="color:#489F46; background-color:#489F46; height:3px; margin-top: 0px; margin-bottom: 0px;">
