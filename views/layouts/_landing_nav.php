@@ -26,7 +26,7 @@ use yii\helpers\Html;
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
                 <li>
-                    <b>Национальное Агентство Капиталов</b>
+                    <a><b>Национальное Агентство Капиталов</b></a>
                 </li>
                 <li>
                     <a href="tel:+74993942743">
