@@ -25,6 +25,11 @@ return [
     'auth'                                  => 'auth/auth',
 
     // superadmin
+    'admin/news'                            => 'superadmin_news/index',
+    'admin/news/add'                        => 'superadmin_news/add',
+    'admin/news/<id:\\d+>/edit'             => 'superadmin_news/edit',
+
+    // superadmin
     'admin'                                 => 'superadmin/index',
     'admin/login'                           => 'superadmin/login',
     'admin/referal'                         => 'superadmin/referal',

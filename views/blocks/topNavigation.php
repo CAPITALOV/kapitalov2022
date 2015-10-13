@@ -60,6 +60,12 @@ JS
                     </ul>
                 </li>
 
+
+                <li>
+                    <a href="tel:+74993942743">
+                        +7 (499) 394-27-43
+                    </a>
+                </li>
                 <?php if (Yii::$app->requestedRoute == 'cabinet/stock_item3') { ?>
                     <li style="margin-top:11px; display: -webkit-box; display: -moz-box; display: -ms-flexbox; display: -webkit-flex; display: flex;align-items: center; -webkit-align-items: center; ">
                         <?php
