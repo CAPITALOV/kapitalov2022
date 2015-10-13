@@ -4,6 +4,16 @@ $this->title = 'Capitalov.com Эксклюзивные финансовые ус
 
 $design = \app\models\Design::find(1);
 ?>
+
+<div class="container">
+
+<div class="col-lg-12">
+    <h1>Эксклюзивные финансовые услуги анализа движения капиталов</h1>
+</div>
+</div>
+
+
+
 <!-- Header Carousel -->
 <header id="myCarousel" class="carousel slide">
     <!-- Indicators -->
@@ -46,9 +56,6 @@ $design = \app\models\Design::find(1);
 
     <!-- Marketing Icons Section -->
     <div class="row">
-        <div class="col-lg-12">
-            <h1>Эксклюзивные финансовые услуги анализа движения капиталов</h1>
-        </div>
         <div class="col-lg-8">
             <div class="col-lg-12">
                 <h2 class="page-header">
