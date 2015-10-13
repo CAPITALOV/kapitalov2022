@@ -4,6 +4,17 @@ $this->title = 'Capitalov.com Эксклюзивные финансовые ус
 
 $design = \app\models\Design::find(1);
 ?>
+
+<div class="container">
+    <div class="col-lg-12">
+        <center>
+            <h1 class="page-header">Эксклюзивные финансовые услуги анализа движения капиталов</h1>
+        </center>
+    </div>
+</div>
+
+
+
 <!-- Header Carousel -->
 <header id="myCarousel" class="carousel slide">
     <!-- Indicators -->
@@ -48,39 +59,39 @@ $design = \app\models\Design::find(1);
     <div class="row">
         <div class="col-lg-8">
             <div class="col-lg-12">
-                <h1 class="page-header">
+                <h2 class="page-header">
                     Кто мы
-                </h1>
+                </h2>
 
                 <p>Национальное Агентство Капиталов является поставщиком инсайдерской информации для участников финансового рынка Европы, России, Азии и США.</p>
             </div>
             <div class="col-lg-12">
-                <h1 class="page-header">
+                <h2 class="page-header">
                     Что мы предлагаем
-                </h1>
+                </h2>
 
                 <p>Мы предоставляем графический прогноз изменения движения цены котировок на месяц. Мы анализируем нестабильность на валютно-финансовых рынках и представляем это графическим способом.
                     Например: Юкос, Золото, Нефть, Периоды кризиса.</p>
             </div>
             <div class="col-lg-12">
-                <h1 class="page-header">
+                <h2 class="page-header">
                     Для чего это нужно
-                </h1>
+                </h2>
 
                 <p>Для того чтобы заработать, зная когда продавать и когда покупать.</p>
                 <p>Например: IPO ВТБ Банк, Тинькофф, Юкос.</p>
             </div>
             <div class="col-lg-12">
-                <h1 class="page-header">
+                <h2 class="page-header">
                     Для кого
-                </h1>
+                </h2>
 
                 <p>Для трейдеров, аналитиков, кризис менеджеров, банкиров, финансистов и простых людей следящих за рынком (пифов).</p>
             </div>
             <div class="col-lg-12">
-                <h1 class="page-header">
+                <h2 class="page-header">
                     Что нас отличает от других
-                </h1>
+                </h2>
 
                 <div class="col-md-4">
                     <div class="panel panel-default">
@@ -127,9 +138,9 @@ $design = \app\models\Design::find(1);
                 </div>
             </div>
             <div class="col-lg-12">
-                <h1 class="page-header">
+                <h2 class="page-header">
                     Что вам надо сделать
-                </h1>
+                </h2>
 
                 <ol>
                     <li>Зарегистрироваться по <a href="<?= \yii\helpers\Url::to(['auth/registration']) ?>">ссылке</a>.</li>
