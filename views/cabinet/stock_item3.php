@@ -129,7 +129,7 @@ $dateMax = $dateMax->format('j') . ' ' . $monthList[$dateMax->format('n')-1];
                 Нет данных
             </div>
         <?php } ?>
-        <p class="center-text text-center"><b>Красная линия</b> - закрытие торгов, <b>Синяя линия</b> - взвешенная цена</p>
+        <p class="center-text text-center" style="margin-bottom: 65px;"><b>Красная линия</b> - закрытие торгов, <b>Синяя линия</b> - взвешенная цена</p>
     </div>
 
 <?php } else { ?>
@@ -256,7 +256,7 @@ $dateMax = $dateMax->format('j') . ' ' . $monthList[$dateMax->format('n')-1];
             Нет данных
         </div>
     <?php } ?>
-    <p class="center-text text-center"><b>Красная линия</b> - закрытие торгов, <b>Синяя линия</b> - взвешенная цена, <b>Зеленая линия</b> - биржевая цена</p>
+    <p class="center-text text-center" style="margin-bottom: 65px;"><b>Красная линия</b> - закрытие торгов, <b>Синяя линия</b> - взвешенная цена, <b>Зеленая линия</b> - биржевая цена</p>
 </div>
 
 <hr class="clearfix" style="color:#489F46; background-color:#489F46; height:3px; margin-top: 0px; margin-bottom: 0px;">
