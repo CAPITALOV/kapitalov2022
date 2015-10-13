@@ -47,7 +47,7 @@ $dateMax = $dateMax->format('j') . ' ' . $monthList[$dateMax->format('n')-1];
             <?= \cs\Widget\AmCharts\CandleStick::widget([
                 'enableExport' => true,
                 'lineArray'    => $lineArrayFuture,
-                'height'       => 600,
+                'height'       => 500,
                 'chartOptions' => [
                     'language'       => 'ru',
                     "type"           => "serial",
@@ -138,7 +138,7 @@ $dateMax = $dateMax->format('j') . ' ' . $monthList[$dateMax->format('n')-1];
 <div id="chart2" class="center-block" style="margin:0 5px;">
     <?php if (!is_null($lineArrayPast)) { ?>
         <?= \cs\Widget\AmCharts\CandleStick::widget([
-            'height'       => 600,
+            'height'       => 500,
             'lineArray'    => $lineArrayPast,
             'chartOptions' => [
                 'language'       => 'ru',
@@ -235,7 +235,7 @@ $dateMax = $dateMax->format('j') . ' ' . $monthList[$dateMax->format('n')-1];
 
 <div id="chart3" class="center-block" style="margin-left:5px; margin-right:5px; margin-bottom:75px">
     <?= \cs\Widget\AmCharts\CandleStick::widget([
-        'height'       => 600,
+        'height'       => 500,
         'lineArray'    => $lineArrayCandels,
         'chartOptions' => [
             'language'       => 'ru',

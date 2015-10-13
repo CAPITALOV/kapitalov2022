@@ -72,14 +72,16 @@ JS
                         <?php if ($logo) { ?>
                             <img src="<?= $logo ?>" width="50" style="float:left; margin:0 10px;">
                         <?php } ?>
-                        <div
-                            style="display: table-cell; font-weight:bold; float:left;"><?= $item->getField('finam_code') ?>
-                            –
-                        </div>
-                        <div style="float:left; margin-left:5px;"><?= $item->getField('name') ?></div>
-                        <img src="/images/payd.png" style="margin-left:10px; height:17px"/>
+                        <span class="hidden-sm hidden-md">
+                            <div
+                                style="display: table-cell; font-weight:bold; float:left;"><?= $item->getField('finam_code') ?>
+                                –
+                            </div>
+                            <div style="float:left; margin-left:5px;"><?= $item->getField('name') ?></div>
+                            <img src="/images/payd.png" style="margin-left:10px; height:17px"/>
 
-                        <div style="margin-left:5px; color:#58b724">Оплачено до <?= $date ?></div>
+                            <div style="margin-left:5px; color:#58b724">Оплачено до <?= $date ?></div>
+                        </span>
                     </li>
                 <?php } else { ?>
                     <li>
