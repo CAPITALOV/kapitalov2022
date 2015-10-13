@@ -6,10 +6,11 @@ $design = \app\models\Design::find(1);
 ?>
 
 <div class="container">
-
-<div class="col-lg-12">
-    <h1>Эксклюзивные финансовые услуги анализа движения капиталов</h1>
-</div>
+    <div class="col-lg-12">
+        <center>
+            <h1 class="page-header">Эксклюзивные финансовые услуги анализа движения капиталов</h1>
+        </center>
+    </div>
 </div>
 
 
