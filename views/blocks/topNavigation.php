@@ -61,11 +61,6 @@ JS
                 </li>
 
 
-                <li>
-                    <a href="tel:+74993942743">
-                        +7 (499) 394-27-43
-                    </a>
-                </li>
                 <?php if (Yii::$app->requestedRoute == 'cabinet/stock_item3') { ?>
                     <li style="margin-top:11px; display: -webkit-box; display: -moz-box; display: -ms-flexbox; display: -webkit-flex; display: flex;align-items: center; -webkit-align-items: center; ">
                         <?php
@@ -85,6 +80,12 @@ JS
                         <img src="/images/payd.png" style="margin-left:10px; height:17px"/>
 
                         <div style="margin-left:5px; color:#58b724">Оплачено до <?= $date ?></div>
+                    </li>
+                <?php } else { ?>
+                    <li>
+                        <a href="tel:+74993942743">
+                            +7 (499) 394-27-43
+                        </a>
                     </li>
                 <?php } ?>
             </ul>
