@@ -234,6 +234,11 @@ $dataProvider = $searchModel->search(Yii::$app->request->get());
             ]),
             'content' => function ($item) {
                 if (\yii\helpers\ArrayHelper::getValue($item, 'finam_code', '') == '') {
+                    $u = Html::tag('div', null, ['class' => 'input-group']);
+                    $lines = [];
+                    $lines[] = Html::input('text', null, null, ['class' => 'form-control', 'size' => '5']);
+                    $lines[] = Html::button('u', ['class' => 'btn btn-default']);
+//                    return join("\n", $lines);
                     return '';
                 }
 
