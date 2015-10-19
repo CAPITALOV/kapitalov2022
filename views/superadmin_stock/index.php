@@ -26,7 +26,7 @@ $('input[name=\"StockAll[is_enabled]\"]').change(function() {
         }
     });
 });
-$('.glyphicon').tooltip();
+$('.tooltipButton').tooltip();
 JS
 );
 
@@ -75,12 +75,12 @@ $dataProvider = $searchModel->search(Yii::$app->request->get());
             'content' => function ($item) {
                 return Html::a(Html::tag('span', null, [
                     'class' => 'glyphicon glyphicon-edit',
-                    'title' => 'Редактировать'
                 ]), [
                     'superadmin_stock/edit',
                     'id' => $item['id'],
                 ], [
-                    'class' => 'btn btn-default btn-xs',
+                    'class' => 'btn btn-default btn-xs tooltipButton',
+                    'title' => 'Редактировать',
                 ]);
             }
         ],
@@ -92,12 +92,12 @@ $dataProvider = $searchModel->search(Yii::$app->request->get());
             'content' => function ($item) {
                 return Html::a(Html::tag('span', null, [
                     'class' => 'glyphicon glyphicon-signal',
-                    'title' => 'График'
                 ]), [
                     'superadmin_stock/graph2',
                     'id' => $item['id'],
                 ], [
-                    'class' => 'btn btn-default btn-xs',
+                    'class' => 'btn btn-default btn-xs tooltipButton',
+                    'title' => 'График',
                 ]);
             }
         ],
@@ -122,14 +122,14 @@ $dataProvider = $searchModel->search(Yii::$app->request->get());
                     $lines[] = Html::a("{$min} ... {$max}", ['superadmin_stock/show', 'id' => $item['id'], 'color' => 'red']);
                     $lines[] = Html::a(Html::tag('span', null, [
                         'class' => 'glyphicon glyphicon-remove-sign',
-                        'title' => 'Удалить'
                     ]), [
                         'superadmin_stock/prognosis_delete_red',
                         'id' => $item['id']
                     ], [
-                        'class'       => "btn btn-default btn-xs",
+                        'class'       => "btn btn-default btn-xs tooltipButton",
                         'onmouseover' => "$(this).removeClass('btn-default').addClass('btn-danger')",
                         'onmouseout'  => "$(this).removeClass('btn-danger').addClass('btn-default')",
+                        'title'       => 'Удалить',
                         'style'       => 'margin-left: 10px;'
                     ]);
                 }
@@ -158,14 +158,14 @@ $dataProvider = $searchModel->search(Yii::$app->request->get());
                     $lines[] = Html::a("{$min} ... {$max}", ['superadmin_stock/show', 'id' => $item['id'], 'color' => 'blue']);
                     $lines[] = Html::a(Html::tag('span', null, [
                         'class' => 'glyphicon glyphicon-remove-sign',
-                        'title' => 'Удалить'
                     ]), [
                         'superadmin_stock/prognosis_delete_blue',
                         'id' => $item['id']
                     ], [
-                        'class'       => "btn btn-default btn-xs",
+                        'class'       => "btn btn-default btn-xs tooltipButton",
                         'onmouseover' => "$(this).removeClass('btn-default').addClass('btn-danger')",
                         'onmouseout'  => "$(this).removeClass('btn-danger').addClass('btn-default')",
+                        'title'       => 'Удалить',
                         'style'       => 'margin-left: 10px;'
                     ]);
                 }
@@ -181,12 +181,12 @@ $dataProvider = $searchModel->search(Yii::$app->request->get());
             'content' => function ($item) {
                 return Html::a(Html::tag('span', null, [
                     'class' => 'glyphicon glyphicon-log-in',
-                    'title' => 'Имортировать'
                 ]), [
                     'superadmin_stock/import',
                     'id' => $item['id'],
                 ], [
-                    'class' => 'btn btn-default btn-xs',
+                    'class' => 'btn btn-default btn-xs tooltipButton',
+                    'title' => 'Имортировать',
                 ]);
             }
         ],
@@ -211,14 +211,14 @@ $dataProvider = $searchModel->search(Yii::$app->request->get());
                     $lines[] = "{$min} ... {$max}";
                     $lines[] = Html::a(Html::tag('span', null, [
                         'class' => 'glyphicon glyphicon-remove-sign',
-                        'title' => 'Удалить'
                     ]), [
                         'superadmin_stock/kurs_delete',
                         'id' => $item['id']
                     ], [
-                        'class'       => "btn btn-default btn-xs",
+                        'class'       => "btn btn-default btn-xs tooltipButton",
                         'onmouseover' => "$(this).removeClass('btn-default').addClass('btn-danger')",
                         'onmouseout'  => "$(this).removeClass('btn-danger').addClass('btn-default')",
+                        'title'       => 'Удалить',
                         'style'       => 'margin-left: 10px;'
                     ]);
                 }
@@ -233,14 +233,23 @@ $dataProvider = $searchModel->search(Yii::$app->request->get());
                 'title' => 'Имортировать'
             ]),
             'content' => function ($item) {
+                if (\yii\helpers\ArrayHelper::getValue($item, 'finam_code', '') == '') {
+                    $u = Html::tag('div', null, ['class' => 'input-group']);
+                    $lines = [];
+                    $lines[] = Html::input('text', null, null, ['class' => 'form-control', 'size' => '5']);
+                    $lines[] = Html::button('u', ['class' => 'btn btn-default']);
+//                    return join("\n", $lines);
+                    return '';
+                }
+
                 return Html::a(Html::tag('span', null, [
                     'class' => 'glyphicon glyphicon-log-in',
-                    'title' => 'Имортировать'
                 ]), [
                     'superadmin_stock/import_kurs',
                     'id' => $item['id'],
                 ], [
-                    'class' => 'btn btn-default btn-xs',
+                    'class' => 'btn btn-success btn-xs tooltipButton',
+                    'title' => 'Имортировать',
                 ]);
             }
         ],
