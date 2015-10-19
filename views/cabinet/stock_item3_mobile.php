@@ -36,8 +36,9 @@ $dateMin = $dateMin->format('j') . ' ' . $monthList[$dateMin->format('n')-1];
 $dateMax = $dateMax->format('j') . ' ' . $monthList[$dateMax->format('n')-1];
 ?>
 
+
 <div class="col-lg-12">
-    <h2 class="page-header ">Просмотр будущих индексов капиталов</h2>
+    <h2 class="page-header">Просмотр будущих индексов капиталов</h2>
     <p>с <?= $dateMin ?> по <?= $dateMax ?></p>
 </div>
 
@@ -114,20 +115,21 @@ $dateMax = $dateMax->format('j') . ' ' . $monthList[$dateMax->format('n')-1];
                 Нет данных
             </div>
         <?php } ?>
+        <p class="center-text text-center" style="margin-bottom: 65px;">Прогноз линий изменения тренда по цене закрытия (close, <b>красная линия</b>) и средне-взвешенная цена (RPO, <b>синяя линия</b>)</p>
 
     </div>
 
 <?php } else { ?>
-    <div class="row col-lg-12">
+    <div class="col-lg-12">
         <div class="form-group">
             <p><span class="label label-danger">График не оплачен</span></p>
         </div>
+        <a
+            href="<?= Url::to(['cabinet_wallet/add', 'id' => $item->getId()]) ?>"
+            class="btn btn-default"
+            style="width: 100%"
+            >Купить</a>
     </div>
-    <a
-        href="<?= Url::to(['cabinet_wallet/add', 'id' => $item->getId()]) ?>"
-        class="btn btn-default"
-        style="width: 100%"
-        >Купить</a>
 <?php } ?>
 
 
@@ -227,6 +229,7 @@ $dateMax = $dateMax->format('j') . ' ' . $monthList[$dateMax->format('n')-1];
             Нет данных
         </div>
     <?php } ?>
+    <p class="center-text text-center" style="margin-bottom: 65px;">Прогноз линий изменения тренда по цене закрытия (close, <b>красная линия</b>) и средне-взвешенная цена (RPO, <b>синяя линия</b>), <b>Зеленая линия</b> - реальные биржевые котировки (история торгов)</p>
 </div>
 
 <h2 class="page-header col-lg-12">Просмотр архивных

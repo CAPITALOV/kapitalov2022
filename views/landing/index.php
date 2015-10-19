@@ -8,7 +8,7 @@ $design = \app\models\Design::find(1);
 <div class="container">
     <div class="col-lg-12">
         <center>
-            <h1 class="page-header">Эксклюзивные финансовые услуги анализа движения капиталов</h1>
+            <h1 class="page-header">Эксклюзивные услуги анализа движения рынка капиталов</h1>
         </center>
     </div>
 </div>
