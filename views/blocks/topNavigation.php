@@ -94,52 +94,6 @@ JS
 
 
             <ul class="nav navbar-nav navbar-right" style="margin-right: 20px;">
-<!--                --><?php
-//                $this->registerCss('.ui-autocomplete {z-index: 9999;}');
-//                // форма поиска
-//                $form = ActiveForm::begin([
-//                    'enableClientValidation' => false,
-//                    'options'                => [
-//                        'style' => 'margin-bottom: 0px;',
-//                        'class' => "navbar-form navbar-left",
-//                        'role'  => "search",
-//                    ],
-//                ]);
-//                $url = Url::to(['cabinet/search_stock_autocomplete']);
-//                echo $form
-//                    ->field(new \app\models\Form\Search(), 'searchText', ['inputOptions' => ['placeholder' => 'Поиск']])
-//                    ->label('Поиск', ['class' => 'hide'])
-//                    ->widget(\yii\jui\AutoComplete::classname(), [
-//                        'clientOptions' => [
-//                            'source' => new  \yii\web\JsExpression(<<<JS
-//function (request, response) {
-//    ajaxJson({
-//        url: '{$url}',
-//        data: {
-//        term: request.term
-//        },
-//        success: function(ret) {
-//            response(ret);
-//        }
-//    });
-//  }
-//JS
-//                            ),
-//                            'select' => new \yii\web\JsExpression(<<<JS
-//function(event, ui) {
-//    var stockId = ui.item.id;
-//    window.location = '/stockList3/' + stockId;
-//}
-//JS
-//                            ),
-//                        ],
-//                        'options'       => [
-//                            'class'       => 'form-control',
-//                            'placeholder' => 'Поиск',
-//                        ]
-//                    ]);
-//                ActiveForm::end();
-//                ?>
                 <li style="height:50px; margin:0;">
                     <?php if (Url::to(['cabinet_chat/index']) == Url::current()) { } ?><a style="margin-top: -2px;" href="<?= Url::to(['cabinet_chat/index']) ?>"><span class="hidden-sm hidden-md">Связаться с экспертом </span><img src="/images/message.png" style="height:28px; margin:0;"/></a></li>
                 <li class="dropdown">
@@ -172,7 +126,7 @@ JS
                         <li><a href="<?= Url::to(['money/history']) ?>"><i
                                     class="glyphicon glyphicon-rub" style="padding-right: 5px;"></i>История платежей</a></li>
                         <li class="divider"></li>
-                        <li><a href="<?= Url::to(['auth/logout']) ?>" data-method="post"><i
+                            <li><a href="<?= Url::to(['auth/logout']) ?>" data-method="post"><i
                                     class="glyphicon glyphicon-off" style="padding-right: 5px;"></i>Выйти</a></li>
                     </ul>
                 </li>
