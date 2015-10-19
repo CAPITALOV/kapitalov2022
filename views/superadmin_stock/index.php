@@ -234,11 +234,6 @@ $dataProvider = $searchModel->search(Yii::$app->request->get());
             ]),
             'content' => function ($item) {
                 if (\yii\helpers\ArrayHelper::getValue($item, 'finam_code', '') == '') {
-                    $u = Html::tag('div', null, ['class' => 'input-group']);
-                    $lines = [];
-                    $lines[] = Html::input('text', null, null, ['class' => 'form-control', 'size' => '5']);
-                    $lines[] = Html::button('u', ['class' => 'btn btn-default']);
-//                    return join("\n", $lines);
                     return '';
                 }
 
@@ -253,8 +248,73 @@ $dataProvider = $searchModel->search(Yii::$app->request->get());
                 ]);
             }
         ],
+        [
+            'header'         => 'Code',
+            'content'        => function ($item) {
+                if (\yii\helpers\ArrayHelper::getValue($item, 'finam_code', '') == '') {
+                    if (\yii\helpers\ArrayHelper::getValue($item, 'finam_code', '') == '') {
+                        $u = Html::tag('div',
+                            Html::input('text', null, null, [
+                                'class' => 'form-control',
+                                'size'  => '5',
+                            ]) .
+                            Html::tag('span',
+                                Html::button('о', [
+                                    'class'   => 'btn btn-default buttonUpdateCode',
+                                    'type'    => 'button',
+                                    'data-id' => $item['id'],
+                                    'title'   => 'Обновить',
+                                ])
+                                , [
+                                    'class' => 'input-group-btn',
+                                ])
+                            , [
+                                'class' => 'input-group',
+                                'style' => 'width:100px;',
+                            ]);
+
+                        return $u;
+                    }
+                }
+                return $item['finam_code'];
+            }
+        ],
     ],
 ])
+?>
+<?php
+$url = Url::to(['superadmin_stock/update_code']);
+$this->registerJs(<<<JS
+$('.buttonUpdateCode').tooltip();
+$('.buttonUpdateCode').click(function() {
+    var b = $(this);
+    ajaxJson({
+        url: '{$url}',
+        data: {
+            id: b.data('id'),
+            code: b.parent().parent().find('input').val()
+        },
+        success: function(ret) {
+            var v = b.parent().parent().parent();
+            b.parent().parent().remove();
+            v.append(
+                $('<a>', {
+                    class: 'btn btn-success btn-xs tooltipButton',
+                    href: '/stock/' + b.data('id') + '/importKurs',
+                    title: 'Имортировать'
+                })
+                .append(
+                    $('<span>', {
+                        class: 'glyphicon glyphicon-log-in'
+                    })
+                )
+                .tooltip()
+            );
+        }
+    })
+})
+JS
+);
 ?>
 
 <a href="<?= Url::to(['superadmin_stock/add']) ?>" class="btn btn-default">Добавить</a>

@@ -56,6 +56,28 @@ class Superadmin_stockController extends SuperadminBaseController
     }
 
     /**
+     * AJAX
+     * Обновляет код finam_code для котировки
+     *
+     * REQUEST:
+     * - id - int - идентификатор котировки
+     * - code - str - код finam_code для котировки
+     */
+    public function actionUpdate_code()
+    {
+        $id = self::getParam('id');
+        $code = self::getParam('code');
+
+        $stock = Stock::find($id);
+        if (is_null($stock)) {
+            return self::jsonErrorId(101, 'Не найдена котировка');
+        }
+        $stock->update(['finam_code' => $code]);
+
+        return self::jsonSuccess();
+    }
+
+    /**
      * Выводит график для админа
      *
      * @param int $id идентификатор курса
