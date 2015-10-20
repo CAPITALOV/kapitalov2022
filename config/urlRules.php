@@ -50,6 +50,7 @@ return [
 
     // stock
     'stock'                                 => 'superadmin_stock/index',
+    'stock/updateCode'                      => 'superadmin_stock/update_code',
     'stock/add'                             => 'superadmin_stock/add',
     'stock/toggle'                          => 'superadmin_stock/toggle',
     'stock/<id:\\d+>/edit'                  => 'superadmin_stock/edit',
