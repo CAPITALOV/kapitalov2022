@@ -218,7 +218,7 @@ $design = \app\models\Design::find(1);
     <footer>
         <div class="row">
             <div class="col-lg-12">
-                <p>© 2007 — 2015 | www.capitalov.com | Национальное Агентство Капиталов | +7 (499) 394-27-43</p>
+                <p>© 2007 — 2015 | www.capitalov.com | Национальное Агентство Капиталов | +7 (499) 755-66-90</p>
             </div>
         </div>
     </footer>
