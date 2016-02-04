@@ -81,7 +81,8 @@ $this->registerMetaTag(['name' => 'og:description', 'content' => 'Эксклюз
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <p>© 2007 — 2015 | www.capitalov.com | Национальное Агентство Капиталов | +7 (499) 755-66-90</p>
+                    <p>© 2007 — 2015 | www.capitalov.com | Национальное Агентство Капиталов | <?= $this->render('../blocks/telephone') ?>
+                    </p>
                 </div>
 
             </div>

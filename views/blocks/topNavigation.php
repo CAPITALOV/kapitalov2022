@@ -85,9 +85,7 @@ JS
                     </li>
                 <?php } else { ?>
                     <li>
-                        <a href="tel:+74997556690">
-                            +7 (499) 755-66-90
-                        </a>
+                        <?= $this->render('telephone') ?>
                     </li>
                 <?php } ?>
             </ul>

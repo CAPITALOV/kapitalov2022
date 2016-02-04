@@ -29,9 +29,7 @@ use yii\helpers\Html;
                     <a><b>Национальное Агентство Капиталов</b></a>
                 </li>
                 <li>
-                    <a href="tel:+74997556690">
-                        +7 (499) 755-66-90
-                    </a>
+                    <?= $this->render('../blocks/telephone') ?>
                 </li>
 
             </ul>
