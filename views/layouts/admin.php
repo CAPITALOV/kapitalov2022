@@ -83,7 +83,6 @@ $this->registerMetaTag(['name' => 'og:description', 'content' => 'Эксклюз
                 <div class="col-lg-12">
                     <p>© 2007 — 2015 | www.capitalov.com | Эксклюзивные финансовые услуги | Национальное Агентство Капиталов</p>
                 </div>
-
             </div>
         </div>
     </footer>
