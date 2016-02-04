@@ -26,7 +26,9 @@ class ImporterController extends Controller
         $rows = Stock::query(['not', [
             'finam_code' => null,
         ]
-        ])->all();
+        ])
+            ->andWhere(['not', ['finam_code' => '']])
+            ->all();
 
         foreach($rows as $row) {
             $stock_id = $row['id'];
@@ -76,7 +78,9 @@ class ImporterController extends Controller
         $rows = Stock::query(['not', [
             'finam_code' => null,
         ]
-        ])->all();
+        ])
+            ->andWhere(['not', ['finam_code' => '']])
+            ->all();
 
         foreach($rows as $row) {
             $this->log('Попытка получить данные для: ' . $row['name']);

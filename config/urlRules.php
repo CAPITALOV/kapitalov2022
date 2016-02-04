@@ -25,12 +25,20 @@ return [
     'auth'                                  => 'auth/auth',
 
     // superadmin
-    'superAdmin'                            => 'superadmin/index',
+    'admin/news'                            => 'superadmin_news/index',
+    'admin/news/add'                        => 'superadmin_news/add',
+    'admin/news/<id:\\d+>/edit'             => 'superadmin_news/edit',
+
+    // superadmin
+    'admin'                                 => 'superadmin/index',
+    'admin/login'                           => 'superadmin/login',
     'admin/referal'                         => 'superadmin/referal',
     'admin/referal/delete'                  => 'superadmin/referal_delete',
     'admin/calc'                            => 'superadmin/calc',
     'admin/userStocks'                      => 'superadmin/users_stock',
     'admin/users'                           => 'superadmin/users',
+    'admin/stock/calc'                      => 'superadmin/stock_calc',
+    'admin/stock/calc/activate'             => 'superadmin/stock_calc_activate',
 
     'requests'                              => 'superadmin_requests/index',
     'requests/activate/<hash:\\w+>'         => 'superadmin_requests/activate',
@@ -38,9 +46,13 @@ return [
     'requests/delete'                       => 'superadmin_requests/delete_ajax',
 
 
+    'stock/<id:\\d+>'                       => 'site/stock',
+
     // stock
     'stock'                                 => 'superadmin_stock/index',
+    'stock/updateCode'                      => 'superadmin_stock/update_code',
     'stock/add'                             => 'superadmin_stock/add',
+    'stock/toggle'                          => 'superadmin_stock/toggle',
     'stock/<id:\\d+>/edit'                  => 'superadmin_stock/edit',
     'stock/<id:\\d+>/import'                => 'superadmin_stock/import',
     'stock/<id:\\d+>/importKurs'            => 'superadmin_stock/import_kurs',
@@ -56,6 +68,7 @@ return [
     'stock/<id:\\d+>/prognosis/edit'        => 'superadmin_stock/prognosis_edit',
     'stock/prognosis/update'                => 'superadmin_stock/prognosis_update',
     'stock/<id:\\d+>/graph'                 => 'superadmin_stock/graph',
+    'stock/<id:\\d+>/graph2'                => 'superadmin_stock/graph2',
 
     // designer
     'designer'                              => 'designer/index',
@@ -83,8 +96,10 @@ return [
 
     'cabinet/wallet/add/<id:\\d+>'          => 'cabinet_wallet/add',
 
-    'cabinet/wallet/sendMail'                   => 'cabinet_wallet/send_mail',
+    'cabinet/wallet/sendMail'               => 'cabinet_wallet/send_mail',
     'cabinet/wallet/add1'                   => 'cabinet_wallet/add1',
+    'cabinet/wallet/add1/<id:\\d+>/success' => 'cabinet_wallet/add1_success',
+    'cabinet/wallet/add1/<id:\\d+>/fail'    => 'cabinet_wallet/add1_fail',
     'cabinet/wallet/add/add_national_step1' => 'cabinet_wallet/add_national_step1',
 
     'cabinet/wallet/add2'                   => 'cabinet_wallet/add2',

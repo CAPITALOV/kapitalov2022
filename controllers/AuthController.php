@@ -70,6 +70,7 @@ class AuthController extends BaseController
         if (Yii::$app->user->isGuest) {
             $user = $client->login($attributes);
             if (is_null($user)) {
+                $user->firstEnter();
                 $user = $client->register($attributes);
             }
             if (!is_null($user)) Yii::$app->user->login($user);

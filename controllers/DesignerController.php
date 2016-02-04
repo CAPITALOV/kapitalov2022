@@ -20,6 +20,7 @@ use yii\web\Response;
 
 class DesignerController extends CabinetBaseController
 {
+    public $layout = 'admin';
 
     public function behaviors()
     {

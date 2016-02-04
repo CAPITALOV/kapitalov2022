@@ -11,13 +11,17 @@ use cs\services\VarDumper;
 use cs\web\Exception;
 use Yii;
 use yii\base\UserException;
+use yii\helpers\ArrayHelper;
 
 class Superadmin_stockController extends SuperadminBaseController
 {
 
     public function actionIndex()
     {
-        $items = Stock::query()->all();
+        $items = Stock::query()
+            ->orWhere(['is_enabled' => null])
+            ->orWhere(['is_enabled' => 0])
+            ->all();
         $red = StockPrognosisRed::query()
             ->select([
                 'stock_id',
@@ -49,6 +53,150 @@ class Superadmin_stockController extends SuperadminBaseController
             'blue'  => $blue,
             'kurs'  => $kurs,
         ]);
+    }
+
+    /**
+     * AJAX
+     * Обновляет код finam_code для котировки
+     *
+     * REQUEST:
+     * - id - int - идентификатор котировки
+     * - code - str - код finam_code для котировки
+     */
+    public function actionUpdate_code()
+    {
+        $id = self::getParam('id');
+        $code = self::getParam('code');
+
+        $stock = Stock::find($id);
+        if (is_null($stock)) {
+            return self::jsonErrorId(101, 'Не найдена котировка');
+        }
+        $stock->update(['finam_code' => $code]);
+
+        return self::jsonSuccess();
+    }
+
+    /**
+     * Выводит график для админа
+     *
+     * @param int $id идентификатор курса
+     *
+     * @return string
+     */
+    public function actionGraph2($id)
+    {
+        $item = \app\models\Stock::find($id);
+        $start = (new \DateTime())->sub(new \DateInterval('P30D'));
+        $isPaid = Yii::$app->user->identity->isPaid($id);
+        if ($isPaid) {
+            $end = (new \DateTime())->add(new \DateInterval('P30D'));
+        } else {
+            $end = (new \DateTime());
+        }
+        $defaultParams = [
+            'start' => $start,
+            'end'   => $end,
+        ];
+
+        // график с продажами
+        {
+            $params = ArrayHelper::merge($defaultParams, [
+                'rows'  => [
+                    \app\models\StockKurs::query(['stock_id' => $id])
+                        ->andWhere(['between', 'date', $start->format('Y-m-d'), $end->format('Y-m-d')])
+                        ->all(),
+                ],
+            ]);
+            $lineArrayKurs = \app\service\GraphExporter::convert($params);
+        }
+
+        // график с прогнозом (красная линия)
+        {
+            $params = ArrayHelper::merge($defaultParams, [
+                'rows'  => [
+                    \app\models\StockPrognosisRed::query(['stock_id' => $id])
+                        ->andWhere(['between', 'date', $start->format('Y-m-d'), $end->format('Y-m-d')])
+                        ->select([
+                            'date',
+                            'delta as kurs',
+                        ])
+                        ->all(),
+                ],
+            ]);
+            $lineArrayRed = \app\service\GraphExporter::convert($params);
+        }
+
+        // график с прогнозом (синяя линия)
+        {
+            $params = ArrayHelper::merge($defaultParams, [
+                'rows'  => [
+                    \app\models\StockPrognosisBlue::query(['stock_id' => $id])
+                        ->andWhere(['between', 'date', $start->format('Y-m-d'), $end->format('Y-m-d')])
+                        ->select([
+                            'date',
+                            'delta as kurs',
+                        ])
+                        ->all(),
+                ],
+            ]);
+            $lineArrayBlue = \app\service\GraphExporter::convert($params);
+        }
+
+        // union
+        {
+            $lineArrayUnion = \app\service\GraphUnion::convert([
+                'x' => $lineArrayRed['x'],
+                'y' => [
+                    $lineArrayRed['y'][0],
+                    $lineArrayBlue['y'][0],
+                ]
+            ]);
+        }
+
+        // union2
+        {
+            $lineArrayUnion2 = \app\service\GraphUnion::convert([
+                'x' => $lineArrayRed['x'],
+                'y' => [
+                    $lineArrayRed['y'][0],
+                    $lineArrayBlue['y'][0],
+                    $lineArrayKurs['y'][0],
+                ]
+            ]);
+        }
+
+        return $this->render([
+            'item'           => $item,
+            'lineArrayKurs'  => $lineArrayKurs,
+            'lineArrayRed'   => $lineArrayRed,
+            'lineArrayBlue'  => $lineArrayBlue,
+            'lineArrayUnion' => $lineArrayUnion,
+            'lineArrayUnion2' => $lineArrayUnion2,
+            'isPaid'         => $isPaid,
+        ]);
+    }
+
+    /**
+     * Устанавливает флаг is_enabled для котировки
+     * AJAX
+     *
+     * REQUEST:
+     * - id - int - идентификатор котировки
+     * - is_enabled - int - 0 - нет, 1 - да
+     */
+    public function actionToggle()
+    {
+        $id = self::getParam('id');
+        $is_enabled = self::getParam('is_enabled');
+
+        $stock = Stock::find($id);
+        if (is_null($stock)) {
+            return self::jsonErrorId(101, 'Не найдена котировка');
+        }
+        $stock->update(['is_enabled' => $is_enabled]);
+
+        return self::jsonSuccess();
     }
 
     public function actionAdd()

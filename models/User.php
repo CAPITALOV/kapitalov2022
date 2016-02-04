@@ -5,12 +5,17 @@ namespace app\models;
 use app\service\RegistrationDispatcher;
 use cs\base\DbRecord;
 use cs\services\Security;
+use cs\services\UploadFolderDispatcher;
+use Imagine\Image\Box;
+use Imagine\Image\ManipulatorInterface;
 use yii\db\Query;
 use yii\debug\models\search\Db;
+use yii\helpers\FileHelper;
 use yii\helpers\Url;
 use yii\helpers\VarDumper;
 use yii\helpers\ArrayHelper;
 use app\models\UserStock;
+use yii\imagine\Image;
 
 class User extends DbRecord implements \yii\web\IdentityInterface
 {
@@ -93,8 +98,6 @@ class User extends DbRecord implements \yii\web\IdentityInterface
     {
         // Сбербанк п
         UserStock::add($this->getId(), 1, 0);
-        // Eur/Usd
-        UserStock::add($this->getId(), 628, 0);
     }
 
     /**
@@ -241,5 +244,111 @@ class User extends DbRecord implements \yii\web\IdentityInterface
         return $this->update([
             'password' => self::hashPassword($password)
         ]);
+    }
+
+    /**
+     * Устанавливает новый аватар
+     * Картинка должна быть квадратной
+     * Размер 300х300
+     *
+     * @param string $content   содержимое файла аватара
+     * @param string $extension расширение файла
+     *
+     * @return \cs\services\SitePath
+     */
+    public function setAvatarAsContent($content, $extension)
+    {
+        $path = UploadFolderDispatcher::createFolder('FileUpload2', self::TABLE, $this->getId());
+        $path->addAndCreate('small');
+        $path->add('avatar.' . $extension);
+
+        file_put_contents($path->getPathFull(), $content);
+        $this->update([
+            'avatar' => $path->getPath(),
+        ]);
+
+        return $path;
+    }
+
+    /**
+     * Устанавливает новый аватар из адреса интернет
+     *
+     * @param string $url       полный url на картинку, может быть прямоугольной
+     * @param string $extension расширение которое должно быть в результируеющем файле
+     *
+     * @return \cs\services\SitePath
+     */
+    public function setAvatarFromUrl($url, $extension = null)
+    {
+        if (is_null($extension)) {
+            $info = parse_url($url);
+            $pathinfo = pathinfo($info['path']);
+            $extension = $pathinfo['extension'];
+        }
+        \Yii::info(\yii\helpers\VarDumper::dumpAsString($url), 'gs\\user');
+        $image = new Image();
+        $imageFileName = \Yii::getAlias('@runtime/temp_images');
+        FileHelper::createDirectory($imageFileName);
+        $imageFileName .= DIRECTORY_SEPARATOR . time() . '_' . Security::generateRandomString(10) . '.' . $extension;
+        \Yii::info(\yii\helpers\VarDumper::dumpAsString($imageFileName), 'gs\\user');
+
+        $image = $image->getImagine()->load(file_get_contents($url));
+        $image = $this->expandImage($image, 300, 300, ManipulatorInterface::THUMBNAIL_OUTBOUND);
+        $image->thumbnail(new Box(300, 300), ManipulatorInterface::THUMBNAIL_OUTBOUND)->save($imageFileName, ['format' => 'jpg', 'quality' => 100]);
+
+        return $this->setAvatarAsContent(file_get_contents($imageFileName), $extension);
+    }
+
+    /**
+     * Расширяет маленькую картинку по заданной стратегии
+     *
+     * @param \Imagine\Image\ImageInterface $image
+     * @param int $widthFormat
+     * @param int $heightFormat
+     * @param int $mode
+     *
+     * @return \Imagine\Image\ImageInterface
+     */
+    protected static function expandImage($image, $widthFormat, $heightFormat, $mode)
+    {
+        $size = $image->getSize();
+        $width = $size->getWidth();
+        $height = $size->getHeight();
+        if ($width < $widthFormat || $height < $heightFormat) {
+            // расширяю картинку
+            if ($mode == ManipulatorInterface::THUMBNAIL_OUTBOUND) {
+                if ($width < $widthFormat && $height >= $heightFormat) {
+                    $size = $size->widen($widthFormat);
+                } else if ($width >= $widthFormat && $height < $heightFormat) {
+                    $size = $size->heighten($heightFormat);
+                } else if ($width < $widthFormat && $height < $heightFormat) {
+                    // определяю как расширять по ширине или по высоте
+                    if ($width / $widthFormat < $height / $heightFormat) {
+                        $size = $size->widen($widthFormat);
+                    }
+                    else {
+                        $size = $size->heighten($heightFormat);
+                    }
+                }
+                $image->resize($size);
+            } else {
+                if ($width < $widthFormat && $height >= $heightFormat) {
+                    $size = $size->heighten($heightFormat);
+                } else if ($width >= $widthFormat && $height < $heightFormat) {
+                    $size = $size->widen($widthFormat);
+                } else if ($width < $widthFormat && $height < $heightFormat) {
+                    // определяю как расширять по ширине или по высоте
+                    if ($width / $widthFormat < $height / $heightFormat) {
+                        $size = $size->heighten($heightFormat);
+                    }
+                    else {
+                        $size = $size->widen($widthFormat);
+                    }
+                }
+                $image->resize($size);
+            }
+        }
+
+        return $image;
     }
 }

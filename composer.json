@@ -150,7 +150,8 @@
         "isocra/TableDnD": "*",
         "amcharts/amstock3": "*",
         "ecomfe/echarts": "*",
-        "minhur/bootstrap-toggle":"*"
+        "minhur/bootstrap-toggle":"*",
+        "mobiledetect/mobiledetectlib": "*"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",

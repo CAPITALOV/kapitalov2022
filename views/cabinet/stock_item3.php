@@ -3,6 +3,7 @@
 use yii\helpers\Url;
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
+use app\service\CalculatingProbability;
 
 /* @var $this \yii\web\View */
 /* @var $item  \app\models\Stock */
@@ -61,7 +62,7 @@ $dateMax = $dateMax->format('j') . ' ' . $monthList[$dateMax->format('n')-1];
             <?= \cs\Widget\AmCharts\CandleStick::widget([
                 'enableExport' => true,
                 'lineArray'    => $lineArrayFuture,
-                'height'       => 600,
+                'height'       => 500,
                 'chartOptions' => [
                     'language'       => 'ru',
                     "type"           => "serial",
@@ -128,7 +129,7 @@ $dateMax = $dateMax->format('j') . ' ' . $monthList[$dateMax->format('n')-1];
                 Нет данных
             </div>
         <?php } ?>
-
+        <p class="center-text text-center" style="margin-bottom: 65px;">Прогноз линий изменения тренда по цене закрытия (close, <b>красная линия</b>) и средне-взвешенная цена (RPO, <b>синяя линия</b>)</p>
     </div>
 
 <?php } else { ?>
@@ -159,13 +160,14 @@ $dateMax = $dateMax->format('j') . ' ' . $monthList[$dateMax->format('n')-1];
              style="vertical-align:middle; font-size:20px; font-weight: bold; display:inline-block;">Просмотр истории
             индексов прошедших торгов
         </div>
+        <div>[<?= $p1 = round((CalculatingProbability::initStock($item->getId(),1)->calc()) * 100) ?> / <?= $p2 = round((CalculatingProbability::initStock($item->getId(), 2)->calc()) * 100) ?> = <?= ($p2+$p1)/2 ?>]</div>
     </div>
 </div>
 
 <div id="chart2" class="center-block" style=" margin-left:75px; margin-right:75px;">
     <?php if (!is_null($lineArrayPast)) { ?>
         <?= \cs\Widget\AmCharts\CandleStick::widget([
-            'height'       => 600,
+            'height'       => 500,
             'lineArray'    => $lineArrayPast,
             'chartOptions' => [
                 'language'       => 'ru',
@@ -254,6 +256,7 @@ $dateMax = $dateMax->format('j') . ' ' . $monthList[$dateMax->format('n')-1];
             Нет данных
         </div>
     <?php } ?>
+    <p class="center-text text-center" style="margin-bottom: 65px;">Прогноз линий изменения тренда по цене закрытия (close, <b>красная линия</b>) и средне-взвешенная цена (RPO, <b>синяя линия</b>), <b>Зеленая линия</b> - реальные биржевые котировки (история торгов)</p>
 </div>
 
 <hr class="clearfix" style="color:#489F46; background-color:#489F46; height:3px; margin-top: 0px; margin-bottom: 0px;">
@@ -276,7 +279,7 @@ $dateMax = $dateMax->format('j') . ' ' . $monthList[$dateMax->format('n')-1];
 
 <div id="chart3" class="center-block" style="margin-left:75px; margin-right:75px; margin-bottom:75px">
     <?= \cs\Widget\AmCharts\CandleStick::widget([
-        'height'       => 600,
+        'height'       => 500,
         'lineArray'    => $lineArrayCandels,
         'chartOptions' => [
             'language'       => 'ru',

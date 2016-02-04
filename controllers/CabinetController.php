@@ -421,104 +421,6 @@ class CabinetController extends CabinetBaseController
     }
 
     /**
-     * @param int $id идентификатор курса
-     *
-     * @return string
-     */
-    public function actionStock_item($id)
-    {
-        $item = \app\models\Stock::find($id);
-        $start = (new \DateTime())->sub(new \DateInterval('P30D'));
-        $isPaid = Yii::$app->user->identity->isPaid($id);
-        if ($isPaid) {
-            $end = (new \DateTime())->add(new \DateInterval('P30D'));
-        } else {
-            $end = (new \DateTime());
-        }
-        $defaultParams = [
-            'start' => $start,
-            'end'   => $end,
-        ];
-
-        // график с продажами
-        {
-            $params = ArrayHelper::merge($defaultParams, [
-                'rows'  => [
-                    \app\models\StockKurs::query(['stock_id' => $id])
-                        ->andWhere(['between', 'date', $start->format('Y-m-d'), $end->format('Y-m-d')])
-                        ->all(),
-                ],
-            ]);
-            $lineArrayKurs = \app\service\GraphExporter::convert($params);
-        }
-
-        // график с прогнозом (красная линия)
-        {
-            $params = ArrayHelper::merge($defaultParams, [
-                'rows'  => [
-                    \app\models\StockPrognosisRed::query(['stock_id' => $id])
-                        ->andWhere(['between', 'date', $start->format('Y-m-d'), $end->format('Y-m-d')])
-                        ->select([
-                            'date',
-                            'delta as kurs',
-                        ])
-                        ->all(),
-                ],
-            ]);
-            $lineArrayRed = \app\service\GraphExporter::convert($params);
-        }
-
-        // график с прогнозом (синяя линия)
-        {
-            $params = ArrayHelper::merge($defaultParams, [
-                'rows'  => [
-                    \app\models\StockPrognosisBlue::query(['stock_id' => $id])
-                        ->andWhere(['between', 'date', $start->format('Y-m-d'), $end->format('Y-m-d')])
-                        ->select([
-                            'date',
-                            'delta as kurs',
-                        ])
-                        ->all(),
-                ],
-            ]);
-            $lineArrayBlue = \app\service\GraphExporter::convert($params);
-        }
-
-        // union
-        {
-            $lineArrayUnion = \app\service\GraphUnion::convert([
-                'x' => $lineArrayRed['x'],
-                'y' => [
-                    $lineArrayRed['y'][0],
-                    $lineArrayBlue['y'][0],
-                ]
-            ]);
-        }
-
-        // union2
-        {
-            $lineArrayUnion2 = \app\service\GraphUnion::convert([
-                'x' => $lineArrayRed['x'],
-                'y' => [
-                    $lineArrayRed['y'][0],
-                    $lineArrayBlue['y'][0],
-                    $lineArrayKurs['y'][0],
-                ]
-            ]);
-        }
-
-        return $this->render([
-            'item'           => $item,
-            'lineArrayKurs'  => $lineArrayKurs,
-            'lineArrayRed'   => $lineArrayRed,
-            'lineArrayBlue'  => $lineArrayBlue,
-            'lineArrayUnion' => $lineArrayUnion,
-            'lineArrayUnion2' => $lineArrayUnion2,
-            'isPaid'         => $isPaid,
-        ]);
-    }
-
-    /**
      * Рисует графики с прошлым и будущим
      *
      * @param int $id идентификатор курса
@@ -688,32 +590,6 @@ class CabinetController extends CabinetBaseController
             ]
         ]);
 
-
-        // будущее
-        $today = new \DateTime();
-        $start = $today->format('Y-m-d');
-        $end = $today->add(new \DateInterval('P1M'))->format('Y-m-d');
-        $lineArrayFuture = \app\service\GraphUnion2::convert([
-            'lines' => [
-                \app\models\StockPrognosisRed::query(['stock_id' => $item->getId()])
-                    ->select([
-                        'date',
-                        'delta as red',
-                    ])
-                    ->andWhere(['between', 'date', $start, $end])
-                    ->orderBy(['date' => SORT_ASC])
-                    ->all(),
-                \app\models\StockPrognosisBlue::query(['stock_id' => $item->getId()])
-                    ->select([
-                        'date',
-                        'delta as blue',
-                    ])
-                    ->andWhere(['between', 'date', $start, $end])
-                    ->orderBy(['date' => SORT_ASC])
-                    ->all(),
-            ]
-        ]);
-
         // Прошлое
         $today = new \DateTime();
         $end = $today->format('Y-m-d');
@@ -763,7 +639,12 @@ class CabinetController extends CabinetBaseController
             ->orderBy(['date' => SORT_ASC])
             ->all();
 
-        return $this->render([
+        $template = 'stock_item3';
+        if (\Yii::$app->deviceDetect->isMobile()) {
+            $template = 'stock_item3_mobile';
+        }
+
+        return $this->render($template, [
             'item'             => $item,
             'isPaid'           => $isPaid,
             'lineArrayFuture'  => $lineArrayFuture,

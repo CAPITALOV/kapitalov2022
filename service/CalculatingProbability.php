@@ -9,6 +9,7 @@ use app\models\StockPrognosisRed;
 use cs\services\VarDumper;
 use yii\base\Exception;
 use yii\base\Object;
+use yii\db\Query;
 use yii\helpers\ArrayHelper;
 
 class CalculatingProbability extends Object
@@ -103,9 +104,11 @@ class CalculatingProbability extends Object
             }
         }
         $rowPrognozNew = [];
+        $c = [];
         foreach ($rowPrognoz as $item) {
             if (in_array($item['date'], $dateArrayCorrect)) {
                 $rowPrognozNew[] = $item['value'];
+                $c[] = $item;
             }
         }
 

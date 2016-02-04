@@ -27,6 +27,9 @@ class Stock extends \cs\base\BaseForm
     public $finam_em;
     public $finam_market;
     public $finam_code;
+    public $status;
+    public $is_kurs;
+    public $is_enabled;
 
     function __construct($fields = [])
     {
@@ -40,7 +43,7 @@ class Stock extends \cs\base\BaseForm
             [
                 'description',
                 'Описание',
-                1,
+                0,
                 'string',
                 [],
                 'до 255 символов'
@@ -62,6 +65,15 @@ class Stock extends \cs\base\BaseForm
                 'Идентификатор рынка по Finam',
                 0,
                 'integer',
+            ],
+            [
+                'is_enabled',
+                'Действует?',
+                0,
+                'cs\Widget\CheckBox2\Validator',
+                'widget' => [
+                    'cs\Widget\CheckBox2\CheckBox', []
+                ]
             ],
             [
                 'logo',

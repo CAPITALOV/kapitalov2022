@@ -4,6 +4,7 @@ use app\models\Translator as T;
 
 /* @var $this yii\web\View */
 $this->title = T::t('Welcome to adminnistrative panel');
+
 ?>
 <div class="site-index">
 

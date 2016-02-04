@@ -46,7 +46,6 @@ class Yandex_moneyController extends BaseController
 
     public function actionAuth()
     {
-
         /** @var \app\service\authclient\YandexMoney $client */
         $client = Yii::$app->authClientCollection->getClient('yandex_money');
         $code = self::getParam('code');
@@ -55,7 +54,6 @@ class Yandex_moneyController extends BaseController
             // process error
         }
         $access_token = $access_token_response->access_token;
-        VarDumper::dump($access_token);
     }
 
     public function actionTest2()

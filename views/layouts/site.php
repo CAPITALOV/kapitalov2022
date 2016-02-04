@@ -45,7 +45,8 @@ $this->registerMetaTag(['name' => 'og:description', 'content' => 'Эксклюз
 
 
 <!-- Page Content -->
-<div class="container">
+<?php if (Yii::$app->requestedRoute == 'site/stock') { echo('<div>');} else {echo('<div class="container">');}?>
+
 
     <?= $content ?>
 
@@ -55,7 +56,7 @@ $this->registerMetaTag(['name' => 'og:description', 'content' => 'Эксклюз
     <footer>
         <div class="row">
             <div class="col-lg-12">
-                <p>© 2007 &mdash; 2015 | www.capitalov.com | Эксклюзивные финансовые услуги | Национальное Агентство Капиталов</p>
+                <p>© 2007 — 2015 | www.capitalov.com | Национальное Агентство Капиталов | +7 (499) 755-66-90</p>
             </div>
         </div>
     </footer>

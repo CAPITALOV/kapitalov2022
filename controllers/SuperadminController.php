@@ -7,7 +7,9 @@
 
 namespace app\controllers;
 
+use app\models\LoginForm;
 use app\models\Registration;
+use app\models\Request;
 use app\models\Stock;
 use app\models\StockKurs;
 use app\models\StockPrognosisBlue;
@@ -22,12 +24,44 @@ class SuperadminController extends SuperadminBaseController
 {
     public function actionIndex()
     {
-        return $this->render('index');
+        return $this->redirect(['superadmin_stock/index']);
     }
 
     public function actionReferal()
     {
         return $this->render();
+    }
+
+    public function actionStock_calc()
+    {
+        return $this->render([]);
+    }
+
+    /**
+     * Публикует котировку
+     * Все оплаченные заказы активируются
+     * AJAX
+     *
+     * REQUEST:
+     * - id - int -           идентификатор котировки
+     *
+     * @return string
+     */
+    public function actionStock_calc_activate()
+    {
+        $stock_id = self::getParam('id');
+        $stock = Stock::find($stock_id);
+        $requestList = Request::query([
+            'stock_id' => $stock->getId(),
+            'is_paid'  => 1,
+        ])->all();
+        foreach ($requestList as $request) {
+            $requestObject = new Request($request);
+            $requestObject->activate();
+        }
+        $stock->setStatus(Stock::STATUS_READY);
+
+        return self::jsonSuccess();
     }
 
     /**
@@ -68,6 +102,24 @@ class SuperadminController extends SuperadminBaseController
             'query' => User::query()
         ]);
     }
+
+    public function actionLogin()
+    {
+        if (!\Yii::$app->user->isGuest) {
+            return $this->redirect(['superadmin/index']);
+        }
+
+        $model = new LoginForm();
+        if ($model->load(Yii::$app->request->post()) && $model->login()) {
+            return $this->redirect(['superadmin/index']);
+        }
+        else {
+            return $this->render([
+                'model' => $model,
+            ]);
+        }
+    }
+
 
     /**
      * Показывает "Текущие заказы пользователей"

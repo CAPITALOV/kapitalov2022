@@ -26,6 +26,11 @@ $this->title = 'Вход в систему капиталов';
 
 <?= $model->field($form, 'rememberMe') ?>
 
+<?= \yii\authclient\widgets\AuthChoice::widget([
+    'baseAuthUrl' => ['auth/auth']
+]); ?>
+
+
     <div class="form-group">
         <div class="col-lg-12">
             <?= Html::submitButton('Вход', [

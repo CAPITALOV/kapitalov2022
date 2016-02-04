@@ -37,19 +37,19 @@ class SiteController extends \cs\base\BaseController
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['logout', 'profile', 'profile_password_change'],
+                'only'  => ['logout', 'profile', 'profile_password_change'],
                 'rules' => [
                     [
                         'actions' => ['logout', 'profile', 'profile_password_change'],
-                        'allow' => true,
-                        'roles' => ['@'],
+                        'allow'   => true,
+                        'roles'   => ['@'],
                     ],
                 ],
             ],
-            'verbs' => [
-                'class' => VerbFilter::className(),
+            'verbs'  => [
+                'class'   => VerbFilter::className(),
                 'actions' => [
-                    'logout' => ['post','get'],
+                    'logout' => ['post', 'get'],
                 ],
             ],
         ];
@@ -59,11 +59,11 @@ class SiteController extends \cs\base\BaseController
     public function actions()
     {
         return [
-            'error' => [
+            'error'   => [
                 'class' => 'yii\web\ErrorAction',
             ],
             'captcha' => [
-                'class' => 'yii\captcha\CaptchaAction',
+                'class'           => 'yii\captcha\CaptchaAction',
                 'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
             ],
         ];
@@ -78,6 +78,76 @@ class SiteController extends \cs\base\BaseController
     {
 
         return $this->render();
+    }
+
+    /**
+     * @param int $id идентификатор котировки
+     *
+     * @return mixed
+     */
+    public function actionStock($id)
+    {
+        $item = \app\models\Stock::find($id);
+
+        // Прошлое
+        $today = new \DateTime();
+        $end = $today->format('Y-m-d');
+        $start = $today->sub(new \DateInterval('P6M'))->format('Y-m-d');
+        $lineArrayPast = \app\service\GraphUnion2::convert([
+            'lines' => [
+                \app\models\StockKurs::query(['stock_id' => $item->getId()])
+                    ->select([
+                        'date',
+                        'kurs',
+                    ])
+                    ->andWhere(['between', 'date', $start, $end])
+                    ->orderBy(['date' => SORT_ASC])
+                    ->all(),
+                \app\models\StockPrognosisRed::query(['stock_id' => $item->getId()])
+                    ->select([
+                        'date',
+                        'delta as red',
+                    ])
+                    ->andWhere(['between', 'date', $start, $end])
+                    ->orderBy(['date' => SORT_ASC])
+                    ->all(),
+                \app\models\StockPrognosisBlue::query(['stock_id' => $item->getId()])
+                    ->select([
+                        'date',
+                        'delta as blue',
+                    ])
+                    ->andWhere(['between', 'date', $start, $end])
+                    ->orderBy(['date' => SORT_ASC])
+                    ->all(),
+            ]
+        ]);
+
+        // свечи
+        $today = new \DateTime();
+        $end = $today->format('Y-m-d');
+        $start = $today->sub(new \DateInterval('P1Y'))->format('Y-m-d');
+        $lineArrayCandels = \app\models\StockKurs::query(['stock_id' => $item->getId()])
+            ->select([
+                'date',
+                'open',
+                'close',
+                'low',
+                'high',
+            ])
+            ->andWhere(['between', 'date', $start, $end])
+            ->orderBy(['date' => SORT_ASC])
+            ->all();
+
+        $template = 'stock';
+        if (\Yii::$app->deviceDetect->isMobile()) {
+            $template = 'stock_mobile';
+        }
+
+        return $this->render($template, [
+            'item'             => $item,
+            'lineArrayPast'    => $lineArrayPast,
+            'lineArrayCandels' => $lineArrayCandels,
+        ]);
     }
 
     public static function sendRequest($url, $options = [], $access_token = null)
@@ -101,7 +171,7 @@ class SiteController extends \cs\base\BaseController
         $result->body = $body;
         curl_close($curl);
 
-        \cs\services\VarDumper::dump($result) ;
+        \cs\services\VarDumper::dump($result);
     }
 
     protected static function processResult($result)
@@ -114,9 +184,8 @@ class SiteController extends \cs\base\BaseController
             case 403:
                 break;
             default:
-                if($result->status_code >= 500) {
-                }
-                else {
+                if ($result->status_code >= 500) {
+                } else {
                     return json_decode($result->body);
                 }
         }
@@ -125,15 +194,14 @@ class SiteController extends \cs\base\BaseController
     public function getVideo($embedTag)
     {
         $x = new \DOMDocument();
-        $x->loadXML('<?xml version="1.0" encoding="utf-8"?>'.$embedTag);
+        $x->loadXML('<?xml version="1.0" encoding="utf-8"?>' . $embedTag);
         $flashvars = $x->documentElement->getAttribute('flashvars');
 
         $vars = explode('&', $flashvars);
-        foreach($vars as $i) {
-            $new[] = explode('=',$i);
+        foreach ($vars as $i) {
+            $new[] = explode('=', $i);
         }
-        foreach($new as $i)
-        {
+        foreach ($new as $i) {
             if ($i[0] == 'params') {
                 $v = $i[1];
             }
@@ -141,7 +209,7 @@ class SiteController extends \cs\base\BaseController
         $vars = json_decode(urldecode($v));
         $url = $vars->video_data[0]->hd_src;
 
-        return Yii::$app->response->sendContentAsFile(file_get_contents($url),'video.mp4');
+        return Yii::$app->response->sendContentAsFile(file_get_contents($url), 'video.mp4');
     }
 
     public function actionTime()
@@ -164,17 +232,19 @@ class SiteController extends \cs\base\BaseController
         $market = \app\models\StockMarket::query()
             ->orderBy([
                 'if (id = 1, 0,1)' => SORT_ASC,
-                'name'                => SORT_ASC,
+                'name'             => SORT_ASC,
             ])
             ->all();
         for ($i = 0; $i < count($market); $i++) {
             $item = &$market[ $i ];
-            $item['stockList'] = Stock::query([])
+            $item['stockList'] = Stock::query()
+                ->andWhere(['finam_market' => $item['id']])
                 ->orderBy([
                     'name' => SORT_ASC,
                 ])
                 ->all();
         }
+
         return $this->render([
             'items' => $market,
         ]);

@@ -53,7 +53,6 @@ JS
         disablePreviousStep: false
     });
     $('#buttonNext').click(function() {
-    console.log(1);
         ajaxJson({
             url: '{$url}',
             data: {
@@ -73,6 +72,8 @@ JS
 JS
     );
     ?>
+
+
     <div class="wizard" data-initialize="wizard" id="myWizard">
         <div class="steps-container">
             <ul class="steps">
@@ -138,23 +139,22 @@ JS
                     <input type="hidden" name="scid" value="34126">
 
                     <!--                Идентификатор клиента/Номер заказа:<br>-->
-                    <input type="hidden" name="customerNumber" size="43" placeholder="" value="" id="customerNumber">
+                    <input type="hidden" name="customerNumber" value="" id="customerNumber">
 
                     <!--                Сумма:<br>-->
-                    <input type="hidden" name="sum" value="" size="43" placeholder="введите сумму заказа в рублях"
-                           id="sum">
+                    <input type="hidden" name="sum" value="" id="sum">
 
                     <!--                ФИО плательщика:<br>-->
-                    <input name="custName" type="hidden" size="43" placeholder="" id="custName">
+                    <input name="custName" type="hidden"  id="custName">
 
                     <!--                Email:<br>-->
-                    <input name="custEmail" type="hidden" size="43" placeholder="" value="" id="custEmail">
+                    <input name="custEmail" type="hidden"  id="custEmail">
 
                     <!--                Адрес доставки:<br>-->
-                    <input name="custAddr" type="hidden" size="43" placeholder="город, улица, номер дома, квартира">
+                    <input name="custAddr" type="hidden">
 
                     <!--                Телефон плательщика<br>-->
-                    <input name="orderDetails" type="hidden" size="43" placeholder="пример +79031234567">
+                    <input name="orderDetails" type="hidden">
 
                     <div class="radio">
                         <label class="radio-custom radioList" data-initialize="radio">
@@ -204,6 +204,16 @@ JS
                 </form>
 
             </div>
+        </div>
+    </div>
+
+    <hr>
+    <div class="panel panel-info">
+        <div class="panel-heading">Условия предоставления услуги</div>
+        <div class="panel-body">
+            <p>Заказывая услуги после 15 числа текущего месяца, вы получаете услугу до конца следующего.</p>
+            <p>Фактически оплачивая следующий месяц авансовым платежом.</p>
+            <p>Срок расчёта котировки национального рынка от 2 до 7 дней, зарубежного до 10 после оплаты.</p>
         </div>
     </div>
 <?php } ?>

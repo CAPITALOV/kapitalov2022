@@ -5,6 +5,7 @@ namespace app\models;
 use app\models\NewsItem;
 use app\models\User;
 use app\services\GsssHtml;
+use cs\Application;
 use cs\services\Security;
 use cs\services\Str;
 use cs\services\VarDumper;
@@ -51,6 +52,7 @@ class Request extends \cs\base\DbRecord
      * Актвирует услугу
      * Добавляет купленное количество месяцев
      * Добавляет запись в историю покупок
+     * Высылает письмо о готовности заказа
      *
      * @return array
      * [
@@ -66,7 +68,11 @@ class Request extends \cs\base\DbRecord
         $dateFinish = \app\models\UserStock::add($this->getUserId(), $stock_id, $monthCounter, $this->getField('datetime'));
         $dateFinishStr = Yii::$app->formatter->asDate($dateFinish);
         WalletHistory::insert("Услуга включена, акция: {$stock->getName()}, месяцев: {$monthCounter}, до: {$dateFinishStr}");
-        self::delete();
+        $this->delete();
+        // Высылаю письмо клиенту что ваш заказ готов и можете пользоваться
+        Application::mail(User::find($this->getUserId())->getEmail(), 'ваш заказ готов и можете пользоваться', 'request_ready', [
+            'request' => $this,
+        ]);
 
         return [
             'stock'      => $stock,
