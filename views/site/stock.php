@@ -9,7 +9,6 @@ use yii\bootstrap\ActiveForm;
 /* @var $lineArrayPast  array */
 /* @var $lineArrayFuture  array */
 /* @var $lineArrayCandels  array */
-/* @var $isPaid  bool опачена ли эта котировка? */
 
 $this->title = $item->getField('name');
 $this->registerJsFile("/js/actions.js", ['depends' => ['yii\web\JqueryAsset']]);

@@ -88,7 +88,6 @@ class SiteController extends \cs\base\BaseController
     public function actionStock($id)
     {
         $item = \app\models\Stock::find($id);
-        $isPaid = Yii::$app->user->identity->isPaid($id);
 
         // Прошлое
         $today = new \DateTime();
@@ -146,7 +145,6 @@ class SiteController extends \cs\base\BaseController
 
         return $this->render($template, [
             'item'             => $item,
-            'isPaid'           => $isPaid,
             'lineArrayPast'    => $lineArrayPast,
             'lineArrayCandels' => $lineArrayCandels,
         ]);

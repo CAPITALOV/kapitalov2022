@@ -4,10 +4,10 @@ use yii\helpers\Url;
 use yii\helpers\Html;
 
 /** @var $items array cap_stock */
-/** @var $red array */
-/** @var $blue array */
-/** @var $kurs array */
-/** @var $this yii\web\View */
+/** @var $red   array */
+/** @var $blue  array */
+/** @var $kurs  array */
+/** @var $this  yii\web\View */
 
 $this->title = 'Котировки';
 $model = new \app\models\Form\StockAll();
