@@ -149,6 +149,7 @@ class CalculatingProbability extends Object
                 $ret[] = 0;
             }
         }
+        if (count($ret) == 0) return 0;
         $sum = 0;
         $count = 0;
         foreach ($ret as $i) {
