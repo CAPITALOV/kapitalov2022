@@ -133,7 +133,7 @@ $dateMax = $dateMax->format('j') . ' ' . $monthList[$dateMax->format('n')-1];
     </div>
 
 <?php } else { ?>
-    <div style="margin: 0px 0px 0px 0px;">
+    <div style="margin: 40px;">
         <div class="row col-lg-12">
             <div class="form-group">
                 <p><span class="label label-danger">График не оплачен</span></p>
@@ -141,7 +141,7 @@ $dateMax = $dateMax->format('j') . ' ' . $monthList[$dateMax->format('n')-1];
         </div>
         <a
             href="<?= Url::to(['cabinet_wallet/add', 'id' => $item->getId()]) ?>"
-            class="btn btn-default"
+            class="btn btn-primary"
             style="width: 100%"
             >Купить</a>
     </div>
