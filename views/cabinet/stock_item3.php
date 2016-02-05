@@ -133,16 +133,18 @@ $dateMax = $dateMax->format('j') . ' ' . $monthList[$dateMax->format('n')-1];
     </div>
 
 <?php } else { ?>
-    <div class="row col-lg-12">
-        <div class="form-group">
-            <p><span class="label label-danger">График не оплачен</span></p>
+    <div style="margin: 0px 0px 0px 0px;">
+        <div class="row col-lg-12">
+            <div class="form-group">
+                <p><span class="label label-danger">График не оплачен</span></p>
+            </div>
         </div>
+        <a
+            href="<?= Url::to(['cabinet_wallet/add', 'id' => $item->getId()]) ?>"
+            class="btn btn-default"
+            style="width: 100%"
+            >Купить</a>
     </div>
-    <a
-        href="<?= Url::to(['cabinet_wallet/add', 'id' => $item->getId()]) ?>"
-        class="btn btn-default"
-        style="width: 100%"
-        >Купить</a>
 <?php } ?>
 
 <hr class="clearfix" style="color:#489F46; background-color:#489F46; height:3px; margin-top: 0px;margin-bottom: 0px;">
