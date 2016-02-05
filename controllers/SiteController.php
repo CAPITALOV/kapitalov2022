@@ -231,7 +231,7 @@ class SiteController extends \cs\base\BaseController
     {
         $market = \app\models\StockMarket::query()
             ->orderBy([
-                'if (id = 1, 0,1)' => SORT_ASC,
+                'if (id = 1, 0, 1)' => SORT_ASC,
                 'name'             => SORT_ASC,
             ])
             ->all();

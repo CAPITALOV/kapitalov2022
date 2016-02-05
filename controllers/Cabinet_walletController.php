@@ -239,16 +239,27 @@ class Cabinet_walletController extends CabinetBaseController
     {
         $monthCounter = self::getParam('monthcounter');
         $stockId = self::getParam('stock_id');
+        $stock = Stock::find($stockId);
 
         $request = Request::insert([
             'stock_id' => $stockId,
             'month'    => $monthCounter,
         ]);
-        Application::mail(User::find(Yii::$app->params['chat']['consultant_id'])->getEmail(), 'Запрос на добавление услуги', 'request', [
-            'stock'    => Stock::find($stockId),
-            'user'     => \Yii::$app->user->identity,
-            'request'  => $request,
-        ]);
+
+        if ($stock->getStatus() == \app\models\Stock::STATUS_NO_CALC) {
+            $stock->setStatus(\app\models\Stock::STATUS_IN_PROGRESS);
+            Application::mail(User::find(\Yii::$app->params['chat']['consultant_id'])->getEmail(), 'Заказана котировка. Необходим расчет', 'new_request_need_calculate', [
+                'stock'   => $stock,
+                'user'    => \Yii::$app->user->identity,
+                'request' => $request,
+            ]);
+        } else {
+            Application::mail(User::find(Yii::$app->params['chat']['consultant_id'])->getEmail(), 'Запрос на продление услуги', 'request', [
+                'stock'    => $stock,
+                'user'     => \Yii::$app->user->identity,
+                'request'  => $request,
+            ]);
+        }
 
         return self::jsonSuccess([
             'user'    => [
@@ -257,7 +268,7 @@ class Cabinet_walletController extends CabinetBaseController
             ],
             'request' => [
                 'id'  => $request->getId(),
-                'sum' => $monthCounter * 100 * 65,
+                'sum' => $monthCounter * 100 * Yii::$app->params['yeKurs'],
             ],
         ]);
     }

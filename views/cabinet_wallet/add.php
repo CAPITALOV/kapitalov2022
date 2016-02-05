@@ -19,7 +19,6 @@ $this->registerJs(<<<JS
         disablePreviousStep: false
     });
     $('#buttonNext').click(function() {
-    console.log(1);
         ajaxJson({
             url: '{$url}',
             data: {

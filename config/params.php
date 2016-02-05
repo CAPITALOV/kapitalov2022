@@ -9,4 +9,5 @@ return [
         'consultant_id' => (YII_ENV_DEV)? 7 : 6,
     ],
     'yeKurs' => 65,
+
 ];

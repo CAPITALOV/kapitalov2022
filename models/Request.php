@@ -67,10 +67,10 @@ class Request extends \cs\base\DbRecord
         $monthCounter = $this->getField('month');
         $dateFinish = \app\models\UserStock::add($this->getUserId(), $stock_id, $monthCounter, $this->getField('datetime'));
         $dateFinishStr = Yii::$app->formatter->asDate($dateFinish);
-        WalletHistory::insert("Услуга включена, акция: {$stock->getName()}, месяцев: {$monthCounter}, до: {$dateFinishStr}");
+        WalletHistory::insert("Услуга включена, котировка: {$stock->getName()}, месяцев: {$monthCounter}, до: {$dateFinishStr}");
         $this->delete();
         // Высылаю письмо клиенту что ваш заказ готов и можете пользоваться
-        Application::mail(User::find($this->getUserId())->getEmail(), 'ваш заказ готов и можете пользоваться', 'request_ready', [
+        Application::mail(User::find($this->getUserId())->getEmail(), 'Ваш заказ готов и можете пользоваться', 'request_ready', [
             'request' => $this,
         ]);
 
