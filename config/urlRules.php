@@ -100,10 +100,12 @@ return [
     'cabinet/wallet/add1'                   => 'cabinet_wallet/add1',
     'cabinet/wallet/add1/<id:\\d+>/success' => 'cabinet_wallet/add1_success',
     'cabinet/wallet/add1/<id:\\d+>/fail'    => 'cabinet_wallet/add1_fail',
-    'cabinet/wallet/add/add_national_step1' => 'cabinet_wallet/add_national_step1',
+    'cabinet/wallet/add2/ajax'              => 'cabinet_wallet/add1_ajax',
 
     'cabinet/wallet/add2'                   => 'cabinet_wallet/add2',
-    'cabinet/wallet/add/add_world_step1'    => 'cabinet_wallet/add_world_step1',
+    'cabinet/wallet/add2/ajax'              => 'cabinet_wallet/add2_ajax',
+    'cabinet/wallet/add2/<id:\\d+>/success' => 'cabinet_wallet/add2_success',
+    'cabinet/wallet/add2/<id:\\d+>/fail'    => 'cabinet_wallet/add2_fail',
 
     'cabinet/wallet/add/step1'              => 'cabinet_wallet/add_step1',
 

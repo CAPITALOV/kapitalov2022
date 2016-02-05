@@ -47,7 +47,7 @@ JS
 <?php } else { ?>
     <?php
     \app\assets\FuelUX\Asset::register($this);
-    $url = \yii\helpers\Url::to(['cabinet_wallet/add_world_step1']);
+    $url = \yii\helpers\Url::to(['cabinet_wallet/add2_ajax']);
     $this->registerJs(<<<JS
     $('#myWizard').wizard({
         disablePreviousStep: false

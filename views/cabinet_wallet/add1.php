@@ -49,7 +49,7 @@ JS
         <div class="col-lg-8">
             <?php
             \app\assets\FuelUX\Asset::register($this);
-            $url = \yii\helpers\Url::to(['cabinet_wallet/add_national_step1']);
+            $url = \yii\helpers\Url::to(['cabinet_wallet/add1_ajax']);
             $this->registerJs(<<<JS
     $('#myWizard').wizard({
         disablePreviousStep: false
