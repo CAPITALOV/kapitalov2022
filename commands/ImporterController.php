@@ -80,6 +80,10 @@ class ImporterController extends Controller
         ]
         ])
             ->andWhere(['not', ['finam_code' => '']])
+            ->andWhere(['not', ['finam_em' => null]])
+            ->andWhere(['not', ['finam_em' => '']])
+            ->andWhere(['not', ['finam_market' => null]])
+            ->andWhere(['not', ['finam_market' => '']])
             ->all();
 
         foreach($rows as $row) {
