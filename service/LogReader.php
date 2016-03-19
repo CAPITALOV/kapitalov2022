@@ -4,7 +4,6 @@
 namespace app\service;
 
 
-
 use cs\services\VarDumper;
 use yii\helpers\ArrayHelper;
 
@@ -86,8 +85,9 @@ class LogReader
     public function readLast($options = [])
     {
         $maxStrings = ArrayHelper::getValue($options, 'maxStrings', null);
-        $uid = ArrayHelper::getValue($options, 'uid', null);
+        $user_id = ArrayHelper::getValue($options, 'uid', null);
         $type = ArrayHelper::getValue($options, 'type', null);
+        $category = ArrayHelper::getValue($options, 'type', null);
 
         $data = file_get_contents($this->file);
         $array = explode("\n", $data);
@@ -97,8 +97,10 @@ class LogReader
         do {
             $ret = $this->getItemReverse($array, $i);
             $logItem = $this->convertItem($ret['data']);
-            $items[] = $logItem;
-            $d++;
+            if ($this->isEqual($logItem, $options)) {
+                $items[] = $logItem;
+                $d++;
+            }
             $i = $ret['nextString'];
             if ($maxStrings) {
                 if ($d == $maxStrings) {
@@ -108,6 +110,32 @@ class LogReader
         } while (!$ret['isLast']);
 
         return $items;
+    }
+
+    public function isEqual($logItem, $options)
+    {
+        $isEqual = true;
+        foreach ($options as $n => $v) {
+            switch ($n) {
+                case 'user_id':
+                    if ($logItem['user_id'] != $v) {
+                        return false;
+                    }
+                    break;
+                case 'category':
+                    if (substr($logItem['category'], 0, strlen($options['category'])) != $options['category']) {
+                        return false;
+                    }
+                    break;
+                case 'type':
+                    if (!in_array($options['type'], ['info', 'debug', 'error', 'warning'])) {
+                        return false;
+                    }
+                    break;
+            }
+        }
+
+        return true;
     }
 
     public function convert($items)
@@ -124,8 +152,8 @@ class LogReader
      * Преобразует набор строк файла лога в набор записей лога
      *
      *
-     * @param array $data  все строки файла
-     * @param int   $index указатель строки в файле на запись лога, исчисление от 0
+     * @param array $data все строки файла
+     * @param int $index указатель строки в файле на запись лога, исчисление от 0
      *
      * @return array
      * [
@@ -160,8 +188,8 @@ class LogReader
     /**
      * Преобразует набор строк файла лога в набор записей лога
      *
-     * @param array $data  все строки файла
-     * @param int   $index указатель строки в файле на запись лога, исчисление от 0
+     * @param array $data все строки файла
+     * @param int $index указатель строки в файле на запись лога, исчисление от 0
      *
      * @return array
      * [
@@ -185,7 +213,7 @@ class LogReader
         } while (!$this->isBeginLogAction($data[ $index + $c ]));
 
         $i = 1;
-        while(!$this->isBeginLogAction($data[ $index - $i ])) {
+        while (!$this->isBeginLogAction($data[ $index - $i ])) {
             $i++;
             if ($index - $i < 0) {
                 $isLast = true;
@@ -235,30 +263,30 @@ class LogReader
      * @param array $item
      *
      * @return array [
-            'uid'      => $uid,
-            'datetime' => $datetime,
-            'type'     => $type,
-            'message'  => $message,
+     * 'uid'      => $uid,
+     * 'datetime' => $datetime,
+     * 'type'     => $type,
+     * 'message'  => $message,
      * ]
      */
     public function convertItem($item)
     {
         $firstRow = $item[0];
-        $date = substr($firstRow,0,10);
-        $time = substr($firstRow,11,8);
-        $pos = strpos($firstRow,']', 21);
+        $date = substr($firstRow, 0, 10);
+        $time = substr($firstRow, 11, 8);
+        $pos = strpos($firstRow, ']', 21);
         $ip = substr($firstRow, 21, $pos - 21);
         $start = $pos + 2;
-        $pos = strpos($firstRow,']', $start);
+        $pos = strpos($firstRow, ']', $start);
         $user_id = substr($firstRow, $start, $pos - $start);
         $start = $pos + 2;
-        $pos = strpos($firstRow,']', $start);
+        $pos = strpos($firstRow, ']', $start);
         $code = substr($firstRow, $start, $pos - $start);
         $start = $pos + 2;
-        $pos = strpos($firstRow,']', $start);
+        $pos = strpos($firstRow, ']', $start);
         $type = substr($firstRow, $start, $pos - $start);
         $start = $pos + 2;
-        $pos = strpos($firstRow,']', $start);
+        $pos = strpos($firstRow, ']', $start);
         $app = substr($firstRow, $start, $pos - $start);
         $start = $pos + 2;
         $message = substr($firstRow, $start);
@@ -267,14 +295,14 @@ class LogReader
         }
 
         return [
-            'date'    => $date,
-            'time'    => $time,
-            'ip'      => $ip,
-            'user_id' => $user_id,
-            'code'    => $code,
-            'type'    => $type,
-            'app'     => $app,
-            'message' => $message,
+            'date'     => $date,
+            'time'     => $time,
+            'ip'       => $ip,
+            'user_id'  => $user_id,
+            'code'     => $code,
+            'type'     => $type,
+            'category' => $app,
+            'message'  => $message,
         ];
     }
 
