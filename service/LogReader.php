@@ -85,10 +85,6 @@ class LogReader
     public function readLast($options = [])
     {
         $maxStrings = ArrayHelper::getValue($options, 'maxStrings', null);
-        $user_id = ArrayHelper::getValue($options, 'uid', null);
-        $type = ArrayHelper::getValue($options, 'type', null);
-        $category = ArrayHelper::getValue($options, 'type', null);
-
         $data = file_get_contents($this->file);
         $array = explode("\n", $data);
         $i = $this->findLast($array);
@@ -114,7 +110,6 @@ class LogReader
 
     public function isEqual($logItem, $options)
     {
-        $isEqual = true;
         foreach ($options as $n => $v) {
             switch ($n) {
                 case 'user_id':
@@ -128,7 +123,7 @@ class LogReader
                     }
                     break;
                 case 'type':
-                    if (!in_array($options['type'], ['info', 'debug', 'error', 'warning'])) {
+                    if ($options['type'] != $logItem['type']) {
                         return false;
                     }
                     break;

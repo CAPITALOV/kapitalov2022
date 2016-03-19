@@ -267,9 +267,13 @@ class SiteController extends \cs\base\BaseController
 
     public function actionLog()
     {
-        $reader = LogReader::file('@runtime/logs/app.log');
         return $this->render([
-            'log' => $reader->readLast(['maxStrings' => 10]),
+            'log' => LogReader::file('@runtime/logs/app.log')->readLast(
+                ArrayHelper::merge(
+                    ['maxStrings' => 10],
+                    Yii::$app->request->get()
+                )
+            ),
         ]);
     }
 

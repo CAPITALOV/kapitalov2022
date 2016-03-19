@@ -10,41 +10,32 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="container">
 
-<div class="site-login">
-    <h1 class="page-header"><?= Html::encode($this->title) ?></h1>
+    <div class="site-login">
+        <h1 class="page-header"><?= Html::encode($this->title) ?></h1>
 
-    <table class="table table-hover table-striped table-bordered">
-        <?php foreach($log as $row) { ?>
-            <tr>
-                <td nowrap>
-                    <?= $row['date'] ?>
-                </td>
-                <td nowrap>
-                    <?= $row['time'] ?>
-                </td>
-                <td nowrap>
-                    <?= $row['ip'] ?>
-                </td>
-                <td nowrap>
-                    <?= $row['user_id'] ?>
-                </td>
-                <td nowrap>
-                    <?= $row['code'] ?>
-                </td>
-                <td nowrap>
-                    <?= $row['type'] ?>
-                </td>
-                <td nowrap>
-                    <?= $row['app'] ?>
-                </td>
-                <td>
-                    <pre><?= Html::encode($row['message']) ?></pre>
-                </td>
-            </tr>
-        <?php }?>
-    </table>
-
-
-
-</div>
+        <?= \yii\grid\GridView::widget([
+            'dataProvider' => new \yii\data\ArrayDataProvider([
+                'allModels' => $log,
+            ]),
+            'tableOptions' => [
+                'class' => 'table table-hover table-striped table-bordered',
+            ],
+            'columns'      => [
+                ['class' => 'yii\grid\SerialColumn'],
+                'date:date:Дата',
+                'time:text:Время',
+                'ip',
+                'user_id',
+                'code',
+                'type',
+                'category',
+                [
+                    'header'  => 'Сообщение',
+                    'content' => function ($item) {
+                        return '<pre>' . Html::encode($item['message']) . '</pre>';
+                    }
+                ],
+            ],
+        ]) ?>
+    </div>
 </div>
