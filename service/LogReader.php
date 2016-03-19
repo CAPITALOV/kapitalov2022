@@ -76,8 +76,9 @@ class LogReader
      *
      * @param array $options опции вывода
      * - maxStrings - int - количество записей лога которые надо вернуть, по умолчанию - все
-     * - uid - int - идентификатор пользователя
-     * - type - string - тип сообщения INFO | DEBUG | ERROR | WARNING
+     * - user_id - int - идентификатор пользователя
+     * - type - string - тип сообщения info | debug | error | warning
+     * - category - string - первые симводы категории
      *
      * @return array
      * последняя запись лога будет первой в массиве
