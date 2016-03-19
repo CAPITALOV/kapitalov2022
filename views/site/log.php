@@ -16,6 +16,9 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= \yii\grid\GridView::widget([
             'dataProvider' => new \yii\data\ArrayDataProvider([
                 'allModels' => $log,
+                'pagination' => [
+                    'pageSize' => 50
+                ]
             ]),
             'tableOptions' => [
                 'class' => 'table table-hover table-striped table-bordered',
