@@ -11,6 +11,7 @@ use app\models\Log;
 use app\models\Stock;
 use app\models\StockKurs;
 use app\models\User;
+use app\service\LogReader;
 use cs\services\Security;
 use cs\services\Url;
 use Yii;
@@ -266,8 +267,9 @@ class SiteController extends \cs\base\BaseController
 
     public function actionLog()
     {
+        $reader = LogReader::file('@runtime/logs/app.log');
         return $this->render([
-            'log' => file_get_contents(Yii::getAlias('@runtime/logs/app.log')),
+            'log' => $reader->readLast(['maxStrings' => 10]),
         ]);
     }
 
