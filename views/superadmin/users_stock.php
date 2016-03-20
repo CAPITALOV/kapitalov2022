@@ -150,7 +150,7 @@ $this->title = 'Текущие заказы пользователей';
                     $с++;
                 } ?>
                 <td>
-                    <a href="<?= Url::to(['cabinet/stock_item', 'id' => $stock['id']]) ?>"><?= $stock['name'] ?>
+                    <a href="<?= Url::to(['cabinet/stock_item3', 'id' => $stock['id']]) ?>"><?= $stock['name'] ?>
                 </td>
                 <td>
                     <?= Yii::$app->formatter->asDate($stock['date_finish']) ?>
