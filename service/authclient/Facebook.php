@@ -82,8 +82,10 @@ class Facebook extends \yii\authclient\clients\Facebook implements authClientInt
         \Yii::info(\yii\helpers\VarDumper::dumpAsString([$attributes, $userIdentity]), 'gs\\user');
         $fields = [
             'fb_id'   => $attributes['id'],
-            'fb_link' => $attributes['link'],
         ];
+        if (isset($attributes['link'])) {
+            $fields['fb_link'] = $attributes['link'];
+        }
         if ($userIdentity->getEmail() == '') {
             if (ArrayHelper::getValue($attributes, 'email', '') != '') {
                 $fields['email'] = $attributes['email'];
