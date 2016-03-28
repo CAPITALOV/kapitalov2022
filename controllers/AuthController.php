@@ -79,7 +79,9 @@ class AuthController extends BaseController
             $client->attach($attributes, Yii::$app->user->identity);
         }
         $client->setAuthFlag();
-        Yii::$app->user->setReturnUrl($_SERVER['HTTP_REFERER']);
+        if (isset($_SERVER['HTTP_REFERER'])) {
+            Yii::$app->user->setReturnUrl($_SERVER['HTTP_REFERER']);
+        }
     }
 
     public function actionLogin()
