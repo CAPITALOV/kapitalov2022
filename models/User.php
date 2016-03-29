@@ -40,6 +40,18 @@ class User extends DbRecord implements \yii\web\IdentityInterface
     }
 
     /**
+     * Имеет ли профиль аватар?
+     *
+     * @return bool
+     * true - имеет
+     * false - не имеет
+     */
+    public function hasAvatar()
+    {
+        return ($this->getField('avatar').'' != '');
+    }
+
+    /**
      * Возвращает реферальную ссылку
      *
      * @param bool $isScheme
