@@ -65,13 +65,14 @@ class AuthController extends BaseController
     public function successCallback($client)
     {
         $attributes = $client->getUserAttributes();
+        Yii::info('$attributes='.\yii\helpers\VarDumper::dumpAsString($attributes), 'cap\\\app\\controllers\\AuthController::successCallback');
         /** @var \app\service\authclient\authClientInterface $client */
         $client->saveToken();
         if (Yii::$app->user->isGuest) {
             $user = $client->login($attributes);
             if (is_null($user)) {
-                $user->firstEnter();
                 $user = $client->register($attributes);
+                $user->firstEnter();
             }
             if (!is_null($user)) Yii::$app->user->login($user);
         }

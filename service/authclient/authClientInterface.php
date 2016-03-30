@@ -5,6 +5,12 @@ namespace app\service\authclient;
 interface authClientInterface
 {
 
+    /**
+     * Прикрепяет профиль фейсбука к профилю сайта
+     *
+     * @param array            $attributes
+     * @return \app\models\User
+     */
     public function register($attributes);
 
     /**
