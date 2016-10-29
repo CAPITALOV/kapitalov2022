@@ -106,7 +106,6 @@ class Finam extends Object implements DadaImporterInterface
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $out = curl_exec($ch);
         curl_close($ch);
-        \cs\services\VarDumper::dump($out, true);
 
         $arr = explode("\n", $out);
         $ret = [];
