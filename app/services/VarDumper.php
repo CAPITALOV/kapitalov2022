@@ -10,10 +10,16 @@ class VarDumper
 {
     public static function dump($value, $highlight = true, $depth = 10)
     {
-        Yii::$app->response->charset = 'utf-8';
-        Yii::$app->response->send();
+        if (\Yii::$app->response->className() != 'yii\console\Response') {
+            \Yii::$app->response->headers->set('Content-Encoding', 'utf-8');
+            \Yii::$app->response->charset = 'utf-8';
+            \Yii::$app->response->send();
+            $isHighlight = $highlight;
+        } else {
+            $isHighlight = false;
+        }
 
-        \yii\helpers\VarDumper::dump($value, $depth, $highlight);
+        \yii\helpers\VarDumper::dump($value, $depth, $isHighlight);
         $c = 1;
 
         echo "\r\n";
