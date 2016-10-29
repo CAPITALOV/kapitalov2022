@@ -89,7 +89,6 @@ class ImporterController extends Controller
             $start = (new \DateTime())->sub(new \DateInterval('P7D'));
             $end = (new \DateTime());
             $result = \app\models\Form\StockKursImport::importCandels($row['id'], $start->format('Y-m-d'), $end->format('Y-m-d'));
-            \cs\services\VarDumper::dump($result, true);
             $new = $result['insert'];
             if (count($new) > 0) {
                 \Yii::info('Импортированы данные: ' . VarDumper::dumpAsString($new), 'cap\\importer\\index');

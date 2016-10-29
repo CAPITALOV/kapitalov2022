@@ -160,6 +160,7 @@ class StockKursImport extends \cs\base\BaseForm
             ],
         ];
         $importer = new \app\service\DadaImporter\Finam($data);
+        \cs\services\VarDumper::dump($importer, true);
         $data = $importer->importCandels($start, $end);
         $dateArrayRows = StockKurs::query(['between', 'date', $start, $end])->select(['date'])->andWhere(['stock_id' => $stock_id])->column();
         $insert = [];
