@@ -101,7 +101,7 @@ class ImporterController extends Controller
 
     public function log($message, $isNewLine = true)
     {
-        echo $message;
+        echo iconv('utf-8', 'windows-1251', $message);
         if ($isNewLine) {
             echo "\n";
         }
