@@ -9,7 +9,7 @@ use yii\helpers\ArrayHelper;
 
 class Finam extends Object implements DadaImporterInterface
 {
-    private $url    = 'http://195.128.78.52';
+    private $url    = 'http://export.finam.ru';
 
     public $path    = '/SBERP_150701_150818.txt';
 
