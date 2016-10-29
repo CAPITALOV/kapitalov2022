@@ -23,16 +23,13 @@ class ImporterController extends Controller
      */
     public function actionIndex()
     {
-        $rows = Stock::query(['not', [
-            'finam_code' => null,
-        ]
-        ])
+        $rows = Stock::query(['not', ['finam_code' => null,]])
             ->andWhere(['not', ['finam_code' => '']])
             ->all();
 
         foreach($rows as $row) {
             $stock_id = $row['id'];
-            $this->log('Попытка получить данные для: ' . $row['name']);
+            $this->log('Trying to get: ' . $row['name']);
 
             $importer = [
                 'params'   => [
@@ -62,11 +59,11 @@ class ImporterController extends Controller
             }
             if (count($new) > 0) {
                 \Yii::info('Импортированы данные: ' . VarDumper::dumpAsString($new), 'gs\\importer\\index');
-                $this->log('Импортированы данные: ' . VarDumper::dumpAsString($new));
+                $this->log('Import data: ' . VarDumper::dumpAsString($new));
 
                 StockKurs::batchInsert(['stock_id', 'date', 'kurs'], $new);
             } else {
-                $this->log('Нечего импортировать');
+                $this->log('Nothing to import');
             }
         }
     }
@@ -75,19 +72,20 @@ class ImporterController extends Controller
      */
     public function actionCandels()
     {
-        $rows = Stock::query(['not', [
-            'finam_code' => null,
-        ]
-        ])
-            ->andWhere(['not', ['finam_code' => '']])
-            ->andWhere(['not', ['finam_em' => null]])
-            ->andWhere(['not', ['finam_em' => '']])
-            ->andWhere(['not', ['finam_market' => null]])
-            ->andWhere(['not', ['finam_market' => '']])
+        $rows = Stock::query(['not', ['finam_code' => null]])
+            ->andWhere([
+                'and',
+                ['not', ['finam_code' => '']],
+                ['not', ['finam_em' => null]],
+                ['not', ['finam_em' => '']],
+                ['not', ['finam_market' => null]],
+                ['not', ['finam_market' => '']]
+            ])
             ->all();
+        \cs\services\VarDumper::dump($rows, true);
 
         foreach($rows as $row) {
-            $this->log('Попытка получить данные для: ' . $row['name']);
+            $this->log('Try to get: ' . $row['name']);
 
             $start = (new \DateTime())->sub(new \DateInterval('P7D'));
             $end = (new \DateTime());
@@ -95,9 +93,9 @@ class ImporterController extends Controller
             $new = $result['insert'];
             if (count($new) > 0) {
                 \Yii::info('Импортированы данные: ' . VarDumper::dumpAsString($new), 'cap\\importer\\index');
-                $this->log('Импортированы данные: ' . VarDumper::dumpAsString($new));
+                $this->log('Import data: ' . VarDumper::dumpAsString($new));
             } else {
-                $this->log('Нечего импортировать');
+                $this->log('nothing to import');
             }
         }
     }
