@@ -40,7 +40,7 @@ class StockPrognosisRedDelete extends \cs\base\BaseForm
                     [
                         'dateFormat' => 'php:d.m.Y',
                         'clientOptions' => [
-                            'maxDate' => '+11m'
+                            'maxDate' => '01.01.2020'
                         ],
                     ]
                 ]
@@ -54,7 +54,7 @@ class StockPrognosisRedDelete extends \cs\base\BaseForm
                     [
                         'dateFormat' => 'php:d.m.Y',
                         'clientOptions' => [
-                            'maxDate' => '+11m'
+                            'maxDate' => '01.01.2020'
                         ],
                     ]
                 ]
