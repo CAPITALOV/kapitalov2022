@@ -32,7 +32,7 @@ $this->title = 'Удалить прогноз красный';
         <div class="form-group">
             <hr>
             <?= Html::submitButton('Удалить', [
-                'class' => 'btn btn-default',
+                'class' => 'btn btn-info',
                 'name'  => 'contact-button',
                 'style' => 'width:100%',
             ]) ?>
