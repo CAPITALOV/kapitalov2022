@@ -39,6 +39,9 @@ class StockPrognosisRedDelete extends \cs\base\BaseForm
                 'widget' => ['cs\Widget\DatePicker\DatePicker',
                     [
                         'dateFormat' => 'php:d.m.Y',
+                        'clientOptions' => [
+                            'maxDate' => '+11m'
+                        ],
                     ]
                 ]
             ],
@@ -50,6 +53,9 @@ class StockPrognosisRedDelete extends \cs\base\BaseForm
                 'widget' => ['cs\Widget\DatePicker\DatePicker',
                     [
                         'dateFormat' => 'php:d.m.Y',
+                        'clientOptions' => [
+                            'maxDate' => '+11m'
+                        ],
                     ]
                 ]
             ],
