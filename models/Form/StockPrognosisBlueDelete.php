@@ -31,6 +31,8 @@ class StockPrognosisBlueDelete extends \cs\base\BaseForm
 
     function __construct($fields = [])
     {
+        $year = date('Y');
+        $range = ($year - 9) . ':' . ($year + 9);
         static::$fields = [
             [
                 'dateMin',
@@ -40,6 +42,9 @@ class StockPrognosisBlueDelete extends \cs\base\BaseForm
                 'widget' => ['cs\Widget\DatePicker\DatePicker',
                     [
                         'dateFormat' => 'php:d.m.Y',
+                        'clientOptions' => [
+                            'yearRange' => $range
+                        ],
                     ]
                 ]
             ],
@@ -51,6 +56,9 @@ class StockPrognosisBlueDelete extends \cs\base\BaseForm
                 'widget' => ['cs\Widget\DatePicker\DatePicker',
                     [
                         'dateFormat' => 'php:d.m.Y',
+                        'clientOptions' => [
+                            'yearRange' => $range
+                        ],
                     ]
                 ]
             ],

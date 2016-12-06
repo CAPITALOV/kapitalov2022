@@ -12,7 +12,7 @@ use yii\db\Query;
 $this->title = 'Удалить прогноз синий';
 ?>
 
-    <h1 class="page-header"><?= Html::encode($this->title) ?></h1>
+    <h1 class="page-header text-center"><?= Html::encode($this->title) ?></h1>
 
 <?php if (Yii::$app->session->hasFlash('contactFormSubmitted')): ?>
 
@@ -22,7 +22,7 @@ $this->title = 'Удалить прогноз синий';
 
 <?php else: ?>
 
-    <div class="row col-lg-6">
+    <div class="row col-lg-4 col-lg-offset-4">
         <?php $form = ActiveForm::begin([
             'id' => 'contact-form',
         ]); ?>
