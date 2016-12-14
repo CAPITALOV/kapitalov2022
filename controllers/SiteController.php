@@ -228,6 +228,11 @@ class SiteController extends \cs\base\BaseController
         return $this->render();
     }
 
+    public function actionTest()
+    {
+        \cs\services\VarDumper::dump(mail('dram1008@yandex.ru', 1, 1));
+    }
+
     public function actionPrice()
     {
         $market = \app\models\StockMarket::query()

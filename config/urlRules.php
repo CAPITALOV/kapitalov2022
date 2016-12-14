@@ -2,6 +2,7 @@
 
 return [
     '/'                                     => 'landing/index',
+    'test'                                  => 'site/test',
     'contact'                               => 'site/contact',
     'price'                                 => 'site/price',
     'captcha'                               => 'site/captcha',
