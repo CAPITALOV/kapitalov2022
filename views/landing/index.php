@@ -26,17 +26,17 @@ $design = \app\models\Design::find(1);
     <!-- Wrapper for slides -->
     <div class="carousel-inner">
         <div class="item active">
-            <div class="fill" style="background-image:url('<?= $design->getImg(1) ?>');"></div>
+            <div class="fill" style="background-image:url('/images/index/promo1.png');"></div>
             <div class="carousel-caption">
             </div>
         </div>
         <div class="item">
-            <div class="fill" style="background-image:url('<?= $design->getImg(2) ?>');"></div>
+            <div class="fill" style="background-image:url('/images/index/promo2.png');"></div>
             <div class="carousel-caption">
             </div>
         </div>
         <div class="item">
-            <div class="fill" style="background-image:url('<?= $design->getImg(3) ?>');"></div>
+            <div class="fill" style="background-image:url('/images/index/promo3.png');"></div>
             <div class="carousel-caption">
             </div>
         </div>

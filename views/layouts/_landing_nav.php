@@ -18,7 +18,7 @@ use yii\helpers\Html;
                 <span class="icon-bar"></span>
             </button>
             <a class="navbar-brand" href="/" style="padding: 5px 10px 5px 10px;"><img
-                    src="<?= Yii::$app->getAssetManager()->getBundle('app\assets\LayoutSite\Asset')->baseUrl ?>/images/capitalovlogo2.png"
+                    src="/images/kapitalovlogo1-2.png"
                     class="siteLayoutLogo"></a>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -26,7 +26,7 @@ use yii\helpers\Html;
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
                 <li>
-                    <a><b>Национальное Агентство Капиталов</b></a>
+                    <a><b>Экспертная Аналитическая Система</b></a>
                 </li>
                 <li>
                     <?= $this->render('../blocks/telephone') ?>

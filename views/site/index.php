@@ -12,6 +12,6 @@ $this->title = T::t('Welcome to adminnistrative panel');
         <h2><?= $this->title ?>!</h2>
         <?php if (!$this->context->user->identity): ?>
             <p><a class="btn btn-lg btn-success" href="/login"><?= T::t('Login into system') ?></a></p>
-            <?php endif ?>
+        <?php endif ?>
     </div>
 </div>
