@@ -34,7 +34,7 @@ JS
             <ul class="nav navbar-nav navbar-left" >
                 <li>
                      <a class="navbar-brand" href="/" style="margin-top:-10px;">
-                     <img src="<?= Yii::$app->getAssetManager()->getBundle('app\assets\LayoutSite\Asset')->baseUrl ?>/images/capitalovlogo2.png"
+                     <img src="/images/kapitalovlogo1-2.png"
                                         class="siteLayoutLogo" style="height:40px; margin:0px"></a>
                 </li>
                 <li class="dropdown <?php if (Yii::$app->controller->id == 'cabinet') { echo(' active');} ?>">

@@ -36,7 +36,7 @@ JS
                 <li>
                     <a class="navbar-brand" href="<?= Url::to(['superadmin/index'])?>" style="margin-top:-10px;">
                         <img
-                            src="<?= Yii::$app->getAssetManager()->getBundle('app\assets\LayoutSite\Asset')->baseUrl ?>/images/capitalovlogo2.png"
+                            src="/images/kapitalovlogo1-2.png"
                             class="siteLayoutLogo" style="height:40px; margin:0px"></a>
                 </li>
                 <?php if (!Yii::$app->user->isGuest) { ?>

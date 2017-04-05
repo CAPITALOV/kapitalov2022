@@ -34,7 +34,7 @@ $this->registerMetaTag(['name' => 'og:description', 'content' => 'Эксклюз
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
     <script src="/js/ajaxJson.js"></script>
-    <link rel="shortcut icon" href="/images/capitalov32-1.png">
+    <link rel="shortcut icon" href="/images/kapitalovlogo1-2.png">
 
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
