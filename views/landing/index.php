@@ -51,3 +51,13 @@ $design = \app\models\Design::find(1);
     </a>
 </header>
 
+<hr>
+
+<!-- Footer -->
+<footer>
+    <div class="row">
+        <div class="col-lg-12">
+            <p>© 2002 — <?= date('Y') ?> | www.capitalov.com | Национальное Агентство Капиталов | <?= $this->render('../blocks/telephone') ?></p>
+        </div>
+    </div>
+</footer>
