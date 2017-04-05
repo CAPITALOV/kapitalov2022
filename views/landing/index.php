@@ -53,6 +53,8 @@ $design = \app\models\Design::find(1);
 
 <hr>
 
+<div class="container">
+
 <!-- Footer -->
 <footer>
     <div class="row">
@@ -61,3 +63,4 @@ $design = \app\models\Design::find(1);
         </div>
     </div>
 </footer>
+</div>
