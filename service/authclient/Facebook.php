@@ -107,7 +107,7 @@ class Facebook extends \yii\authclient\clients\Facebook implements authClientInt
         ]
          */
         $params = $this->getAccessToken()->getParams();
-        \Yii::$app->cache->set("authClientCollection/{$this->defaultName()}/access_token", $params['access_token'], $params['expires']);
+         // \Yii::$app->cache->set("authClientCollection/{$this->defaultName()}/access_token", $params['access_token'], $params['expires']);
     }
 
     /**
