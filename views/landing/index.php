@@ -15,7 +15,7 @@ $design = \app\models\Design::find(1);
 
 
 <!-- Header Carousel -->
-<header id="myCarousel" class="carousel slide">
+<header id="myCarousel" class="carousel slide" style="height: 80%;">
 
 
     <!-- Wrapper for slides -->
