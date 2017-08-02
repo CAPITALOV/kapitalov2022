@@ -50,7 +50,7 @@ $this->registerJs("$('.labelPaid').tooltip()");
 
 <h2 class="page-header">Заказать</h2>
 <div class="row col-sm-12">
-    <div class="col-sm-4" style="margin-bottom: 30px;">
+    <div class="col-sm-4 col-sm-offset-2" style="margin-bottom: 30px;">
         <center>
             <?php
             echo Html::a(Html::img('/images/cabinet/index/all-stok.png', [
@@ -63,7 +63,7 @@ $this->registerJs("$('.labelPaid').tooltip()");
         <a
             href="<?= Url::to(['cabinet_wallet/add1']) ?>"
             class="btn btn-primary"
-            style="width: 100%"
+            style="width: 100%;background-color: #aa719f;border: none;border-radius: 24px;"
 
             >Выбрать</a>
     </div>
@@ -75,12 +75,12 @@ $this->registerJs("$('.labelPaid').tooltip()");
                 'width' => 200,
             ]), ['cabinet_wallet/add2']);
             ?>
-            <p>Зарубежный рынок</p>
+            <p>Международный рынок</p>
         </center>
         <a
             href="<?= Url::to(['cabinet_wallet/add2']) ?>"
             class="btn btn-primary"
-            style="width: 100%"
+            style="width: 100%;background-color: #aa719f;border: none;border-radius: 24px;"
 
             >Выбрать</a>
     </div>
