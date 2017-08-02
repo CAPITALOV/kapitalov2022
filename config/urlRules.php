@@ -4,6 +4,8 @@ return [
     '/'                                     => 'landing/index',
     'test'                                  => 'site/test',
     'contact'                               => 'site/contact',
+    'service'                               => 'site/service',
+    'contacts'                              => 'site/contacts',
     'price'                                 => 'site/price',
     'captcha'                               => 'site/captcha',
     'time'                                  => 'site/time',
