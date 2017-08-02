@@ -21,7 +21,7 @@ $this->title = 'Регистрация';
 <?php else: ?>
 
     <div class="row">
-        <div class="col-lg-5">
+        <div class="col-lg-4 col-lg-offset-4">
             <?php $form = ActiveForm::begin([
                 'id'                   => 'contact-form',
                 'enableAjaxValidation' => true,
@@ -44,8 +44,11 @@ $this->title = 'Регистрация';
                 <?= Html::submitButton('Зарегистрироваться', [
                     'class' => 'btn btn-primary',
                     'name' => 'contact-button',
-                    'style' => 'width: 100%;',
+                    'style' => 'width: 100%;background-color: #aa719f;border: none;border-radius: 24px;',
                 ]) ?>
+            </div>
+            <div class="form-group">
+                <a class="btn btn-primary btn-lg" href="<?= \yii\helpers\Url::to(['auth/login']) ?>" style="width: 100%;background-color: #aa719f;border: none;border-radius: 24px;">Войти в систему</a>
             </div>
             <?php ActiveForm::end(); ?>
         </div>
