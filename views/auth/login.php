@@ -32,11 +32,11 @@ $this->title = 'Вход в систему капиталов';
 
 
     <div class="form-group">
-        <div class="col-lg-12">
+        <div class="col-lg-4 col-lg-offset-4">
             <?= Html::submitButton('Вход', [
                 'class' => 'btn btn-primary',
                 'name'  => 'login-button',
-                'style' => 'width: 100%;',
+                'style' => 'width: 100%;background-color: #aa719f;border: none;border-radius: 24px;',
             ]) ?>
         </div>
     </div>
