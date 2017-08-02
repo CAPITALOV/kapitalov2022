@@ -24,11 +24,12 @@ $this->title = 'Вход в систему капиталов';
     ])->passwordInput() ?>
 
     <?= $model->field($form, 'rememberMe') ?>
-
+    <hr>
     <p>Вход через Facebook</p>
     <?= \yii\authclient\widgets\AuthChoice::widget([
         'baseAuthUrl' => ['auth/auth']
     ]); ?>
+    <hr>
 
 
     <div class="form-group">
