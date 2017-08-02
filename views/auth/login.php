@@ -26,19 +26,18 @@ $this->title = 'Вход в систему капиталов';
 
     <?= $model->field($form, 'rememberMe') ?>
 
+    <p>Вход через Facebook</p>
     <?= \yii\authclient\widgets\AuthChoice::widget([
         'baseAuthUrl' => ['auth/auth']
     ]); ?>
 
 
     <div class="form-group">
-        <div class="col-lg-4 col-lg-offset-4">
-            <?= Html::submitButton('Вход', [
-                'class' => 'btn btn-primary',
-                'name'  => 'login-button',
-                'style' => 'width: 100%;background-color: #aa719f;border: none;border-radius: 24px;',
-            ]) ?>
-        </div>
+        <?= Html::submitButton('Вход', [
+            'class' => 'btn btn-primary',
+            'name'  => 'login-button',
+            'style' => 'width: 100%;background-color: #aa719f;border: none;border-radius: 24px;',
+        ]) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
