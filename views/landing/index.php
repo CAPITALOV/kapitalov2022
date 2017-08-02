@@ -64,7 +64,7 @@ $design = \app\models\Design::find(1);
             </div>
         </div>
         <div class="col-lg-12">
-            <p>© 2002 — <?= date('Y') ?> | www.kapitalov.com | Национальное Агентство Капиталов | <?= $this->render('../blocks/telephone') ?></p>
+            <p>© 2002 — <?= date('Y') ?> | www.kapitalov.com | Национальное Агентство Kapitalov | <?= $this->render('../blocks/telephone') ?></p>
         </div>
     </div>
 </footer>

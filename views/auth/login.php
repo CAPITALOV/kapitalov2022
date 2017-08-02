@@ -26,12 +26,13 @@ $this->title = 'Вход в систему Kapitalov';
 
     <hr>
     <?= $model->field($form, 'rememberMe') ?>
+    <hr>
 
 
 
     <div class="form-group">
         <?= Html::submitButton('Вход', [
-            'class' => 'btn btn-primary',
+            'class' => 'btn btn-primary btn-lg',
             'name'  => 'login-button',
             'style' => 'width: 100%;background-color: #aa719f;border: none;border-radius: 24px;',
         ]) ?>
