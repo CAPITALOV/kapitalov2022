@@ -233,7 +233,7 @@ class SiteController extends \cs\base\BaseController
         return $this->render();
     }
 
-    public function actionСontacts()
+    public function actionContacts()
     {
         return $this->render();
     }
