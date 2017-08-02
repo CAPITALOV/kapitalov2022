@@ -16,16 +16,10 @@ $design = \app\models\Design::find(1);
 
 <!-- Header Carousel -->
 <header id="myCarousel" class="carousel slide">
-    <!-- Indicators -->
-    <ol class="carousel-indicators">
-        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-        <li data-target="#myCarousel" data-slide-to="1"></li>
-        <li data-target="#myCarousel" data-slide-to="2"></li>
-        <li data-target="#myCarousel" data-slide-to="3"></li>
-    </ol>
+
 
     <!-- Wrapper for slides -->
-    <div class="carousel-inner">
+    <div class="carousel-inner" style="height: 100%;">
         <div class="item active">
             <div class="fill" style="background-image:url('/images/index/promo0.jpg');"></div>
             <div class="carousel-caption">
