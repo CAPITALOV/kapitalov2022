@@ -38,11 +38,12 @@ $this->title = 'Регистрация';
             <hr>
             <div class="form-group">
                 <?= Html::submitButton('Зарегистрироваться', [
-                    'class' => 'btn btn-primary',
+                    'class' => 'btn btn-primary btn-lg',
                     'name' => 'contact-button',
                     'style' => 'width: 100%;background-color: #aa719f;border: none;border-radius: 24px;',
                 ]) ?>
             </div>
+            <hr>
             <div class="form-group">
                 <a class="btn btn-primary btn-lg" href="<?= \yii\helpers\Url::to(['auth/login']) ?>" style="width: 100%;background-color: #aa719f;border: none;border-radius: 24px;">Войти в систему</a>
             </div>
