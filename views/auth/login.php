@@ -9,7 +9,8 @@ use yii\bootstrap\ActiveForm;
 $this->title = 'Вход в систему капиталов';
 ?>
 
-<div class="col-lg-4 col-lg-offset-4">
+<div class="row">
+<div class="col-lg-6 col-lg-offset-3">
     <h1 class="page-header text-center"><?= Html::encode($this->title) ?></h1>
 
     <p>Пожалуйста заполните следующие поля для входа:</p>
@@ -41,4 +42,5 @@ $this->title = 'Вход в систему капиталов';
     </div>
 
     <?php ActiveForm::end(); ?>
+</div>
 </div>
