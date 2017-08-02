@@ -56,7 +56,7 @@ $this->registerMetaTag(['name' => 'og:description', 'content' => 'Эксклюз
     <footer>
         <div class="row">
             <div class="col-lg-12">
-                <p>© 2002 — <?= date('Y') ?> | www.capitalov.com | Национальное Агентство Капиталов | <?= $this->render('../blocks/telephone') ?></p>
+                <p>© 2002 — <?= date('Y') ?> | www.kapitalov.com | Национальное Агентство Капиталов | <?= $this->render('../blocks/telephone') ?></p>
             </div>
         </div>
     </footer>
