@@ -1,8 +1,8 @@
 <?php
 
-$this->title = 'Национальное Агентство Капиталов';
+$this->title = 'Национальное Агентство Kapitalov';
 ?>
-<h1 class="page-header">Национальное Агентство Капиталов</h1>
+<h1 class="page-header">Национальное Агентство Kapitalov</h1>
 
 <div class="row">
     <div class="col-lg-8">
