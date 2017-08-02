@@ -23,13 +23,13 @@ $this->title = 'Вход в систему капиталов';
         'template' => '{label}{beginWrapper}{input}<div style="margin-top: 5px;"><b>Забыли пароль?</b><span style="margin-left: 20px;"><a href=' . \yii\helpers\Url::to(['auth/password_recover']) . '>Восстановить</a></span></div>{hint}{error}{endWrapper}',
     ])->passwordInput() ?>
 
+    <hr>
     <?= $model->field($form, 'rememberMe') ?>
     <hr>
     <p>Вход через Facebook</p>
     <?= \yii\authclient\widgets\AuthChoice::widget([
         'baseAuthUrl' => ['auth/auth']
     ]); ?>
-    <hr>
 
 
     <div class="form-group">
