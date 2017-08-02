@@ -21,11 +21,17 @@ $design = \app\models\Design::find(1);
         <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
         <li data-target="#myCarousel" data-slide-to="1"></li>
         <li data-target="#myCarousel" data-slide-to="2"></li>
+        <li data-target="#myCarousel" data-slide-to="3"></li>
     </ol>
 
     <!-- Wrapper for slides -->
     <div class="carousel-inner">
         <div class="item active">
+            <div class="fill" style="background-image:url('/images/index/promo0.jpg');"></div>
+            <div class="carousel-caption">
+            </div>
+        </div>
+        <div class="item">
             <div class="fill" style="background-image:url('/images/index/promo1.png');"></div>
             <div class="carousel-caption">
             </div>
