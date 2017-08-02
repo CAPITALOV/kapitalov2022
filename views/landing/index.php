@@ -64,8 +64,13 @@ $design = \app\models\Design::find(1);
 <!-- Footer -->
 <footer>
     <div class="row">
+        <div class="row">
+            <div class="col-lg-4 col-lg-offset-4">
+                <p class="text-center"><a class="btn btn-primary btn-lg" href="/login" style="width: 100%;background-color: #aa719f;border: none;border-radius: 24px;">Войти в систему</a></p>
+            </div>
+        </div>
         <div class="col-lg-12">
-            <p>© 2002 — <?= date('Y') ?> | www.capitalov.com | Национальное Агентство Капиталов | <?= $this->render('../blocks/telephone') ?></p>
+            <p>© 2002 — <?= date('Y') ?> | www.kapitalov.com | Национальное Агентство Капиталов | <?= $this->render('../blocks/telephone') ?></p>
         </div>
     </div>
 </footer>

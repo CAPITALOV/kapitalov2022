@@ -35,10 +35,16 @@ use yii\helpers\Html;
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li>
-                    <a href="<?= Url::to(['site/about']) ?>">О продукте</a>
+                    <a href="<?= Url::to(['site/about']) ?>">О комании</a>
+                </li>
+                <li>
+                    <a href="<?= Url::to(['site/service']) ?>">Услуги</a>
                 </li>
                 <li>
                     <a href="<?= Url::to(['site/price']) ?>">Тарифы</a>
+                </li>
+                <li>
+                    <a href="<?= Url::to(['site/contacts']) ?>">Контакты</a>
                 </li>
 
                 <?php if (Yii::$app->user->isGuest) { ?>

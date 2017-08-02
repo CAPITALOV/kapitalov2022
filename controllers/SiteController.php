@@ -228,6 +228,16 @@ class SiteController extends \cs\base\BaseController
         return $this->render();
     }
 
+    public function actionService()
+    {
+        return $this->render();
+    }
+
+    public function actionСontacts()
+    {
+        return $this->render();
+    }
+
     public function actionTest()
     {
         \cs\services\VarDumper::dump(mail('dram1008@yandex.ru', 1, 1));
