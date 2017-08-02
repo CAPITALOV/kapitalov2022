@@ -11,7 +11,7 @@ $this->title = 'Регистрация';
 
 ?>
 
-    <h1 class="page-header"><?= Html::encode($this->title) ?></h1>
+    <h1 class="page-header text-center"><?= Html::encode($this->title) ?></h1>
 
 <?php if (Yii::$app->session->hasFlash('contactFormSubmitted')): ?>
 
