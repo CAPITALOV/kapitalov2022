@@ -35,7 +35,7 @@ use yii\helpers\Html;
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li>
-                    <a href="<?= Url::to(['site/about']) ?>">О комании</a>
+                    <a href="<?= Url::to(['site/about']) ?>">О компании</a>
                 </li>
                 <li>
                     <a href="<?= Url::to(['site/service']) ?>">Услуги</a>
