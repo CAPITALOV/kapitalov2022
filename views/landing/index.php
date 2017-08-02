@@ -19,7 +19,7 @@ $design = \app\models\Design::find(1);
 
 
     <!-- Wrapper for slides -->
-    <div class="carousel-inner" style="height: 100%;">
+    <div class="carousel-inner">
         <div class="item active">
             <div class="fill" style="background-image:url('/images/index/promo0.jpg');"></div>
             <div class="carousel-caption">
