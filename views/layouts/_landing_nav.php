@@ -40,9 +40,6 @@ use yii\helpers\Html;
                 <li>
                     <a href="<?= Url::to(['site/service']) ?>">Услуги</a>
                 </li>
-                <li>
-                    <a href="<?= Url::to(['site/contacts']) ?>">Контакты</a>
-                </li>
 
                 <?php if (Yii::$app->user->isGuest) { ?>
                     <li>
