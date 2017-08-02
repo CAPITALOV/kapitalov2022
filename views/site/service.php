@@ -31,9 +31,9 @@ $this->title = 'Услуги';
 
     <div class="col-lg-4 col-lg-offset-4">
         <?php if (Yii::$app->user->isGuest) { ?>
-            <a class="btn btn-primary btn-lg" href="<?= \yii\helpers\Url::to(['auth/login']) ?>" style="width: 100%;background-color: #aa719f;border: none;border-radius: 24px;">Войти</a>
+            <a class="btn btn-primary btn-lg" href="<?= \yii\helpers\Url::to(['auth/login']) ?>" style="width: 100%;background-color: #aa719f;border: none;border-radius: 24px;">Войти в систему</a>
         <?php } else { ?>
-            <a class="btn btn-primary btn-lg" href="<?= \yii\helpers\Url::to(['cabinet/index']) ?>" style="width: 100%;background-color: #aa719f;border: none;border-radius: 24px;">Войти</a>
+            <a class="btn btn-primary btn-lg" href="<?= \yii\helpers\Url::to(['cabinet/index']) ?>" style="width: 100%;background-color: #aa719f;border: none;border-radius: 24px;">Войти в систему</a>
         <?php } ?>
     </div>
 
