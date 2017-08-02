@@ -26,11 +26,7 @@ $this->title = 'Вход в систему Kapitalov';
 
     <hr>
     <?= $model->field($form, 'rememberMe') ?>
-    <hr>
-    <p>Вход через Facebook</p>
-    <?= \yii\authclient\widgets\AuthChoice::widget([
-        'baseAuthUrl' => ['auth/auth']
-    ]); ?>
+
 
 
     <div class="form-group">

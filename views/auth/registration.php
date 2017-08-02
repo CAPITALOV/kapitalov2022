@@ -34,10 +34,6 @@ $this->title = 'Регистрация';
             <?= $form->field($model, 'password1', ['inputOptions' => ['placeholder' => 'Пароль']])->passwordInput()->label('Пароль', ['class' => 'hide']) ?>
             <?= $form->field($model, 'password2', ['inputOptions' => ['placeholder' => 'Повторите пароль еще раз']])->passwordInput()->label('Пароль повтор', ['class' => 'hide']) ?>
 
-            <?= \yii\authclient\widgets\AuthChoice::widget([
-                'baseAuthUrl' => ['auth/auth']
-            ]); ?>
-
 
             <hr>
             <div class="form-group">
