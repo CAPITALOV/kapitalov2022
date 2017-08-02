@@ -16,7 +16,6 @@ $this->title = 'Вход в систему капиталов';
 
     <?php $form = ActiveForm::begin([
         'id'     => 'login-form',
-        'layout' => 'horizontal',
     ]); ?>
 
     <?= $model->field($form, 'username') ?>
