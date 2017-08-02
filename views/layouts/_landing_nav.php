@@ -41,9 +41,6 @@ use yii\helpers\Html;
                     <a href="<?= Url::to(['site/service']) ?>">Услуги</a>
                 </li>
                 <li>
-                    <a href="<?= Url::to(['site/price']) ?>">Тарифы</a>
-                </li>
-                <li>
                     <a href="<?= Url::to(['site/contacts']) ?>">Контакты</a>
                 </li>
 
