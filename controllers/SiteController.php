@@ -240,7 +240,7 @@ class SiteController extends \cs\base\BaseController
 
     public function actionTest()
     {
-        \cs\services\VarDumper::dump(mail('dram1008@yandex.ru', 1, 1));
+        \cs\services\VarDumper::dump(\Yii::$app->params['tel']);
     }
 
     public function actionPrice()
@@ -279,6 +279,7 @@ class SiteController extends \cs\base\BaseController
             ]);
         }
     }
+
 
     public function actionLog()
     {
