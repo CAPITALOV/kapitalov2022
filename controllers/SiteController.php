@@ -72,7 +72,9 @@ class SiteController extends \cs\base\BaseController
 
     public function actionIndex()
     {
-        return $this->render('index');
+        $this->layout = 'blank';
+
+        return $this->render('cap');
     }
 
     public function actionReferal()
