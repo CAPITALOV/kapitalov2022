@@ -243,6 +243,13 @@ class SiteController extends \cs\base\BaseController
         \cs\services\VarDumper::dump(\Yii::$app->params['tel']);
     }
 
+    public function actionCap()
+    {
+        $this->layout = 'blank';
+
+        return $this->render('cap');
+    }
+
     public function actionPrice()
     {
         $market = \app\models\StockMarket::query()
