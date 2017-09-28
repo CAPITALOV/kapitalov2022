@@ -29,7 +29,7 @@ use app\models\ContactForm;
 use app\models\UserForm;
 use app\models\Form\UserPassword as FormUserPassword;
 
-class SiteController extends \cs\base\BaseController
+class CapController extends \cs\base\BaseController
 {
     public $layout = 'blank';
 
