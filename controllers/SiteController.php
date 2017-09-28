@@ -74,6 +74,7 @@ class SiteController extends \cs\base\BaseController
     {
         $this->layout = 'blank';
 
+
         return $this->render('cap');
     }
 
