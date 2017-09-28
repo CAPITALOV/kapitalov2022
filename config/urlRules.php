@@ -12,7 +12,7 @@ return [
     'log'                                   => 'site/log',
     'logDb'                                 => 'site/log_db',
     'referal'                               => 'site/referal',
-    'cap'                                   => 'site/index',
+    'cap'                                   => 'site/cap',
 
     'about'                                 => 'site/about',
 
