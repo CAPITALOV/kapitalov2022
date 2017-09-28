@@ -13,6 +13,9 @@ class LandingController extends \cs\base\BaseController
 
     public function actionIndex()
     {
-        return $this->render();
+        $this->layout = 'blank';
+
+
+        return $this->render('cap');
     }
 } 
