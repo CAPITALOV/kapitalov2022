@@ -66,7 +66,6 @@ class Finam extends Object implements DadaImporterInterface
         foreach ($arr as $row) {
             if (trim($row) != '') {
                 $items = explode(',', $row);
-                if (substr($items[2],0,4) . '-' . substr($items[2],4,2) . '-' . substr($items[2],6,2) == '--') VarDumper::dump($arr);
                 $ret[] = [
                     'date' => substr($items[2],0,4) . '-' . substr($items[2],4,2) . '-' . substr($items[2],6,2),
                     'kurs' => (float)trim($items[4]),

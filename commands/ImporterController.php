@@ -51,7 +51,6 @@ class ImporterController extends Controller
             $new = [];
             foreach($data as $row) {
                 if (!in_array($row['date'], $dateArrayRows)) {
-                    if ($row['date'] == '--') \cs\services\VarDumper::dump($data);
                     $new[] = [
                         $stock_id,
                         $row['date'],
