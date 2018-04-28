@@ -42,12 +42,13 @@ class ImporterController extends Controller
             $date = new \DateTime();
             $date->sub(new \DateInterval('P7D'));
             $data = $class->import($date->format('Y-m-d'));
-            \cs\services\VarDumper::dump($data);
             // стратегия: Если данные есть то, они не трогаются
             $dateArray = ArrayHelper::getColumn($data, 'date');
             sort($dateArray);
             $rows2 = StockKurs::query(['between', 'date', $dateArray[0], $dateArray[count($dateArray)-1]])->andWhere(['stock_id' => $stock_id])->all();
             $dateArrayRows = ArrayHelper::getColumn($rows2, 'date');
+            \cs\services\VarDumper::dump($dateArrayRows);
+
             $new = [];
             foreach($data as $row) {
                 if (!in_array($row['date'], $dateArrayRows)) {
