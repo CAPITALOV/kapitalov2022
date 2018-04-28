@@ -47,7 +47,7 @@ class ImporterController extends Controller
             sort($dateArray);
             $rows2 = StockKurs::query(['between', 'date', $dateArray[0], $dateArray[count($dateArray)-1]])->andWhere(['stock_id' => $stock_id])->all();
             $dateArrayRows = ArrayHelper::getColumn($rows2, 'date');
-            \cs\services\VarDumper::dump($dateArrayRows);
+            \cs\services\VarDumper::dump([$dateArrayRows, $data]);
 
             $new = [];
             foreach($data as $row) {
