@@ -9,7 +9,7 @@ return [
         'username' => 'kapitalov2020@ya.ru',
         'password' => 'mtS-WVL-Qzr-3fW',
         'host'     => 'smtp.yandex.ru',
-        'port'     => '587',
-        'encryption' => 'TLS',
+        'port'     => '465',
+        'encryption' => 'ssl',
     ]
 ];
