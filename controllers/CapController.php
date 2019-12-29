@@ -38,15 +38,4 @@ class CapController extends \cs\base\BaseController
         return $this->render('cap');
     }
 
-    public function actionTest()
-    {
-        \cs\services\VarDumper::dump(\cs\Application::mail('dram1008@yandex.ru', 'Восстановление пароля', 'password_recover', [
-            'user'     => '1',
-            'url'      => \yii\helpers\Url::to([
-                'auth/password_recover_activate',
-                'code' => 'ssss'
-            ], true),
-            'datetime' => 'sss',
-        ]));
-    }
 }

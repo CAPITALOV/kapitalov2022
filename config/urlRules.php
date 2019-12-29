@@ -125,4 +125,6 @@ return [
     'yandexMoney'                           => 'yandex_money/auth',
     'yandexMoney/test1'                     => 'yandex_money/test1',
     'yandexMoney/test2'                     => 'yandex_money/test2',
+
+    '<controller>/<action>'                 => '<controller>/<action>',
 ];
