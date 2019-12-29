@@ -243,7 +243,14 @@ class SiteController extends \cs\base\BaseController
 
     public function actionTest()
     {
-        \cs\services\VarDumper::dump(\Yii::$app->params['tel']);
+        \cs\services\VarDumper::dump(\cs\Application::mail('dram1008@yandex.ru', 'Восстановление пароля', 'password_recover', [
+            'user'     => '1',
+            'url'      => \yii\helpers\Url::to([
+                'auth/password_recover_activate',
+                'code' => 'ssss'
+            ], true),
+            'datetime' => 'sss',
+        ]));
     }
 
     public function actionCap()
