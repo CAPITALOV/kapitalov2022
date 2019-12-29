@@ -6,7 +6,7 @@ return [
     'transport' => [
         'class'    => 'Swift_SmtpTransport',
 
-        'username' => 'kapitalov2020@ya.ru',
+        'username' => 'kapitalov2020',
         'password' => 'mtS-WVL-Qzr-3fW',
         'host'     => 'smtp.yandex.ru',
         'port'     => '465',
