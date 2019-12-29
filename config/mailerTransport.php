@@ -10,6 +10,6 @@ return [
         'password' => 'mtS-WVL-Qzr-3fW',
         'host'     => 'smtp.yandex.ru',
         'port'     => '465',
-        'encryption' => 'SSL',
+        'encryption' => 'tls',
     ]
 ];
