@@ -3,7 +3,7 @@
 return [
     'adminEmail' => 'admin@capitalov.com',
     'mailer'     => [
-        'from' => ['kapitalov2020@ya.ru' => 'Kapitalov.com']
+        'from' => ['info@s-routes.com' => 'Kapitalov.com']
     ],
     'chat' => [
         'consultant_id' => (YII_ENV_DEV)? 7 : 6,
