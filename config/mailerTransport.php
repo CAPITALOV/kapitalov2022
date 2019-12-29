@@ -6,10 +6,10 @@ return [
     'transport' => [
         'class'    => 'Swift_SmtpTransport',
 
-        'username' => 'kapitalov2020',
+        'username' => 'kapitalov@kapitalov.icu',
         'password' => 'mtS-WVL-Qzr-3fW',
-        'host'     => 'smtp.yandex.ru',
-        'port'     => 'TLS',
-        'encryption' => 'tls',
+        'host'     => 'mail.kapitalov.icu',
+        'port'     => '465',
+        'encryption' => 'ssl',
     ]
 ];
