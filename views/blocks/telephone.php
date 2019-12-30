@@ -2,7 +2,7 @@
 
 $t = \Yii::$app->params['tel'];
 
-$telephone2 = substr($t,0,2) . ' (' . substr($t,2,3) . ') ' . substr($t,5,3) . '-' . substr($t,7,4);
+$telephone2 = substr($t,0,2) . ' (' . substr($t,2,3) . ') ' . substr($t,5,3) . '-' . substr($t,8,4);
 
 ?>
 
