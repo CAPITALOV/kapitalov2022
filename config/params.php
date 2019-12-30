@@ -9,5 +9,5 @@ return [
         'consultant_id' => (YII_ENV_DEV)? 7 : 6,
     ],
     'yeKurs' => 65,
-    'tel' => '+79998980442',
+    'tel' => '+79257291023',
 ];
