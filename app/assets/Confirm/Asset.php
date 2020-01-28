@@ -9,7 +9,7 @@ use yii\web\AssetBundle;
  */
 class Asset extends AssetBundle
 {
-    public $sourcePath  = '@vendor/mistic100/Bootstrap-Confirmation';
+    public $sourcePath  = '@vendor/mistic100/Bootstrap-Confirmation/dist';
     public $css     = [
     ];
     public $js      = [
