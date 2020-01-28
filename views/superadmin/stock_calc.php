@@ -12,12 +12,8 @@ $this->title = 'Расчитываемые котировки';
 
 $url = Url::to(['superadmin/stock_calc_activate']);
 $this->registerJs(<<<JS
-    $('.buttonActivate').confirmation({
-        btnOkLabel: 'Да',
-        btnCancelLabel: 'Нет',
-        title: 'Вы уверены',
-        popout: true,
-        onConfirm: function() {
+    $('.buttonActivate').click(function(){
+        if (confirm('Вы уверены?')) {
             var button = $(this);
             ajaxJson({
                 url: '{$url}',
