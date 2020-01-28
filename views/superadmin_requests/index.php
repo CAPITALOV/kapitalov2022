@@ -22,12 +22,8 @@ $this->title = 'Заявки на услуги';
 $url = Url::to(['superadmin_requests/activate_ajax']);
 $urlDelete = Url::to(['superadmin_requests/delete_ajax']);
 $this->registerJs(<<<JS
-    $('.buttonActivate').confirmation({
-        btnOkLabel: 'Да',
-        btnCancelLabel: 'Нет',
-        title: 'Вы уверены',
-        popout: true,
-        onConfirm: function(){
+    $('.buttonActivate').click(function() {
+        if (confirm('Вы уверены?')) {
             var button = $(this);
             ajaxJson({
                 url: '{$url}',
@@ -41,12 +37,8 @@ $this->registerJs(<<<JS
             })
         }
     });
-    $('.buttonDelete').confirmation({
-        btnOkLabel: 'Да',
-        btnCancelLabel: 'Нет',
-        title: 'Вы уверены',
-        popout: true,
-        onConfirm: function() {
+    $('.buttonDelete').click(function() {
+        if (confirm('Вы уверены?')) {
             var button = $(this);
             ajaxJson({
                 url: '{$urlDelete}',
