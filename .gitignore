@@ -40,3 +40,6 @@ robots.txt
 
 webstat
 ./webstat
+
+public_html/webstat
+./public_html/webstat
