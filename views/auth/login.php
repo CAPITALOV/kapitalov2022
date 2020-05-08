@@ -8,7 +8,6 @@ use yii\bootstrap\ActiveForm;
 
 $this->title = 'Вход в систему Kapitalov';
 ?>
-
 <div class="row">
 <div class="col-lg-6 col-lg-offset-3">
     <h1 class="page-header text-center"><?= Html::encode($this->title) ?></h1>

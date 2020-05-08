@@ -11,8 +11,6 @@ $this->registerMetaTag(['name' => 'og:title', 'content' => $this->title]);
 $this->registerMetaTag(['name' => 'og:description', 'content' => 'Эксклюзивные финансовые услуги анализа движения капиталов']);
 
 ?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 

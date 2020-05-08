@@ -37,3 +37,6 @@ config/authClientCollection.php
 composer.lock
 
 robots.txt
+
+webstat
+./webstat
