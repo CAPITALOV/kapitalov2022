@@ -2,14 +2,14 @@
 
 
 return [
-    'username' => 'capitalov_bot',
-    'appName'  => 'capitalov',
+    'username' => 'kapitalov_bot',
+    'appName'  => 'kapitalov',
     'key'      => '114576187:AAEviNK7YoWjuH5zVgW50Kc8Jg4FrXiLtnA',
     'app'      => [
         'id'          => '20063',
         'hash'        => '51c39b2a0f4d943dab4603c5ac01e07e',
-        'title'       => 'Capitalov.com',
-        'name'        => 'capitalov',
+        'title'       => 'Kapitalov.com',
+        'name'        => 'kapitalov',
         'servers'     => [
             'test' => '149.154.167.40:443',
             'prod' => '149.154.167.50:443',

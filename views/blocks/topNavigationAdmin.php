@@ -54,8 +54,8 @@ JS
                             <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu" role="menu">
-                            <li><a href="<?= Url::to(['superadmin_requests/index']) ?>">Заявки на оплату</a></li>
-                            <li><a href="<?= Url::to(['superadmin/referal']) ?>">Пирамида изобилия</a></li>
+                            <li><a href="<?= Url::to(['superadmin_requests/index']) ?>">Заявки на оплату услуги</a></li>
+                            <li><a href="<?= Url::to(['superadmin/referal']) ?>">Регистрация по реферальным ссылкам</a></li>
                             <li><a href="<?= Url::to(['superadmin_stock/index']) ?>">Котировки</a></li>
                             <li><a href="<?= Url::to(['superadmin/users_stock']) ?>">Текущие заказы пользователей</a></li>
                             <li><a href="<?= Url::to(['superadmin/users']) ?>">Пользователи</a></li>

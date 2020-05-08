@@ -2,4 +2,4 @@
 
 <?= $content ?>
 
-С уважением команда CAPITALOV.
+С уважением команда KAPITALOV.com.

@@ -1,9 +1,9 @@
 <?php
 
 return [
-    'adminEmail' => 'admin@capitalov.com',
+    'adminEmail' => 'smtp@kasianov.com',
     'mailer'     => [
-        'from' => ['kapitalov@kapitalov.icu' => 'Kapitalov.com']
+        'from' => ['smtp@kasianov.com' => 'www.kapitalov.com']
     ],
     'chat' => [
         'consultant_id' => (YII_ENV_DEV)? 7 : 6,

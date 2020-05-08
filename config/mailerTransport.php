@@ -6,10 +6,11 @@ return [
     'transport' => [
         'class'    => 'Swift_SmtpTransport',
 
-        'username' => 'kapitalov@kapitalov.icu',
-        'password' => 'mtS-WVL-Qzr-3fW',
-        'host'     => 'mail.kapitalov.icu',
-        'port'     => '465',
-        'encryption' => 'ssl',
+//        'username' => 'smtp@kasianov.com',
+//        'password' => '5Rs-Xgh-AQa-jJE',
+        'host'     => 'mail.kasianov.com',
+        'port'     => '25',
+        'username' => 'smtp@kasianov.com',
+        'password' => '5Rs-Xgh-AQa-jJE',
     ]
 ];

@@ -49,7 +49,7 @@ class Yandex_moneyController extends BaseController
         /** @var \app\service\authclient\YandexMoney $client */
         $client = Yii::$app->authClientCollection->getClient('yandex_money');
         $code = self::getParam('code');
-        $access_token_response = API::getAccessToken($client->clientId, $code, 'http://capitalov.localhost/yandexMoney', $client->clientSecret);
+        $access_token_response = API::getAccessToken($client->clientId, $code, 'https://kapitalov.localhost/yandexMoney', $client->clientSecret);
         if(property_exists($access_token_response, "error")) {
             // process error
         }
@@ -73,7 +73,7 @@ class Yandex_moneyController extends BaseController
     {
         /** @var \app\service\authclient\YandexMoney $client */
         $client = Yii::$app->authClientCollection->getClient('yandex_money');
-        $auth_url = API::buildObtainTokenUrl($client->clientId, 'http://capitalov.localhost/yandexMoney', ['account-info']);
+        $auth_url = API::buildObtainTokenUrl($client->clientId, 'http://kapitalov.localhost/yandexMoney', ['account-info']);
 
         return $this->render([
             'url' => $auth_url,

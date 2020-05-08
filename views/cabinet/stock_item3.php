@@ -50,7 +50,7 @@ $dateMax = $dateMax->format('j') . ' ' . $monthList[$dateMax->format('n')-1];
         <img src="/images/icon-index-capitalov.png" style="height:35px;padding-right:15px;">
 
         <div class="text-nowrap"
-             style="vertical-align:middle; font-size:18px; font-weight: bold; display:inline-block;">Просмотр будущих индексов капиталов
+             style="vertical-align:middle; font-size:18px; font-weight: bold; display:inline-block;">Будем прогнозировать на месяц вперед (смотрим графики изменений тренда), делаем свой прогноз и анализ
         </div>
     </div>
     <div style="color: #58b724; margin-left: 20px; margin-top: 1px;">с <?= $dateMin ?> по <?= $dateMax ?></div>
@@ -129,7 +129,7 @@ $dateMax = $dateMax->format('j') . ' ' . $monthList[$dateMax->format('n')-1];
                 Нет данных
             </div>
         <?php } ?>
-        <p class="center-text text-center" style="margin-bottom: 65px;">Прогноз линий изменения тренда по цене закрытия (close, <b>красная линия</b>) и средне-взвешенная цена (RPO, <b>синяя линия</b>)</p>
+        <p class="center-text text-center" style="margin-bottom: 65px;">Прогноз линий изменения тренда по цене закрытия (close, <b>красная линия</b>) и средне-взвешенная цена (RPO Relative Price Oscillator осциллятор относительной цены, <b>синяя линия</b>)</p>
     </div>
 
 <?php } else { ?>
@@ -159,8 +159,7 @@ $dateMax = $dateMax->format('j') . ' ' . $monthList[$dateMax->format('n')-1];
         <img src="/images/icon-index-history.png" style="height:35px;padding-right:15px;">
 
         <div class="text-nowrap"
-             style="vertical-align:middle; font-size:20px; font-weight: bold; display:inline-block;">Просмотр истории
-            индексов прошедших торгов
+             style="vertical-align:middle; font-size:20px; font-weight: bold; display:inline-block;">Сравниваем, что произошло с торгами на бирже (зеленый) и проверяем с прогнозом (синий и красный) индекс
         </div>
         <div>[<?= $p1 = round((CalculatingProbability::initStock($item->getId(),1)->calc()) * 100) ?> / <?= $p2 = round((CalculatingProbability::initStock($item->getId(), 2)->calc()) * 100) ?> = <?= ($p2+$p1)/2 ?>]</div>
     </div>
@@ -258,7 +257,7 @@ $dateMax = $dateMax->format('j') . ' ' . $monthList[$dateMax->format('n')-1];
             Нет данных
         </div>
     <?php } ?>
-    <p class="center-text text-center" style="margin-bottom: 65px;">Прогноз линий изменения тренда по цене закрытия (close, <b>красная линия</b>) и средне-взвешенная цена (RPO, <b>синяя линия</b>), <b>Зеленая линия</b> - реальные биржевые котировки (история торгов)</p>
+    <p class="center-text text-center" style="margin-bottom: 65px;">Прогноз линий изменения тренда по цене закрытия (close, <b>красная линия</b>) и средне-взвешенная цена (RPO Relative Price Oscillator осциллятор относительной цены, <b>синяя линия</b>), <b>Зеленая линия</b> - реальные биржевые котировки (история торгов)</p>
 </div>
 
 <hr class="clearfix" style="color:#489F46; background-color:#489F46; height:3px; margin-top: 0px; margin-bottom: 0px;">
@@ -274,7 +273,7 @@ $dateMax = $dateMax->format('j') . ' ' . $monthList[$dateMax->format('n')-1];
 
         <div class="text-nowrap"
              style="vertical-align:middle; font-size:18px; font-weight: bold; display:inline-block;">Просмотр архивных
-            котировок
+            котировок с бирж
         </div>
     </div>
 </div>

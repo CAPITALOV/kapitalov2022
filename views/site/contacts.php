@@ -7,8 +7,8 @@ $this->title = 'Национальное Агентство Капиталов';
 <div class="row">
     <div class="col-lg-8">
         <p>
-            +7 (999) 898-0442<br>
-            +7 (926) 190-4992<br>
+            +7 (925) 729-1023<br>
+            +7 (968) 723-1023<br>
             info@kapitalov.com
         </p>
         <script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3Ab01e07770c07f7a15bb4beb9fd1fc925ee1fa91505a29736a9763fdc31da0732&amp;width=100%25&amp;height=400&amp;lang=ru_RU&amp;scroll=true"></script>

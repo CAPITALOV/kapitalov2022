@@ -25,7 +25,7 @@ class Data
             'stock_id' => 4,
             'path'     => '/US2.AAPL_150818_150818.txt',
             'params'   => [
-                'market'    => 25,
+                'market'    => 2,
                 'em'        => 20569,
                 'code'      => 'US2.AAPL',       // кодовый шифр продукта
             ],
@@ -58,7 +58,7 @@ class Data
             'stock_id' => 8,
             'path'     => '/LKOH_150818_150818.txt',
             'params'   => [
-                'market'    => 24,
+                'market'    => 2,
                 'em'        => 18953,
                 'code'      => 'comex.GC',       // кодовый шифр продукта
             ],
@@ -69,7 +69,7 @@ class Data
             'stock_id' => 7,
             'path'     => '/ICE.BRN_150818_150818.txt',
             'params'   => [
-                'market'    => 24,
+                'market'    => 2,
                 'em'        => 19473,
                 'code'      => 'ICE.BRN',       // кодовый шифр продукта
             ],
@@ -80,7 +80,7 @@ class Data
             'stock_id' => 10,
             'path'     => '/RTSI_150818_150818.txt',
             'params'   => [
-                'market'    => 6,
+                'market'    => 1,
                 'em'        => 95,
                 'code'      => 'RTSI',       // кодовый шифр продукта
             ],
@@ -91,7 +91,7 @@ class Data
             'stock_id' => 9,
             'path'     => '/MICEXINDEXCF_150818_150818.txt',
             'params'   => [
-                'market'    => 6,
+                'market'    => 1,
                 'em'        => 13851,
                 'code'      => 'MICEXINDEXCF',       // кодовый шифр продукта
             ],
@@ -102,7 +102,7 @@ class Data
             'stock_id' => 11,
             'path'     => '/MICEXINDEXCF_150818_150818.txt',
             'params'   => [
-                'market'    => 6,
+                'market'    => 2,
                 'em'        => 91,
                 'code'      => 'D&J-IND',       // кодовый шифр продукта
             ],

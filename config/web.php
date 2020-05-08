@@ -97,9 +97,9 @@ $config = [
                     ],
                     'categories' => ['yii\db\*'],
                     'message'    => [
-                        'from'    => ['admin@capitalov.com'],
-                        'to'      => ['admin@capitalov.com'],
-                        'subject' => 'capitalov.com ERROR',
+                        'from'    => ['smtp@kasianov.com'],
+                        'to'      => ['smtp@kasianov.com'],
+                        'subject' => 'kapitalov.com ERROR',
                     ],
                 ],
             ],
